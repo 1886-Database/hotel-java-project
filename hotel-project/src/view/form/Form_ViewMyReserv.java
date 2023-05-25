@@ -25,6 +25,10 @@ import javax.swing.GroupLayout;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import view.swing.RoundedButton;
 import java.awt.Font;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.JLabel;
 
 public class Form_ViewMyReserv extends JPanel {
 
@@ -81,7 +85,7 @@ public class Form_ViewMyReserv extends JPanel {
 
         jLabel1.setFont(new java.awt.Font("sansserif", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(127, 127, 127));
-        jLabel1.setText("Reservation");
+        jLabel1.setText("Reservation History");
 
         spTable.setBorder(null);
 
@@ -126,43 +130,56 @@ public class Form_ViewMyReserv extends JPanel {
                 .addGap(20, 20, 20))
         );
         
-        JPanel pabelBorder_2 = new JPanel();
+        btnNewButton = new JButton("예약 취소");
+        btnNewButton.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        	}
+        });
+        
+        btnNewButton_1 = new JButton("평점 남기기");
+        btnNewButton_1.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        	}
+        });
+        
+        JLabel lblNewLabel = new JLabel("* 체크인 날짜로부터 3일 이전에만 예약 취소가 가능합니다.");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         layout.setHorizontalGroup(
-        	layout.createParallelGroup(Alignment.TRAILING)
-        		.addGroup(Alignment.LEADING, layout.createSequentialGroup()
+        	layout.createParallelGroup(Alignment.LEADING)
+        		.addGroup(layout.createSequentialGroup()
         			.addGap(20)
+        			.addGroup(layout.createParallelGroup(Alignment.TRAILING)
+        				.addComponent(panelBorder1, GroupLayout.DEFAULT_SIZE, 410, Short.MAX_VALUE)
+        				.addComponent(panel, GroupLayout.DEFAULT_SIZE, 410, Short.MAX_VALUE))
+        			.addGap(20))
+        		.addGroup(layout.createSequentialGroup()
+        			.addGap(45)
         			.addGroup(layout.createParallelGroup(Alignment.LEADING)
+        				.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 333, GroupLayout.PREFERRED_SIZE)
         				.addGroup(layout.createSequentialGroup()
-        					.addComponent(pabelBorder_2, GroupLayout.DEFAULT_SIZE, 418, Short.MAX_VALUE)
-        					.addContainerGap())
-        				.addGroup(layout.createSequentialGroup()
-        					.addGroup(layout.createParallelGroup(Alignment.TRAILING)
-        						.addComponent(panelBorder1, GroupLayout.DEFAULT_SIZE, 410, Short.MAX_VALUE)
-        						.addComponent(panel, GroupLayout.DEFAULT_SIZE, 410, Short.MAX_VALUE))
-        					.addGap(20))))
+        					.addPreferredGap(ComponentPlacement.RELATED)
+        					.addComponent(btnNewButton, GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE)
+        					.addPreferredGap(ComponentPlacement.UNRELATED)
+        					.addComponent(btnNewButton_1, GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE)
+        					.addPreferredGap(ComponentPlacement.RELATED)))
+        			.addGap(45))
         );
         layout.setVerticalGroup(
         	layout.createParallelGroup(Alignment.LEADING)
         		.addGroup(layout.createSequentialGroup()
         			.addGap(20)
         			.addComponent(panel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-        			.addGap(20)
-        			.addComponent(panelBorder1, GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE)
-        			.addPreferredGap(ComponentPlacement.RELATED)
-        			.addComponent(pabelBorder_2, GroupLayout.PREFERRED_SIZE, 33, Short.MAX_VALUE)
-        			.addContainerGap())
+        			.addGap(15)
+        			.addComponent(panelBorder1, GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)
+        			.addGap(18)
+        			.addGroup(layout.createParallelGroup(Alignment.BASELINE)
+        				.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
+        				.addComponent(btnNewButton_1, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE))
+        			.addGap(18)
+        			.addComponent(lblNewLabel)
+        			.addGap(16))
         );
-        pabelBorder_2.setLayout(null);
-        
-        button_signUp = new RoundedButton("");
-        button_signUp.setBounds(12, 10, 99, 36);
-        pabelBorder_2.add(button_signUp);
-        button_signUp.setText("예약 취소");
-        button_signUp.setForeground(Color.WHITE);
-        button_signUp.setFont(new Font("맑은 고딕", Font.BOLD, 15));
-        button_signUp.setBackground(new Color(40, 60, 134));
         this.setLayout(layout);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -173,5 +190,6 @@ public class Form_ViewMyReserv extends JPanel {
     private view.swing.PanelBorder panelBorder1;
     private javax.swing.JScrollPane spTable;
     private view.swing.Table table;
-    private RoundedButton button_signUp;
+    private JButton btnNewButton;
+    private JButton btnNewButton_1;
 }
