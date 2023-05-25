@@ -63,7 +63,7 @@ public class SignUp {
 	    label_signUp.setBounds(114, 43, 332, 60);
 	    navigationBar.add(label_signUp);
 	    
-	    	//뒤로가기 버튼
+	    //뒤로가기 버튼
 	    JLabel button_back = new JLabel("");
 	    button_back.addMouseListener(new MouseAdapter() {
 	    	@Override

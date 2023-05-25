@@ -155,6 +155,7 @@ public class Login {
 	    button_signUp.setBounds(373, 506, 448, 35);
 	    backgroundPanel.add(button_signUp);
 	    
+	    //구분선
 	    Label line1 = new Label("");
 	    line1.setBackground(new Color(255, 255, 255));
 	    line1.setBounds(380, 350, 450, 1);
