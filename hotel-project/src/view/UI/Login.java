@@ -70,17 +70,20 @@ public class Login {
 	    frame.getContentPane().add(backgroundPanel);
 	    backgroundPanel.setLayout(null);
 	    
+	    //호텔 이름 라벨
 	    JLabel hotelName = new JLabel("EWHA HOTEL");
 	    hotelName.setFont(new Font("이화체", Font.BOLD, 46));
 	    hotelName.setForeground(new Color(255, 255, 255));
 	    hotelName.setBounds(494, 122, 332, 139);
 	    backgroundPanel.add(hotelName);
 	    
+	    //호텔 아이콘 라벨
 	    hotelIcon = new JLabel("");
 	    hotelIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icon/logo.png")));
 	    hotelIcon.setBounds(373, 122, 131, 139);
 	    backgroundPanel.add(hotelIcon);
 	    
+	    //USERNAME 라벨
 	    label_userName = new JLabel("USERNAME");
 	    label_userName.setHorizontalAlignment(SwingConstants.CENTER);
 	    label_userName.setBackground(new Color(255, 255, 255));
@@ -89,6 +92,7 @@ public class Login {
 	    label_userName.setBounds(373, 309, 141, 41);
 	    backgroundPanel.add(label_userName);
 	    
+	    //PASSWORD 라벨
 	    label_password = new JLabel("PASSWORD");
 	    label_password.setHorizontalAlignment(SwingConstants.CENTER);
 	    label_password.setForeground(new Color(255, 255, 255));
@@ -96,6 +100,7 @@ public class Login {
 	    label_password.setBounds(373, 371, 141, 41);
 	    backgroundPanel.add(label_password);
 	    
+	    //로그인 ID 입력 창
 	    input_userName = new JTextField() {
 	    	@Override
             public void setBorder(Border border) {}
@@ -106,6 +111,7 @@ public class Login {
 	    input_userName.setColumns(10);
 	    input_userName.setOpaque(false);
 	    
+	    //로그인 비밀번호 입력 창
 	    input_password = new JPasswordField(){
 	    	@Override
             public void setBorder(Border border) {}
@@ -114,6 +120,7 @@ public class Login {
 	    backgroundPanel.add(input_password);
 	    input_password.setOpaque(false);
 	    
+	    //로그인 버튼
 	    button_login = new RoundedButton("login");
 	    button_login.setForeground(new Color(255, 255, 255));
 	    button_login.setText("LOGIN");
@@ -123,6 +130,7 @@ public class Login {
 	    button_login.setSize(435,61);
 	    backgroundPanel.add(button_login);
 	    
+	    //회원가입 하러 가기 버튼
 	    button_signUp = new JLabel("아직 회원이 아니신가요?");
 	    button_signUp.addMouseListener(new MouseAdapter() {
 	    	@Override
@@ -157,7 +165,9 @@ public class Login {
 	    line2.setBounds(380, 412, 450, 1);
 	    backgroundPanel.add(line2);
 	    
+	    //종료 버튼
 	    JLabel button_exit = new JLabel("");
+	    button_exit.setHorizontalAlignment(SwingConstants.CENTER);
 	    button_exit.addMouseListener(new MouseAdapter() {
 	    	@Override
 	    	public void mouseClicked(MouseEvent e) {
@@ -165,7 +175,7 @@ public class Login {
 	    	}
 	    });
 	    button_exit.setToolTipText("종료");
-	    button_exit.setBounds(1144, 10, 50, 50);
+	    button_exit.setBounds(1132, 0, 62, 60);
 	    button_exit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icon/exit.png")));
 	    backgroundPanel.add(button_exit);
 	    
