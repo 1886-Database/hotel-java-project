@@ -1,7 +1,10 @@
 package view.UI;
 
 import java.awt.Color;
+import java.awt.geom.RoundRectangle2D;
+
 import javax.swing.JComponent;
+import javax.swing.JFrame;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.GroupLayout;
 
@@ -16,6 +19,7 @@ public class EmployeeMain extends javax.swing.JFrame {
 	/**
      * Creates new form Main
      */
+	private JFrame frame;
     private Form_Home home;
     private Form_1 form1;
     private Form_2 form2;
@@ -67,7 +71,7 @@ public class EmployeeMain extends javax.swing.JFrame {
         menu = new view.component.EmployeeMenu();   //메뉴
         header2 = new view.component.Header();
         mainPanel = new javax.swing.JPanel();
-
+        	
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
 
@@ -146,6 +150,7 @@ public class EmployeeMain extends javax.swing.JFrame {
             }
         });
     }
+
     private view.component.Header header2;
     private javax.swing.JPanel mainPanel;
     private view.component.EmployeeMenu menu;

@@ -2,6 +2,7 @@ package view.UI;
 
 import java.awt.EventQueue;
 import java.awt.geom.RoundRectangle2D;
+import java.sql.SQLException;
 
 import javax.swing.JFrame;
 
@@ -9,8 +10,12 @@ import java.awt.Color;
 import javax.swing.border.Border;
 import view.component.LoginBackground;
 import view.swing.RoundedButton;
+import modelManager.MemberManager;
+import modelManager.EmployeeManager;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import java.awt.Cursor;
 
@@ -22,6 +27,8 @@ import java.awt.event.MouseEvent;
 import java.awt.Label;
 import java.awt.Button;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class Login {
 
@@ -84,13 +91,13 @@ public class Login {
 	    backgroundPanel.add(hotelIcon);
 	    
 	    //USERNAME 라벨
-	    label_userName = new JLabel("USERNAME");
-	    label_userName.setHorizontalAlignment(SwingConstants.CENTER);
-	    label_userName.setBackground(new Color(255, 255, 255));
-	    label_userName.setFont(new Font("맑은 고딕", Font.PLAIN, 22));
-	    label_userName.setForeground(new Color(255, 255, 255));
-	    label_userName.setBounds(373, 309, 141, 41);
-	    backgroundPanel.add(label_userName);
+	    lblId = new JLabel("ID");
+	    lblId.setHorizontalAlignment(SwingConstants.CENTER);
+	    lblId.setBackground(new Color(255, 255, 255));
+	    lblId.setFont(new Font("맑은 고딕", Font.PLAIN, 22));
+	    lblId.setForeground(new Color(255, 255, 255));
+	    lblId.setBounds(373, 309, 141, 41);
+	    backgroundPanel.add(lblId);
 	    
 	    //PASSWORD 라벨
 	    label_password = new JLabel("PASSWORD");
@@ -122,6 +129,45 @@ public class Login {
 	    
 	    //로그인 버튼
 	    button_login = new RoundedButton("login");
+	    button_login.addMouseListener(new MouseAdapter() {
+	    	@Override
+	    	public void mouseClicked(MouseEvent e) {
+	    		String username = input_userName.getText(); //유저가 입력한 id를 username 변수에 저장
+	            String password = String.valueOf(input_password.getPassword()); //유저가 입력한 패스워드를 password 변수에 저장
+	            if(username.trim().equals("")){ //유저가 아이디 창을 입력하지 않았다면
+	                JOptionPane.showMessageDialog(backgroundPanel,"ID를 입력해주세요.", "Empty ID",2);
+	            }
+	            else if(password.trim().equals("")){ //유저가 패스워드 창을 입력하지 않았다면
+	                JOptionPane.showMessageDialog(backgroundPanel,"패스워드를 입력해주세요.", "Empty Password",2);
+	            }
+	            else{ //유저가 아이디와 패스워드를 모두 입력한 경우
+	            	MemberManager memberManager = new MemberManager();
+	            	EmployeeManager employeeManager = new EmployeeManager();
+	            	try {
+	            		if(memberManager.login(username,password)==1) {
+	            			MemberMain memberMain = new MemberMain();
+	            			memberMain.main(null);
+	            			frame.dispose();
+	            		}
+	            		else if(employeeManager.login(username,password)==1) {
+	            			EmployeeMain employeeMain = new EmployeeMain();
+	            			employeeMain.main(null);
+	            			frame.dispose();
+	            		}
+	            		else {
+	            			JOptionPane.showMessageDialog(backgroundPanel,"ID나 패스워드가 잘못되었습니다.", "Login Error",2);
+	            		}
+	            	}
+	            	catch(Exception ex){
+	            		JOptionPane.showMessageDialog(backgroundPanel,"error", "Login Error",2);
+	            	}
+	            }
+	    	}
+	    });
+	    button_login.addActionListener(new ActionListener() {
+	    	public void actionPerformed(ActionEvent e) {
+	    	}
+	    });
 	    button_login.setForeground(new Color(255, 255, 255));
 	    button_login.setText("LOGIN");
 	    button_login.setFont(new Font("맑은 고딕", Font.BOLD, 25));
@@ -185,7 +231,7 @@ public class Login {
 	private view.component.LoginBackground backgroundPanel;
 	private view.swing.RoundedButton button_login;
 	private JLabel hotelIcon;
-	private JLabel label_userName;
+	private JLabel lblId;
 	private JLabel label_password;
 	private JTextField input_userName;
 	private JPasswordField input_password;
