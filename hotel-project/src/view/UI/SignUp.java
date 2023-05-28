@@ -15,6 +15,10 @@ import javax.swing.JOptionPane;
 import java.awt.Font;
 import javax.swing.SwingConstants;
 import javax.swing.text.NumberFormatter;
+
+import modelManager.EmployeeManager;
+import modelManager.MemberManager;
+
 import javax.swing.JSeparator;
 import javax.swing.JTextField;
 import view.swing.RoundedButton;
@@ -27,6 +31,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JFormattedTextField;
 import javax.swing.JFormattedTextField.AbstractFormatter;
+import javax.swing.JButton;
 
 public class SignUp {
 
@@ -56,6 +61,9 @@ public class SignUp {
 		frame.setShape(new RoundRectangle2D.Double(0, 0, 1195, 670, 20, 20));
 		frame.getContentPane().setLayout(null);
 		frame.setVisible(true);
+		
+		memberManager = new MemberManager();
+		employeeManager = new EmployeeManager();
 		
 		/****************************************** 네비게이션 바 ********************************************/
 		navigationBar = new LoginBackground(Color.decode("#283c86"), Color.decode("#45a247"), 3);
@@ -105,15 +113,15 @@ public class SignUp {
 	    panel.setLayout(null);
 	    
 	    /**************라벨***************/
-	    label_realName = new JLabel("이름");
-	    label_realName.setFont(new Font("맑은 고딕", Font.PLAIN, 22));
-	    label_realName.setBounds(122, 54, 115, 44);
-	    panel.add(label_realName);
+	    label_name = new JLabel("이름");
+	    label_name.setFont(new Font("맑은 고딕", Font.PLAIN, 22));
+	    label_name.setBounds(122, 54, 115, 44);
+	    panel.add(label_name);
 	    
-	    label_loginName = new JLabel("ID");
-	    label_loginName.setFont(new Font("맑은 고딕", Font.PLAIN, 22));
-	    label_loginName.setBounds(122, 134, 115, 44);
-	    panel.add(label_loginName);
+	    label_loginID = new JLabel("ID");
+	    label_loginID.setFont(new Font("맑은 고딕", Font.PLAIN, 22));
+	    label_loginID.setBounds(122, 134, 115, 44);
+	    panel.add(label_loginID);
 	    
 	    label_password = new JLabel("password");
 	    label_password.setFont(new Font("맑은 고딕", Font.PLAIN, 22));
@@ -153,29 +161,29 @@ public class SignUp {
 	    separator2.setBounds(504, 312, 7, 2);
 	    panel.add(separator2);
 	    
-	    JFormattedTextField input_realName = new JFormattedTextField((AbstractFormatter) null);
-	    input_realName.addKeyListener(new KeyAdapter() {  //숫자는 입력할 수 없도록 제한 + 글자 수 제한
+	    JFormattedTextField input_name = new JFormattedTextField((AbstractFormatter) null);
+	    input_name.addKeyListener(new KeyAdapter() {  //숫자는 입력할 수 없도록 제한 + 글자 수 제한
 	    	public void keyTyped(KeyEvent e) {
 	    		char c = e.getKeyChar();
-	    		if ((Character.isDigit(c)) ||(c == KeyEvent.VK_BACK_SPACE) || (c == KeyEvent.VK_DELETE)||input_realName.getText().length()>=15) {
+	    		if ((Character.isDigit(c)) ||(c == KeyEvent.VK_BACK_SPACE) || (c == KeyEvent.VK_DELETE)||input_name.getText().length()>=15) {
 	    			e.consume();
 	    		}
 	    	}
 	    });
-	    input_realName.setBounds(272, 54, 370, 38);
-	    panel.add(input_realName);
+	    input_name.setBounds(272, 54, 370, 38);
+	    panel.add(input_name);
 	    
-	    input_loginName = new JTextField();
-	    input_loginName.setColumns(10);
-	    input_loginName.setBounds(272, 140, 370, 38);
-	    input_loginName.addKeyListener(new KeyAdapter() {  //숫자는 입력할 수 없도록 제한 + 글자 수 제한
+	    input_loginID = new JTextField();
+	    input_loginID.setColumns(10);
+	    input_loginID.setBounds(272, 140, 370, 38);
+	    input_loginID.addKeyListener(new KeyAdapter() {  //숫자는 입력할 수 없도록 제한 + 글자 수 제한
 	    	public void keyTyped(KeyEvent e) {
-	    		if (input_loginName.getText().length()>=15) {
+	    		if (input_loginID.getText().length()>=15) {
 	    			e.consume();
 	    		}
 	    	}
 	    });
-	    panel.add(input_loginName);
+	    panel.add(input_loginID);
 	    
 	    input_password = new JTextField();
 	    input_password.setColumns(10);
@@ -240,13 +248,46 @@ public class SignUp {
 	    input_birthDay.setBounds(530, 376, 70, 38);
 	    panel.add(input_birthDay);
 	    
+	    
+	    /**************ID 중복 확인 버튼***************/
+	    
+	    JButton button_checkID = new JButton("중복 확인");
+	    button_checkID.addMouseListener(new MouseAdapter() {
+	    	@Override
+	    	public void mouseClicked(MouseEvent e) {
+	    		String loginID = input_loginID.getText();
+	    		if(loginID.trim().equals("")) {
+	    			JOptionPane.showMessageDialog(frame,"ID를 입력해주세요.", "Empty id",2);
+	    		}else {
+	    			try { 
+	    				System.out.println("1");
+			    		if(memberManager.checkID(loginID)==0||employeeManager.checkID(loginID)==0) {
+			    			JOptionPane.showMessageDialog(frame,"이미 존재하는 ID입니다.", "ID duplicate",2);
+			    		}else {
+			    			checkedID=loginID;
+			    			System.out.println("checkedID : "+checkedID);
+			    			JOptionPane.showMessageDialog(frame,"사용할 수 있는 ID입니다", "possible ID",2);
+			    		}
+	    			}catch(Exception ex) {
+	    				ex.printStackTrace();
+	    				JOptionPane.showMessageDialog(frame,"error", "Error",2);
+	    			}
+	    		}
+	    	}
+	    });
+	    button_checkID.setFont(new Font("맑은 고딕", Font.PLAIN, 13));
+	    button_checkID.setBounds(654, 142, 104, 38);
+	    panel.add(button_checkID);
+	   
+	    
+	    
 	    /**************회원가입 버튼***************/
 	    RoundedButton button_signUp = new RoundedButton("sign up");
 	    button_signUp.addMouseListener(new MouseAdapter() {
 	    	@Override
 	    	public void mouseClicked(MouseEvent e) {
-	    		String realName = input_realName.getText();
-	    		String loginName = input_loginName.getText();
+	    		String name = input_name.getText();
+	    		String loginID = input_loginID.getText();
 	    		String password = input_password.getText();
 	    		String phone1=input_phone1.getText().replace(",", "");
 	    		String phone2=input_phone2.getText().replace(",", "");
@@ -254,10 +295,10 @@ public class SignUp {
 	    		String birthYear=input_birthYear.getSelectedItem().toString();
 	    		String birthMonth=input_birthMonth.getSelectedItem().toString();
 	    		String birthDay=input_birthDay.getSelectedItem().toString();
-	    		if(realName.trim().equals("")) {
+	    		if(name.trim().equals("")) {
 	    			JOptionPane.showMessageDialog(frame,"이름을 입력해주세요.", "Empty name",2);
 	    		}
-	    		else if(loginName.trim().equals("")) {
+	    		else if(loginID.trim().equals("")) {
 	    			JOptionPane.showMessageDialog(frame,"ID를 입력해주세요.", "Empty id",2);
 	    		}
 	    		else if(password.trim().equals("")) {
@@ -268,7 +309,21 @@ public class SignUp {
 	    		}
 	    		else if(birthYear.trim().equals("")||birthMonth.trim().equals("")||birthDay.trim().equals("")) {
 	    			JOptionPane.showMessageDialog(frame,"생일을 입력해주세요.", "Empty birthday",2);
+	    		}else if(!(loginID.equals(checkedID))) {
+	    			JOptionPane.showMessageDialog(frame,"ID 중복 확인을 해주세요.", "you should check your ID",2);
 	    		}else {
+	    			String phoneNum = phone1+phone2+phone3;
+	    			String birthDate = birthYear+"-"+birthMonth+"-"+birthDay;
+	    			try {
+	    				int result = memberManager.signUp(name,loginID,password,phoneNum,birthDate);
+	    				if(result==1) {
+	    					JOptionPane.showMessageDialog(frame,"회원가입이 완료되었습니다.", "done",2);
+	    				}else {
+	    					JOptionPane.showMessageDialog(frame,"error.", "signUp error",2);
+	    				}
+	    			}catch(Exception ex) {
+	    				JOptionPane.showMessageDialog(frame,"error", "Error",2);
+	    			}
 	    			
 	    		}
 	    	}
@@ -279,7 +334,8 @@ public class SignUp {
 	    button_signUp.setBackground(new Color(40, 60, 134));
 	    button_signUp.setBounds(950, 390, 208, 52);
 	    panel.add(button_signUp);
-	   
+	    
+
 	   
 	    
 	    
@@ -289,11 +345,14 @@ public class SignUp {
 	private view.component.LoginBackground navigationBar;
 	private JLabel label_signUp;
 	private JLabel button_exit;
-	private JLabel label_realName;
-	private JLabel label_loginName;
+	private JLabel label_name;
+	private JLabel label_loginID;
 	private JLabel label_password;
 	private JLabel label_phone;
 	private JLabel label_birthday;
-	private JTextField input_loginName;
+	private JTextField input_loginID;
 	private JTextField input_password;
+	private MemberManager memberManager;
+	private EmployeeManager employeeManager;
+	private String checkedID;
 }
