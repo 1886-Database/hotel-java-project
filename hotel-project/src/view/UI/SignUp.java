@@ -10,6 +10,8 @@ import view.component.LoginBackground;
 import javax.swing.JScrollPane;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import javax.swing.SwingConstants;
 import javax.swing.text.NumberFormatter;
@@ -24,6 +26,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JFormattedTextField;
+import javax.swing.JFormattedTextField.AbstractFormatter;
 
 public class SignUp {
 
@@ -150,11 +153,17 @@ public class SignUp {
 	    separator2.setBounds(504, 312, 7, 2);
 	    panel.add(separator2);
 	    
-	    /**************사용자 입력***************/
-	    input_realName = new JTextField();
+	    JFormattedTextField input_realName = new JFormattedTextField((AbstractFormatter) null);
+	    input_realName.addKeyListener(new KeyAdapter() {  //숫자만 입력받을 수 있도록 keyListener 추가 + 글자 수 제한
+	    	public void keyTyped(KeyEvent e) {
+	    		char c = e.getKeyChar();
+	    		if ((Character.isDigit(c)) ||(c == KeyEvent.VK_BACK_SPACE) || (c == KeyEvent.VK_DELETE)) {
+	    			e.consume();
+	    		}
+	    	}
+	    });
 	    input_realName.setBounds(272, 54, 370, 38);
 	    panel.add(input_realName);
-	    input_realName.setColumns(10);
 	    
 	    input_loginName = new JTextField();
 	    input_loginName.setColumns(10);
@@ -168,10 +177,10 @@ public class SignUp {
 	    
 	    JFormattedTextField input_phone1 = new JFormattedTextField(new NumberFormatter());
 	    input_phone1.setBounds(272, 293, 70, 38);
-	    input_phone1.addKeyListener(new KeyAdapter() {  //숫자만 입력받을 수 있도록 keyListener 추가
+	    input_phone1.addKeyListener(new KeyAdapter() {  //숫자만 입력받을 수 있도록 keyListener 추가 + 글자 수 제한
 	    	public void keyTyped(KeyEvent e) {
 	    		char c = e.getKeyChar();
-	    		if (!((Character.isDigit(c)) ||(c == KeyEvent.VK_BACK_SPACE) || (c == KeyEvent.VK_DELETE))) {
+	    		if (!((Character.isDigit(c)) ||(c == KeyEvent.VK_BACK_SPACE) || (c == KeyEvent.VK_DELETE))||input_phone1.getText().length()>=3) {
 	    			e.consume();
 	    		}
 	    	}
@@ -180,10 +189,10 @@ public class SignUp {
 	    
 	    JFormattedTextField input_phone2 = new JFormattedTextField(new NumberFormatter());
 	    input_phone2.setBounds(372, 294, 120, 38);
-	    input_phone2.addKeyListener(new KeyAdapter() {  //숫자만 입력받을 수 있도록 keyListener 추가
+	    input_phone2.addKeyListener(new KeyAdapter() {  //숫자만 입력받을 수 있도록 keyListener 추가 + 글자 수 제한
 	    	public void keyTyped(KeyEvent e) {
 	    		char c = e.getKeyChar();
-	    		if (!((Character.isDigit(c)) ||(c == KeyEvent.VK_BACK_SPACE) || (c == KeyEvent.VK_DELETE))) {
+	    		if (!((Character.isDigit(c)) ||(c == KeyEvent.VK_BACK_SPACE) || (c == KeyEvent.VK_DELETE))||input_phone2.getText().length()>=4) {
 	    			e.consume();
 	    		}
 	    	}
@@ -192,10 +201,10 @@ public class SignUp {
 	    
 	    JFormattedTextField input_phone3 = new JFormattedTextField(new NumberFormatter());
 	    input_phone3.setBounds(522, 294, 120, 38);
-	    input_phone3.addKeyListener(new KeyAdapter() {  //숫자만 입력받을 수 있도록 keyListener 추가
+	    input_phone3.addKeyListener(new KeyAdapter() {  //숫자만 입력받을 수 있도록 keyListener 추가 + 글자 수 제한
 	    	public void keyTyped(KeyEvent e) {
 	    		char c = e.getKeyChar();
-	    		if (!((Character.isDigit(c)) ||(c == KeyEvent.VK_BACK_SPACE) || (c == KeyEvent.VK_DELETE))) {
+	    		if (!((Character.isDigit(c)) ||(c == KeyEvent.VK_BACK_SPACE) || (c == KeyEvent.VK_DELETE))||input_phone3.getText().length()>=4) {
 	    			e.consume();
 	    		}
 	    	}
@@ -203,17 +212,17 @@ public class SignUp {
 	    panel.add(input_phone3);
 
 	    JComboBox input_birthYear = new JComboBox();
-	    input_birthYear.setModel(new DefaultComboBoxModel(new String[] {"1923", "1924", "1925", "1926", "1927", "1928", "1929", "1930", "1931", "1932", "1933", "1934", "1935", "1936", "1937", "1938", "1939", "1940", "1941", "1942", "1943", "1944", "1945", "1946", "1947", "1948", "1949", "1950", "1951", "1952", "1953", "1954", "1955", "1956", "1957", "1958", "1959", "1960", "1961", "1962", "1963", "1964", "1965", "1966", "1967", "1968", "1969", "1970", "1971", "1972", "1973", "1974", "1975", "1976", "1977", "1978", "1979", "1980", "1981", "1982", "1983", "1984", "1985", "1986", "1987", "1988", "1989", "1990", "1991", "1992", "1993", "1994", "1995", "1996", "1997", "1998", "1999", "2000", "2001", "2002", "2003", "2004"}));
+	    input_birthYear.setModel(new DefaultComboBoxModel(new String[] {"", "1923", "1924", "1925", "1926", "1927", "1928", "1929", "1930", "1931", "1932", "1933", "1934", "1935", "1936", "1937", "1938", "1939", "1940", "1941", "1942", "1943", "1944", "1945", "1946", "1947", "1948", "1949", "1950", "1951", "1952", "1953", "1954", "1955", "1956", "1957", "1958", "1959", "1960", "1961", "1962", "1963", "1964", "1965", "1966", "1967", "1968", "1969", "1970", "1971", "1972", "1973", "1974", "1975", "1976", "1977", "1978", "1979", "1980", "1981", "1982", "1983", "1984", "1985", "1986", "1987", "1988", "1989", "1990", "1991", "1992", "1993", "1994", "1995", "1996", "1997", "1998", "1999", "2000", "2001", "2002", "2003", "2004"}));
 	    input_birthYear.setBounds(272, 376, 70, 38);
 	    panel.add(input_birthYear);
 	    
 	    JComboBox input_birthMonth = new JComboBox();
-	    input_birthMonth.setModel(new DefaultComboBoxModel(new String[] {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"}));
+	    input_birthMonth.setModel(new DefaultComboBoxModel(new String[] {"", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"}));
 	    input_birthMonth.setBounds(401, 376, 70, 38);
 	    panel.add(input_birthMonth);
 	    
 	    JComboBox input_birthDay = new JComboBox();
-	    input_birthDay.setModel(new DefaultComboBoxModel(new String[] {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"}));
+	    input_birthDay.setModel(new DefaultComboBoxModel(new String[] {"", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"}));
 	    input_birthDay.setBounds(530, 376, 70, 38);
 	    panel.add(input_birthDay);
 	    
@@ -222,7 +231,30 @@ public class SignUp {
 	    button_signUp.addMouseListener(new MouseAdapter() {
 	    	@Override
 	    	public void mouseClicked(MouseEvent e) {
-	    		
+	    		String realName = input_realName.getText();
+	    		String loginName = input_loginName.getText();
+	    		String password = input_password.getText();
+	    		String phone1=input_phone1.getText().replace(",", "");
+	    		String phone2=input_phone2.getText().replace(",", "");
+	    		String phone3=input_phone3.getText().replace(",", "");
+	    		String birthYear=input_birthYear.getSelectedItem().toString();
+	    		String birthMonth=input_birthMonth.getSelectedItem().toString();
+	    		String birthDay=input_birthDay.getSelectedItem().toString();
+	    		if(realName.trim().equals("")) {
+	    			JOptionPane.showMessageDialog(frame,"이름을 입력해주세요.", "Empty name",2);
+	    		}
+	    		else if(loginName.trim().equals("")) {
+	    			JOptionPane.showMessageDialog(frame,"ID를 입력해주세요.", "Empty id",2);
+	    		}
+	    		else if(password.trim().equals("")) {
+	    			JOptionPane.showMessageDialog(frame,"비밀번호를 입력해주세요.", "Empty password",2);
+	    		}
+	    		else if(phone1.length()<2||phone2.length()!=4||phone3.length()!=4) {
+	    			JOptionPane.showMessageDialog(frame,"잘못된 전화번호 형식입니다.", "wrong phoneNum",2);
+	    		}
+	    		else if(birthYear.trim().equals("")||birthMonth.trim().equals("")||birthDay.trim().equals("")) {
+	    			JOptionPane.showMessageDialog(frame,"생일을 입력해주세요.", "Empty birthday",2);
+	    		}
 	    	}
 	    });
 	    button_signUp.setText("가입");
@@ -231,6 +263,7 @@ public class SignUp {
 	    button_signUp.setBackground(new Color(40, 60, 134));
 	    button_signUp.setBounds(950, 390, 208, 52);
 	    panel.add(button_signUp);
+	   
 	   
 	    
 	    
@@ -245,7 +278,6 @@ public class SignUp {
 	private JLabel label_password;
 	private JLabel label_phone;
 	private JLabel label_birthday;
-	private JTextField input_realName;
 	private JTextField input_loginName;
 	private JTextField input_password;
 }

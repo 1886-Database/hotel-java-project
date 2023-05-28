@@ -37,10 +37,11 @@ public class MemberManager {
 		}catch(Exception e){
 		    e.printStackTrace();
 		}finally {
-			System.out.println("자원 반납");
 			myConnection.close(rs,null,ps,con);
 		}
 		return -1; //데이터베이스 오류 
 	 }
+	
+	//public int signUp()
 }
 
