@@ -26,9 +26,11 @@ public class MemberMain extends javax.swing.JFrame {
     private Form_MyPage form4;
     private Form_ViewMyReserv form5;
     private Form_Msg form6;
+    static String loginID;
 
-    public MemberMain() {
+    public MemberMain(String id) {
         initComponents();
+        loginID = id;
         setBackground(new Color(0, 0, 0, 0));
         home = new Form_Home();
         form1 = new Form_1();
@@ -140,6 +142,9 @@ public class MemberMain extends javax.swing.JFrame {
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
+    	
+    	System.out.println(loginID+"로 로그인하였습니다.");
+    	
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -161,7 +166,7 @@ public class MemberMain extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MemberMain().setVisible(true);
+                new MemberMain(null).setVisible(true);
             }
         });
     }

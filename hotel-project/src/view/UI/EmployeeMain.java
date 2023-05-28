@@ -5,6 +5,9 @@ import java.awt.geom.RoundRectangle2D;
 
 import javax.swing.JComponent;
 import javax.swing.JFrame;
+
+import model.Employee;
+
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.GroupLayout;
 
@@ -35,9 +38,11 @@ public class EmployeeMain extends javax.swing.JFrame {
     private Form_AdSales form5;
     private Form_MyPage form6;
     private Form_AdMsg form7;
+    static String loginID;
 
-    public EmployeeMain() {
+    public EmployeeMain(String id) {
         initComponents();
+        loginID = id;
         setBackground(new Color(0, 0, 0, 0));
         home = new Form_Home();
         form1 = new Form_AdRoom();
@@ -150,6 +155,8 @@ public class EmployeeMain extends javax.swing.JFrame {
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
+    	System.out.println(loginID+"로 로그인하였습니다.");
+    	
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -171,7 +178,7 @@ public class EmployeeMain extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new EmployeeMain().setVisible(true);
+                new EmployeeMain(null).setVisible(true);
             }
         });
     }
