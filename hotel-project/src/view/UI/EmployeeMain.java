@@ -12,7 +12,14 @@ import view.event.EventMenuSelected;
 import view.form.Form_1;
 import view.form.Form_2;
 import view.form.Form_3;
+import view.form.Form_AdEmployee;
+import view.form.Form_AdMember;
+import view.form.Form_AdMsg;
+import view.form.Form_AdReserv;
+import view.form.Form_AdRoom;
+import view.form.Form_AdSales;
 import view.form.Form_Home;
+import view.form.Form_MyPage;
 
 public class EmployeeMain extends javax.swing.JFrame {
 
@@ -21,29 +28,47 @@ public class EmployeeMain extends javax.swing.JFrame {
      */
 	private JFrame frame;
     private Form_Home home;
-    private Form_1 form1;
-    private Form_2 form2;
-    private Form_3 form3;
+    private Form_AdRoom form1;
+    private Form_AdReserv form2;
+    private Form_AdEmployee form3;
+    private Form_AdMember form4;
+    private Form_AdSales form5;
+    private Form_MyPage form6;
+    private Form_AdMsg form7;
 
     public EmployeeMain() {
         initComponents();
         setBackground(new Color(0, 0, 0, 0));
         home = new Form_Home();
-        form1 = new Form_1();
-        form2 = new Form_2();
-        form3 = new Form_3();
+        form1 = new Form_AdRoom();
+        form2 = new Form_AdReserv();
+        form3 = new Form_AdEmployee();
+        form4 = new Form_AdMember();
+        form5 = new Form_AdSales();
+        form6 = new Form_MyPage();
+        form7 = new Form_AdMsg();
         menu.initMoving(EmployeeMain.this);
         menu.addEventMenuSelected(new EventMenuSelected() {
             @Override
             public void selected(int index) {
                 if (index == 0) {
                     setForm(home);
-                } else if (index == 1) {
-                    setForm(form1);
                 } else if (index == 2) {
-                    setForm(form2);
+                    setForm(form1);
                 } else if (index == 3) {
+                    setForm(form2);
+                } else if (index == 4) {
                     setForm(form3);
+                } else if (index == 5) {
+                    setForm(form4);
+                } else if (index == 6) {
+                    setForm(form5);
+                }else if (index == 10) {
+                    setForm(form6);
+                }else if (index ==11) {
+                    setForm(form7);
+                }else if (index ==13) {
+                    dispose();
                 }
             }
         });
