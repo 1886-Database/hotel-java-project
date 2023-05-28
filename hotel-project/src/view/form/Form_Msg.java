@@ -12,15 +12,23 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import view.model.StatusType;
 import view.swing.ScrollBar;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.GroupLayout;
+import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+import javax.swing.JComboBox;
+import com.toedter.calendar.JDateChooser;
+import javax.swing.JButton;
 
 
-public class Form_2 extends javax.swing.JPanel {
+public class Form_Msg extends javax.swing.JPanel {
 
 
     /**
      * Creates new form Form_1
      */
-    public Form_2() {
+    public Form_Msg() {
         initComponents();
     //  add row table
         spTable.setVerticalScrollBar(new ScrollBar());
@@ -48,7 +56,10 @@ public class Form_2 extends javax.swing.JPanel {
         panelBorder1 = new view.swing.PanelBorder();
         jLabel1 = new javax.swing.JLabel();
         spTable = new javax.swing.JScrollPane();
+        spTable_1 =new javax.swing.JScrollPane();
         table = new view.swing.Table();
+        table1 = new view.swing.Table();
+
 
         setBackground(new java.awt.Color(242, 242, 242));
 
@@ -59,7 +70,7 @@ public class Form_2 extends javax.swing.JPanel {
 
         jLabel1.setFont(new java.awt.Font("sansserif", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(127, 127, 127));
-        jLabel1.setText("Reservation");
+        jLabel1.setText("Message");
 
         spTable.setBorder(null);
 
@@ -68,7 +79,7 @@ public class Form_2 extends javax.swing.JPanel {
 
             },
             new String [] {
-                "예약번호", "예약자", "객실", "예약날짜", "처리현황"
+                "받은 메시지","발신자", "받은 시간", "메시지"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -80,29 +91,76 @@ public class Form_2 extends javax.swing.JPanel {
             }
         });
         spTable.setViewportView(table);
+        
+        textField = new JTextField();
+        textField.setText("메시지를 작성해주세요.\n");
+        textField.setColumns(10);
+        
+        lblNewLabel = new JLabel("메시지 작성");
+        
+        btnNewButton = new JButton("보내기");
+        
+        spTable_1 = new JScrollPane();
+        spTable_1.setBorder(null);
+        table1.setModel(new javax.swing.table.DefaultTableModel(
+                new Object [][] {
+
+                },
+                new String [] {
+                    "보낸 메시지","보낸 시간", "메시지"
+                }
+            ) {
+                boolean[] canEdit = new boolean [] {
+                    false, false, false, false, false
+                };
+
+                public boolean isCellEditable(int rowIndex, int columnIndex) {
+                    return canEdit [columnIndex];
+                }
+            });
+            spTable_1.setViewportView(table1);
 
         javax.swing.GroupLayout panelBorder1Layout = new javax.swing.GroupLayout(panelBorder1);
-        panelBorder1.setLayout(panelBorder1Layout);
         panelBorder1Layout.setHorizontalGroup(
-            panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelBorder1Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addGroup(panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelBorder1Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(spTable))
-                .addContainerGap())
+        	panelBorder1Layout.createParallelGroup(Alignment.LEADING)
+        		.addGroup(panelBorder1Layout.createSequentialGroup()
+        			.addGroup(panelBorder1Layout.createParallelGroup(Alignment.LEADING)
+        				.addGroup(panelBorder1Layout.createSequentialGroup()
+        					.addGap(20)
+        					.addComponent(jLabel1))
+        				.addGroup(panelBorder1Layout.createSequentialGroup()
+        					.addGap(46)
+        					.addGroup(panelBorder1Layout.createParallelGroup(Alignment.LEADING)
+        						.addComponent(spTable, GroupLayout.PREFERRED_SIZE, 440, GroupLayout.PREFERRED_SIZE)
+        						.addComponent(spTable_1, GroupLayout.PREFERRED_SIZE, 440, GroupLayout.PREFERRED_SIZE))
+        					.addGap(39)
+        					.addGroup(panelBorder1Layout.createParallelGroup(Alignment.LEADING)
+        						.addComponent(btnNewButton)
+        						.addComponent(textField, GroupLayout.PREFERRED_SIZE, 303, GroupLayout.PREFERRED_SIZE)
+        						.addComponent(lblNewLabel))))
+        			.addContainerGap(120, Short.MAX_VALUE))
         );
         panelBorder1Layout.setVerticalGroup(
-            panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelBorder1Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(spTable, javax.swing.GroupLayout.DEFAULT_SIZE, 279, Short.MAX_VALUE)
-                .addGap(20, 20, 20))
+        	panelBorder1Layout.createParallelGroup(Alignment.LEADING)
+        		.addGroup(panelBorder1Layout.createSequentialGroup()
+        			.addGroup(panelBorder1Layout.createParallelGroup(Alignment.LEADING)
+        				.addGroup(panelBorder1Layout.createSequentialGroup()
+        					.addGap(20)
+        					.addComponent(jLabel1)
+        					.addGap(29)
+        					.addComponent(spTable, GroupLayout.PREFERRED_SIZE, 237, GroupLayout.PREFERRED_SIZE)
+        					.addGap(18)
+        					.addComponent(spTable_1, GroupLayout.PREFERRED_SIZE, 237, GroupLayout.PREFERRED_SIZE))
+        				.addGroup(panelBorder1Layout.createSequentialGroup()
+        					.addGap(171)
+        					.addComponent(lblNewLabel)
+        					.addPreferredGap(ComponentPlacement.UNRELATED)
+        					.addComponent(textField, GroupLayout.PREFERRED_SIZE, 208, GroupLayout.PREFERRED_SIZE)
+        					.addGap(32)
+        					.addComponent(btnNewButton)))
+        			.addContainerGap(26, Short.MAX_VALUE))
         );
+        panelBorder1.setLayout(panelBorder1Layout);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -133,5 +191,9 @@ public class Form_2 extends javax.swing.JPanel {
     private view.swing.PanelBorder panelBorder1;
     private javax.swing.JScrollPane spTable;
     private view.swing.Table table;
-    // End of variables declaration//GEN-END:variables
+    private view.swing.Table table1;
+    private JTextField textField;
+    private JLabel lblNewLabel;
+    private JButton btnNewButton;
+    private JScrollPane spTable_1;
 }
