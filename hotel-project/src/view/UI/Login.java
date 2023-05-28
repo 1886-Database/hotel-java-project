@@ -145,12 +145,12 @@ public class Login {
 	            	EmployeeManager employeeManager = new EmployeeManager();
 	            	try {
 	            		if(memberManager.login(loginID,password)==1) {
-	            			MemberMain memberMain = new MemberMain();
+	            			MemberMain memberMain = new MemberMain(loginID);
 	            			memberMain.main(null);
 	            			frame.dispose();
 	            		}
 	            		else if(employeeManager.login(loginID,password)==1) {
-	            			EmployeeMain employeeMain = new EmployeeMain();
+	            			EmployeeMain employeeMain = new EmployeeMain(loginID);
 	            			employeeMain.main(null);
 	            			frame.dispose();
 	            		}
