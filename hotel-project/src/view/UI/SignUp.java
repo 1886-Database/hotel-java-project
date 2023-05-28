@@ -10,9 +10,15 @@ import view.component.LoginBackground;
 import javax.swing.JScrollPane;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import javax.swing.SwingConstants;
 import javax.swing.text.NumberFormatter;
+
+import modelManager.EmployeeManager;
+import modelManager.MemberManager;
+
 import javax.swing.JSeparator;
 import javax.swing.JTextField;
 import view.swing.RoundedButton;
@@ -24,6 +30,8 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JFormattedTextField;
+import javax.swing.JFormattedTextField.AbstractFormatter;
+import javax.swing.JButton;
 
 public class SignUp {
 
@@ -53,6 +61,9 @@ public class SignUp {
 		frame.setShape(new RoundRectangle2D.Double(0, 0, 1195, 670, 20, 20));
 		frame.getContentPane().setLayout(null);
 		frame.setVisible(true);
+		
+		memberManager = new MemberManager();
+		employeeManager = new EmployeeManager();
 		
 		/****************************************** 네비게이션 바 ********************************************/
 		navigationBar = new LoginBackground(Color.decode("#283c86"), Color.decode("#45a247"), 3);
@@ -102,15 +113,15 @@ public class SignUp {
 	    panel.setLayout(null);
 	    
 	    /**************라벨***************/
-	    label_realName = new JLabel("이름");
-	    label_realName.setFont(new Font("맑은 고딕", Font.PLAIN, 22));
-	    label_realName.setBounds(122, 54, 115, 44);
-	    panel.add(label_realName);
+	    label_name = new JLabel("이름");
+	    label_name.setFont(new Font("맑은 고딕", Font.PLAIN, 22));
+	    label_name.setBounds(122, 54, 115, 44);
+	    panel.add(label_name);
 	    
-	    label_loginName = new JLabel("ID");
-	    label_loginName.setFont(new Font("맑은 고딕", Font.PLAIN, 22));
-	    label_loginName.setBounds(122, 134, 115, 44);
-	    panel.add(label_loginName);
+	    label_loginID = new JLabel("ID");
+	    label_loginID.setFont(new Font("맑은 고딕", Font.PLAIN, 22));
+	    label_loginID.setBounds(122, 134, 115, 44);
+	    panel.add(label_loginID);
 	    
 	    label_password = new JLabel("password");
 	    label_password.setFont(new Font("맑은 고딕", Font.PLAIN, 22));
@@ -150,28 +161,48 @@ public class SignUp {
 	    separator2.setBounds(504, 312, 7, 2);
 	    panel.add(separator2);
 	    
-	    /**************사용자 입력***************/
-	    input_realName = new JTextField();
-	    input_realName.setBounds(272, 54, 370, 38);
-	    panel.add(input_realName);
-	    input_realName.setColumns(10);
+	    JFormattedTextField input_name = new JFormattedTextField((AbstractFormatter) null);
+	    input_name.addKeyListener(new KeyAdapter() {  //숫자는 입력할 수 없도록 제한 + 글자 수 제한
+	    	public void keyTyped(KeyEvent e) {
+	    		char c = e.getKeyChar();
+	    		if ((Character.isDigit(c)) ||(c == KeyEvent.VK_BACK_SPACE) || (c == KeyEvent.VK_DELETE)||input_name.getText().length()>=15) {
+	    			e.consume();
+	    		}
+	    	}
+	    });
+	    input_name.setBounds(272, 54, 370, 38);
+	    panel.add(input_name);
 	    
-	    input_loginName = new JTextField();
-	    input_loginName.setColumns(10);
-	    input_loginName.setBounds(272, 140, 370, 38);
-	    panel.add(input_loginName);
+	    input_loginID = new JTextField();
+	    input_loginID.setColumns(10);
+	    input_loginID.setBounds(272, 140, 370, 38);
+	    input_loginID.addKeyListener(new KeyAdapter() {  //숫자는 입력할 수 없도록 제한 + 글자 수 제한
+	    	public void keyTyped(KeyEvent e) {
+	    		if (input_loginID.getText().length()>=15) {
+	    			e.consume();
+	    		}
+	    	}
+	    });
+	    panel.add(input_loginID);
 	    
 	    input_password = new JTextField();
 	    input_password.setColumns(10);
 	    input_password.setBounds(272, 214, 370, 38);
+	    input_password.addKeyListener(new KeyAdapter() {  //글자 수 제한
+	    	public void keyTyped(KeyEvent e) {
+	    		if (input_password.getText().length()>=15) {
+	    			e.consume();
+	    		}
+	    	}
+	    });
 	    panel.add(input_password);
 	    
 	    JFormattedTextField input_phone1 = new JFormattedTextField(new NumberFormatter());
 	    input_phone1.setBounds(272, 293, 70, 38);
-	    input_phone1.addKeyListener(new KeyAdapter() {  //숫자만 입력받을 수 있도록 keyListener 추가
+	    input_phone1.addKeyListener(new KeyAdapter() {  //글자 수 제한
 	    	public void keyTyped(KeyEvent e) {
 	    		char c = e.getKeyChar();
-	    		if (!((Character.isDigit(c)) ||(c == KeyEvent.VK_BACK_SPACE) || (c == KeyEvent.VK_DELETE))) {
+	    		if (!((Character.isDigit(c)) ||(c == KeyEvent.VK_BACK_SPACE) || (c == KeyEvent.VK_DELETE))||input_phone1.getText().length()>=3) {
 	    			e.consume();
 	    		}
 	    	}
@@ -180,10 +211,10 @@ public class SignUp {
 	    
 	    JFormattedTextField input_phone2 = new JFormattedTextField(new NumberFormatter());
 	    input_phone2.setBounds(372, 294, 120, 38);
-	    input_phone2.addKeyListener(new KeyAdapter() {  //숫자만 입력받을 수 있도록 keyListener 추가
+	    input_phone2.addKeyListener(new KeyAdapter() {  //숫자만 입력받을 수 있도록 keyListener 추가 + 글자 수 제한
 	    	public void keyTyped(KeyEvent e) {
 	    		char c = e.getKeyChar();
-	    		if (!((Character.isDigit(c)) ||(c == KeyEvent.VK_BACK_SPACE) || (c == KeyEvent.VK_DELETE))) {
+	    		if (!((Character.isDigit(c)) ||(c == KeyEvent.VK_BACK_SPACE) || (c == KeyEvent.VK_DELETE))||input_phone2.getText().length()>=4) {
 	    			e.consume();
 	    		}
 	    	}
@@ -192,10 +223,10 @@ public class SignUp {
 	    
 	    JFormattedTextField input_phone3 = new JFormattedTextField(new NumberFormatter());
 	    input_phone3.setBounds(522, 294, 120, 38);
-	    input_phone3.addKeyListener(new KeyAdapter() {  //숫자만 입력받을 수 있도록 keyListener 추가
+	    input_phone3.addKeyListener(new KeyAdapter() {  //숫자만 입력받을 수 있도록 keyListener 추가 + 글자 수 제한
 	    	public void keyTyped(KeyEvent e) {
 	    		char c = e.getKeyChar();
-	    		if (!((Character.isDigit(c)) ||(c == KeyEvent.VK_BACK_SPACE) || (c == KeyEvent.VK_DELETE))) {
+	    		if (!((Character.isDigit(c)) ||(c == KeyEvent.VK_BACK_SPACE) || (c == KeyEvent.VK_DELETE))||input_phone3.getText().length()>=4) {
 	    			e.consume();
 	    		}
 	    	}
@@ -203,26 +234,98 @@ public class SignUp {
 	    panel.add(input_phone3);
 
 	    JComboBox input_birthYear = new JComboBox();
-	    input_birthYear.setModel(new DefaultComboBoxModel(new String[] {"1923", "1924", "1925", "1926", "1927", "1928", "1929", "1930", "1931", "1932", "1933", "1934", "1935", "1936", "1937", "1938", "1939", "1940", "1941", "1942", "1943", "1944", "1945", "1946", "1947", "1948", "1949", "1950", "1951", "1952", "1953", "1954", "1955", "1956", "1957", "1958", "1959", "1960", "1961", "1962", "1963", "1964", "1965", "1966", "1967", "1968", "1969", "1970", "1971", "1972", "1973", "1974", "1975", "1976", "1977", "1978", "1979", "1980", "1981", "1982", "1983", "1984", "1985", "1986", "1987", "1988", "1989", "1990", "1991", "1992", "1993", "1994", "1995", "1996", "1997", "1998", "1999", "2000", "2001", "2002", "2003", "2004"}));
+	    input_birthYear.setModel(new DefaultComboBoxModel(new String[] {"", "1923", "1924", "1925", "1926", "1927", "1928", "1929", "1930", "1931", "1932", "1933", "1934", "1935", "1936", "1937", "1938", "1939", "1940", "1941", "1942", "1943", "1944", "1945", "1946", "1947", "1948", "1949", "1950", "1951", "1952", "1953", "1954", "1955", "1956", "1957", "1958", "1959", "1960", "1961", "1962", "1963", "1964", "1965", "1966", "1967", "1968", "1969", "1970", "1971", "1972", "1973", "1974", "1975", "1976", "1977", "1978", "1979", "1980", "1981", "1982", "1983", "1984", "1985", "1986", "1987", "1988", "1989", "1990", "1991", "1992", "1993", "1994", "1995", "1996", "1997", "1998", "1999", "2000", "2001", "2002", "2003", "2004"}));
 	    input_birthYear.setBounds(272, 376, 70, 38);
 	    panel.add(input_birthYear);
 	    
 	    JComboBox input_birthMonth = new JComboBox();
-	    input_birthMonth.setModel(new DefaultComboBoxModel(new String[] {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"}));
+	    input_birthMonth.setModel(new DefaultComboBoxModel(new String[] {"", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"}));
 	    input_birthMonth.setBounds(401, 376, 70, 38);
 	    panel.add(input_birthMonth);
 	    
 	    JComboBox input_birthDay = new JComboBox();
-	    input_birthDay.setModel(new DefaultComboBoxModel(new String[] {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"}));
+	    input_birthDay.setModel(new DefaultComboBoxModel(new String[] {"", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"}));
 	    input_birthDay.setBounds(530, 376, 70, 38);
 	    panel.add(input_birthDay);
+	    
+	    
+	    /**************ID 중복 확인 버튼***************/
+	    
+	    JButton button_checkID = new JButton("중복 확인");
+	    button_checkID.addMouseListener(new MouseAdapter() {
+	    	@Override
+	    	public void mouseClicked(MouseEvent e) {
+	    		String loginID = input_loginID.getText();
+	    		if(loginID.trim().equals("")) {
+	    			JOptionPane.showMessageDialog(frame,"ID를 입력해주세요.", "Empty id",2);
+	    		}else {
+	    			try { 
+	    				System.out.println("1");
+			    		if(memberManager.checkID(loginID)==0||employeeManager.checkID(loginID)==0) {
+			    			JOptionPane.showMessageDialog(frame,"이미 존재하는 ID입니다.", "ID duplicate",2);
+			    		}else {
+			    			checkedID=loginID;
+			    			System.out.println("checkedID : "+checkedID);
+			    			JOptionPane.showMessageDialog(frame,"사용할 수 있는 ID입니다", "possible ID",2);
+			    		}
+	    			}catch(Exception ex) {
+	    				ex.printStackTrace();
+	    				JOptionPane.showMessageDialog(frame,"error", "Error",2);
+	    			}
+	    		}
+	    	}
+	    });
+	    button_checkID.setFont(new Font("맑은 고딕", Font.PLAIN, 13));
+	    button_checkID.setBounds(654, 142, 104, 38);
+	    panel.add(button_checkID);
+	   
+	    
 	    
 	    /**************회원가입 버튼***************/
 	    RoundedButton button_signUp = new RoundedButton("sign up");
 	    button_signUp.addMouseListener(new MouseAdapter() {
 	    	@Override
 	    	public void mouseClicked(MouseEvent e) {
-	    		
+	    		String name = input_name.getText();
+	    		String loginID = input_loginID.getText();
+	    		String password = input_password.getText();
+	    		String phone1=input_phone1.getText().replace(",", "");
+	    		String phone2=input_phone2.getText().replace(",", "");
+	    		String phone3=input_phone3.getText().replace(",", "");
+	    		String birthYear=input_birthYear.getSelectedItem().toString();
+	    		String birthMonth=input_birthMonth.getSelectedItem().toString();
+	    		String birthDay=input_birthDay.getSelectedItem().toString();
+	    		if(name.trim().equals("")) {
+	    			JOptionPane.showMessageDialog(frame,"이름을 입력해주세요.", "Empty name",2);
+	    		}
+	    		else if(loginID.trim().equals("")) {
+	    			JOptionPane.showMessageDialog(frame,"ID를 입력해주세요.", "Empty id",2);
+	    		}
+	    		else if(password.trim().equals("")) {
+	    			JOptionPane.showMessageDialog(frame,"비밀번호를 입력해주세요.", "Empty password",2);
+	    		}
+	    		else if(phone1.length()<2||phone2.length()!=4||phone3.length()!=4) {
+	    			JOptionPane.showMessageDialog(frame,"잘못된 전화번호 형식입니다.", "wrong phoneNum",2);
+	    		}
+	    		else if(birthYear.trim().equals("")||birthMonth.trim().equals("")||birthDay.trim().equals("")) {
+	    			JOptionPane.showMessageDialog(frame,"생일을 입력해주세요.", "Empty birthday",2);
+	    		}else if(!(loginID.equals(checkedID))) {
+	    			JOptionPane.showMessageDialog(frame,"ID 중복 확인을 해주세요.", "you should check your ID",2);
+	    		}else {
+	    			String phoneNum = phone1+phone2+phone3;
+	    			String birthDate = birthYear+"-"+birthMonth+"-"+birthDay;
+	    			try {
+	    				int result = memberManager.signUp(name,loginID,password,phoneNum,birthDate);
+	    				if(result==1) {
+	    					JOptionPane.showMessageDialog(frame,"회원가입이 완료되었습니다.", "done",2);
+	    				}else {
+	    					JOptionPane.showMessageDialog(frame,"error.", "signUp error",2);
+	    				}
+	    			}catch(Exception ex) {
+	    				JOptionPane.showMessageDialog(frame,"error", "Error",2);
+	    			}
+	    			
+	    		}
 	    	}
 	    });
 	    button_signUp.setText("가입");
@@ -231,6 +334,8 @@ public class SignUp {
 	    button_signUp.setBackground(new Color(40, 60, 134));
 	    button_signUp.setBounds(950, 390, 208, 52);
 	    panel.add(button_signUp);
+	    
+
 	   
 	    
 	    
@@ -240,12 +345,14 @@ public class SignUp {
 	private view.component.LoginBackground navigationBar;
 	private JLabel label_signUp;
 	private JLabel button_exit;
-	private JLabel label_realName;
-	private JLabel label_loginName;
+	private JLabel label_name;
+	private JLabel label_loginID;
 	private JLabel label_password;
 	private JLabel label_phone;
 	private JLabel label_birthday;
-	private JTextField input_realName;
-	private JTextField input_loginName;
+	private JTextField input_loginID;
 	private JTextField input_password;
+	private MemberManager memberManager;
+	private EmployeeManager employeeManager;
+	private String checkedID;
 }

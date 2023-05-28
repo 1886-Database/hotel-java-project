@@ -14,7 +14,6 @@ public class EmployeeManager {
 	public EmployeeManager() {
 		try {
 			myConnection = new MY_Connection();
-			con=myConnection.getConnection();
 		} 
 		catch(Exception e) {
 			e.printStackTrace();
@@ -22,8 +21,9 @@ public class EmployeeManager {
 	}
 	
 	public int login(String id, String pw) {
-		String SQL = "SELECT * FROM DB2023_employee WHERE loginname=? and password=?";
+		String SQL = "SELECT * FROM DB2023_employee WHERE loginID=? and password=?";
 		try {
+			con=myConnection.getConnection();
 		    ps = con.prepareStatement(SQL);
 		    ps.setString(1, id);
 		    ps.setString(2,pw);
@@ -42,4 +42,25 @@ public class EmployeeManager {
 		}
 		return -1; //데이터베이스 오류 
 	 }
+	
+	public int checkID(String id) {
+		String SQL = "SELECT * FROM DB2023_employee WHERE loginID=?";
+		try {
+			con=myConnection.getConnection();
+		    ps = con.prepareStatement(SQL);
+		    ps.setString(1, id);
+		    rs = ps.executeQuery();
+		    
+		    if (rs.next()) { 
+		    	System.out.println("중복 ID 존재");
+		    	return 0; //중복 ID 존재
+		    }
+		    return 1; //중복 ID 존재하지 않음
+		}catch(Exception e){
+		    e.printStackTrace();
+		}finally {
+			myConnection.close(rs,null,ps,con);
+		}
+		return -1; //데이터베이스 오류 
+	}
 }
