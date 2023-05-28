@@ -154,10 +154,10 @@ public class SignUp {
 	    panel.add(separator2);
 	    
 	    JFormattedTextField input_realName = new JFormattedTextField((AbstractFormatter) null);
-	    input_realName.addKeyListener(new KeyAdapter() {  //숫자만 입력받을 수 있도록 keyListener 추가 + 글자 수 제한
+	    input_realName.addKeyListener(new KeyAdapter() {  //숫자는 입력할 수 없도록 제한 + 글자 수 제한
 	    	public void keyTyped(KeyEvent e) {
 	    		char c = e.getKeyChar();
-	    		if ((Character.isDigit(c)) ||(c == KeyEvent.VK_BACK_SPACE) || (c == KeyEvent.VK_DELETE)) {
+	    		if ((Character.isDigit(c)) ||(c == KeyEvent.VK_BACK_SPACE) || (c == KeyEvent.VK_DELETE)||input_realName.getText().length()>=15) {
 	    			e.consume();
 	    		}
 	    	}
@@ -168,16 +168,30 @@ public class SignUp {
 	    input_loginName = new JTextField();
 	    input_loginName.setColumns(10);
 	    input_loginName.setBounds(272, 140, 370, 38);
+	    input_loginName.addKeyListener(new KeyAdapter() {  //숫자는 입력할 수 없도록 제한 + 글자 수 제한
+	    	public void keyTyped(KeyEvent e) {
+	    		if (input_loginName.getText().length()>=15) {
+	    			e.consume();
+	    		}
+	    	}
+	    });
 	    panel.add(input_loginName);
 	    
 	    input_password = new JTextField();
 	    input_password.setColumns(10);
 	    input_password.setBounds(272, 214, 370, 38);
+	    input_password.addKeyListener(new KeyAdapter() {  //글자 수 제한
+	    	public void keyTyped(KeyEvent e) {
+	    		if (input_password.getText().length()>=15) {
+	    			e.consume();
+	    		}
+	    	}
+	    });
 	    panel.add(input_password);
 	    
 	    JFormattedTextField input_phone1 = new JFormattedTextField(new NumberFormatter());
 	    input_phone1.setBounds(272, 293, 70, 38);
-	    input_phone1.addKeyListener(new KeyAdapter() {  //숫자만 입력받을 수 있도록 keyListener 추가 + 글자 수 제한
+	    input_phone1.addKeyListener(new KeyAdapter() {  //글자 수 제한
 	    	public void keyTyped(KeyEvent e) {
 	    		char c = e.getKeyChar();
 	    		if (!((Character.isDigit(c)) ||(c == KeyEvent.VK_BACK_SPACE) || (c == KeyEvent.VK_DELETE))||input_phone1.getText().length()>=3) {
@@ -254,6 +268,8 @@ public class SignUp {
 	    		}
 	    		else if(birthYear.trim().equals("")||birthMonth.trim().equals("")||birthDay.trim().equals("")) {
 	    			JOptionPane.showMessageDialog(frame,"생일을 입력해주세요.", "Empty birthday",2);
+	    		}else {
+	    			
 	    		}
 	    	}
 	    });
