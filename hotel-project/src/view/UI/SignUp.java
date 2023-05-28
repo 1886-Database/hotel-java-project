@@ -12,13 +12,18 @@ import javax.swing.JPanel;
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.SwingConstants;
+import javax.swing.text.NumberFormatter;
 import javax.swing.JSeparator;
 import javax.swing.JTextField;
 import view.swing.RoundedButton;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
+
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.JFormattedTextField;
 
 public class SignUp {
 
@@ -161,19 +166,40 @@ public class SignUp {
 	    input_password.setBounds(272, 214, 370, 38);
 	    panel.add(input_password);
 	    
-	    input_phone1 = new JTextField();
-	    input_phone1.setColumns(10);
-	    input_phone1.setBounds(272, 294, 70, 38);
+	    JFormattedTextField input_phone1 = new JFormattedTextField(new NumberFormatter());
+	    input_phone1.setBounds(272, 293, 70, 38);
+	    input_phone1.addKeyListener(new KeyAdapter() {  //숫자만 입력받을 수 있도록 keyListener 추가
+	    	public void keyTyped(KeyEvent e) {
+	    		char c = e.getKeyChar();
+	    		if (!((Character.isDigit(c)) ||(c == KeyEvent.VK_BACK_SPACE) || (c == KeyEvent.VK_DELETE))) {
+	    			e.consume();
+	    		}
+	    	}
+	    });
 	    panel.add(input_phone1);
 	    
-	    input_phone2 = new JTextField();
-	    input_phone2.setColumns(10);
+	    JFormattedTextField input_phone2 = new JFormattedTextField(new NumberFormatter());
 	    input_phone2.setBounds(372, 294, 120, 38);
+	    input_phone2.addKeyListener(new KeyAdapter() {  //숫자만 입력받을 수 있도록 keyListener 추가
+	    	public void keyTyped(KeyEvent e) {
+	    		char c = e.getKeyChar();
+	    		if (!((Character.isDigit(c)) ||(c == KeyEvent.VK_BACK_SPACE) || (c == KeyEvent.VK_DELETE))) {
+	    			e.consume();
+	    		}
+	    	}
+	    });
 	    panel.add(input_phone2);
 	    
-	    input_phone3 = new JTextField();
-	    input_phone3.setColumns(10);
+	    JFormattedTextField input_phone3 = new JFormattedTextField(new NumberFormatter());
 	    input_phone3.setBounds(522, 294, 120, 38);
+	    input_phone3.addKeyListener(new KeyAdapter() {  //숫자만 입력받을 수 있도록 keyListener 추가
+	    	public void keyTyped(KeyEvent e) {
+	    		char c = e.getKeyChar();
+	    		if (!((Character.isDigit(c)) ||(c == KeyEvent.VK_BACK_SPACE) || (c == KeyEvent.VK_DELETE))) {
+	    			e.consume();
+	    		}
+	    	}
+	    });
 	    panel.add(input_phone3);
 
 	    JComboBox input_birthYear = new JComboBox();
@@ -193,12 +219,19 @@ public class SignUp {
 	    
 	    /**************회원가입 버튼***************/
 	    RoundedButton button_signUp = new RoundedButton("sign up");
+	    button_signUp.addMouseListener(new MouseAdapter() {
+	    	@Override
+	    	public void mouseClicked(MouseEvent e) {
+	    		
+	    	}
+	    });
 	    button_signUp.setText("가입");
 	    button_signUp.setForeground(Color.WHITE);
 	    button_signUp.setFont(new Font("맑은 고딕", Font.BOLD, 25));
 	    button_signUp.setBackground(new Color(40, 60, 134));
 	    button_signUp.setBounds(950, 390, 208, 52);
 	    panel.add(button_signUp);
+	   
 	    
 	    
 	    
@@ -215,7 +248,4 @@ public class SignUp {
 	private JTextField input_realName;
 	private JTextField input_loginName;
 	private JTextField input_password;
-	private JTextField input_phone1;
-	private JTextField input_phone2;
-	private JTextField input_phone3;
 }
