@@ -12,15 +12,23 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import view.model.StatusType;
 import view.swing.ScrollBar;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.GroupLayout;
+import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+import javax.swing.JComboBox;
+import com.toedter.calendar.JDateChooser;
+import javax.swing.JButton;
 
 
-public class Form_2 extends javax.swing.JPanel {
+public class Form_AdReservConf extends javax.swing.JPanel {
 
 
     /**
      * Creates new form Form_1
      */
-    public Form_2() {
+    public Form_AdReservConf() {
         initComponents();
     //  add row table
         spTable.setVerticalScrollBar(new ScrollBar());
@@ -59,7 +67,7 @@ public class Form_2 extends javax.swing.JPanel {
 
         jLabel1.setFont(new java.awt.Font("sansserif", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(127, 127, 127));
-        jLabel1.setText("Reservation");
+        jLabel1.setText("Reservation Confirm");
 
         spTable.setBorder(null);
 
@@ -68,7 +76,7 @@ public class Form_2 extends javax.swing.JPanel {
 
             },
             new String [] {
-                "예약번호", "예약자", "객실", "예약날짜", "처리현황"
+                "예약번호", "예약자", "방 번호", "예약 신청일", "처리현황"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -80,29 +88,51 @@ public class Form_2 extends javax.swing.JPanel {
             }
         });
         spTable.setViewportView(table);
+        
+        JLabel lblNewLabel_1_1_1_1 = new JLabel("처리현황");
+        
+        JComboBox comboBox_1 = new JComboBox();
+        
+        JButton btnEdit = new JButton("Edit");
 
         javax.swing.GroupLayout panelBorder1Layout = new javax.swing.GroupLayout(panelBorder1);
-        panelBorder1.setLayout(panelBorder1Layout);
         panelBorder1Layout.setHorizontalGroup(
-            panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelBorder1Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addGroup(panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelBorder1Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(spTable))
-                .addContainerGap())
+        	panelBorder1Layout.createParallelGroup(Alignment.LEADING)
+        		.addGroup(panelBorder1Layout.createSequentialGroup()
+        			.addGap(20)
+        			.addGroup(panelBorder1Layout.createParallelGroup(Alignment.TRAILING)
+        				.addGroup(panelBorder1Layout.createSequentialGroup()
+        					.addComponent(jLabel1)
+        					.addContainerGap(633, Short.MAX_VALUE))
+        				.addGroup(panelBorder1Layout.createSequentialGroup()
+        					.addComponent(lblNewLabel_1_1_1_1)
+        					.addPreferredGap(ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
+        					.addComponent(comboBox_1, GroupLayout.PREFERRED_SIZE, 130, GroupLayout.PREFERRED_SIZE)
+        					.addGap(18)
+        					.addGroup(panelBorder1Layout.createParallelGroup(Alignment.LEADING)
+        						.addComponent(btnEdit)
+        						.addComponent(spTable, GroupLayout.PREFERRED_SIZE, 512, GroupLayout.PREFERRED_SIZE))
+        					.addGap(29))))
         );
         panelBorder1Layout.setVerticalGroup(
-            panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelBorder1Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(spTable, javax.swing.GroupLayout.DEFAULT_SIZE, 279, Short.MAX_VALUE)
-                .addGap(20, 20, 20))
+        	panelBorder1Layout.createParallelGroup(Alignment.LEADING)
+        		.addGroup(panelBorder1Layout.createSequentialGroup()
+        			.addGroup(panelBorder1Layout.createParallelGroup(Alignment.LEADING)
+        				.addGroup(panelBorder1Layout.createSequentialGroup()
+        					.addGap(20)
+        					.addComponent(jLabel1)
+        					.addGap(249)
+        					.addGroup(panelBorder1Layout.createParallelGroup(Alignment.BASELINE)
+        						.addComponent(lblNewLabel_1_1_1_1)
+        						.addComponent(comboBox_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+        				.addGroup(panelBorder1Layout.createSequentialGroup()
+        					.addGap(54)
+        					.addComponent(spTable, GroupLayout.PREFERRED_SIZE, 420, GroupLayout.PREFERRED_SIZE)))
+        			.addGap(29)
+        			.addComponent(btnEdit)
+        			.addContainerGap(36, Short.MAX_VALUE))
         );
+        panelBorder1.setLayout(panelBorder1Layout);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -133,5 +163,4 @@ public class Form_2 extends javax.swing.JPanel {
     private view.swing.PanelBorder panelBorder1;
     private javax.swing.JScrollPane spTable;
     private view.swing.Table table;
-    // End of variables declaration//GEN-END:variables
 }

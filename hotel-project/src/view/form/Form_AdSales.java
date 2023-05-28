@@ -12,15 +12,23 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import view.model.StatusType;
 import view.swing.ScrollBar;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.GroupLayout;
+import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+import javax.swing.JComboBox;
+import com.toedter.calendar.JDateChooser;
+import javax.swing.JButton;
 
 
-public class Form_2 extends javax.swing.JPanel {
+public class Form_AdSales extends javax.swing.JPanel {
 
 
     /**
      * Creates new form Form_1
      */
-    public Form_2() {
+    public Form_AdSales() {
         initComponents();
     //  add row table
         spTable.setVerticalScrollBar(new ScrollBar());
@@ -29,6 +37,23 @@ public class Form_2 extends javax.swing.JPanel {
         JPanel p = new JPanel();
         p.setBackground(Color.WHITE);
         spTable.setCorner(JScrollPane.UPPER_RIGHT_CORNER, p);
+        panelBorder1.setLayout(null);
+        panelBorder1.add(jLabel1);
+        panelBorder1.add(lblNewLabel_1_1);
+        panelBorder1.add(lblNewLabel_1);
+        panelBorder1.add(dateChooser);
+        panelBorder1.add(lblNewLabel);
+        panelBorder1.add(textField_2);
+        panelBorder1.add(btnNewButton);
+        panelBorder1.add(btnEdit);
+        panelBorder1.add(btnNewButton_1);
+        panelBorder1.add(btnNewButton_1_1);
+        panelBorder1.add(spTable);
+        
+        textField = new JTextField();
+        textField.setColumns(10);
+        textField.setBounds(80, 330, 164, 26);
+        panelBorder1.add(textField);
         table.addRow(new Object[]{"23031900001", "Ivan", "Single", "2023-03-19~2023-03-20", StatusType.PENDING});
         table.addRow(new Object[]{"23040100002", "Conan", "2023-04-01 13:20", "83821", StatusType.APPROVED});
         
@@ -47,7 +72,9 @@ public class Form_2 extends javax.swing.JPanel {
         panel = new javax.swing.JLayeredPane();
         panelBorder1 = new view.swing.PanelBorder();
         jLabel1 = new javax.swing.JLabel();
+        jLabel1.setBounds(20, 20, 48, 22);
         spTable = new javax.swing.JScrollPane();
+        spTable.setBounds(443, 45, 454, 420);
         table = new view.swing.Table();
 
         setBackground(new java.awt.Color(242, 242, 242));
@@ -59,7 +86,7 @@ public class Form_2 extends javax.swing.JPanel {
 
         jLabel1.setFont(new java.awt.Font("sansserif", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(127, 127, 127));
-        jLabel1.setText("Reservation");
+        jLabel1.setText("Sales");
 
         spTable.setBorder(null);
 
@@ -68,7 +95,7 @@ public class Form_2 extends javax.swing.JPanel {
 
             },
             new String [] {
-                "예약번호", "예약자", "객실", "예약날짜", "처리현황"
+                "날짜","예약건수", "일 매출",
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -80,29 +107,34 @@ public class Form_2 extends javax.swing.JPanel {
             }
         });
         spTable.setViewportView(table);
-
-        javax.swing.GroupLayout panelBorder1Layout = new javax.swing.GroupLayout(panelBorder1);
-        panelBorder1.setLayout(panelBorder1Layout);
-        panelBorder1Layout.setHorizontalGroup(
-            panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelBorder1Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addGroup(panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelBorder1Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(spTable))
-                .addContainerGap())
-        );
-        panelBorder1Layout.setVerticalGroup(
-            panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelBorder1Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(spTable, javax.swing.GroupLayout.DEFAULT_SIZE, 279, Short.MAX_VALUE)
-                .addGap(20, 20, 20))
-        );
+        
+        lblNewLabel = new JLabel("예약 건수");
+        lblNewLabel.setBounds(31, 275, 48, 16);
+        
+        lblNewLabel_1 = new JLabel("일 매출");
+        lblNewLabel_1.setBounds(31, 335, 37, 16);
+        
+        lblNewLabel_1_1 = new JLabel("날짜");
+        lblNewLabel_1_1.setBounds(31, 218, 22, 16);
+        
+        dateChooser = new JDateChooser();
+        dateChooser.setBounds(85, 208, 160, 26);
+        
+        btnNewButton = new JButton("Add");
+        btnNewButton.setBounds(451, 507, 75, 29);
+        
+        btnEdit = new JButton("Edit");
+        btnEdit.setBounds(566, 507, 75, 29);
+        
+        btnNewButton_1 = new JButton("Delete");
+        btnNewButton_1.setBounds(699, 507, 84, 29);
+        
+        btnNewButton_1_1 = new JButton("Clear");
+        btnNewButton_1_1.setBounds(831, 507, 76, 29);
+        
+        textField_2 = new JTextField();
+        textField_2.setBounds(85, 270, 164, 26);
+        textField_2.setColumns(10);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -133,5 +165,14 @@ public class Form_2 extends javax.swing.JPanel {
     private view.swing.PanelBorder panelBorder1;
     private javax.swing.JScrollPane spTable;
     private view.swing.Table table;
-    // End of variables declaration//GEN-END:variables
+    private JTextField textField_2;
+    private JLabel lblNewLabel_1_1;
+    private JLabel lblNewLabel_1;
+    private JDateChooser dateChooser;
+    private JLabel lblNewLabel;
+    private JButton btnNewButton;
+    private JButton btnEdit;
+    private JButton btnNewButton_1;
+    private JButton btnNewButton_1_1;
+    private JTextField textField;
 }
