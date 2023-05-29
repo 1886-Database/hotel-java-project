@@ -20,6 +20,9 @@ import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import com.toedter.calendar.JDateChooser;
 import javax.swing.JButton;
+import java.awt.Font;
+import javax.swing.SwingConstants;
+import java.awt.Component;
 
 
 public class Form_AdEmployee extends javax.swing.JPanel {
@@ -34,9 +37,29 @@ public class Form_AdEmployee extends javax.swing.JPanel {
         spTable.setVerticalScrollBar(new ScrollBar());
         spTable.getVerticalScrollBar().setBackground(Color.WHITE);
         spTable.getViewport().setBackground(Color.WHITE);
+        setLayout(null);
         JPanel p = new JPanel();
         p.setBackground(Color.WHITE);
         spTable.setCorner(JScrollPane.UPPER_RIGHT_CORNER, p);
+        add(panelBorder1);
+        panelBorder1.setLayout(null);
+        panelBorder1.add(jLabel1);
+        panelBorder1.add(lblNewLabel_1_1);
+        panelBorder1.add(lblNewLabel_1_1_1);
+        panelBorder1.add(lblNewLabel_1_1_1_1);
+        panelBorder1.add(lblNewLabel);
+        panelBorder1.add(lblNewLabel_1);
+        panelBorder1.add(textField_1);
+        panelBorder1.add(comboBox);
+        panelBorder1.add(textField);
+        panelBorder1.add(textField_2);
+        panelBorder1.add(dateChooser);
+        panelBorder1.add(spTable);
+        panelBorder1.add(btnNewButton);
+        panelBorder1.add(btnEdit);
+        panelBorder1.add(btnNewButton_1);
+        panelBorder1.add(btnNewButton_1_1);
+        add(panel);
         table.addRow(new Object[]{"23031900001", "Ivan", "Single", "2023-03-19~2023-03-20", StatusType.PENDING});
         table.addRow(new Object[]{"23040100002", "Conan", "2023-04-01 13:20", "83821", StatusType.APPROVED});
         
@@ -53,9 +76,13 @@ public class Form_AdEmployee extends javax.swing.JPanel {
     private void initComponents() {
 
         panel = new javax.swing.JLayeredPane();
+        panel.setBounds(20, 20, 907, 0);
         panelBorder1 = new view.swing.PanelBorder();
+        panelBorder1.setBounds(20, 40, 907, 557);
         jLabel1 = new javax.swing.JLabel();
+        jLabel1.setBounds(20, 20, 263, 26);
         spTable = new javax.swing.JScrollPane();
+        spTable.setBounds(371, 104, 484, 378);
         table = new view.swing.Table();
 
         setBackground(new java.awt.Color(242, 242, 242));
@@ -67,7 +94,7 @@ public class Form_AdEmployee extends javax.swing.JPanel {
 
         jLabel1.setFont(new java.awt.Font("sansserif", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(127, 127, 127));
-        jLabel1.setText("Employee");
+        jLabel1.setText("Employee Management");
 
         spTable.setBorder(null);
 
@@ -76,7 +103,7 @@ public class Form_AdEmployee extends javax.swing.JPanel {
 
             },
             new String [] {
-                "부서", "이름", "아이디", "휴대폰 번호", "생년월일"
+                "고유번호","부서", "이름", "ID", "휴대폰 번호", "생년월일"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -89,136 +116,55 @@ public class Form_AdEmployee extends javax.swing.JPanel {
         });
         spTable.setViewportView(table);
         
-        JLabel lblNewLabel = new JLabel("이름");
+        lblNewLabel = new JLabel("이름");
+        lblNewLabel.setBounds(20, 237, 26, 19);
+        lblNewLabel.setFont(new Font("맑은 고딕", Font.PLAIN, 13));
         
-        JLabel lblNewLabel_1 = new JLabel("아이디");
+        lblNewLabel_1 = new JLabel("아이디");
+        lblNewLabel_1.setBounds(20, 307, 38, 19);
+        lblNewLabel_1.setFont(new Font("맑은 고딕", Font.PLAIN, 13));
         
-        JLabel lblNewLabel_1_1 = new JLabel("부서");
+        lblNewLabel_1_1 = new JLabel("부서");
+        lblNewLabel_1_1.setBounds(20, 168, 26, 19);
+        lblNewLabel_1_1.setFont(new Font("맑은 고딕", Font.PLAIN, 13));
         
-        JLabel lblNewLabel_1_1_1 = new JLabel("휴대폰 번호");
+        lblNewLabel_1_1_1 = new JLabel("휴대폰 번호");
+        lblNewLabel_1_1_1.setBounds(20, 385, 84, 19);
+        lblNewLabel_1_1_1.setFont(new Font("맑은 고딕", Font.PLAIN, 13));
         
-        JLabel lblNewLabel_1_1_1_1 = new JLabel("생년월일");
+        lblNewLabel_1_1_1_1 = new JLabel("생년월일");
+        lblNewLabel_1_1_1_1.setBounds(20, 458, 84, 19);
+        lblNewLabel_1_1_1_1.setFont(new Font("맑은 고딕", Font.PLAIN, 13));
         
         textField = new JTextField();
+        textField.setBounds(122, 238, 195, 21);
         textField.setColumns(10);
         
-        JComboBox comboBox = new JComboBox();
+        comboBox = new JComboBox();
+        comboBox.setBounds(122, 168, 195, 23);
         
-        JButton btnNewButton = new JButton("Add");
+        btnNewButton = new JButton("Add");
+        btnNewButton.setBounds(428, 492, 53, 23);
         
-        JButton btnEdit = new JButton("Edit");
+        btnEdit = new JButton("Edit");
+        btnEdit.setBounds(537, 492, 51, 23);
         
-        JButton btnNewButton_1_1 = new JButton("Delete");
+        btnNewButton_1 = new JButton("Delete");
+        btnNewButton_1.setBounds(638, 492, 65, 23);
         
-        JButton btnNewButton_1_1_1 = new JButton("Clear");
+        btnNewButton_1_1 = new JButton("Clear");
+        btnNewButton_1_1.setBounds(742, 492, 59, 23);
         
         textField_1 = new JTextField();
+        textField_1.setBounds(122, 308, 195, 21);
         textField_1.setColumns(10);
         
         textField_2 = new JTextField();
+        textField_2.setBounds(122, 381, 195, 21);
         textField_2.setColumns(10);
         
-        JDateChooser dateChooser = new JDateChooser();
-
-        javax.swing.GroupLayout panelBorder1Layout = new javax.swing.GroupLayout(panelBorder1);
-        panelBorder1Layout.setHorizontalGroup(
-        	panelBorder1Layout.createParallelGroup(Alignment.LEADING)
-        		.addGroup(panelBorder1Layout.createSequentialGroup()
-        			.addGap(20)
-        			.addGroup(panelBorder1Layout.createParallelGroup(Alignment.TRAILING)
-        				.addGroup(panelBorder1Layout.createSequentialGroup()
-        					.addComponent(jLabel1)
-        					.addContainerGap(918, Short.MAX_VALUE))
-        				.addGroup(panelBorder1Layout.createSequentialGroup()
-        					.addGroup(panelBorder1Layout.createParallelGroup(Alignment.LEADING)
-        						.addComponent(lblNewLabel_1)
-        						.addComponent(lblNewLabel)
-        						.addComponent(lblNewLabel_1_1_1)
-        						.addComponent(lblNewLabel_1_1)
-        						.addComponent(lblNewLabel_1_1_1_1))
-        					.addGap(24)
-        					.addGroup(panelBorder1Layout.createParallelGroup(Alignment.LEADING, false)
-        						.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-        						.addComponent(comboBox, 0, 195, Short.MAX_VALUE)
-        						.addComponent(textField)
-        						.addComponent(textField_2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-        						.addComponent(dateChooser, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        					.addGap(173)
-        					.addGroup(panelBorder1Layout.createParallelGroup(Alignment.LEADING)
-        						.addGroup(panelBorder1Layout.createSequentialGroup()
-        							.addComponent(btnNewButton)
-        							.addGap(64)
-        							.addComponent(btnEdit)
-        							.addPreferredGap(ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
-        							.addComponent(btnNewButton_1_1)
-        							.addGap(71)
-        							.addComponent(btnNewButton_1_1_1)
-        							.addGap(38))
-        						.addGroup(panelBorder1Layout.createSequentialGroup()
-        							.addPreferredGap(ComponentPlacement.RELATED)
-        							.addComponent(spTable, GroupLayout.PREFERRED_SIZE, 512, GroupLayout.PREFERRED_SIZE)
-        							.addContainerGap())))))
-        );
-        panelBorder1Layout.setVerticalGroup(
-        	panelBorder1Layout.createParallelGroup(Alignment.LEADING)
-        		.addGroup(panelBorder1Layout.createSequentialGroup()
-        			.addContainerGap(26, Short.MAX_VALUE)
-        			.addGroup(panelBorder1Layout.createParallelGroup(Alignment.TRAILING)
-        				.addGroup(panelBorder1Layout.createSequentialGroup()
-        					.addComponent(jLabel1)
-        					.addGap(102)
-        					.addGroup(panelBorder1Layout.createParallelGroup(Alignment.LEADING)
-        						.addGroup(panelBorder1Layout.createSequentialGroup()
-        							.addComponent(lblNewLabel_1_1)
-        							.addGap(45)
-        							.addComponent(lblNewLabel)
-        							.addGap(47)
-        							.addComponent(lblNewLabel_1))
-        						.addGroup(panelBorder1Layout.createSequentialGroup()
-        							.addComponent(comboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-        							.addGap(45)
-        							.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-        							.addGap(47)
-        							.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
-        					.addGap(55)
-        					.addGroup(panelBorder1Layout.createParallelGroup(Alignment.BASELINE)
-        						.addComponent(lblNewLabel_1_1_1)
-        						.addComponent(textField_2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-        					.addGap(54)
-        					.addGroup(panelBorder1Layout.createParallelGroup(Alignment.LEADING)
-        						.addComponent(lblNewLabel_1_1_1_1)
-        						.addComponent(dateChooser, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
-        				.addComponent(spTable, GroupLayout.PREFERRED_SIZE, 420, GroupLayout.PREFERRED_SIZE))
-        			.addGap(34)
-        			.addGroup(panelBorder1Layout.createParallelGroup(Alignment.BASELINE)
-        				.addComponent(btnNewButton)
-        				.addComponent(btnEdit)
-        				.addComponent(btnNewButton_1_1)
-        				.addComponent(btnNewButton_1_1_1))
-        			.addContainerGap(18, Short.MAX_VALUE))
-        );
-        panelBorder1.setLayout(panelBorder1Layout);
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(panelBorder1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(panel, javax.swing.GroupLayout.DEFAULT_SIZE, 875, Short.MAX_VALUE))
-                .addGap(20, 20, 20))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20)
-                .addComponent(panelBorder1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(20, 20, 20))
-        );
+        dateChooser = new JDateChooser();
+        dateChooser.setBounds(122, 456, 195, 21);
     }// </editor-fold>//GEN-END:initComponents
 
 
@@ -231,4 +177,15 @@ public class Form_AdEmployee extends javax.swing.JPanel {
     private JTextField textField;
     private JTextField textField_1;
     private JTextField textField_2;
+    private JLabel lblNewLabel_1_1;
+    private JLabel lblNewLabel_1_1_1;
+    private JLabel lblNewLabel_1_1_1_1;
+    private JLabel lblNewLabel;
+    private JLabel lblNewLabel_1;
+    private JComboBox comboBox;
+    private JDateChooser dateChooser;
+    private JButton btnNewButton;
+    private JButton btnEdit;
+    private JButton btnNewButton_1;
+    private JButton btnNewButton_1_1;
 }
