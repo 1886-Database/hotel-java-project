@@ -107,7 +107,9 @@ public class Form_MyPage extends JPanel {
     	leftPanel_userGrade.setBounds(69, 200, 50, 15);
     	leftPanel.add(leftPanel_userGrade);
     	
-    	JButton leftPanel_button1 = new JButton("개인 정보 수정");
+    	JButton leftPanel_button1 = new JButton("내 정보");
+    	leftPanel_button1.setFont(new Font("맑은 고딕", Font.BOLD, 13));
+    	leftPanel_button1.setBackground(Color.WHITE);
     	leftPanel_button1.addMouseListener(new MouseAdapter() {
     		@Override
     		public void mouseClicked(MouseEvent e) {
@@ -124,6 +126,8 @@ public class Form_MyPage extends JPanel {
     	leftPanel.add(leftPanel_button1);
     	
     	JButton leftPanel_button2 = new JButton("비밀번호 변경");
+    	leftPanel_button2.setFont(new Font("맑은 고딕", Font.BOLD, 13));
+    	leftPanel_button2.setBackground(Color.WHITE);
     	leftPanel_button2.addMouseListener(new MouseAdapter() {
     		@Override
     		public void mouseClicked(MouseEvent e) {
@@ -136,6 +140,8 @@ public class Form_MyPage extends JPanel {
     	leftPanel.add(leftPanel_button2);
     	
     	JButton leftPanel_button3 = new JButton("회원 탈퇴");
+    	leftPanel_button3.setFont(new Font("맑은 고딕", Font.BOLD, 13));
+    	leftPanel_button3.setBackground(Color.WHITE);
     	leftPanel_button3.addMouseListener(new MouseAdapter() {
     		@Override
     		public void mouseClicked(MouseEvent e) {
@@ -165,120 +171,121 @@ public class Form_MyPage extends JPanel {
     	
     	//우측 패널 : 개인 정보 수정 패널 컴포넌트******************************************************************************
     	
-    	JLabel rightPanel1_label1 = new JLabel("개인 정보 수정");
+    	JLabel rightPanel1_label1 = new JLabel("내 정보");
     	rightPanel1_label1.setHorizontalAlignment(SwingConstants.CENTER);
     	rightPanel1_label1.setFont(new Font("맑은 고딕", Font.BOLD, 25));
     	rightPanel1_label1.setBounds(189, 49, 237, 54);
     	rightPanel1.add(rightPanel1_label1);
     	
-    	JButton rightPanel1_button1 = new JButton("변경하기");
-    	rightPanel1_button1.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
-    	rightPanel1_button1.setBounds(135, 389, 168, 54);
-    	rightPanel1.add(rightPanel1_button1);
-    	
-    	JButton rightPanel1_button2 = new JButton("새로고침");
-    	rightPanel1_button2.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
-    	rightPanel1_button2.setBounds(324, 389, 168, 54);
-    	rightPanel1.add(rightPanel1_button2);
-    	
     	JLabel rightPanel1_label2 = new JLabel("ID");
     	rightPanel1_label2.setFont(new Font("맑은 고딕", Font.BOLD, 15));
-    	rightPanel1_label2.setBounds(135, 141, 27, 15);
+    	rightPanel1_label2.setBounds(122, 199, 27, 15);
     	rightPanel1.add(rightPanel1_label2);
     	
     	JLabel rightPanel1_label3 = new JLabel("성함");
     	rightPanel1_label3.setFont(new Font("맑은 고딕", Font.BOLD, 15));
-    	rightPanel1_label3.setBounds(334, 141, 50, 15);
+    	rightPanel1_label3.setBounds(332, 199, 50, 15);
     	rightPanel1.add(rightPanel1_label3);
     	
     	JLabel rightPanel1_label4 = new JLabel("전화번호");
     	rightPanel1_label4.setFont(new Font("맑은 고딕", Font.BOLD, 15));
-    	rightPanel1_label4.setBounds(102, 214, 66, 15);
+    	rightPanel1_label4.setBounds(94, 283, 66, 15);
     	rightPanel1.add(rightPanel1_label4);
     	
     	JLabel rightPanel1_label5 = new JLabel("생일");
     	rightPanel1_label5.setFont(new Font("맑은 고딕", Font.BOLD, 15));
-    	rightPanel1_label5.setBounds(124, 279, 34, 15);
+    	rightPanel1_label5.setBounds(122, 360, 34, 15);
     	rightPanel1.add(rightPanel1_label5);
     	
     	rightPanel1_ID = new JTextField();
-    	rightPanel1_ID.setBackground(Color.LIGHT_GRAY);
+    	rightPanel1_ID.setBackground(Color.WHITE);
     	rightPanel1_ID.setEditable(false);
     	rightPanel1_ID.setEnabled(false);
-    	rightPanel1_ID.setBounds(198, 141, 96, 21);
+    	rightPanel1_ID.setBounds(189, 199, 96, 24);
     	rightPanel1.add(rightPanel1_ID);
     	rightPanel1_ID.setColumns(10);
     	
     	rightPanel1_name = new JTextField();
-    	rightPanel1_name.setBackground(Color.LIGHT_GRAY);
+    	rightPanel1_name.setBackground(Color.WHITE);
     	rightPanel1_name.setEnabled(false);
     	rightPanel1_name.setEditable(false);
     	rightPanel1_name.setColumns(10);
-    	rightPanel1_name.setBounds(389, 141, 96, 21);
+    	rightPanel1_name.setBounds(394, 199, 96, 25);
     	rightPanel1.add(rightPanel1_name);
     	
     	rightPanel1_phone1 = new JTextField();
+    	rightPanel1_phone1.setEditable(false);
+    	rightPanel1_phone1.setEnabled(false);
     	rightPanel1_phone1.setBackground(Color.WHITE);
     	rightPanel1_phone1.setColumns(10);
-    	rightPanel1_phone1.setBounds(200, 214, 66, 21);
+    	rightPanel1_phone1.setBounds(204, 281, 66, 25);
     	rightPanel1.add(rightPanel1_phone1);
     	
     	JLabel rightPanel1_label4_1 = new JLabel("-");
     	rightPanel1_label4_1.setHorizontalAlignment(SwingConstants.CENTER);
     	rightPanel1_label4_1.setFont(new Font("맑은 고딕", Font.BOLD, 19));
-    	rightPanel1_label4_1.setBounds(282, 213, 19, 15);
+    	rightPanel1_label4_1.setBounds(282, 281, 19, 15);
     	rightPanel1.add(rightPanel1_label4_1);
     	
     	rightPanel1_phone2 = new JTextField();
+    	rightPanel1_phone2.setEditable(false);
+    	rightPanel1_phone2.setEnabled(false);
     	rightPanel1_phone2.setColumns(10);
     	rightPanel1_phone2.setBackground(Color.WHITE);
-    	rightPanel1_phone2.setBounds(317, 214, 66, 21);
+    	rightPanel1_phone2.setBounds(317, 281, 66, 25);
     	rightPanel1.add(rightPanel1_phone2);
     	
     	JLabel rightPanel1_label4_2 = new JLabel("-");
     	rightPanel1_label4_2.setHorizontalAlignment(SwingConstants.CENTER);
     	rightPanel1_label4_2.setFont(new Font("맑은 고딕", Font.BOLD, 19));
-    	rightPanel1_label4_2.setBounds(395, 213, 19, 15);
+    	rightPanel1_label4_2.setBounds(395, 281, 19, 15);
     	rightPanel1.add(rightPanel1_label4_2);
     	
     	rightPanel1_phone3 = new JTextField();
+    	rightPanel1_phone3.setEditable(false);
+    	rightPanel1_phone3.setEnabled(false);
     	rightPanel1_phone3.setColumns(10);
     	rightPanel1_phone3.setBackground(Color.WHITE);
-    	rightPanel1_phone3.setBounds(426, 214, 66, 21);
+    	rightPanel1_phone3.setBounds(426, 281, 66, 25);
     	rightPanel1.add(rightPanel1_phone3);
     	
-    	JYearChooser rightPanel1_yearChooser = new JYearChooser();
-    	rightPanel1_yearChooser.setEndYear(2023);
-    	rightPanel1_yearChooser.setStartYear(1910);
-    	rightPanel1_yearChooser.setBounds(200, 279, 50, 21);
-    	rightPanel1.add(rightPanel1_yearChooser);
+    	
     	
     	JLabel rightPanel1_label5_1 = new JLabel("년");
     	rightPanel1_label5_1.setHorizontalAlignment(SwingConstants.CENTER);
     	rightPanel1_label5_1.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
-    	rightPanel1_label5_1.setBounds(260, 282, 19, 15);
+    	rightPanel1_label5_1.setBounds(274, 360, 19, 15);
     	rightPanel1.add(rightPanel1_label5_1);
     	
-    	JMonthChooser rightPanel1_monthChooser = new JMonthChooser();
-    	rightPanel1_monthChooser.setBounds(300, 279, 72, 21);
-    	rightPanel1.add(rightPanel1_monthChooser);
+    	
     	
     	JComboBox rightPanel1_dayChooser = new JComboBox();
+    	rightPanel1_dayChooser.setEnabled(false);
     	rightPanel1_dayChooser.setModel(new DefaultComboBoxModel(new String[] {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"}));
-    	rightPanel1_dayChooser.setBounds(426, 278, 70, 22);
+    	rightPanel1_dayChooser.setBounds(440, 358, 70, 25);
     	rightPanel1.add(rightPanel1_dayChooser);
     	
     	JLabel rightPanel1_label5_2 = new JLabel("월");
     	rightPanel1_label5_2.setHorizontalAlignment(SwingConstants.CENTER);
     	rightPanel1_label5_2.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
-    	rightPanel1_label5_2.setBounds(383, 282, 19, 15);
+    	rightPanel1_label5_2.setBounds(397, 360, 19, 15);
     	rightPanel1.add(rightPanel1_label5_2);
     	
     	JLabel rightPanel1_label5_3 = new JLabel("일");
     	rightPanel1_label5_3.setHorizontalAlignment(SwingConstants.CENTER);
     	rightPanel1_label5_3.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
-    	rightPanel1_label5_3.setBounds(507, 282, 19, 15);
+    	rightPanel1_label5_3.setBounds(521, 360, 19, 15);
     	rightPanel1.add(rightPanel1_label5_3);
+    	
+    	JComboBox input_birthYear = new JComboBox();
+    	input_birthYear.setEnabled(false);
+    	input_birthYear.setBounds(187, 358, 70, 25);
+    	rightPanel1.add(input_birthYear);
+    	
+    	JComboBox input_birthMonth = new JComboBox();
+    	input_birthMonth.setEnabled(false);
+    	input_birthMonth.setBounds(316, 358, 70, 25);
+    	rightPanel1.add(input_birthMonth);
     	
     	//우측 패널 : 비밀번호 변경 패널 컴포넌트 ******************************************************************************
     	
@@ -290,7 +297,8 @@ public class Form_MyPage extends JPanel {
     	rightPanel2.add(rightPanel2_label1);
     	
     	JButton rightPanel2_button1 = new JButton("변경하기");
-    	rightPanel2_button1.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
+    	rightPanel2_button1.setBackground(Color.WHITE);
+    	rightPanel2_button1.setFont(new Font("맑은 고딕", Font.PLAIN, 13));
     	rightPanel2_button1.setBounds(175, 388, 264, 54);
     	rightPanel2.add(rightPanel2_button1);
     	
@@ -306,7 +314,7 @@ public class Form_MyPage extends JPanel {
     	
     	JLabel rightPanel2_label4 = new JLabel("변경할 비밀번호 확인");
     	rightPanel2_label4.setFont(new Font("맑은 고딕", Font.BOLD, 15));
-    	rightPanel2_label4.setBounds(84, 278, 159, 15);
+    	rightPanel2_label4.setBounds(74, 278, 159, 15);
     	rightPanel2.add(rightPanel2_label4);
     	
     	rightPanel2_input1 = new JPasswordField();
@@ -356,7 +364,8 @@ public class Form_MyPage extends JPanel {
     	rightPanel3.add(rightPanel3_input2);
     	
     	JButton rightPanel3_button = new JButton("탈퇴하기");
-    	rightPanel3_button.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
+    	rightPanel3_button.setBackground(Color.WHITE);
+    	rightPanel3_button.setFont(new Font("맑은 고딕", Font.PLAIN, 13));
     	rightPanel3_button.setBounds(175, 388, 264, 54);
     	rightPanel3.add(rightPanel3_button);
     	rightPanel3.setLayout(null);

@@ -3,8 +3,8 @@ package model;
 public class Member {
 	
 	private int memberID;
-	private String loginName;
-	private String realName;
+	private String loginID;
+	private String name;
 	private String password;
 	private String birthday;
 	private String grade;
@@ -12,12 +12,11 @@ public class Member {
 	//기본 생성자
 	public Member() {}
 	
-	//매개변수를 모두 받는 생성자
-	public Member(int memberID,String loginName,String realName,String password,String birthday,String grade) {
+	//memberID 를 제외한 매개변수를 받는 생성자
+	public Member(String loginID,String name,String password,String birthday,String grade) {
 		super();
-		this.setMemberID(memberID);
-		this.setLoginName(loginName);
-		this.setRealName(realName);
+		this.setLoginID(loginID);
+		this.setName(name);
 		this.setPassword(password);
 		this.setBirthday(birthday);
 		this.setGrade(grade);
@@ -31,20 +30,20 @@ public class Member {
 		this.memberID = memberID;
 	}
 
-	public String getLoginName() {
-		return loginName;
+	public String getLoginID() {
+		return loginID;
 	}
 
-	public void setLoginName(String loginName) {
-		this.loginName = loginName;
+	public void setLoginID(String loginID) {
+		this.loginID = loginID;
 	}
 
-	public String getRealName() {
-		return realName;
+	public String getName() {
+		return name;
 	}
 
-	public void setRealName(String realName) {
-		this.realName = realName;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public String getPassword() {
