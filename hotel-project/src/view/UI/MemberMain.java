@@ -26,7 +26,7 @@ public class MemberMain extends javax.swing.JFrame {
     private Form_MyPage form4;
     private Form_ViewMyReserv form5;
     private Form_Msg form6;
-    static String loginID;
+    static String loginID="leda7";   //테스트를 위한 값 초기화... 마지막에 삭제해야함
 
     public MemberMain(String id) {
         initComponents();
@@ -36,7 +36,7 @@ public class MemberMain extends javax.swing.JFrame {
         form1 = new Form_1();
         form2 = new Form_2();
         form3 = new Form_3();
-        form4 = new Form_MyPage();
+        form4 = new Form_MyPage(loginID);
         form5 = new Form_ViewMyReserv();
         form6 = new Form_Msg();
         menu.initMoving(MemberMain.this);
@@ -143,7 +143,7 @@ public class MemberMain extends javax.swing.JFrame {
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
     	
-    	System.out.println(loginID+"로 로그인하였습니다.");
+    	System.out.println(loginID+" 회원으로 로그인하였습니다.");
     	
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -166,7 +166,7 @@ public class MemberMain extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MemberMain(null).setVisible(true);
+                new MemberMain(loginID).setVisible(true);
             }
         });
     }

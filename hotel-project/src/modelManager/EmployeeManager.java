@@ -3,6 +3,8 @@ package modelManager;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+
+import model.Employee;
 import myConnection.MY_Connection;
 
 public class EmployeeManager {
@@ -63,4 +65,25 @@ public class EmployeeManager {
 		}
 		return -1; //데이터베이스 오류 
 	}
+	
+	//직원의 로그인 ID 값으로 다른 속성 값 얻기
+		public Employee getByLoginID(String loginID) {
+			String SQL = "SELECT * FROM DB2023_employee WHERE loginID=?";
+			try {
+				con=myConnection.getConnection();
+				ps=con.prepareStatement(SQL);
+				ps.setString(1, loginID);
+				rs = ps.executeQuery();
+				while(rs.next()) {
+					Employee employee = new Employee(loginID,rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6),rs.getString(7));
+					return employee;
+				}
+			}catch(Exception e) {
+				e.printStackTrace();
+			}finally {
+				myConnection.close(rs, null, ps, con);
+			}
+			Employee employee = new Employee();
+			return employee;
+		}
 }
