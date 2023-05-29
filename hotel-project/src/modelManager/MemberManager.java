@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
+import model.Member;
 import myConnection.MY_Connection;
 
 public class MemberManager {
@@ -92,6 +93,27 @@ public class MemberManager {
 			myConnection.close(rs,stmt,ps,con);
 		}
 		return -1; //데이터베이스 오류
+	}
+	
+	//멤버의 로그인 ID 값으로 다른 속성 값 얻기
+	public Member getByLoginID(String loginID) {
+		String SQL = "SELECT * FROM DB2023_member WHERE loginID=?";
+		try {
+			con=myConnection.getConnection();
+			ps=con.prepareStatement(SQL);
+			ps.setString(1, loginID);
+			rs = ps.executeQuery();
+			while(rs.next()) {
+				Member member = new Member(loginID,rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6),rs.getString(7));
+				return member;
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			myConnection.close(rs, null, ps, con);
+		}
+		Member member = new Member();
+		return member;
 	}
 }
 

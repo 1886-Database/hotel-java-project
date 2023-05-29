@@ -1,55 +1,39 @@
 package view.form;
 
 import java.awt.Color;
-
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-
-import view.model.StatusType;
-import view.swing.ScrollBar;
-import javax.swing.GroupLayout.Alignment;
-import javax.swing.GroupLayout;
-import javax.swing.JLabel;
-import javax.swing.JPopupMenu;
-import java.awt.Component;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import javax.swing.JSeparator;
-import javax.swing.SwingConstants;
-import javax.swing.JLayeredPane;
-import javax.swing.UIManager;
-import view.swing.MyPagePanelBorder;
-import java.awt.Font;
-import java.awt.Button;
+
 import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JPasswordField;
+import javax.swing.JSeparator;
 import javax.swing.JTextField;
-import com.toedter.calendar.JDateChooser;
-import com.toedter.calendar.JYearChooser;
+import javax.swing.SwingConstants;
 
-import model.Member;
-import modelManager.MemberManager;
+import model.Employee;
+import modelManager.EmployeeManager;
+import view.swing.MyPagePanelBorder;
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
 
-import com.toedter.calendar.JMonthChooser;
-import com.toedter.calendar.JDayChooser;
-import javax.swing.JComboBox;
-import javax.swing.DefaultComboBoxModel;
-
-public class Form_MyPage extends JPanel {
+public class Form_AdMyPage extends JPanel {
 
 
 	//생성자
-    public Form_MyPage(String loginID) {
-    	memberManager= new MemberManager();
-    	Member member=memberManager.getByLoginID(loginID);
-        initComponents(member);
+    public Form_AdMyPage(String loginID) {
+    	employeeManager= new EmployeeManager();
+    	Employee employee=employeeManager.getByLoginID(loginID);
+        initComponents(employee);
 
     
     }
     
-    public void initComponents(Member mem) {
+    public void initComponents(Employee emp) {
     	setBackground(new java.awt.Color(242, 242, 242));
     	setLayout(null);
     	
@@ -61,7 +45,7 @@ public class Form_MyPage extends JPanel {
     	leftPanel.setBackground(new java.awt.Color(255, 255, 255));
     	add(leftPanel);
     	
-    	//우측 패널 (1:내 정보 패널 / 2:비밀번호 변경 패널 / 3:회원 탈퇴 패널) ***********************
+    	//우측 패널 (1:내 정보 패널 / 2:비밀번호 변경 패널) ***********************
     	
     	MyPagePanelBorder rightPanel1 = new MyPagePanelBorder();
     	rightPanel1.setBackground(Color.WHITE);
@@ -74,11 +58,6 @@ public class Form_MyPage extends JPanel {
     	rightPanel2.setBounds(295, 73, 615, 500);
     	add(rightPanel2);
     	
-    	MyPagePanelBorder rightPanel3 = new MyPagePanelBorder();
-    	rightPanel3.setBackground(Color.WHITE);
-    	rightPanel3.setBounds(295, 73, 615, 500);
-    	add(rightPanel3);
-    	
     	JSeparator leftPanel_seperator = new JSeparator();
     	leftPanel_seperator.setBounds(25, 240, 180, 10);
     	leftPanel.add(leftPanel_seperator);
@@ -87,10 +66,10 @@ public class Form_MyPage extends JPanel {
     	
     	JLabel leftPanel_userImg = new JLabel("");
     	leftPanel_userImg.setBounds(59, 48, 100, 100);
-    	leftPanel_userImg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icon/myUser.png")));
+    	leftPanel_userImg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icon/admin.png")));
     	leftPanel.add(leftPanel_userImg);
     	
-    	JLabel leftPanel_userName = new JLabel(mem.getName());
+    	JLabel leftPanel_userName = new JLabel(emp.getName());
     	leftPanel_userName.setForeground(new Color(47, 79, 79));
     	leftPanel_userName.setFont(new Font("맑은 고딕", Font.BOLD, 20));
     	leftPanel_userName.setBounds(69, 158, 68, 31);
@@ -101,14 +80,15 @@ public class Form_MyPage extends JPanel {
     	leftPanel_label1.setBounds(135, 158, 37, 31);
     	leftPanel.add(leftPanel_label1);
     	
-    	JLabel leftPanel_label2 = new JLabel("등급");
+    	JLabel leftPanel_label2 = new JLabel("부서");
     	leftPanel_label2.setFont(new Font("맑은 고딕", Font.PLAIN, 14));
-    	leftPanel_label2.setBounds(122, 200, 37, 15);
+    	leftPanel_label2.setBounds(135, 199, 37, 15);
     	leftPanel.add(leftPanel_label2);
     	
-    	JLabel leftPanel_userGrade = new JLabel(mem.getGrade());
+    	JLabel leftPanel_userGrade = new JLabel(emp.getDepartment());
+    	leftPanel_userGrade.setHorizontalAlignment(SwingConstants.CENTER);
     	leftPanel_userGrade.setFont(new Font("맑은 고딕", Font.BOLD, 14));
-    	leftPanel_userGrade.setBounds(69, 200, 50, 15);
+    	leftPanel_userGrade.setBounds(43, 199, 89, 15);
     	leftPanel.add(leftPanel_userGrade);
     	
     	JButton leftPanel_button1 = new JButton("내 정보");
@@ -119,7 +99,6 @@ public class Form_MyPage extends JPanel {
     		public void mouseClicked(MouseEvent e) {
     			rightPanel1.setVisible(true);
     			rightPanel2.setVisible(false);
-    			rightPanel3.setVisible(false);
     		}
     	});
     	leftPanel_button1.addActionListener(new ActionListener() {
@@ -137,25 +116,10 @@ public class Form_MyPage extends JPanel {
     		public void mouseClicked(MouseEvent e) {
     			rightPanel1.setVisible(false);
     			rightPanel2.setVisible(true);
-    			rightPanel3.setVisible(false);
     		}
     	});
     	leftPanel_button2.setBounds(25, 343, 180, 50);
     	leftPanel.add(leftPanel_button2);
-    	
-    	JButton leftPanel_button3 = new JButton("회원 탈퇴");
-    	leftPanel_button3.setFont(new Font("맑은 고딕", Font.BOLD, 13));
-    	leftPanel_button3.setBackground(Color.WHITE);
-    	leftPanel_button3.addMouseListener(new MouseAdapter() {
-    		@Override
-    		public void mouseClicked(MouseEvent e) {
-    			rightPanel1.setVisible(false);
-    			rightPanel2.setVisible(false);
-    			rightPanel3.setVisible(true);
-    		}
-    	});
-    	leftPanel_button3.setBounds(25, 413, 180, 50);
-    	leftPanel.add(leftPanel_button3);
     	leftPanel.setLayout(null);
     	leftPanel.add(leftPanel_userImg);
     	leftPanel.add(leftPanel_userName);
@@ -164,7 +128,6 @@ public class Form_MyPage extends JPanel {
     	leftPanel.add(leftPanel_userGrade);
     	leftPanel.add(leftPanel_button1);
     	leftPanel.add(leftPanel_button2);
-    	leftPanel.add(leftPanel_button3);
     	
     	
     	//구분선
@@ -202,7 +165,7 @@ public class Form_MyPage extends JPanel {
     	rightPanel1.add(rightPanel1_label5);
     	
     	rightPanel1_ID = new JTextField();
-    	rightPanel1_ID.setText(mem.getLoginID());
+    	rightPanel1_ID.setText(emp.getLoginID());
     	rightPanel1_ID.setBackground(Color.WHITE);
     	rightPanel1_ID.setEditable(false);
     	rightPanel1_ID.setEnabled(false);
@@ -211,7 +174,7 @@ public class Form_MyPage extends JPanel {
     	rightPanel1_ID.setColumns(10);
     	
     	rightPanel1_name = new JTextField();
-    	rightPanel1_name.setText(mem.getName());
+    	rightPanel1_name.setText(emp.getName());
     	rightPanel1_name.setBackground(Color.WHITE);
     	rightPanel1_name.setEnabled(false);
     	rightPanel1_name.setEditable(false);
@@ -219,7 +182,7 @@ public class Form_MyPage extends JPanel {
     	rightPanel1_name.setBounds(394, 199, 96, 25);
     	rightPanel1.add(rightPanel1_name);
     	
-    	String phone=mem.getPhone();
+    	String phone=emp.getPhone();
     	String phone1=phone.substring(0, 3);
     	String phone2=phone.substring(3, 7);
     	String phone3=phone.substring(7, 11);
@@ -283,7 +246,7 @@ public class Form_MyPage extends JPanel {
     	rightPanel1_label5_3.setBounds(516, 365, 19, 15);
     	rightPanel1.add(rightPanel1_label5_3);
     	
-    	String birthDate=mem.getBirthDate();
+    	String birthDate=emp.getBirthDate();
     	String birthYear=birthDate.substring(0, 4);
     	String birthMonth=birthDate.substring(5, 7);
     	String birthDay=birthDate.substring(8, 10);
@@ -357,60 +320,10 @@ public class Form_MyPage extends JPanel {
     	rightPanel2_input3.setBounds(254, 277, 264, 27);
     	rightPanel2.add(rightPanel2_input3);
     	
-    	//우측 패널 : 회원 탈퇴 패널 컴포넌트 ******************************************************************************
-    	
-    	JLabel rightPanel3_label1 = new JLabel("회원 탈퇴");
-    	rightPanel3_label1.setFont(new Font("맑은 고딕", Font.BOLD, 25));
-    	rightPanel3_label1.setHorizontalAlignment(SwingConstants.CENTER);
-    	rightPanel3_label1.setBounds(189, 49, 237, 54);
-    	rightPanel3.add(rightPanel3_label1);
-    	
-    	JLabel rightPanel3_label2 = new JLabel("<html>* 회원 탈퇴를 원하신다면 아래 창에 비밀번호를 두번 입력해주세요.");
-    	rightPanel3_label2.setHorizontalAlignment(SwingConstants.CENTER);
-    	rightPanel3_label2.setFont(new Font("맑은 고딕", Font.PLAIN, 13));
-    	rightPanel3_label2.setBounds(87, 134, 440, 38);
-    	rightPanel3.add(rightPanel3_label2);
-    	
-    	JLabel rightPanel3_label3 = new JLabel("비밀번호");
-    	rightPanel3_label3.setFont(new Font("맑은 고딕", Font.BOLD, 15));
-    	rightPanel3_label3.setHorizontalAlignment(SwingConstants.CENTER);
-    	rightPanel3_label3.setBounds(72, 248, 106, 15);
-    	rightPanel3.add(rightPanel3_label3);
-    	
-    	JLabel rightPanel3_label4 = new JLabel("비밀번호 확인");
-    	rightPanel3_label4.setHorizontalAlignment(SwingConstants.CENTER);
-    	rightPanel3_label4.setFont(new Font("맑은 고딕", Font.BOLD, 15));
-    	rightPanel3_label4.setBounds(72, 291, 106, 15);
-    	rightPanel3.add(rightPanel3_label4);
-    	
-    	rightPanel3_input1 = new JPasswordField();
-    	rightPanel3_input1.setBounds(214, 242, 264, 27);
-    	rightPanel3.add(rightPanel3_input1);
-    	
-    	rightPanel3_input2 = new JPasswordField();
-    	rightPanel3_input2.setBounds(214, 288, 264, 27);
-    	rightPanel3.add(rightPanel3_input2);
-    	
-    	JButton rightPanel3_button = new JButton("탈퇴하기");
-    	rightPanel3_button.setBackground(Color.WHITE);
-    	rightPanel3_button.setFont(new Font("맑은 고딕", Font.PLAIN, 13));
-    	rightPanel3_button.setBounds(175, 388, 264, 54);
-    	rightPanel3.add(rightPanel3_button);
-    	rightPanel3.setLayout(null);
-    	rightPanel3.add(rightPanel3_label1);
-    	rightPanel3.add(rightPanel3_label2);
-    	rightPanel3.add(rightPanel3_label3);
-    	rightPanel3.add(rightPanel3_label4);
-    	rightPanel3.add(rightPanel3_input1);
-    	rightPanel3.add(rightPanel3_input2);
-    	rightPanel3.add(rightPanel3_button);
-    	
     	
 
     }
     private view.swing.MyPagePanelBorder leftPanel;
-    private JPasswordField rightPanel3_input1;
-    private JPasswordField rightPanel3_input2;
     private JPasswordField rightPanel2_input1;
     private JPasswordField rightPanel2_input2;
     private JPasswordField rightPanel2_input3;
@@ -419,8 +332,9 @@ public class Form_MyPage extends JPanel {
     private JTextField rightPanel1_phone1;
     private JTextField rightPanel1_phone2;
     private JTextField rightPanel1_phone3;
-    private modelManager.MemberManager memberManager;
+    private modelManager.EmployeeManager employeeManager;
     private JTextField rightPanel1_birthYear;
     private JTextField rightPanel1_bithMonth;
     private JTextField rightPanel1_birthDay;
+
 }
