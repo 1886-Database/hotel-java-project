@@ -17,6 +17,7 @@ import java.awt.event.MouseEvent;
 import javax.swing.JSeparator;
 import javax.swing.SwingConstants;
 import javax.swing.JLayeredPane;
+import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import view.swing.MyPagePanelBorder;
 import java.awt.Font;
@@ -91,9 +92,10 @@ public class Form_MyPage extends JPanel {
     	leftPanel.add(leftPanel_userImg);
     	
     	JLabel leftPanel_userName = new JLabel(mem.getName());
+    	leftPanel_userName.setHorizontalAlignment(SwingConstants.CENTER);
     	leftPanel_userName.setForeground(new Color(47, 79, 79));
     	leftPanel_userName.setFont(new Font("맑은 고딕", Font.BOLD, 20));
-    	leftPanel_userName.setBounds(69, 158, 68, 31);
+    	leftPanel_userName.setBounds(44, 158, 93, 31);
     	leftPanel.add(leftPanel_userName);
     	
     	JLabel leftPanel_label1 = new JLabel("님");
@@ -107,8 +109,9 @@ public class Form_MyPage extends JPanel {
     	leftPanel.add(leftPanel_label2);
     	
     	JLabel leftPanel_userGrade = new JLabel(mem.getGrade());
+    	leftPanel_userGrade.setHorizontalAlignment(SwingConstants.CENTER);
     	leftPanel_userGrade.setFont(new Font("맑은 고딕", Font.BOLD, 14));
-    	leftPanel_userGrade.setBounds(69, 200, 50, 15);
+    	leftPanel_userGrade.setBounds(54, 200, 65, 15);
     	leftPanel.add(leftPanel_userGrade);
     	
     	JButton leftPanel_button1 = new JButton("내 정보");
@@ -322,13 +325,7 @@ public class Form_MyPage extends JPanel {
     	rightPanel2_label1.setFont(new Font("맑은 고딕", Font.BOLD, 25));
     	rightPanel2_label1.setBounds(189, 49, 237, 54);
     	rightPanel2.add(rightPanel2_label1);
-    	rightPanel2.add(rightPanel2_label1);
-    	
-    	JButton rightPanel2_button1 = new JButton("변경하기");
-    	rightPanel2_button1.setBackground(Color.WHITE);
-    	rightPanel2_button1.setFont(new Font("맑은 고딕", Font.PLAIN, 13));
-    	rightPanel2_button1.setBounds(175, 388, 264, 54);
-    	rightPanel2.add(rightPanel2_button1);
+    
     	
     	JLabel rightPanel2_label2 = new JLabel("현재 비밀번호");
     	rightPanel2_label2.setFont(new Font("맑은 고딕", Font.BOLD, 15));
@@ -357,6 +354,44 @@ public class Form_MyPage extends JPanel {
     	rightPanel2_input3.setBounds(254, 277, 264, 27);
     	rightPanel2.add(rightPanel2_input3);
     	
+    	JButton rightPanel2_button1 = new JButton("변경하기");
+    	rightPanel2_button1.addMouseListener(new MouseAdapter() {
+    		@Override
+    		public void mouseClicked(MouseEvent e) {
+    			String oldPassword=String.valueOf(rightPanel2_input1.getPassword());
+    			String newPassword=String.valueOf(rightPanel2_input2.getPassword());
+    			String newPassword2 = String.valueOf(rightPanel2_input3.getPassword());
+    			if(oldPassword.trim().equals("")) {
+    				JOptionPane.showMessageDialog(rightPanel2,"현재 비밀번호를 입력해주세요.", "Empty current password",2);
+    			}else if(newPassword.trim().equals("")) {
+    				JOptionPane.showMessageDialog(rightPanel2,"새롭게 변경할 비밀번호를 입력해주세요.", "Empty new password",2);
+    			}else if(!(newPassword.equals(newPassword2))) {
+    				JOptionPane.showMessageDialog(rightPanel2,"새로 변경할 비밀번호를 다시 확인해주세요.", "Re-check your new pw",2);
+    			}else {
+    				if(!(oldPassword.equals(mem.getPassword()))) {
+    					JOptionPane.showMessageDialog(rightPanel2,"현재 비밀번호가 틀렸습니다.", "Wrong current password",2);
+    				}else {
+    					try {
+    						mem.setPassword(newPassword);
+    						memberManager.passwordChange(mem.getLoginID(), newPassword);
+    						JOptionPane.showMessageDialog(rightPanel2,"비밀번호가 정상적으로 변경됐습니다.", "Change done",2);
+    						rightPanel2_input1.setText("");
+    						rightPanel2_input2.setText("");
+    						rightPanel2_input3.setText("");
+    						
+    					}catch(Exception ex) {
+    						JOptionPane.showMessageDialog(rightPanel2,"에러 발생", "exception error",2);
+    					}
+    				}
+    			}
+    			
+    		}
+    	});
+    	rightPanel2_button1.setBackground(Color.WHITE);
+    	rightPanel2_button1.setFont(new Font("맑은 고딕", Font.PLAIN, 13));
+    	rightPanel2_button1.setBounds(175, 388, 264, 54);
+    	rightPanel2.add(rightPanel2_button1);
+    	
     	//우측 패널 : 회원 탈퇴 패널 컴포넌트 ******************************************************************************
     	
     	JLabel rightPanel3_label1 = new JLabel("회원 탈퇴");
@@ -365,7 +400,7 @@ public class Form_MyPage extends JPanel {
     	rightPanel3_label1.setBounds(189, 49, 237, 54);
     	rightPanel3.add(rightPanel3_label1);
     	
-    	JLabel rightPanel3_label2 = new JLabel("<html>* 회원 탈퇴를 원하신다면 아래 창에 비밀번호를 두번 입력해주세요.");
+    	JLabel rightPanel3_label2 = new JLabel("<html>* 회원 탈퇴를 원하신다면 아래 입력창에 비밀번호를 두번 입력해주세요.");
     	rightPanel3_label2.setHorizontalAlignment(SwingConstants.CENTER);
     	rightPanel3_label2.setFont(new Font("맑은 고딕", Font.PLAIN, 13));
     	rightPanel3_label2.setBounds(87, 134, 440, 38);

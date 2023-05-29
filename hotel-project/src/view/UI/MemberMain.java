@@ -26,7 +26,7 @@ public class MemberMain extends javax.swing.JFrame {
     private Form_MyPage form4;
     private Form_ViewMyReserv form5;
     private Form_Msg form6;
-    static String loginID="leda7";   //테스트를 위한 값 초기화... 마지막에 삭제해야함
+    static String loginID="horton7";   //테스트를 위한 값 초기화... 마지막에 삭제해야함
 
     public MemberMain(String id) {
         initComponents();
