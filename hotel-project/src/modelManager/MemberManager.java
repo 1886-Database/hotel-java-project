@@ -95,6 +95,23 @@ public class MemberManager {
 		return -1; //데이터베이스 오류
 	}
 	
+	//패스워드 변경
+	public int passwordChange(String loginID,String password) {
+		String SQL="UPDATE DB2023_member SET password=? WHERE loginID=?";
+		try {
+			con=myConnection.getConnection();
+			ps=con.prepareStatement(SQL);
+			ps.setString(1, password);
+			ps.setString(2, loginID);
+			ps.executeUpdate();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			myConnection.close(null, null, ps, con);
+		}
+		return -1;
+	}
+	
 	//멤버의 로그인 ID 값으로 다른 속성 값 얻기
 	public Member getByLoginID(String loginID) {
 		String SQL = "SELECT * FROM DB2023_member WHERE loginID=?";
@@ -115,5 +132,6 @@ public class MemberManager {
 		Member member = new Member();
 		return member;
 	}
+	
 }
 
