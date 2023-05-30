@@ -49,16 +49,16 @@ public class Form_AdEmployee extends javax.swing.JPanel {
         panelBorder1.add(lblNewLabel_1_1_1_1);
         panelBorder1.add(lblNewLabel);
         panelBorder1.add(lblNewLabel_1);
-        panelBorder1.add(textField_1);
-        panelBorder1.add(comboBox);
-        panelBorder1.add(textField);
-        panelBorder1.add(textField_2);
-        panelBorder1.add(dateChooser);
+        panelBorder1.add(input_loginID);
+        panelBorder1.add(input_dept);
+        panelBorder1.add(input_name);
+        panelBorder1.add(input_phoneNum);
+        panelBorder1.add(input_birthDate);
         panelBorder1.add(spTable);
-        panelBorder1.add(btnNewButton);
-        panelBorder1.add(btnEdit);
-        panelBorder1.add(btnNewButton_1);
-        panelBorder1.add(btnNewButton_1_1);
+        panelBorder1.add(btn_add);
+        panelBorder1.add(btn_edit);
+        panelBorder1.add(btn_del);
+        panelBorder1.add(btn_clear);
         add(panel);
         table.addRow(new Object[]{"23031900001", "Ivan", "Single", "2023-03-19~2023-03-20", StatusType.PENDING});
         table.addRow(new Object[]{"23040100002", "Conan", "2023-04-01 13:20", "83821", StatusType.APPROVED});
@@ -136,35 +136,35 @@ public class Form_AdEmployee extends javax.swing.JPanel {
         lblNewLabel_1_1_1_1.setBounds(20, 458, 84, 19);
         lblNewLabel_1_1_1_1.setFont(new Font("맑은 고딕", Font.PLAIN, 13));
         
-        textField = new JTextField();
-        textField.setBounds(122, 238, 195, 21);
-        textField.setColumns(10);
+        input_name = new JTextField();
+        input_name.setBounds(122, 238, 195, 21);
+        input_name.setColumns(10);
         
-        comboBox = new JComboBox();
-        comboBox.setBounds(122, 168, 195, 23);
+        input_dept = new JComboBox();
+        input_dept.setBounds(122, 168, 195, 23);
         
-        btnNewButton = new JButton("Add");
-        btnNewButton.setBounds(428, 492, 53, 23);
+        btn_add = new JButton("Add");
+        btn_add.setBounds(428, 492, 53, 23);
         
-        btnEdit = new JButton("Edit");
-        btnEdit.setBounds(537, 492, 51, 23);
+        btn_edit = new JButton("Edit");
+        btn_edit.setBounds(537, 492, 51, 23);
         
-        btnNewButton_1 = new JButton("Delete");
-        btnNewButton_1.setBounds(638, 492, 65, 23);
+        btn_del = new JButton("Delete");
+        btn_del.setBounds(638, 492, 65, 23);
         
-        btnNewButton_1_1 = new JButton("Clear");
-        btnNewButton_1_1.setBounds(742, 492, 59, 23);
+        btn_clear = new JButton("Clear");
+        btn_clear.setBounds(742, 492, 59, 23);
         
-        textField_1 = new JTextField();
-        textField_1.setBounds(122, 308, 195, 21);
-        textField_1.setColumns(10);
+        input_loginID = new JTextField();
+        input_loginID.setBounds(122, 308, 195, 21);
+        input_loginID.setColumns(10);
         
-        textField_2 = new JTextField();
-        textField_2.setBounds(122, 381, 195, 21);
-        textField_2.setColumns(10);
+        input_phoneNum = new JTextField();
+        input_phoneNum.setBounds(122, 381, 195, 21);
+        input_phoneNum.setColumns(10);
         
-        dateChooser = new JDateChooser();
-        dateChooser.setBounds(122, 456, 195, 21);
+        input_birthDate = new JDateChooser();
+        input_birthDate.setBounds(122, 456, 195, 21);
     }// </editor-fold>//GEN-END:initComponents
 
 
@@ -174,18 +174,18 @@ public class Form_AdEmployee extends javax.swing.JPanel {
     private view.swing.PanelBorder panelBorder1;
     private javax.swing.JScrollPane spTable;
     private view.swing.Table table;
-    private JTextField textField;
-    private JTextField textField_1;
-    private JTextField textField_2;
+    private JTextField input_name;
+    private JTextField input_loginID;
+    private JTextField input_phoneNum;
     private JLabel lblNewLabel_1_1;
     private JLabel lblNewLabel_1_1_1;
     private JLabel lblNewLabel_1_1_1_1;
     private JLabel lblNewLabel;
     private JLabel lblNewLabel_1;
-    private JComboBox comboBox;
-    private JDateChooser dateChooser;
-    private JButton btnNewButton;
-    private JButton btnEdit;
-    private JButton btnNewButton_1;
-    private JButton btnNewButton_1_1;
+    private JComboBox input_dept;
+    private JDateChooser input_birthDate;
+    private JButton btn_add;
+    private JButton btn_edit;
+    private JButton btn_del;
+    private JButton btn_clear;
 }
