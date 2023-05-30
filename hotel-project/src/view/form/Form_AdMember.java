@@ -6,6 +6,10 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import com.toedter.calendar.JDateChooser;
+
+import model.Member;
+import modelManager.MemberManager;
+
 import java.awt.Font;
 
 import view.model.StatusType;
@@ -17,39 +21,23 @@ import javax.swing.JScrollPane;
 import javax.swing.JButton;
 import javax.swing.JLayeredPane;
 import java.awt.GridLayout;
+import javax.swing.DefaultComboBoxModel;
 
 public class Form_AdMember extends JPanel {
+	
+	private Member[] mem;
+	private MemberManager mM;
+	
 	public Form_AdMember() {
 		initComponents();
+		mM = new MemberManager();
+		mem = mM.getAllMember();
     //  add row table
-        spTable.setVerticalScrollBar(new ScrollBar());
-        spTable.getVerticalScrollBar().setBackground(Color.WHITE);
-        spTable.getViewport().setBackground(Color.WHITE);
-        setLayout(null);
-        JPanel p = new JPanel();
-        p.setBackground(Color.WHITE);
-        spTable.setCorner(JScrollPane.UPPER_RIGHT_CORNER, p);
-        add(panelBorder1);
-        panelBorder1.setLayout(null);
-        panelBorder1.add(jLabel1);
-        panelBorder1.add(lblNewLabel_1_1);
-        panelBorder1.add(lblNewLabel_1_1_1);
-        panelBorder1.add(lblNewLabel_1_1_1_1);
-        panelBorder1.add(lblNewLabel);
-        panelBorder1.add(lblNewLabel_1);
-        panelBorder1.add(input_loginID);
-        panelBorder1.add(input_grade);
-        panelBorder1.add(input_name);
-        panelBorder1.add(input_phoneNum);
-        panelBorder1.add(input_birthDate);
-        panelBorder1.add(spTable);
-        panelBorder1.add(btn_add);
-        panelBorder1.add(btn_edit);
-        panelBorder1.add(btn_del);
-        panelBorder1.add(btn_clear);
-        add(panel);
-        table.addRow(new Object[]{"23031900001", "Ivan", "Single", "2023-03-19~2023-03-20", StatusType.PENDING});
-        table.addRow(new Object[]{"23040100002", "Conan", "2023-04-01 13:20", "83821", StatusType.APPROVED});
+		
+		for (int i = 0; i < mem.length; ++i) {
+			table.addRow(new Object[] {mem[i].getMemberID(),mem[i].getGrade(),mem[i].getName(),mem[i].getLoginID(),mem[i].getPhone(),mem[i].getBirthDate()});
+		}
+		
 
     }
 
@@ -66,8 +54,8 @@ public class Form_AdMember extends JPanel {
         panel.setBounds(20, 20, 907, 0);
         panelBorder1 = new view.swing.PanelBorder();
         panelBorder1.setBounds(20, 40, 907, 557);
-        jLabel1 = new javax.swing.JLabel();
-        jLabel1.setBounds(20, 20, 263, 26);
+        label_title = new javax.swing.JLabel();
+        label_title.setBounds(20, 20, 263, 26);
         spTable = new javax.swing.JScrollPane();
         spTable.setBounds(371, 104, 484, 378);
         table = new view.swing.Table();
@@ -79,9 +67,9 @@ public class Form_AdMember extends JPanel {
 
         panelBorder1.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel1.setFont(new java.awt.Font("sansserif", 1, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(127, 127, 127));
-        jLabel1.setText("Member Management");
+        label_title.setFont(new java.awt.Font("sansserif", 1, 18)); // NOI18N
+        label_title.setForeground(new java.awt.Color(127, 127, 127));
+        label_title.setText("Member Management");
 
         spTable.setBorder(null);
 
@@ -94,7 +82,7 @@ public class Form_AdMember extends JPanel {
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false, false,false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -103,31 +91,32 @@ public class Form_AdMember extends JPanel {
         });
         spTable.setViewportView(table);
         
-        lblNewLabel = new JLabel("이름");
-        lblNewLabel.setBounds(20, 237, 26, 19);
-        lblNewLabel.setFont(new Font("맑은 고딕", Font.PLAIN, 13));
+        label_name = new JLabel("이름");
+        label_name.setBounds(20, 237, 26, 19);
+        label_name.setFont(new Font("맑은 고딕", Font.PLAIN, 13));
         
-        lblNewLabel_1 = new JLabel("아이디");
-        lblNewLabel_1.setBounds(20, 307, 38, 19);
-        lblNewLabel_1.setFont(new Font("맑은 고딕", Font.PLAIN, 13));
+        label_loginID = new JLabel("아이디");
+        label_loginID.setBounds(20, 307, 38, 19);
+        label_loginID.setFont(new Font("맑은 고딕", Font.PLAIN, 13));
         
-        lblNewLabel_1_1 = new JLabel("등급");
-        lblNewLabel_1_1.setBounds(20, 168, 26, 19);
-        lblNewLabel_1_1.setFont(new Font("맑은 고딕", Font.PLAIN, 13));
+        label_grade = new JLabel("등급");
+        label_grade.setBounds(20, 168, 26, 19);
+        label_grade.setFont(new Font("맑은 고딕", Font.PLAIN, 13));
         
-        lblNewLabel_1_1_1 = new JLabel("휴대폰 번호");
-        lblNewLabel_1_1_1.setBounds(20, 385, 84, 19);
-        lblNewLabel_1_1_1.setFont(new Font("맑은 고딕", Font.PLAIN, 13));
+        label_phoneNum = new JLabel("휴대폰 번호");
+        label_phoneNum.setBounds(20, 385, 84, 19);
+        label_phoneNum.setFont(new Font("맑은 고딕", Font.PLAIN, 13));
         
-        lblNewLabel_1_1_1_1 = new JLabel("생년월일");
-        lblNewLabel_1_1_1_1.setBounds(20, 458, 84, 19);
-        lblNewLabel_1_1_1_1.setFont(new Font("맑은 고딕", Font.PLAIN, 13));
+        label_birthDate = new JLabel("생년월일");
+        label_birthDate.setBounds(20, 458, 84, 19);
+        label_birthDate.setFont(new Font("맑은 고딕", Font.PLAIN, 13));
         
         input_name = new JTextField();
         input_name.setBounds(122, 238, 195, 21);
         input_name.setColumns(10);
         
         input_grade = new JComboBox();
+        input_grade.setModel(new DefaultComboBoxModel(new String[] {"", "bronze", "silver", "gold", "VIP"}));
         input_grade.setBounds(122, 168, 195, 23);
         
         btn_add = new JButton("Add");
@@ -152,10 +141,37 @@ public class Form_AdMember extends JPanel {
         
         input_birthDate = new JDateChooser();
         input_birthDate.setBounds(122, 456, 195, 21);
+        
+        spTable.setVerticalScrollBar(new ScrollBar());
+        spTable.getVerticalScrollBar().setBackground(Color.WHITE);
+        spTable.getViewport().setBackground(Color.WHITE);
+        setLayout(null);
+        JPanel p = new JPanel();
+        p.setBackground(Color.WHITE);
+        spTable.setCorner(JScrollPane.UPPER_RIGHT_CORNER, p);
+        add(panelBorder1);
+        panelBorder1.setLayout(null);
+        panelBorder1.add(label_title);
+        panelBorder1.add(label_grade);
+        panelBorder1.add(label_phoneNum);
+        panelBorder1.add(label_birthDate);
+        panelBorder1.add(label_name);
+        panelBorder1.add(label_loginID);
+        panelBorder1.add(input_loginID);
+        panelBorder1.add(input_grade);
+        panelBorder1.add(input_name);
+        panelBorder1.add(input_phoneNum);
+        panelBorder1.add(input_birthDate);
+        panelBorder1.add(spTable);
+        panelBorder1.add(btn_add);
+        panelBorder1.add(btn_edit);
+        panelBorder1.add(btn_del);
+        panelBorder1.add(btn_clear);
+        add(panel);
     }// </editor-fold>//GEN-END:initComponents
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel label_title;
     private javax.swing.JLayeredPane panel;
     private view.swing.PanelBorder panelBorder1;
     private javax.swing.JScrollPane spTable;
@@ -163,11 +179,11 @@ public class Form_AdMember extends JPanel {
     private JTextField input_name;
     private JTextField input_loginID;
     private JTextField input_phoneNum;
-    private JLabel lblNewLabel_1_1;
-    private JLabel lblNewLabel_1_1_1;
-    private JLabel lblNewLabel_1_1_1_1;
-    private JLabel lblNewLabel;
-    private JLabel lblNewLabel_1;
+    private JLabel label_grade;
+    private JLabel label_phoneNum;
+    private JLabel label_birthDate;
+    private JLabel label_name;
+    private JLabel label_loginID;
     private JComboBox input_grade;
     private JDateChooser input_birthDate;
     private JButton btn_add;

@@ -3,6 +3,7 @@ package modelManager;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.Statement;
 
 import model.Member;
@@ -15,6 +16,7 @@ public class MemberManager {
 	private PreparedStatement ps;
 	private ResultSet rs;
 
+	//기본 생성자 : 커넥션 객체 생성
 	public MemberManager() {
 		try {
 			myConnection = new MY_Connection();
@@ -24,6 +26,7 @@ public class MemberManager {
 		}
 	}
 	
+	//로그인 화면 : 입력받은 id와 pw 와 일치하는 정보가 member 테이블에 존재하는지 확인
 	public int login(String id, String pw) {
 		String SQL = "SELECT * FROM DB2023_member WHERE loginID=? and password=?";
 		try {
@@ -46,6 +49,7 @@ public class MemberManager {
 		return -1; //데이터베이스 오류 
 	 }
 	
+	//회원가입 화면 : ID 중복 검사
 	public int checkID(String id) {
 		String SQL = "SELECT * FROM DB2023_member WHERE loginID=?";
 		System.out.println("checkID");
@@ -68,6 +72,7 @@ public class MemberManager {
 		return -1; //데이터베이스 오류 
 	}
 	
+	//회원가입 화면 : 입력받은 정보를 member 테이블에 insert
 	public int signUp(String name,String loginID,String password,String phoneNum,String birthDate){
 		String SQL = "INSERT INTO DB2023_member VALUES(?,?,?,?,?,?,?)";
 		try {
@@ -95,7 +100,7 @@ public class MemberManager {
 		return -1; //데이터베이스 오류
 	}
 	
-	//패스워드 변경
+	//마이페이지 화면 : 인자로 받은 id 에 해당하는 레코드의 비밀번호를 인자로 받은 pw 값으로 변경
 	public int passwordChange(String loginID,String password) {
 		String SQL="UPDATE DB2023_member SET password=? WHERE loginID=?";
 		try {
@@ -112,7 +117,7 @@ public class MemberManager {
 		return -1;
 	}
 	
-	//멤버의 로그인 ID 값으로 다른 속성 값 얻기
+	//마이페이지 화면 : 인자로 받은 id 에 해당하는 레코드를 Member 객체에 저장한 후 Member 객체 반환
 	public Member getByLoginID(String loginID) {
 		String SQL = "SELECT * FROM DB2023_member WHERE loginID=?";
 		try {
@@ -131,6 +136,54 @@ public class MemberManager {
 		}
 		Member member = new Member();
 		return member;
+	}
+	
+	//직원관리 화면 : member 테이블 모든 레코드를 각각 Member 객체에 저장한 후 객체 배열 반환
+	public Member[] getAllMember() {
+		Member[] m_array;
+		int rowCnt=0;
+		int index=0;
+		String mem = "SELECT * FROM DB2023_member";
+		String memCnt = "SELECT COUNT(*) FROM DB2023_member";
+		try {
+			con=myConnection.getConnection();
+			stmt=con.createStatement();
+			
+			//member 테이블의 레코드 개수 크기 만큼의 객체배열 생성
+			ResultSet rsCnt=stmt.executeQuery(memCnt);
+			
+			if(rsCnt.next()) {
+				rowCnt =rsCnt.getInt(1);
+			}
+			m_array=new Member[rowCnt];
+			for (int i = 0; i < m_array.length; ++i)
+				m_array[i] = new Member();
+			
+			rsCnt.close();     //자원반납
+			
+			//각 객체에 값 저장
+			rs=stmt.executeQuery(mem);
+			while(rs.next()) {
+				m_array[index].setMemberID(rs.getInt(1));
+				m_array[index].setLoginID(rs.getString(2));
+				m_array[index].setName(rs.getString(3));
+				m_array[index].setPassword(rs.getString(4));
+				m_array[index].setPhone(rs.getString(5));
+				m_array[index].setBirthDate(rs.getString(6));
+				m_array[index].setGrade(rs.getString(7));
+				index++;
+			}
+		
+			return m_array;
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			myConnection.close(rs, stmt, null, con);
+		}
+		
+		m_array=new Member[rowCnt];
+		return m_array;
 	}
 	
 }
