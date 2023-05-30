@@ -19,6 +19,10 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import com.toedter.calendar.JDateChooser;
+
+import model.Employee;
+import modelManager.EmployeeManager;
+
 import javax.swing.JButton;
 import java.awt.Font;
 import javax.swing.SwingConstants;
@@ -27,17 +31,20 @@ import java.awt.Component;
 
 public class Form_AdEmployee extends javax.swing.JPanel {
 
-
-    /**
-     * Creates new form Form_1
-     */
+	private Employee[] emp;
+	private EmployeeManager eM;
+	
     public Form_AdEmployee() {
+    	
         initComponents();
-    //  add row table
-
-        table.addRow(new Object[]{"23031900001", "Ivan", "Single", "2023-03-19~2023-03-20", StatusType.PENDING});
-        table.addRow(new Object[]{"23040100002", "Conan", "2023-04-01 13:20", "83821", StatusType.APPROVED});
+        eM = new EmployeeManager();
+        emp = eM.getAllEmployee();
         
+        //  add row table
+        
+        for (int i = 0; i < emp.length; ++i) {
+        	table.addRow(new Object[] {emp[i].getEmployeeID(),emp[i].getDepartment(),emp[i].getName(),emp[i].getLoginID(),emp[i].getPhone(),emp[i].getBirthDate()});
+        }
     
     }
 
@@ -82,7 +89,7 @@ public class Form_AdEmployee extends javax.swing.JPanel {
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false, false,false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {

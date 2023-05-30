@@ -3,6 +3,7 @@ package modelManager;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Statement;
 
 import model.Employee;
 import myConnection.MY_Connection;
@@ -10,6 +11,7 @@ import myConnection.MY_Connection;
 public class EmployeeManager {
 	private MY_Connection myConnection;
 	private Connection con;
+	private Statement stmt;
 	private PreparedStatement ps;
 	private ResultSet rs;
 
@@ -102,5 +104,53 @@ public class EmployeeManager {
 			}
 			Employee employee = new Employee();
 			return employee;
+		}
+		
+		//직원관리 화면 : employee 테이블 모든 레코드를 각각 Employee 객체에 저장한 후 객체 배열 반환
+		public Employee[] getAllEmployee() {
+			Employee[] e_array;
+			int rowCnt=0;
+			int index=0;
+			String emp = "SELECT * FROM DB2023_employee";
+			String empCnt = "SELECT COUNT(*) FROM DB2023_employee";
+			try {
+				con=myConnection.getConnection();
+				stmt=con.createStatement();
+				
+				//member 테이블의 레코드 개수 크기 만큼의 객체배열 생성
+				ResultSet rsCnt=stmt.executeQuery(empCnt);
+				
+				if(rsCnt.next()) {
+					rowCnt =rsCnt.getInt(1);
+				}
+				e_array=new Employee[rowCnt];
+				for (int i = 0; i < e_array.length; ++i)
+					e_array[i] = new Employee();
+				
+				rsCnt.close();     //자원반납
+				
+				//각 객체에 값 저장
+				rs=stmt.executeQuery(emp);
+				while(rs.next()) {
+					e_array[index].setEmployeeID(rs.getInt(1));
+					e_array[index].setLoginID(rs.getString(2));
+					e_array[index].setName(rs.getString(3));
+					e_array[index].setPassword(rs.getString(4));
+					e_array[index].setPhone(rs.getString(5));
+					e_array[index].setBirthDate(rs.getString(6));
+					e_array[index].setDepartment(rs.getString(7));
+					index++;
+				}
+			
+				return e_array;
+				
+			}catch(Exception e) {
+				e.printStackTrace();
+			}finally {
+				myConnection.close(rs, stmt, null, con);
+			}
+			
+			e_array=new Employee[rowCnt];
+			return e_array;
 		}
 }
