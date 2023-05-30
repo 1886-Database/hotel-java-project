@@ -29,10 +29,12 @@ public class Form_AdMember extends JPanel {
 	private MemberManager mM;
 	
 	public Form_AdMember() {
+		
 		initComponents();
 		mM = new MemberManager();
 		mem = mM.getAllMember();
-    //  add row table
+    
+		//  add row table
 		
 		for (int i = 0; i < mem.length; ++i) {
 			table.addRow(new Object[] {mem[i].getMemberID(),mem[i].getGrade(),mem[i].getName(),mem[i].getLoginID(),mem[i].getPhone(),mem[i].getBirthDate()});

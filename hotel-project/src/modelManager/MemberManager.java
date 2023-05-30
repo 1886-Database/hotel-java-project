@@ -138,7 +138,7 @@ public class MemberManager {
 		return member;
 	}
 	
-	//직원관리 화면 : member 테이블 모든 레코드를 각각 Member 객체에 저장한 후 객체 배열 반환
+	//회원관리 화면 : member 테이블 모든 레코드를 각각 Member 객체에 저장한 후 객체 배열 반환
 	public Member[] getAllMember() {
 		Member[] m_array;
 		int rowCnt=0;
