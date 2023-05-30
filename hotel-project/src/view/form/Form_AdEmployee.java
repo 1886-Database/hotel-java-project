@@ -34,32 +34,7 @@ public class Form_AdEmployee extends javax.swing.JPanel {
     public Form_AdEmployee() {
         initComponents();
     //  add row table
-        spTable.setVerticalScrollBar(new ScrollBar());
-        spTable.getVerticalScrollBar().setBackground(Color.WHITE);
-        spTable.getViewport().setBackground(Color.WHITE);
-        setLayout(null);
-        JPanel p = new JPanel();
-        p.setBackground(Color.WHITE);
-        spTable.setCorner(JScrollPane.UPPER_RIGHT_CORNER, p);
-        add(panelBorder1);
-        panelBorder1.setLayout(null);
-        panelBorder1.add(jLabel1);
-        panelBorder1.add(lblNewLabel_1_1);
-        panelBorder1.add(lblNewLabel_1_1_1);
-        panelBorder1.add(lblNewLabel_1_1_1_1);
-        panelBorder1.add(lblNewLabel);
-        panelBorder1.add(lblNewLabel_1);
-        panelBorder1.add(input_loginID);
-        panelBorder1.add(input_dept);
-        panelBorder1.add(input_name);
-        panelBorder1.add(input_phoneNum);
-        panelBorder1.add(input_birthDate);
-        panelBorder1.add(spTable);
-        panelBorder1.add(btn_add);
-        panelBorder1.add(btn_edit);
-        panelBorder1.add(btn_del);
-        panelBorder1.add(btn_clear);
-        add(panel);
+
         table.addRow(new Object[]{"23031900001", "Ivan", "Single", "2023-03-19~2023-03-20", StatusType.PENDING});
         table.addRow(new Object[]{"23040100002", "Conan", "2023-04-01 13:20", "83821", StatusType.APPROVED});
         
@@ -79,8 +54,8 @@ public class Form_AdEmployee extends javax.swing.JPanel {
         panel.setBounds(20, 20, 907, 0);
         panelBorder1 = new view.swing.PanelBorder();
         panelBorder1.setBounds(20, 40, 907, 557);
-        jLabel1 = new javax.swing.JLabel();
-        jLabel1.setBounds(20, 20, 263, 26);
+        label_title = new javax.swing.JLabel();
+        label_title.setBounds(20, 20, 263, 26);
         spTable = new javax.swing.JScrollPane();
         spTable.setBounds(371, 104, 484, 378);
         table = new view.swing.Table();
@@ -92,9 +67,9 @@ public class Form_AdEmployee extends javax.swing.JPanel {
 
         panelBorder1.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel1.setFont(new java.awt.Font("sansserif", 1, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(127, 127, 127));
-        jLabel1.setText("Employee Management");
+        label_title.setFont(new java.awt.Font("sansserif", 1, 18)); // NOI18N
+        label_title.setForeground(new java.awt.Color(127, 127, 127));
+        label_title.setText("Employee Management");
 
         spTable.setBorder(null);
 
@@ -116,25 +91,25 @@ public class Form_AdEmployee extends javax.swing.JPanel {
         });
         spTable.setViewportView(table);
         
-        lblNewLabel = new JLabel("이름");
-        lblNewLabel.setBounds(20, 237, 26, 19);
-        lblNewLabel.setFont(new Font("맑은 고딕", Font.PLAIN, 13));
+        label_name = new JLabel("이름");
+        label_name.setBounds(20, 237, 26, 19);
+        label_name.setFont(new Font("맑은 고딕", Font.PLAIN, 13));
         
-        lblNewLabel_1 = new JLabel("아이디");
-        lblNewLabel_1.setBounds(20, 307, 38, 19);
-        lblNewLabel_1.setFont(new Font("맑은 고딕", Font.PLAIN, 13));
+        label_loginID = new JLabel("아이디");
+        label_loginID.setBounds(20, 307, 38, 19);
+        label_loginID.setFont(new Font("맑은 고딕", Font.PLAIN, 13));
         
-        lblNewLabel_1_1 = new JLabel("부서");
-        lblNewLabel_1_1.setBounds(20, 168, 26, 19);
-        lblNewLabel_1_1.setFont(new Font("맑은 고딕", Font.PLAIN, 13));
+        label_dept = new JLabel("부서");
+        label_dept.setBounds(20, 168, 26, 19);
+        label_dept.setFont(new Font("맑은 고딕", Font.PLAIN, 13));
         
-        lblNewLabel_1_1_1 = new JLabel("휴대폰 번호");
-        lblNewLabel_1_1_1.setBounds(20, 385, 84, 19);
-        lblNewLabel_1_1_1.setFont(new Font("맑은 고딕", Font.PLAIN, 13));
+        label_phone = new JLabel("휴대폰 번호");
+        label_phone.setBounds(20, 385, 84, 19);
+        label_phone.setFont(new Font("맑은 고딕", Font.PLAIN, 13));
         
-        lblNewLabel_1_1_1_1 = new JLabel("생년월일");
-        lblNewLabel_1_1_1_1.setBounds(20, 458, 84, 19);
-        lblNewLabel_1_1_1_1.setFont(new Font("맑은 고딕", Font.PLAIN, 13));
+        label_birthDate = new JLabel("생년월일");
+        label_birthDate.setBounds(20, 458, 84, 19);
+        label_birthDate.setFont(new Font("맑은 고딕", Font.PLAIN, 13));
         
         input_name = new JTextField();
         input_name.setBounds(122, 238, 195, 21);
@@ -165,11 +140,39 @@ public class Form_AdEmployee extends javax.swing.JPanel {
         
         input_birthDate = new JDateChooser();
         input_birthDate.setBounds(122, 456, 195, 21);
+        
+        spTable.setVerticalScrollBar(new ScrollBar());
+        spTable.getVerticalScrollBar().setBackground(Color.WHITE);
+        spTable.getViewport().setBackground(Color.WHITE);
+        setLayout(null);
+        JPanel p = new JPanel();
+        p.setBackground(Color.WHITE);
+        spTable.setCorner(JScrollPane.UPPER_RIGHT_CORNER, p);
+        add(panelBorder1);
+        panelBorder1.setLayout(null);
+        panelBorder1.add(label_title);
+        panelBorder1.add(label_dept);
+        panelBorder1.add(label_phone);
+        panelBorder1.add(label_birthDate);
+        panelBorder1.add(label_name);
+        panelBorder1.add(label_loginID);
+        panelBorder1.add(input_loginID);
+        panelBorder1.add(input_dept);
+        panelBorder1.add(input_name);
+        panelBorder1.add(input_phoneNum);
+        panelBorder1.add(input_birthDate);
+        panelBorder1.add(spTable);
+        panelBorder1.add(btn_add);
+        panelBorder1.add(btn_edit);
+        panelBorder1.add(btn_del);
+        panelBorder1.add(btn_clear);
+        add(panel);
+        
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel label_title;
     private javax.swing.JLayeredPane panel;
     private view.swing.PanelBorder panelBorder1;
     private javax.swing.JScrollPane spTable;
@@ -177,11 +180,11 @@ public class Form_AdEmployee extends javax.swing.JPanel {
     private JTextField input_name;
     private JTextField input_loginID;
     private JTextField input_phoneNum;
-    private JLabel lblNewLabel_1_1;
-    private JLabel lblNewLabel_1_1_1;
-    private JLabel lblNewLabel_1_1_1_1;
-    private JLabel lblNewLabel;
-    private JLabel lblNewLabel_1;
+    private JLabel label_dept;
+    private JLabel label_phone;
+    private JLabel label_birthDate;
+    private JLabel label_name;
+    private JLabel label_loginID;
     private JComboBox input_dept;
     private JDateChooser input_birthDate;
     private JButton btn_add;
