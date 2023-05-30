@@ -31,6 +31,8 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.Component;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 
 public class Form_AdEmployee extends javax.swing.JPanel {
@@ -135,14 +137,13 @@ public class Form_AdEmployee extends javax.swing.JPanel {
         btn_del = new JButton("Delete");
         btn_del.setBounds(638, 492, 65, 23);
         
-        btn_clear = new JButton("Clear");
-        btn_clear.addMouseListener(new MouseAdapter() {
-        	@Override
-        	public void mouseClicked(MouseEvent e) {
-        		clear();
+        btn_refresh = new JButton("Refresh");
+        btn_refresh.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		refresh();
         	}
         });
-        btn_clear.setBounds(742, 492, 59, 23);
+        btn_refresh.setBounds(742, 492, 73, 23);
         
         input_loginID = new JTextField();
         input_loginID.setBounds(122, 308, 195, 21);
@@ -179,7 +180,7 @@ public class Form_AdEmployee extends javax.swing.JPanel {
         panelBorder1.add(btn_add);
         panelBorder1.add(btn_edit);
         panelBorder1.add(btn_del);
-        panelBorder1.add(btn_clear);
+        panelBorder1.add(btn_refresh);
         add(panel);
         
     }// </editor-fold>//GEN-END:initComponents
@@ -192,7 +193,7 @@ public class Form_AdEmployee extends javax.swing.JPanel {
     }
     
     //새로고침 버튼
-    private void clear() {
+    private void refresh() {
     	DefaultTableModel model = (DefaultTableModel)table.getModel();
     	model.setRowCount(0);
     	all();
@@ -218,5 +219,5 @@ public class Form_AdEmployee extends javax.swing.JPanel {
     private JButton btn_add;
     private JButton btn_edit;
     private JButton btn_del;
-    private JButton btn_clear;
+    private JButton btn_refresh;
 }
