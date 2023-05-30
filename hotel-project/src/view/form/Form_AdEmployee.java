@@ -26,7 +26,11 @@ import modelManager.EmployeeManager;
 import javax.swing.JButton;
 import java.awt.Font;
 import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableModel;
+
 import java.awt.Component;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 
 public class Form_AdEmployee extends javax.swing.JPanel {
@@ -38,13 +42,10 @@ public class Form_AdEmployee extends javax.swing.JPanel {
     	
         initComponents();
         eM = new EmployeeManager();
-        emp = eM.getAllEmployee();
         
         //  add row table
         
-        for (int i = 0; i < emp.length; ++i) {
-        	table.addRow(new Object[] {emp[i].getEmployeeID(),emp[i].getDepartment(),emp[i].getName(),emp[i].getLoginID(),emp[i].getPhone(),emp[i].getBirthDate()});
-        }
+        all();
     
     }
 
@@ -135,6 +136,12 @@ public class Form_AdEmployee extends javax.swing.JPanel {
         btn_del.setBounds(638, 492, 65, 23);
         
         btn_clear = new JButton("Clear");
+        btn_clear.addMouseListener(new MouseAdapter() {
+        	@Override
+        	public void mouseClicked(MouseEvent e) {
+        		clear();
+        	}
+        });
         btn_clear.setBounds(742, 492, 59, 23);
         
         input_loginID = new JTextField();
@@ -146,7 +153,7 @@ public class Form_AdEmployee extends javax.swing.JPanel {
         input_phoneNum.setColumns(10);
         
         input_birthDate = new JDateChooser();
-        input_birthDate.setBounds(122, 456, 195, 21);
+        input_birthDate.setBounds(122, 456, 195, 26);
         
         spTable.setVerticalScrollBar(new ScrollBar());
         spTable.getVerticalScrollBar().setBackground(Color.WHITE);
@@ -176,7 +183,21 @@ public class Form_AdEmployee extends javax.swing.JPanel {
         add(panel);
         
     }// </editor-fold>//GEN-END:initComponents
-
+   
+    private void all() {
+    	emp = eM.getAllEmployee();
+    	for (int i = 0; i < emp.length; ++i) {
+        	table.addRow(new Object[] {emp[i].getEmployeeID(),emp[i].getDepartment(),emp[i].getName(),emp[i].getLoginID(),emp[i].getPhone(),emp[i].getBirthDate()});
+        }
+    }
+    
+    //새로고침 버튼
+    private void clear() {
+    	DefaultTableModel model = (DefaultTableModel)table.getModel();
+    	model.setRowCount(0);
+    	all();
+    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel label_title;
