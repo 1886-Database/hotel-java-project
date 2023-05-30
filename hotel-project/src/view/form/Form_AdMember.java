@@ -5,6 +5,8 @@ import javax.swing.JTable;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
+
 import com.toedter.calendar.JDateChooser;
 
 import model.Member;
@@ -22,6 +24,10 @@ import javax.swing.JButton;
 import javax.swing.JLayeredPane;
 import java.awt.GridLayout;
 import javax.swing.DefaultComboBoxModel;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class Form_AdMember extends JPanel {
 	
@@ -32,13 +38,8 @@ public class Form_AdMember extends JPanel {
 		
 		initComponents();
 		mM = new MemberManager();
-		mem = mM.getAllMember();
-    
-		//  add row table
 		
-		for (int i = 0; i < mem.length; ++i) {
-			table.addRow(new Object[] {mem[i].getMemberID(),mem[i].getGrade(),mem[i].getName(),mem[i].getLoginID(),mem[i].getPhone(),mem[i].getBirthDate()});
-		}
+		all();
 		
 
     }
@@ -130,8 +131,13 @@ public class Form_AdMember extends JPanel {
         btn_del = new JButton("Delete");
         btn_del.setBounds(638, 492, 65, 23);
         
-        btn_clear = new JButton("Clear");
-        btn_clear.setBounds(742, 492, 59, 23);
+        btn_refresh = new JButton("Refresh");
+        btn_refresh.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		refresh();
+        	}
+        });
+        btn_refresh.setBounds(742, 492, 73, 23);
         
         input_loginID = new JTextField();
         input_loginID.setBounds(122, 308, 195, 21);
@@ -142,7 +148,7 @@ public class Form_AdMember extends JPanel {
         input_phoneNum.setColumns(10);
         
         input_birthDate = new JDateChooser();
-        input_birthDate.setBounds(122, 456, 195, 21);
+        input_birthDate.setBounds(122, 456, 195, 26);
         
         spTable.setVerticalScrollBar(new ScrollBar());
         spTable.getVerticalScrollBar().setBackground(Color.WHITE);
@@ -168,9 +174,23 @@ public class Form_AdMember extends JPanel {
         panelBorder1.add(btn_add);
         panelBorder1.add(btn_edit);
         panelBorder1.add(btn_del);
-        panelBorder1.add(btn_clear);
+        panelBorder1.add(btn_refresh);
         add(panel);
     }// </editor-fold>//GEN-END:initComponents
+    
+    private void all() {
+    	mem = mM.getAllMember();
+    	for (int i = 0; i < mem.length; ++i) {
+			table.addRow(new Object[] {mem[i].getMemberID(),mem[i].getGrade(),mem[i].getName(),mem[i].getLoginID(),mem[i].getPhone(),mem[i].getBirthDate()});
+		}
+    }
+    
+    //새로고침 버튼
+    private void refresh() {
+    	DefaultTableModel model = (DefaultTableModel)table.getModel();
+    	model.setRowCount(0);
+    	all();
+    }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel label_title;
@@ -191,5 +211,5 @@ public class Form_AdMember extends JPanel {
     private JButton btn_add;
     private JButton btn_edit;
     private JButton btn_del;
-    private JButton btn_clear;
+    private JButton btn_refresh;
 }
