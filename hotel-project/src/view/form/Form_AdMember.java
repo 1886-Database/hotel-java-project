@@ -3,9 +3,13 @@ package view.form;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.JComboBox;
+import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.text.MaskFormatter;
 
 import com.toedter.calendar.JDateChooser;
 
@@ -13,21 +17,20 @@ import model.Member;
 import modelManager.MemberManager;
 
 import java.awt.Font;
-
-import view.model.StatusType;
-import view.swing.PanelBorder;
 import view.swing.ScrollBar;
 
 import java.awt.Color;
 import javax.swing.JScrollPane;
 import javax.swing.JButton;
-import javax.swing.JLayeredPane;
-import java.awt.GridLayout;
 import javax.swing.DefaultComboBoxModel;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import javax.swing.table.DefaultTableCellRenderer;
 
 public class Form_AdMember extends JPanel {
 	
@@ -52,29 +55,56 @@ public class Form_AdMember extends JPanel {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-
+    	SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
         panel = new javax.swing.JLayeredPane();
         panel.setBounds(20, 20, 907, 0);
+        panel.setLayout(new java.awt.GridLayout(1, 0, 10, 0));
         panelBorder1 = new view.swing.PanelBorder();
         panelBorder1.setBounds(20, 40, 907, 557);
-        label_title = new javax.swing.JLabel();
-        label_title.setBounds(20, 20, 263, 26);
+        panelBorder1.setBackground(new java.awt.Color(255, 255, 255));
+        setBackground(new java.awt.Color(242, 242, 242));
+ 
         spTable = new javax.swing.JScrollPane();
         spTable.setBounds(371, 104, 484, 378);
         table = new view.swing.Table();
+        table.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
+        //테이블 행을 클릭하면 해당 행의 정보가 옆의 박스에 자동 입력되도록 하는 이벤트 리스너
+        table.addMouseListener(new MouseAdapter() {
+        	@Override
+        	public void mouseClicked(MouseEvent e) {
+        		int row = table.getSelectedRow();
 
-        setBackground(new java.awt.Color(242, 242, 242));
+        		String str = (String) table.getModel().getValueAt(row, 5);
+        		Date strToDate = null;
+        		try {
+        		    strToDate = dateFormatter.parse(str);
+        		} catch (Exception ex) {
+        		    throw new RuntimeException(ex);
+        		}
 
-        panel.setLayout(new java.awt.GridLayout(1, 0, 10, 0));
+        		String grade = (String) table.getModel().getValueAt(row, 1 );
+        		String name = (String) table.getModel().getValueAt(row, 2 );
+        		String loginID = (String) table.getModel().getValueAt(row, 3 );
+        		String phone = (String) table.getModel().getValueAt(row, 4 );
+        		Date date =  strToDate;
 
+        		setInputText(name,loginID,grade,phone,date);
 
-        panelBorder1.setBackground(new java.awt.Color(255, 255, 255));
-
-        label_title.setFont(new java.awt.Font("sansserif", 1, 18)); // NOI18N
-        label_title.setForeground(new java.awt.Color(127, 127, 127));
-        label_title.setText("Member Management");
-
+        	}
+        });
+        DefaultTableCellRenderer celAlignCenter = new DefaultTableCellRenderer();
+		celAlignCenter.setHorizontalAlignment(JLabel.CENTER);
+        table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        
+        spTable.setVerticalScrollBar(new ScrollBar());
+        spTable.getVerticalScrollBar().setBackground(Color.WHITE);
+        spTable.getViewport().setBackground(Color.WHITE);
+        setLayout(null);
+        JPanel p = new JPanel();
+        p.setBackground(Color.WHITE);
+        spTable.setCorner(JScrollPane.UPPER_RIGHT_CORNER, p);
         spTable.setBorder(null);
+
 
         table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -93,6 +123,14 @@ public class Form_AdMember extends JPanel {
             }
         });
         spTable.setViewportView(table);
+        table.getColumn("고유번호").setPreferredWidth(70);
+        table.getColumn("휴대폰 번호").setPreferredWidth(100);
+        
+        label_title = new javax.swing.JLabel();
+        label_title.setBounds(20, 20, 263, 26);
+        label_title.setFont(new java.awt.Font("sansserif", 1, 18)); // NOI18N
+        label_title.setForeground(new java.awt.Color(127, 127, 127));
+        label_title.setText("Member Management");
         
         label_name = new JLabel("이름");
         label_name.setBounds(20, 237, 26, 19);
@@ -115,22 +153,61 @@ public class Form_AdMember extends JPanel {
         label_birthDate.setFont(new Font("맑은 고딕", Font.PLAIN, 13));
         
         input_name = new JTextField();
-        input_name.setBounds(122, 238, 195, 21);
+        input_name.setBounds(122, 238, 195, 26);
         input_name.setColumns(10);
         
         input_grade = new JComboBox();
-        input_grade.setModel(new DefaultComboBoxModel(new String[] {"", "bronze", "silver", "gold", "VIP"}));
-        input_grade.setBounds(122, 168, 195, 23);
+        input_grade.setModel(new DefaultComboBoxModel(new String[] {"bronze", "silver", "gold", "VIP"}));
+        input_grade.setBounds(122, 168, 195, 26);
+        input_grade.setSelectedIndex(-1);
         
+        input_loginID = new JTextField();
+        input_loginID.setBounds(122, 308, 195, 26);
+        input_loginID.setColumns(10);
+        
+        MaskFormatter formatter=null;
+	    try {
+	    	formatter = new MaskFormatter("###-####-####");
+	    }catch(ParseException ex) {
+	    	ex.printStackTrace();
+	    }
+	    input_phoneNum = new JFormattedTextField(formatter);
+	    input_phoneNum.setBounds(122, 381, 195, 26);
+        
+        input_birthDate = new JDateChooser();
+        input_birthDate.setBounds(122, 456, 195, 26);
+        
+        //추가 버튼
         btn_add = new JButton("Add");
         btn_add.setBounds(428, 492, 53, 23);
         
+        //수정 버튼
         btn_edit = new JButton("Edit");
         btn_edit.setBounds(537, 492, 51, 23);
         
+        //삭제 버튼
         btn_del = new JButton("Delete");
+        btn_del.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		int row = table.getSelectedRow();
+        		if(row==-1)
+        			JOptionPane.showMessageDialog(null,"삭제할 회원을 먼저 선택해주세요.", "Member is Not Selected",2);
+        		else {
+        			int ans = JOptionPane.showConfirmDialog(null, "해당 회원을 영구적으로 삭제하시겠습니까?","Delete Member",JOptionPane.YES_NO_OPTION);
+        			if(ans==JOptionPane.YES_OPTION) {
+        				int id = (int)table.getModel().getValueAt(row, 0);
+	        			if(mM.delete(id)==1) {
+		        			JOptionPane.showMessageDialog(null,"정상적으로 삭제되었습니다.", "Deleted",2);
+		        			refresh();
+		        			clear();
+	        			}
+        			}
+        		}
+        	}
+        });
         btn_del.setBounds(638, 492, 65, 23);
         
+        //새로고침 버튼
         btn_refresh = new JButton("Refresh");
         btn_refresh.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
@@ -139,24 +216,7 @@ public class Form_AdMember extends JPanel {
         });
         btn_refresh.setBounds(742, 492, 73, 23);
         
-        input_loginID = new JTextField();
-        input_loginID.setBounds(122, 308, 195, 21);
-        input_loginID.setColumns(10);
         
-        input_phoneNum = new JTextField();
-        input_phoneNum.setBounds(122, 381, 195, 21);
-        input_phoneNum.setColumns(10);
-        
-        input_birthDate = new JDateChooser();
-        input_birthDate.setBounds(122, 456, 195, 26);
-        
-        spTable.setVerticalScrollBar(new ScrollBar());
-        spTable.getVerticalScrollBar().setBackground(Color.WHITE);
-        spTable.getViewport().setBackground(Color.WHITE);
-        setLayout(null);
-        JPanel p = new JPanel();
-        p.setBackground(Color.WHITE);
-        spTable.setCorner(JScrollPane.UPPER_RIGHT_CORNER, p);
         add(panelBorder1);
         panelBorder1.setLayout(null);
         panelBorder1.add(label_title);
@@ -175,8 +235,39 @@ public class Form_AdMember extends JPanel {
         panelBorder1.add(btn_edit);
         panelBorder1.add(btn_del);
         panelBorder1.add(btn_refresh);
+        
+        JButton btn_clear = new JButton("Clear");
+        btn_clear.setBounds(12, 115, 65, 23);
+        panelBorder1.add(btn_clear);
         add(panel);
     }// </editor-fold>//GEN-END:initComponents
+    
+    private void clear() {
+    	input_name.setText("");
+    	input_loginID.setText("");
+    	input_grade.setSelectedIndex(-1);
+    	input_phoneNum.setText("");
+    	input_birthDate.setDate(null);
+    }
+
+    private void setInputText(String name,String id, String grade, String phone, Date date) {
+    	int i=-1;
+    	if(grade.equals("bronze"))
+    		i=0;
+    	else if(grade.equals("silver"))
+    		i=1;
+    	else if(grade.equals("gold"))
+    		i=2;
+    	else if(grade.equals("VIP"))
+    		i=3;
+
+    	input_name.setText(name);
+    	input_loginID.setText(id);
+    	input_grade.setSelectedIndex(i);
+    	input_phoneNum.setText(phone);
+    	input_birthDate.setDate(date);
+    }
+
     
     private void all() {
     	mem = mM.getAllMember();
@@ -185,7 +276,7 @@ public class Form_AdMember extends JPanel {
 		}
     }
     
-    //새로고침 버튼
+    //새로고침
     private void refresh() {
     	DefaultTableModel model = (DefaultTableModel)table.getModel();
     	model.setRowCount(0);
