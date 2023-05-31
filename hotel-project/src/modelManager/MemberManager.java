@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
 import java.sql.Statement;
 
 import model.Member;
@@ -41,8 +42,8 @@ public class MemberManager {
 		    	return 1; //로그인 성공
 		    }
 		    return 0; //로그인 실패 (잘못된 id/pw)
-		}catch(Exception e){
-		    e.printStackTrace();
+		}catch(SQLException se){
+		    se.printStackTrace();
 		}finally {
 			myConnection.close(rs,null,ps,con);
 		}
@@ -64,8 +65,8 @@ public class MemberManager {
 		    	return 0; //중복 ID 존재
 		    }
 		    return 1; //중복 ID 존재하지 않음
-		}catch(Exception e){
-		    e.printStackTrace();
+		}catch(SQLException se){
+		    se.printStackTrace();
 		}finally {
 			myConnection.close(rs,null,ps,con);
 		}
@@ -92,8 +93,8 @@ public class MemberManager {
 				ps.executeUpdate();
 				return 1;
 			}
-		}catch(Exception e) {
-			e.printStackTrace();
+		}catch(SQLException se) {
+			se.printStackTrace();
 		}finally {
 			myConnection.close(rs,stmt,ps,con);
 		}
@@ -109,8 +110,8 @@ public class MemberManager {
 			ps.setString(1, password);
 			ps.setString(2, loginID);
 			ps.executeUpdate();
-		}catch(Exception e) {
-			e.printStackTrace();
+		}catch(SQLException se) {
+			se.printStackTrace();
 		}finally {
 			myConnection.close(null, null, ps, con);
 		}
@@ -126,11 +127,11 @@ public class MemberManager {
 			ps.setString(1, loginID);
 			rs = ps.executeQuery();
 			while(rs.next()) {
-				Member member = new Member(loginID,rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6),rs.getString(7));
+				Member member = new Member(rs.getInt(1),loginID,rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6),rs.getString(7));
 				return member;
 			}
-		}catch(Exception e) {
-			e.printStackTrace();
+		}catch(SQLException se) {
+			se.printStackTrace();
 		}finally {
 			myConnection.close(rs, null, ps, con);
 		}
@@ -138,7 +139,7 @@ public class MemberManager {
 		return member;
 	}
 	
-	//회원관리 화면 : member 테이블 모든 레코드를 각각 Member 객체에 저장한 후 객체 배열 반환
+	//회원관리 화면 : member 테이블의 모든 레코드를 각각 Member 객체에 저장한 후 객체 배열 반환
 	public Member[] getAllMember() {
 		Member[] m_array;
 		int rowCnt=0;
@@ -176,8 +177,8 @@ public class MemberManager {
 		
 			return m_array;
 			
-		}catch(Exception e) {
-			e.printStackTrace();
+		}catch(SQLException se) {
+			se.printStackTrace();
 		}finally {
 			myConnection.close(rs, stmt, null, con);
 		}
@@ -185,6 +186,7 @@ public class MemberManager {
 		m_array=new Member[rowCnt];
 		return m_array;
 	}
+	
 	
 }
 
