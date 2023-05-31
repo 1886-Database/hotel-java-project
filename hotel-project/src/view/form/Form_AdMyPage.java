@@ -186,8 +186,8 @@ public class Form_AdMyPage extends JPanel {
     	
     	String phone=emp.getPhone();
     	String phone1=phone.substring(0, 3);
-    	String phone2=phone.substring(3, 7);
-    	String phone3=phone.substring(7, 11);
+    	String phone2=phone.substring(4, 8);
+    	String phone3=phone.substring(9, 13);
     	
     	rightPanel1_phone1 = new JTextField();
     	rightPanel1_phone1.setText(phone1);
