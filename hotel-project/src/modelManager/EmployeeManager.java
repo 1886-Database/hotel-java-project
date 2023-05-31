@@ -167,7 +167,7 @@ public class EmployeeManager {
 			}catch(SQLException e) {
 				e.printStackTrace();
 			}finally {
-				myConnection.close(rs, stmt, null, con);
+				myConnection.close(null, stmt, null, con);
 			}
 			return -1;
 		}
@@ -218,7 +218,7 @@ public class EmployeeManager {
 			}catch(SQLException e) {
 				e.printStackTrace();
 			}finally {
-				myConnection.close(rs, stmt, null, con);
+				myConnection.close(null, stmt, null, con);
 			}
 			return -1;
 		}
