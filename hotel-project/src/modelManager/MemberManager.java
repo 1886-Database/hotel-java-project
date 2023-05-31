@@ -187,6 +187,34 @@ public class MemberManager {
 		return m_array;
 	}
 	
-	
+	//삭제 메소드 
+	private int delete(int memberID) {
+		String query1 = "UPDATE DB2023_reservation SET memberID=null,reservedStatus='거절' WHERE memberID=?";
+		String query2 = "DELETE FROM DB2023_member WHERE memberID=?";
+		con=myConnection.getConnection();
+		try {
+			con.setAutoCommit(false);  /**트랜잭션 시작**/
+			ps=con.prepareStatement(query1);
+			ps.setInt(1, memberID);
+			ps.executeUpdate(); //삭제하려는 회원의 예약신청 정보 수정 (예약한 회원의 id 는 null, 예약 상태는 '거절'이 되도록)
+			ps=con.prepareStatement(query2);
+			ps.executeUpdate(); //회원 정보 삭제
+			con.commit();             
+			con.setAutoCommit(true);  /**트랜잭션 종료**/
+			return 1;
+		}catch(SQLException se) {
+			System.out.println("Roll back data...");
+			try {
+				if(con!=null)
+					con.rollback();
+			}catch(SQLException se2) {
+				se2.printStackTrace();
+			}
+		}finally {
+			myConnection.close(null, null, ps, con);
+		}
+		
+		return -1;
+	}
 }
 
