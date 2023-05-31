@@ -294,12 +294,12 @@ public class Form_AdMyPage extends JPanel {
     	rightPanel2_label2.setBounds(84, 182, 106, 15);
     	rightPanel2.add(rightPanel2_label2);
     	
-    	JLabel rightPanel2_label3_ = new JLabel("변경할 비밀번호");
+    	JLabel rightPanel2_label3_ = new JLabel("신규 비밀번호");
     	rightPanel2_label3_.setFont(new Font("맑은 고딕", Font.BOLD, 15));
     	rightPanel2_label3_.setBounds(84, 230, 120, 15);
     	rightPanel2.add(rightPanel2_label3_);
     	
-    	JLabel rightPanel2_label4 = new JLabel("변경할 비밀번호 확인");
+    	JLabel rightPanel2_label4 = new JLabel("신규 비밀번호 확인");
     	rightPanel2_label4.setFont(new Font("맑은 고딕", Font.BOLD, 15));
     	rightPanel2_label4.setBounds(74, 278, 159, 15);
     	rightPanel2.add(rightPanel2_label4);
@@ -326,9 +326,9 @@ public class Form_AdMyPage extends JPanel {
     			if(oldPassword.trim().equals("")) {
     				JOptionPane.showMessageDialog(rightPanel2,"현재 비밀번호를 입력해주세요.", "Empty current password",2);
     			}else if(newPassword.trim().equals("")) {
-    				JOptionPane.showMessageDialog(rightPanel2,"새롭게 변경할 비밀번호를 입력해주세요.", "Empty new password",2);
+    				JOptionPane.showMessageDialog(rightPanel2,"신규 비밀번호를 입력해주세요.", "Empty new password",2);
     			}else if(!(newPassword.equals(newPassword2))) {
-    				JOptionPane.showMessageDialog(rightPanel2,"새로 변경할 비밀번호를 다시 확인해주세요.", "Re-check your new pw",2);
+    				JOptionPane.showMessageDialog(rightPanel2,"신규 비밀번호가 서로 일치하지 않습니다.", "Re-check your new pw",2);
     			}else {
     				if(!(oldPassword.equals(emp.getPassword()))) {
     					JOptionPane.showMessageDialog(rightPanel2,"현재 비밀번호가 틀렸습니다.", "Wrong current password",2);
