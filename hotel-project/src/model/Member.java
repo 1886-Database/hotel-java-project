@@ -13,9 +13,9 @@ public class Member {
 	//기본 생성자
 	public Member() {}
 	
-	//memberID 를 제외한 매개변수를 받는 생성자
-	public Member(String loginID,String name,String password,String phone,String birthDate,String grade) {
+	public Member(int memberID,String loginID,String name,String password,String phone,String birthDate,String grade) {
 		super();
+		this.setMemberID(memberID);
 		this.setLoginID(loginID);
 		this.setName(name);
 		this.setPassword(password);

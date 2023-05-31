@@ -279,11 +279,12 @@ public class Form_AdEmployee extends javax.swing.JPanel {
 	        				int id = (int)table.getModel().getValueAt(row, 0);
 							if(emp.getEmployeeID()==id) { //로그인한 직원의 id 와 선택한 테이블 행의 id 가 동일하면 경고 메시지 출력 후 삭제 과정 중단
 								JOptionPane.showMessageDialog(null,"본인의 정보를 삭제할 수는 없습니다.", "Not allowed",2);
-							}else {
+							}
+							else {
 		        				if(eM.delete(id)==1) {
-		        				JOptionPane.showMessageDialog(null,"정상적으로 삭제되었습니다.", "Deleted",2);
-		        				refresh();
-		        				clear();
+			        				JOptionPane.showMessageDialog(null,"정상적으로 삭제되었습니다.", "Deleted",2);
+			        				refresh();
+			        				clear();
 		        				}
 	        				}
 	        			}
