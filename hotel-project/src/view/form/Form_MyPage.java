@@ -32,6 +32,7 @@ import com.toedter.calendar.JYearChooser;
 
 import model.Member;
 import modelManager.MemberManager;
+import view.UI.Login;
 
 import com.toedter.calendar.JMonthChooser;
 import com.toedter.calendar.JDayChooser;
@@ -427,6 +428,24 @@ public class Form_MyPage extends JPanel {
     	rightPanel3.add(rightPanel3_input2);
     	
     	JButton rightPanel3_button = new JButton("탈퇴하기");
+    	rightPanel3_button.addActionListener(new ActionListener() {
+    		public void actionPerformed(ActionEvent e) {
+    			String pw=String.valueOf(rightPanel3_input1.getPassword());
+    			String pwCheck=String.valueOf(rightPanel3_input2.getPassword());
+    			if(pw.equals(""))
+    				JOptionPane.showMessageDialog(rightPanel2,"비밀번호를 입력해주세요.", "Empty password",2);
+    			else if(pwCheck.equals(""))
+    				JOptionPane.showMessageDialog(rightPanel2,"비밀번호를 한번 더 입력해주세요.", "Empty password check",2);
+    			else {
+    				if(pw.equals(pwCheck)) {
+    					memberManager.delete(mem.getMemberID());
+    					JOptionPane.showMessageDialog(rightPanel2,"회원탈퇴되었습니다. 프로그램이 종료됩니다.", "Deleted",2);
+    					System.exit(0);  //프로그램 강제종료
+    				}else 
+    					JOptionPane.showMessageDialog(rightPanel2,"비밀번호가 서로 일치하지 않습니다.", "Password Not Matching",2);
+    			}
+    		}
+    	});
     	rightPanel3_button.setBackground(Color.WHITE);
     	rightPanel3_button.setFont(new Font("맑은 고딕", Font.PLAIN, 13));
     	rightPanel3_button.setBounds(175, 388, 264, 54);
