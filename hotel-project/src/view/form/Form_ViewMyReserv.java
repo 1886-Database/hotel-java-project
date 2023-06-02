@@ -29,6 +29,7 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
+import javax.swing.SwingConstants;
 
 public class Form_ViewMyReserv extends JPanel {
 
@@ -136,13 +137,8 @@ public class Form_ViewMyReserv extends JPanel {
         	}
         });
         
-        btnNewButton_1 = new JButton("평점 남기기");
-        btnNewButton_1.addActionListener(new ActionListener() {
-        	public void actionPerformed(ActionEvent e) {
-        	}
-        });
-        
         JLabel lblNewLabel = new JLabel("* 체크인 날짜로부터 3일 이전에만 예약 취소가 가능합니다.");
+        lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         layout.setHorizontalGroup(
@@ -153,17 +149,14 @@ public class Form_ViewMyReserv extends JPanel {
         				.addComponent(panelBorder1, GroupLayout.DEFAULT_SIZE, 410, Short.MAX_VALUE)
         				.addComponent(panel, GroupLayout.DEFAULT_SIZE, 410, Short.MAX_VALUE))
         			.addGap(20))
+        		.addGroup(Alignment.TRAILING, layout.createSequentialGroup()
+        			.addGap(145)
+        			.addComponent(btnNewButton, GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE)
+        			.addGap(131))
         		.addGroup(layout.createSequentialGroup()
-        			.addGap(45)
-        			.addGroup(layout.createParallelGroup(Alignment.LEADING)
-        				.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 333, GroupLayout.PREFERRED_SIZE)
-        				.addGroup(layout.createSequentialGroup()
-        					.addPreferredGap(ComponentPlacement.RELATED)
-        					.addComponent(btnNewButton, GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE)
-        					.addPreferredGap(ComponentPlacement.UNRELATED)
-        					.addComponent(btnNewButton_1, GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE)
-        					.addPreferredGap(ComponentPlacement.RELATED)))
-        			.addGap(45))
+        			.addGap(59)
+        			.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 306, Short.MAX_VALUE)
+        			.addGap(58))
         );
         layout.setVerticalGroup(
         	layout.createParallelGroup(Alignment.LEADING)
@@ -171,11 +164,9 @@ public class Form_ViewMyReserv extends JPanel {
         			.addGap(20)
         			.addComponent(panel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
         			.addGap(15)
-        			.addComponent(panelBorder1, GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)
+        			.addComponent(panelBorder1, GroupLayout.DEFAULT_SIZE, 153, Short.MAX_VALUE)
         			.addGap(18)
-        			.addGroup(layout.createParallelGroup(Alignment.BASELINE)
-        				.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
-        				.addComponent(btnNewButton_1, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE))
+        			.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
         			.addGap(18)
         			.addComponent(lblNewLabel)
         			.addGap(16))
@@ -191,5 +182,4 @@ public class Form_ViewMyReserv extends JPanel {
     private javax.swing.JScrollPane spTable;
     private view.swing.Table table;
     private JButton btnNewButton;
-    private JButton btnNewButton_1;
 }
