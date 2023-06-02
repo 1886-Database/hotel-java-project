@@ -115,16 +115,7 @@ public class Form_RoomReservation extends javax.swing.JPanel {
         		}
         		String reservedstatus="대기";
         		System.out.println("인원: "+person+"조식여부: "+breakfast);
-        		try {
-        			int result = ReservationManager.reservation(reservedno,roomno,checkin,checkout,reserveddate,memberid, requirement,breakfast,reservedstatus,guestno);
-        			if(result==1) {
-        				JOptionPane.showMessageDialog(RButton,"예약이 완료되었습니다", "Reservation Success",2);
-    				}else {
-    					JOptionPane.showMessageDialog(RButton,"예약을 실패하였습니다", "Reservation Fail",2);
-    				}
-        		}catch(Exception ex) {
-    				JOptionPane.showMessageDialog(RButton,"error", "Error",2);
-    			}
+        		
         	}
         });
         
