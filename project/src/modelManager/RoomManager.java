@@ -27,19 +27,19 @@ public class RoomManager {
 		}
 	}
 	
-	//회원관리 화면 : member 테이블의 모든 레코드를 각각 Member 객체에 저장한 후 객체 배열 반환
+	//룸리스트 화면 : room 테이블의 모든 레코드를 각각 room 객체에 저장한 후 객체 배열 반환
 	public Room[] getAllRoom() {
 		Room[] r_array;
 		int rowCnt=0;
 		int index=0;
-		String mem = "SELECT * FROM DB2023_room";
-		String memCnt = "SELECT COUNT(*) FROM DB2023_room";
+		String room = "SELECT * FROM DB2023_room";
+		String roomCnt = "SELECT COUNT(*) FROM DB2023_room";
 		try {
 			con=myConnection.getConnection();
 			stmt=con.createStatement();
 			
-			//member 테이블의 레코드 개수 크기 만큼의 객체배열 생성
-			ResultSet rsCnt=stmt.executeQuery(memCnt);
+			//room 테이블의 레코드 개수 크기 만큼의 객체배열 생성
+			ResultSet rsCnt=stmt.executeQuery(roomCnt);
 			
 			if(rsCnt.next()) {
 				rowCnt =rsCnt.getInt(1);
@@ -51,7 +51,7 @@ public class RoomManager {
 			rsCnt.close();     //자원반납
 			
 			//각 객체에 값 저장
-			rs=stmt.executeQuery(mem);
+			rs=stmt.executeQuery(room);
 			while(rs.next()) {
 				r_array[index].setRoomNo(rs.getInt(1));
 				r_array[index].setBedType(rs.getString(2));
@@ -76,24 +76,20 @@ public class RoomManager {
 		r_array=new Room[rowCnt];
 		return r_array;
 	}
-	//회원관리 화면 : member 테이블의 모든 레코드를 각각 Member 객체에 저장한 후 객체 배열 반환
+	//룸리스트 재정렬 화면 : 필터링된 room 테이블의 레코드 반환
 		public Room[] getRefreshRoom(String checkin, String checkout) {
 			System.out.println(checkin+checkout);
 			Room[] r_array;
 			int rowCnt=11;
 			int index=0;
-			String mem = "(SELECT db2023_room.RoomNo,BedType,Capacity,Price,RoomType,RoomSize,RoomName,NonSmoking,Parking FROM db2023_room LEFT OUTER JOIN db2023_reservation ON db2023_room.roomNo=db2023_reservation.roomNo WHERE db2023_reservation.checkIn!=? AND db2023_reservation.checkOut!=?) UNION ALL (SELECT db2023_room.RoomNo,BedType,Capacity,Price,RoomType,RoomSize,RoomName,NonSmoking,Parking FROM db2023_room LEFT OUTER JOIN db2023_reservation ON db2023_room.roomNo=db2023_reservation.roomNo WHERE db2023_reservation.roomNo IS NULL)";
+			String room = "(SELECT db2023_room.RoomNo,BedType,Capacity,Price,RoomType,RoomSize,RoomName,NonSmoking,Parking FROM db2023_room LEFT OUTER JOIN db2023_reservation ON db2023_room.roomNo=db2023_reservation.roomNo WHERE db2023_reservation.checkIn!=? AND db2023_reservation.checkOut!=?) UNION ALL (SELECT db2023_room.RoomNo,BedType,Capacity,Price,RoomType,RoomSize,RoomName,NonSmoking,Parking FROM db2023_room LEFT OUTER JOIN db2023_reservation ON db2023_room.roomNo=db2023_reservation.roomNo WHERE db2023_reservation.roomNo IS NULL)";
 			
 			try {
 				con=myConnection.getConnection();
-				ps = con.prepareStatement(mem);
+				ps = con.prepareStatement(room);
 			    ps.setString(1, checkin);
 			    ps.setString(2,checkout);
 			    rs = ps.executeQuery();
-				
-				
-				//member 테이블의 레코드 개수 크기 만큼의 객체배열 생성
-			    
 				
 				
 				r_array=new Room[rowCnt];
@@ -101,10 +97,7 @@ public class RoomManager {
 					r_array[i] = new Room();
 				
 				
-				//각 객체에 값 저장
-				//rs=stmt.executeQuery(mem);
 				while(rs.next()) {
-					System.out.println("재정렬 성공");
 					r_array[index].setRoomNo(rs.getInt(1));
 					r_array[index].setBedType(rs.getString(2));
 					r_array[index].setCapacity(rs.getInt(3));
@@ -116,6 +109,7 @@ public class RoomManager {
 					r_array[index].setParking(rs.getBoolean(9));
 					index++;
 				}
+				System.out.println("재정렬 성공");
 			
 				return r_array;
 				
