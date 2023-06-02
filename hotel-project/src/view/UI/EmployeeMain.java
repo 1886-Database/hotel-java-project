@@ -73,7 +73,7 @@ public class EmployeeMain extends javax.swing.JFrame {
                 }else if (index ==11) {
                     setForm(form7);
                 }else if (index ==13) {
-                    dispose();
+                    System.exit(0);
                 }
             }
         });

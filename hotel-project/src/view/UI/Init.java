@@ -72,7 +72,7 @@ public class Init {
 	    button_exit.addMouseListener(new MouseAdapter() {
 	    	@Override
 	    	public void mouseClicked(MouseEvent e) {
-	    		frame.dispose();
+	    		System.exit(0);
 	    	}
 	    });
 	    button_exit.setToolTipText("종료");
