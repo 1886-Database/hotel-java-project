@@ -58,7 +58,7 @@ public class MemberMain extends javax.swing.JFrame {
                 } else if (index==9) { //메시지
                 	setForm(form6);
                 } else if (index==11) 
-                	dispose();
+                	System.exit(0);
        
                 
             }
