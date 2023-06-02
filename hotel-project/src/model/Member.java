@@ -6,19 +6,21 @@ public class Member {
 	private String loginID;
 	private String name;
 	private String password;
-	private String birthday;
+	private String phone;
+	private String birthDate;
 	private String grade;
 	
 	//기본 생성자
 	public Member() {}
 	
-	//memberID 를 제외한 매개변수를 받는 생성자
-	public Member(String loginID,String name,String password,String birthday,String grade) {
+	public Member(int memberID,String loginID,String name,String password,String phone,String birthDate,String grade) {
 		super();
+		this.setMemberID(memberID);
 		this.setLoginID(loginID);
 		this.setName(name);
 		this.setPassword(password);
-		this.setBirthday(birthday);
+		this.setPhone(phone);
+		this.setBirthDate(birthDate);
 		this.setGrade(grade);
 	}
 
@@ -54,12 +56,12 @@ public class Member {
 		this.password = password;
 	}
 
-	public String getBirthday() {
-		return birthday;
+	public String getBirthDate() {
+		return birthDate;
 	}
 
-	public void setBirthday(String birthday) {
-		this.birthday = birthday;
+	public void setBirthDate(String birthDate) {
+		this.birthDate = birthDate;
 	}
 
 	public String getGrade() {
@@ -68,6 +70,14 @@ public class Member {
 
 	public void setGrade(String grade) {
 		this.grade = grade;
+	}
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
 	}
 	
 	

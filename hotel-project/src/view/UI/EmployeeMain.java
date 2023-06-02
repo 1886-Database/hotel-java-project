@@ -18,11 +18,11 @@ import view.form.Form_3;
 import view.form.Form_AdEmployee;
 import view.form.Form_AdMember;
 import view.form.Form_AdMsg;
+import view.form.Form_AdMyPage;
 import view.form.Form_AdReserv;
 import view.form.Form_AdRoom;
 import view.form.Form_AdSales;
 import view.form.Form_Home;
-import view.form.Form_MyPage;
 
 public class EmployeeMain extends javax.swing.JFrame {
 
@@ -36,9 +36,9 @@ public class EmployeeMain extends javax.swing.JFrame {
     private Form_AdEmployee form3;
     private Form_AdMember form4;
     private Form_AdSales form5;
-    private Form_MyPage form6;
+    private Form_AdMyPage form6;
     private Form_AdMsg form7;
-    static String loginID;
+    static String loginID = "wcampbell";   //테스트를 위한 값 초기화... 마지막에 삭제해야함
 
     public EmployeeMain(String id) {
         initComponents();
@@ -47,10 +47,10 @@ public class EmployeeMain extends javax.swing.JFrame {
         home = new Form_Home();
         form1 = new Form_AdRoom();
         form2 = new Form_AdReserv();
-        form3 = new Form_AdEmployee();
+        form3 = new Form_AdEmployee(loginID);
         form4 = new Form_AdMember();
         form5 = new Form_AdSales();
-        form6 = new Form_MyPage();
+        form6 = new Form_AdMyPage(loginID);
         form7 = new Form_AdMsg();
         menu.initMoving(EmployeeMain.this);
         menu.addEventMenuSelected(new EventMenuSelected() {
@@ -155,7 +155,7 @@ public class EmployeeMain extends javax.swing.JFrame {
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
-    	System.out.println(loginID+"로 로그인하였습니다.");
+    	System.out.println(loginID+" 관리자로 로그인하였습니다.");
     	
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -178,7 +178,7 @@ public class EmployeeMain extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new EmployeeMain(null).setVisible(true);
+                new EmployeeMain(loginID).setVisible(true);
             }
         });
     }
