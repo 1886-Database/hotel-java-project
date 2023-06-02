@@ -34,20 +34,12 @@ public class SignUp {
 
 	private JFrame frame;
 
-	/**
-	 * Launch the application.
-	 */
 
-	/**
-	 * Create the application.
-	 */
 	public SignUp() {
 		initialize();
 	}
 
-	/**
-	 * Initialize the contents of the frame.
-	 */
+
 	private void initialize() {
 		frame = new JFrame();
 		frame.getContentPane().setEnabled(false);
@@ -60,7 +52,6 @@ public class SignUp {
 		frame.setVisible(true);
 		
 		memberManager = new MemberManager();
-		employeeManager = new EmployeeManager();
 		
 		/****************************************** 네비게이션 바 ********************************************/
 		navigationBar = new LoginBackground(Color.decode("#283c86"), Color.decode("#45a247"), 3);
@@ -77,11 +68,11 @@ public class SignUp {
 	    navigationBar.add(label_signUp);
 	    
 	    //뒤로가기 버튼
-	    JLabel button_back = new JLabel("");
+	    button_back = new JLabel("");
 	    button_back.addMouseListener(new MouseAdapter() {
 	    	@Override
 	    	public void mouseClicked(MouseEvent e) {
-	    		Login login = new Login();
+	    		Login login = new Login(0);
 	    		frame.dispose();
 	    	}
 	    });
@@ -104,7 +95,7 @@ public class SignUp {
 	    navigationBar.add(button_exit);
 	    
 	    /***************************************** 가입 정보 입력 패널 ***********************************************/
-	    JPanel panel = new JPanel();
+	    panel = new JPanel();
 	    panel.setBounds(0, 149, 1194, 521);
 	    frame.getContentPane().add(panel);
 	    panel.setLayout(null);
@@ -135,22 +126,22 @@ public class SignUp {
 	    label_birthday.setBounds(122, 374, 115, 44);
 	    panel.add(label_birthday);
 	    
-	    JLabel label_birthYear = new JLabel("년");
+	    label_birthYear = new JLabel("년");
 	    label_birthYear.setFont(new Font("맑은 고딕", Font.PLAIN, 22));
 	    label_birthYear.setBounds(354, 374, 35, 38);
 	    panel.add(label_birthYear);   
 	    
-	    JLabel label_birthMonth = new JLabel("월");
+	    label_birthMonth = new JLabel("월");
 	    label_birthMonth.setFont(new Font("맑은 고딕", Font.PLAIN, 22));
 	    label_birthMonth.setBounds(483, 374, 35, 38);
 	    panel.add(label_birthMonth);
 	    
-	    JLabel label_birthDay = new JLabel("일");
+	    label_birthDay = new JLabel("일");
 	    label_birthDay.setFont(new Font("맑은 고딕", Font.PLAIN, 22));
 	    label_birthDay.setBounds(612, 374, 35, 38);
 	    panel.add(label_birthDay);
 	    
-	    JFormattedTextField input_name = new JFormattedTextField((AbstractFormatter) null);
+	    input_name = new JFormattedTextField((AbstractFormatter) null);
 	    input_name.addKeyListener(new KeyAdapter() {  //숫자는 입력할 수 없도록 제한 + 글자 수 제한
 	    	public void keyTyped(KeyEvent e) {
 	    		char c = e.getKeyChar();
@@ -192,22 +183,22 @@ public class SignUp {
 	    }catch(ParseException ex) {
 	    	ex.printStackTrace();
 	    }
-	    JFormattedTextField input_phone = new JFormattedTextField(formatter);
+	    input_phone = new JFormattedTextField(formatter);
 	    input_phone.setBounds(272, 293, 370, 38);
 	    panel.add(input_phone);
 	    
 
-	    JComboBox input_birthYear = new JComboBox();
+	    input_birthYear = new JComboBox();
 	    input_birthYear.setModel(new DefaultComboBoxModel(new String[] {"", "1923", "1924", "1925", "1926", "1927", "1928", "1929", "1930", "1931", "1932", "1933", "1934", "1935", "1936", "1937", "1938", "1939", "1940", "1941", "1942", "1943", "1944", "1945", "1946", "1947", "1948", "1949", "1950", "1951", "1952", "1953", "1954", "1955", "1956", "1957", "1958", "1959", "1960", "1961", "1962", "1963", "1964", "1965", "1966", "1967", "1968", "1969", "1970", "1971", "1972", "1973", "1974", "1975", "1976", "1977", "1978", "1979", "1980", "1981", "1982", "1983", "1984", "1985", "1986", "1987", "1988", "1989", "1990", "1991", "1992", "1993", "1994", "1995", "1996", "1997", "1998", "1999", "2000", "2001", "2002", "2003", "2004"}));
 	    input_birthYear.setBounds(272, 376, 70, 38);
 	    panel.add(input_birthYear);
 	    
-	    JComboBox input_birthMonth = new JComboBox();
+	    input_birthMonth = new JComboBox();
 	    input_birthMonth.setModel(new DefaultComboBoxModel(new String[] {"", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"}));
 	    input_birthMonth.setBounds(401, 376, 70, 38);
 	    panel.add(input_birthMonth);
 	    
-	    JComboBox input_birthDay = new JComboBox();
+	    input_birthDay = new JComboBox();
 	    input_birthDay.setModel(new DefaultComboBoxModel(new String[] {"", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"}));
 	    input_birthDay.setBounds(530, 376, 70, 38);
 	    panel.add(input_birthDay);
@@ -215,7 +206,7 @@ public class SignUp {
 	    
 	    /**************ID 중복 확인 버튼***************/
 	    
-	    JButton button_checkID = new JButton("중복 확인");
+	    button_checkID = new JButton("중복 확인");
 	    button_checkID.addMouseListener(new MouseAdapter() {
 	    	@Override
 	    	public void mouseClicked(MouseEvent e) {
@@ -225,7 +216,7 @@ public class SignUp {
 	    		}else {
 	    			try { 
 	    				System.out.println("1");
-			    		if(memberManager.checkID(loginID)==0||employeeManager.checkID(loginID)==0) {
+			    		if(memberManager.checkID(loginID)==0) {
 			    			JOptionPane.showMessageDialog(frame,"이미 존재하는 ID입니다.", "ID duplicate",2);
 			    		}else {
 			    			checkedID=loginID;
@@ -246,7 +237,7 @@ public class SignUp {
 	    
 	    
 	    /**************회원가입 버튼***************/
-	    RoundedButton button_signUp = new RoundedButton("sign up");
+	    button_signUp = new RoundedButton("sign up");
 	    button_signUp.addMouseListener(new MouseAdapter() {
 	    	@Override
 	    	public void mouseClicked(MouseEvent e) {
@@ -280,6 +271,8 @@ public class SignUp {
 	    				int result = memberManager.signUp(name,loginID,password,phoneNum,birthDate);
 	    				if(result==1) {
 	    					JOptionPane.showMessageDialog(frame,"회원가입이 완료되었습니다.", "done",2);
+	    					new Login(0);
+	    					frame.dispose();
 	    				}else {
 	    					JOptionPane.showMessageDialog(frame,"error.", "signUp error",2);
 	    				}
@@ -305,16 +298,27 @@ public class SignUp {
 
 	}
 	private view.component.LoginBackground navigationBar;
+	private JLabel button_back;
 	private JLabel label_signUp;
 	private JLabel button_exit;
+	private JPanel panel;
 	private JLabel label_name;
 	private JLabel label_loginID;
 	private JLabel label_password;
 	private JLabel label_phone;
 	private JLabel label_birthday;
+	private JLabel label_birthYear;
+	private JLabel label_birthMonth;
+	private JLabel label_birthDay;
+	private JFormattedTextField input_name;
 	private JTextField input_loginID;
 	private JTextField input_password;
+	private JFormattedTextField input_phone;
+	private JComboBox input_birthYear;
+	private JComboBox input_birthMonth;
+	private JComboBox input_birthDay;
+	private JButton button_checkID;
+	private RoundedButton button_signUp;
 	private MemberManager memberManager;
-	private EmployeeManager employeeManager;
 	private String checkedID;
 }
