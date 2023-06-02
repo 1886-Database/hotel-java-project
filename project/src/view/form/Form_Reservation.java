@@ -124,7 +124,7 @@ public class Form_Reservation extends javax.swing.JPanel {
         	}
         });
        
-      //테이블 행을 클릭하면 해당 행의 정보가 옆의 박스에 자동 입력되도록 하는 이벤트 리스너
+      //테이블 행 클릭 시 이벤트
         table.addMouseListener(new MouseAdapter() {
         	@Override
         	public void mouseClicked(MouseEvent e) {
@@ -244,6 +244,7 @@ public class Form_Reservation extends javax.swing.JPanel {
         
     }// </editor-fold>//GEN-END:initComponents
     
+    //필터링한 룸리스트 재정렬
     private void refreshroom(String checkin, String checkout) {
     	DefaultTableModel model = (DefaultTableModel)table.getModel();
     	model.setNumRows(0);
@@ -252,7 +253,7 @@ public class Form_Reservation extends javax.swing.JPanel {
 			table.addRow(new Object[] {room[i].getRoomNo(),room[i].getRoomName(),room[i].getRoomType(),room[i].getBedType(),room[i].getPrice()});
 		}
     }
-    
+    //전체 룸리스트
     private void all() {
     	room= rM.getAllRoom();
     	for (int i = 0; i < room.length; ++i) {
