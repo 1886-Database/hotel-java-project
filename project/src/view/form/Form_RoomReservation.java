@@ -1,9 +1,37 @@
 package view.form;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.JPanel;
+
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.Date;
+import java.text.SimpleDateFormat;
+
+import javax.swing.GroupLayout;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JRadioButton;
+import javax.swing.JComboBox;
+import javax.swing.JCheckBox;
+import javax.swing.JButton;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+
+import modelManager.ReservationManager;
+import modelManager.RoomManager;
 
 public class Form_RoomReservation extends javax.swing.JPanel {
 
+	private Form_RoomReservation r;
+	
 	public Form_RoomReservation() {
         initComponents();
+        
     }
 
     /**
@@ -14,37 +42,200 @@ public class Form_RoomReservation extends javax.swing.JPanel {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-
-        jLabel1 = new javax.swing.JLabel();
-
+    	panel = new javax.swing.JLayeredPane();
+        panelBorder1 = new view.swing.PanelBorder();
+        Title = new javax.swing.JLabel();
+        
         setBackground(new java.awt.Color(242, 242, 242));
 
-        jLabel1.setFont(new java.awt.Font("sansserif", 0, 36)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(106, 106, 106));
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Form 1");
+        panel.setLayout(new java.awt.GridLayout(1, 0, 10, 0));
+        panelBorder1.setBackground(new java.awt.Color(255, 255, 255));
+        
+        Title.setFont(new java.awt.Font("sansserif", 1, 18)); // NOI18N
+        Title.setForeground(new java.awt.Color(127, 127, 127));
+        Title.setText("Reservation");
+        
+        JPanel p = new JPanel();
+        p.setBackground(Color.WHITE);
+        
+        ROOMIMG= new JPanel() {
+        	Image background = new ImageIcon(getClass().getResource("/view/icon/더블-슈페리어룸(시티뷰)3.jpg")).getImage();
+        	public void paint(Graphics g) {
+        		g.drawImage(background, 0, 0, null);
+        	}
+        };
+        ROOMIMG.setLayout(null);
+        ROOMIMG.setVisible(true);
+        
+        
+        ROOMINFO = new JLabel("스탠다드룸 시티뷰 Single 45000원 금연여부 파킹여부");
+        ROOMINFO.setHorizontalAlignment(SwingConstants.CENTER);
+        
+        String person[] = {"1","2","3","4"};
+        JComboBox PSELECT = new JComboBox(person);
+        
+        
+        JLabel DATEINFO = new JLabel("체크인 2023-03-21 체크아웃 2023-03-22");
+        DATEINFO.setHorizontalAlignment(SwingConstants.CENTER);
+        
+        JLabel PERSON = new JLabel("인원");
+        PERSON.setHorizontalAlignment(SwingConstants.CENTER);
+        
+        
+        JLabel BREAKFAST = new JLabel("조식 신청");
+        BREAKFAST.setHorizontalAlignment(SwingConstants.CENTER);
+        
+        String breakfast[] = {"조식신청 안함","조식신청"};
+        JComboBox BSELECT = new JComboBox(breakfast);
+        
+        JLabel REQUIREMENT = new JLabel("요구 사항");
+        REQUIREMENT.setHorizontalAlignment(SwingConstants.CENTER);
+        
+        textField = new JTextField();
+        textField.setColumns(10);
+        
+        
+        /**************예약 버튼***************/
+        JButton RButton = new JButton("예약하기");
+        RButton.addMouseListener(new MouseAdapter(){
+        	public void mouseClicked(MouseEvent e) {
+        		
+        		Date date_now = new Date(System.currentTimeMillis()); // 현재시간을 가져와 Date형으로 저장한다
+        		SimpleDateFormat fourteen_format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); 
+        		String reserveddate = fourteen_format.format(date_now);
+        		System.out.println(reserveddate);
+        		String requirement = textField.getText();
+        		System.out.println(requirement);
+        		String guestno = PSELECT.getSelectedItem().toString();
+        		String Breakfast = BSELECT.getSelectedItem().toString();
+        		if(Breakfast=="조식신청 안함") {
+        			int breakfast = 0;
+        		}else {
+        			int breakfast = 1;
+        		}
+        		String reservedstatus="대기";
+        		System.out.println("인원: "+person+"조식여부: "+breakfast);
+        		try {
+        			int result = ReservationManager.reservation(reservedno,roomno,checkin,checkout,reserveddate,memberid, requirement,breakfast,reservedstatus,guestno);
+        			if(result==1) {
+        				JOptionPane.showMessageDialog(RButton,"예약이 완료되었습니다", "Reservation Success",2);
+    				}else {
+    					JOptionPane.showMessageDialog(RButton,"예약을 실패하였습니다", "Reservation Fail",2);
+    				}
+        		}catch(Exception ex) {
+    				JOptionPane.showMessageDialog(RButton,"error", "Error",2);
+    			}
+        	}
+        });
+        
+        
+        
+        
+        
+        
+        
+
+        javax.swing.GroupLayout panelBorder1Layout = new javax.swing.GroupLayout(panelBorder1);
+        panelBorder1Layout.setHorizontalGroup(
+        	panelBorder1Layout.createParallelGroup(Alignment.LEADING)
+        		.addGroup(panelBorder1Layout.createSequentialGroup()
+        			.addGap(20)
+        			.addGroup(panelBorder1Layout.createParallelGroup(Alignment.LEADING)
+        				.addGroup(panelBorder1Layout.createSequentialGroup()
+        					.addGroup(panelBorder1Layout.createParallelGroup(Alignment.LEADING)
+        						.addComponent(ROOMIMG, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        						.addComponent(ROOMINFO, GroupLayout.DEFAULT_SIZE, 559, Short.MAX_VALUE))
+        					.addGroup(panelBorder1Layout.createParallelGroup(Alignment.LEADING)
+        						.addGroup(panelBorder1Layout.createSequentialGroup()
+        							.addPreferredGap(ComponentPlacement.RELATED)
+        							.addGroup(panelBorder1Layout.createParallelGroup(Alignment.TRAILING)
+        								.addComponent(REQUIREMENT, GroupLayout.DEFAULT_SIZE, 78, Short.MAX_VALUE)
+        								.addComponent(PERSON, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 78, Short.MAX_VALUE)
+        								.addComponent(BREAKFAST, GroupLayout.DEFAULT_SIZE, 78, Short.MAX_VALUE))
+        							.addPreferredGap(ComponentPlacement.RELATED)
+        							.addGroup(panelBorder1Layout.createParallelGroup(Alignment.LEADING)
+        								.addGroup(panelBorder1Layout.createSequentialGroup()
+        									.addGap(59)
+        									.addGroup(panelBorder1Layout.createParallelGroup(Alignment.TRAILING, false)
+        										.addGroup(panelBorder1Layout.createSequentialGroup()
+        											.addGroup(panelBorder1Layout.createParallelGroup(Alignment.TRAILING)
+        												.addComponent(BSELECT, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        												.addComponent(PSELECT, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+        											.addGap(91))
+        										.addComponent(RButton, GroupLayout.PREFERRED_SIZE, 134, GroupLayout.PREFERRED_SIZE)))
+        								.addGroup(panelBorder1Layout.createSequentialGroup()
+        									.addGap(42)
+        									.addComponent(textField, GroupLayout.PREFERRED_SIZE, 193, GroupLayout.PREFERRED_SIZE)))
+        							.addGap(53))
+        						.addGroup(panelBorder1Layout.createSequentialGroup()
+        							.addGap(26)
+        							.addComponent(DATEINFO, GroupLayout.PREFERRED_SIZE, 335, GroupLayout.PREFERRED_SIZE)
+        							.addContainerGap())))
+        				.addGroup(panelBorder1Layout.createSequentialGroup()
+        					.addComponent(Title)
+        					.addContainerGap(842, Short.MAX_VALUE))))
+        );
+        panelBorder1Layout.setVerticalGroup(
+        	panelBorder1Layout.createParallelGroup(Alignment.LEADING)
+        		.addGroup(panelBorder1Layout.createSequentialGroup()
+        			.addGap(20)
+        			.addComponent(Title)
+        			.addPreferredGap(ComponentPlacement.UNRELATED)
+        			.addGroup(panelBorder1Layout.createParallelGroup(Alignment.TRAILING)
+        				.addGroup(panelBorder1Layout.createSequentialGroup()
+        					.addComponent(DATEINFO, GroupLayout.PREFERRED_SIZE, 47, GroupLayout.PREFERRED_SIZE)
+        					.addPreferredGap(ComponentPlacement.RELATED)
+        					.addGroup(panelBorder1Layout.createParallelGroup(Alignment.BASELINE)
+        						.addComponent(PERSON, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE)
+        						.addComponent(PSELECT, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+        					.addGap(18)
+        					.addGroup(panelBorder1Layout.createParallelGroup(Alignment.BASELINE)
+        						.addComponent(BREAKFAST, GroupLayout.PREFERRED_SIZE, 19, GroupLayout.PREFERRED_SIZE)
+        						.addComponent(BSELECT, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+        					.addGap(26)
+        					.addGroup(panelBorder1Layout.createParallelGroup(Alignment.BASELINE)
+        						.addComponent(REQUIREMENT, GroupLayout.DEFAULT_SIZE, 194, Short.MAX_VALUE)
+        						.addComponent(textField, GroupLayout.DEFAULT_SIZE, 194, Short.MAX_VALUE))
+        					.addGap(18))
+        				.addGroup(panelBorder1Layout.createSequentialGroup()
+        					.addComponent(ROOMIMG, GroupLayout.PREFERRED_SIZE, 336, GroupLayout.PREFERRED_SIZE)
+        					.addPreferredGap(ComponentPlacement.RELATED)))
+        			.addGroup(panelBorder1Layout.createParallelGroup(Alignment.LEADING)
+        				.addGroup(panelBorder1Layout.createSequentialGroup()
+        					.addGap(15)
+        					.addComponent(RButton, GroupLayout.PREFERRED_SIZE, 55, GroupLayout.PREFERRED_SIZE))
+        				.addGroup(panelBorder1Layout.createSequentialGroup()
+        					.addPreferredGap(ComponentPlacement.RELATED)
+        					.addComponent(ROOMINFO, GroupLayout.PREFERRED_SIZE, 57, GroupLayout.PREFERRED_SIZE)))
+        			.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        panelBorder1.setLayout(panelBorder1Layout);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 388, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGap(20, 20, 20)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(panelBorder1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(panel, javax.swing.GroupLayout.DEFAULT_SIZE, 875, Short.MAX_VALUE))
+                .addGap(20, 20, 20))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(128, 128, 128)
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(125, 125, 125))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addComponent(panelBorder1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(20, 20, 20))
         );
     }// </editor-fold>//GEN-END:initComponents
-
-
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
-    // End of variables declaration//GEN-END:variables
-
+    private javax.swing.JLabel Title;
+    private javax.swing.JLayeredPane panel;
+    private view.swing.PanelBorder panelBorder1;
+    private JPanel ROOMIMG;
+    private JLabel ROOMINFO;
+    private JTextField textField;
 }
