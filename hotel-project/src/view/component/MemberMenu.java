@@ -40,7 +40,7 @@ public class MemberMenu extends javax.swing.JPanel {
         listMenu1.addItem(new Model_Menu("9", "예약 조회 ", Model_Menu.MenuType.MENU));
         listMenu1.addItem(new Model_Menu("7", "메세지 ", Model_Menu.MenuType.MENU));
         listMenu1.addItem(new Model_Menu("", " ", Model_Menu.MenuType.EMPTY));
-        listMenu1.addItem(new Model_Menu("10", "로그아웃 ", Model_Menu.MenuType.MENU));
+        listMenu1.addItem(new Model_Menu("10", "종료 ", Model_Menu.MenuType.MENU));
         listMenu1.addItem(new Model_Menu("", "", Model_Menu.MenuType.EMPTY));             //index=12
     }
 
