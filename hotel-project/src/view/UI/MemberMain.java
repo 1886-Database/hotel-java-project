@@ -26,7 +26,8 @@ public class MemberMain extends javax.swing.JFrame {
     private Form_MyPage form4;
     private Form_ViewMyReserv form5;
     private Form_MemberMsg form6;
-    static String loginID="leda7";   //테스트를 위한 값 초기화... 마지막에 삭제해야함
+    static String loginID="leda7"; 
+    static int MemberID = 00001;//테스트를 위한 값 초기화... 마지막에 삭제해야함
 
     public MemberMain(String id) {
         initComponents();
@@ -38,7 +39,7 @@ public class MemberMain extends javax.swing.JFrame {
         form3 = new Form_3();
         form4 = new Form_MyPage(loginID);
         form5 = new Form_ViewMyReserv();
-        form6 = new Form_MemberMsg(loginID);
+        form6 = new Form_MemberMsg(MemberID);
         menu.initMoving(MemberMain.this);
         menu.addEventMenuSelected(new EventMenuSelected() {
             @Override

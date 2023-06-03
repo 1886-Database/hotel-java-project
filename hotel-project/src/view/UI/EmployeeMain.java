@@ -38,13 +38,15 @@ public class EmployeeMain extends javax.swing.JFrame {
     private Form_AdSales form5;
     private Form_AdMyPage form6;
 
-    private Form_AdMsg form7;
-    static String loginID = "wcampbell";   //테스트를 위한 값 초기화... 마지막에 삭제해야함
+    private Form_EmployeeMsg form7;
+    static String loginID = "wcampbell"; 
+    static int EmployeeID = 2; //테스트를 위한 값 초기화... 마지막에 삭제해야함
 
 
     public EmployeeMain(String id) {
         initComponents();
         loginID = id;
+       
         setBackground(new Color(0, 0, 0, 0));
         home = new Form_Home();
         form1 = new Form_AdRoom();
@@ -53,7 +55,7 @@ public class EmployeeMain extends javax.swing.JFrame {
         form4 = new Form_AdMember();
         form5 = new Form_AdSales();
         form6 = new Form_AdMyPage(loginID);
-        form7 = new Form_EmployeeMsg(loginID);
+        form7 = new Form_EmployeeMsg(EmployeeID);
         menu.initMoving(EmployeeMain.this);
         menu.addEventMenuSelected(new EventMenuSelected() {
             @Override

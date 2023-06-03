@@ -1,13 +1,10 @@
-<<<<<<< Updated upstream
 
-=======
->>>>>>> Stashed changes
 package model;
 
 public class Message {
 	
 	private int messageID;
-	private String memberID;
+	private int memberID;
 	private String messagestatus;
 	private String content;
 	private String sendtime;
@@ -16,7 +13,7 @@ public class Message {
 	public Message() {}
 	
 	//messageID 제외 매개변수를 받는 생성
-	public Message(String memberID,String messagestatus ,String content,String sendtime) {
+	public Message(int memberID,String messagestatus ,String content,String sendtime) {
 		super();
 		this.setMemberID(memberID);
 		this.setMessagestatus(messagestatus);
@@ -32,10 +29,10 @@ public class Message {
 	public void setMessageID(int messageID) {
 		this.messageID = messageID;
 	}
-	public String getMemberID() {
+	public int getMemberID() {
 		return memberID;
 	}
-	public void setMemberID(String memberID) {
+	public void setMemberID(int memberID) {
 		this.memberID = memberID;
 	}
 	public String getMessagestatus(String messagestatus) {
