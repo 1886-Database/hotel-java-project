@@ -150,8 +150,8 @@ public class MessageManager {
 					m_array[index].setMessageID(rs.getInt(1));
 					m_array[index].setMemberID(rs.getString(2));
 					m_array[index].setMessagestatus(rs.getString(3));
-					m_array[index].setContent(rs.getString(5));
-					m_array[index].setSendtime(rs.getString(6));
+					m_array[index].setContent(rs.getString(4));
+					m_array[index].setSendtime(rs.getString(5));
 					index++;
 				}
 			
