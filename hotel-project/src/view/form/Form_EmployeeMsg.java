@@ -22,13 +22,13 @@ import com.toedter.calendar.JDateChooser;
 import javax.swing.JButton;
 
 
-public class Form_Msg extends javax.swing.JPanel {
+public class Form_EmployeeMsg extends javax.swing.JPanel {
 
 
     /**
      * Creates new form Form_1
      */
-    public Form_Msg() {
+    public Form_EmployeeMsg(String loginID) {
         initComponents();
     //  add row table
         spTable.setVerticalScrollBar(new ScrollBar());
@@ -56,10 +56,7 @@ public class Form_Msg extends javax.swing.JPanel {
         panelBorder1 = new view.swing.PanelBorder();
         jLabel1 = new javax.swing.JLabel();
         spTable = new javax.swing.JScrollPane();
-        spTable_1 =new javax.swing.JScrollPane();
         table = new view.swing.Table();
-        table1 = new view.swing.Table();
-
 
         setBackground(new java.awt.Color(242, 242, 242));
 
@@ -70,7 +67,7 @@ public class Form_Msg extends javax.swing.JPanel {
 
         jLabel1.setFont(new java.awt.Font("sansserif", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(127, 127, 127));
-        jLabel1.setText("Message");
+        jLabel1.setText("MessageAdmin");
 
         spTable.setBorder(null);
 
@@ -79,7 +76,7 @@ public class Form_Msg extends javax.swing.JPanel {
 
             },
             new String [] {
-                "받은 메시지","발신자", "받은 시간", "메시지"
+                "발신자","수신자", "보낸 시간", "메시지"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -92,73 +89,91 @@ public class Form_Msg extends javax.swing.JPanel {
         });
         spTable.setViewportView(table);
         
+        JLabel lblNewLabel = new JLabel("수신자");
+        
+        JLabel lblNewLabel_1 = new JLabel("메시지");
+        
+        JLabel lblNewLabel_1_1 = new JLabel("발신자");
+        
+        JButton btnNewButton = new JButton("Add");
+        
+        JButton btnEdit = new JButton("Edit");
+        
+        JButton btnNewButton_1_1 = new JButton("Delete");
+        
+        JButton btnNewButton_1_1_1 = new JButton("Clear");
+        
+        textField_1 = new JTextField();
+        textField_1.setColumns(10);
+        
         textField = new JTextField();
-        textField.setText("메시지를 작성해주세요.\n");
         textField.setColumns(10);
         
-        lblNewLabel = new JLabel("메시지 작성");
-        
-        btnNewButton = new JButton("보내기");
-        
-        spTable_1 = new JScrollPane();
-        spTable_1.setBorder(null);
-        table1.setModel(new javax.swing.table.DefaultTableModel(
-                new Object [][] {
-
-                },
-                new String [] {
-                    "보낸 메시지","보낸 시간", "메시지"
-                }
-            ) {
-                boolean[] canEdit = new boolean [] {
-                    false, false, false, false, false
-                };
-
-                public boolean isCellEditable(int rowIndex, int columnIndex) {
-                    return canEdit [columnIndex];
-                }
-            });
-            spTable_1.setViewportView(table1);
+        textField_2 = new JTextField();
+        textField_2.setColumns(10);
 
         javax.swing.GroupLayout panelBorder1Layout = new javax.swing.GroupLayout(panelBorder1);
         panelBorder1Layout.setHorizontalGroup(
         	panelBorder1Layout.createParallelGroup(Alignment.LEADING)
         		.addGroup(panelBorder1Layout.createSequentialGroup()
-        			.addGroup(panelBorder1Layout.createParallelGroup(Alignment.LEADING)
+        			.addGap(20)
+        			.addGroup(panelBorder1Layout.createParallelGroup(Alignment.TRAILING)
         				.addGroup(panelBorder1Layout.createSequentialGroup()
-        					.addGap(20)
-        					.addComponent(jLabel1))
+        					.addComponent(jLabel1)
+        					.addContainerGap(1054, Short.MAX_VALUE))
         				.addGroup(panelBorder1Layout.createSequentialGroup()
-        					.addGap(46)
         					.addGroup(panelBorder1Layout.createParallelGroup(Alignment.LEADING)
-        						.addComponent(spTable, GroupLayout.PREFERRED_SIZE, 440, GroupLayout.PREFERRED_SIZE)
-        						.addComponent(spTable_1, GroupLayout.PREFERRED_SIZE, 440, GroupLayout.PREFERRED_SIZE))
-        					.addGap(39)
+        						.addComponent(lblNewLabel_1)
+        						.addComponent(lblNewLabel)
+        						.addComponent(lblNewLabel_1_1))
+        					.addGap(50)
         					.addGroup(panelBorder1Layout.createParallelGroup(Alignment.LEADING)
-        						.addComponent(btnNewButton)
-        						.addComponent(textField, GroupLayout.PREFERRED_SIZE, 303, GroupLayout.PREFERRED_SIZE)
-        						.addComponent(lblNewLabel))))
-        			.addContainerGap(120, Short.MAX_VALUE))
+        						.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        						.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        						.addComponent(textField_2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+        					.addGap(173)
+        					.addGroup(panelBorder1Layout.createParallelGroup(Alignment.LEADING)
+        						.addGroup(panelBorder1Layout.createSequentialGroup()
+        							.addComponent(btnNewButton)
+        							.addGap(64)
+        							.addComponent(btnEdit)
+        							.addGap(68)
+        							.addComponent(btnNewButton_1_1)
+        							.addGap(53)
+        							.addComponent(btnNewButton_1_1_1))
+        						.addGroup(panelBorder1Layout.createSequentialGroup()
+        							.addPreferredGap(ComponentPlacement.RELATED)
+        							.addComponent(spTable, GroupLayout.PREFERRED_SIZE, 512, GroupLayout.PREFERRED_SIZE)))
+        					.addGap(245))))
         );
         panelBorder1Layout.setVerticalGroup(
         	panelBorder1Layout.createParallelGroup(Alignment.LEADING)
         		.addGroup(panelBorder1Layout.createSequentialGroup()
-        			.addGroup(panelBorder1Layout.createParallelGroup(Alignment.LEADING)
+        			.addContainerGap(51, Short.MAX_VALUE)
+        			.addGroup(panelBorder1Layout.createParallelGroup(Alignment.TRAILING)
         				.addGroup(panelBorder1Layout.createSequentialGroup()
-        					.addGap(20)
         					.addComponent(jLabel1)
-        					.addGap(29)
-        					.addComponent(spTable, GroupLayout.PREFERRED_SIZE, 237, GroupLayout.PREFERRED_SIZE)
-        					.addGap(18)
-        					.addComponent(spTable_1, GroupLayout.PREFERRED_SIZE, 237, GroupLayout.PREFERRED_SIZE))
-        				.addGroup(panelBorder1Layout.createSequentialGroup()
-        					.addGap(171)
-        					.addComponent(lblNewLabel)
-        					.addPreferredGap(ComponentPlacement.UNRELATED)
-        					.addComponent(textField, GroupLayout.PREFERRED_SIZE, 208, GroupLayout.PREFERRED_SIZE)
-        					.addGap(32)
-        					.addComponent(btnNewButton)))
-        			.addContainerGap(26, Short.MAX_VALUE))
+        					.addGap(102)
+        					.addGroup(panelBorder1Layout.createParallelGroup(Alignment.BASELINE)
+        						.addComponent(lblNewLabel_1_1)
+        						.addComponent(textField_2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+        					.addGap(45)
+        					.addGroup(panelBorder1Layout.createParallelGroup(Alignment.BASELINE)
+        						.addComponent(lblNewLabel)
+        						.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+        					.addGap(47)
+        					.addGroup(panelBorder1Layout.createParallelGroup(Alignment.BASELINE)
+        						.addComponent(lblNewLabel_1)
+        						.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+        					.addGap(161))
+        				.addComponent(spTable, GroupLayout.PREFERRED_SIZE, 420, GroupLayout.PREFERRED_SIZE))
+        			.addGap(34)
+        			.addGroup(panelBorder1Layout.createParallelGroup(Alignment.BASELINE)
+        				.addComponent(btnNewButton)
+        				.addComponent(btnEdit)
+        				.addComponent(btnNewButton_1_1)
+        				.addComponent(btnNewButton_1_1_1))
+        			.addContainerGap(44, Short.MAX_VALUE))
         );
         panelBorder1.setLayout(panelBorder1Layout);
 
@@ -191,9 +206,7 @@ public class Form_Msg extends javax.swing.JPanel {
     private view.swing.PanelBorder panelBorder1;
     private javax.swing.JScrollPane spTable;
     private view.swing.Table table;
-    private view.swing.Table table1;
+    private JTextField textField_1;
     private JTextField textField;
-    private JLabel lblNewLabel;
-    private JButton btnNewButton;
-    private JScrollPane spTable_1;
+    private JTextField textField_2;
 }
