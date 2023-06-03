@@ -17,7 +17,7 @@ import view.form.Form_2;
 import view.form.Form_3;
 import view.form.Form_AdEmployee;
 import view.form.Form_AdMember;
-import view.form.Form_AdMsg;
+import view.form.Form_EmployeeMsg;
 import view.form.Form_AdMyPage;
 import view.form.Form_AdReserv;
 import view.form.Form_AdRoom;
@@ -37,8 +37,10 @@ public class EmployeeMain extends javax.swing.JFrame {
     private Form_AdMember form4;
     private Form_AdSales form5;
     private Form_AdMyPage form6;
+
     private Form_AdMsg form7;
     static String loginID = "wcampbell";   //테스트를 위한 값 초기화... 마지막에 삭제해야함
+
 
     public EmployeeMain(String id) {
         initComponents();
@@ -51,7 +53,7 @@ public class EmployeeMain extends javax.swing.JFrame {
         form4 = new Form_AdMember();
         form5 = new Form_AdSales();
         form6 = new Form_AdMyPage(loginID);
-        form7 = new Form_AdMsg();
+        form7 = new Form_EmployeeMsg(loginID);
         menu.initMoving(EmployeeMain.this);
         menu.addEventMenuSelected(new EventMenuSelected() {
             @Override

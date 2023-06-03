@@ -10,7 +10,7 @@ import view.form.Form_1;
 import view.form.Form_2;
 import view.form.Form_3;
 import view.form.Form_Home;
-import view.form.Form_Msg;
+import view.form.Form_MemberMsg;
 import view.form.Form_MyPage;
 import view.form.Form_ViewMyReserv;
 
@@ -25,7 +25,7 @@ public class MemberMain extends javax.swing.JFrame {
     private Form_3 form3;
     private Form_MyPage form4;
     private Form_ViewMyReserv form5;
-    private Form_Msg form6;
+    private Form_MemberMsg form6;
     static String loginID="leda7";   //테스트를 위한 값 초기화... 마지막에 삭제해야함
 
     public MemberMain(String id) {
@@ -38,7 +38,7 @@ public class MemberMain extends javax.swing.JFrame {
         form3 = new Form_3();
         form4 = new Form_MyPage(loginID);
         form5 = new Form_ViewMyReserv();
-        form6 = new Form_Msg();
+        form6 = new Form_MemberMsg(loginID);
         menu.initMoving(MemberMain.this);
         menu.addEventMenuSelected(new EventMenuSelected() {
             @Override
