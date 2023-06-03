@@ -4,6 +4,8 @@ import java.awt.Color;
 
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+
+import view.UI.Login;
 import view.model.StatusType;
 import view.swing.ScrollBar;
 import java.awt.Color;
@@ -15,7 +17,9 @@ import view.swing.ScrollBar;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.GroupLayout;
 import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import com.toedter.calendar.JDateChooser;
@@ -27,21 +31,32 @@ import model.Message;
 import modelManager.MessageManager;
 import java.awt.Font;
 import javax.swing.SwingConstants;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 
 
 public class Form_MemberMsg extends javax.swing.JPanel {
 
 	private Message[] mess;
 	private MessageManager mM;
+	private int memberID;
    
-    public Form_MemberMsg(String loginID) {
+	
+    public Form_MemberMsg(int memberID) {
+    	this.memberID=memberID;
     	mM = new MessageManager();
-  
-        initComponents();
-        all();
+    	   initComponents();
+    
+    sent(memberID);
+    recieved(memberID);
+    
     
     }
-  
+         
+      
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -49,7 +64,7 @@ public class Form_MemberMsg extends javax.swing.JPanel {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    private void initComponents(){
 
         panel = new javax.swing.JLayeredPane();
         panelBorder1 = new view.swing.PanelBorder();
@@ -124,11 +139,39 @@ public class Form_MemberMsg extends javax.swing.JPanel {
         messagetxt.setColumns(10);
         
         JButton btnNewButton = new JButton("메시지 보내기");
+        btnNewButton.addMouseListener(new MouseAdapter() {
+        	@Override
+        	public void mouseClicked(MouseEvent e) {
+        	    String message = messagetxt.getText();
+        	    int clickedMemberID = memberID;
+        	    String timestamp = String.valueOf(System.currentTimeMillis()); // Current timestamp as a string
+        	    if (message.trim().equals("")) {
+        	        JOptionPane.showMessageDialog(panel, "메시지를 입력해주세요.", "Empty message", 2);
+        	    } else {
+        	        try {
+        	            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        	            String formattedTimestamp = sdf.format(new Date(Long.parseLong(timestamp))); // Format the timestamp
+        	            int result = mM.sendMessage(clickedMemberID, "memsend", message, formattedTimestamp);
+        	            if (result == 1) {
+        	                JOptionPane.showMessageDialog(panel, "메시지를 보냈습니다.", "done", 2);
+        	                DefaultTableModel model = (DefaultTableModel)table.getModel();
+        	            	model.setRowCount(0);
+        	            	sent(memberID);
+        	            } else {
+        	                JOptionPane.showMessageDialog(panel, "error.", "send error", 2);
+        	            }
+        	        } catch (Exception ex) {
+        	            JOptionPane.showMessageDialog(panel, "error", "Error", 2);
+        	        }
+        	    }
+        	}
+
+        
+        });
         btnNewButton.setBounds(677, 484, 117, 29);
         panelBorder1.add(btnNewButton);
       
-        table_1.addRow(new Object[]{"23031900001", "Ivan", "Single", "2023-03-19~2023-03-20", StatusType.PENDING});
-        table_1.addRow(new Object[]{"23040100002", "Conan", "2023-04-01 13:20", "83821", StatusType.APPROVED});
+       
         
         
         
@@ -177,20 +220,21 @@ public class Form_MemberMsg extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
     
-    private void sent(String loginID) {
-    	mess = mM.getMemberMessage(loginID);
-    	for (int i = 0; i < mess.length; ++i) {
-        	table.addRow(new Object[] {"호텔",mess[i].getSendtime(),mess[i].getContent()});
-        }
-    	
-    }
-    private void all() {
-    	mess = mM.getAllMessage();
+    private void sent(int memberID) {
+    	mess = mM.getMemberSendMessage(memberID);
     	for (int i = 0; i < mess.length; ++i) {
         	table.addRow(new Object[] {mess[i].getSendtime(),mess[i].getContent()});
-    	}
+        }}
+    	
+    private void recieved(int memberID) {
+    	mess = mM.getMemberRecieveMessage(memberID);
+    	for (int i = 0; i < mess.length; ++i) {
+        	table_1.addRow(new Object[] {"호텔",mess[i].getSendtime(),mess[i].getContent()});
+        }
     }
-
+    	
+    
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
