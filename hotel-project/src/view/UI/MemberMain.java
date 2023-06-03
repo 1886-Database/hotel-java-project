@@ -24,7 +24,6 @@ import view.form.Form_RoomReservation;
 import view.form.Form_Reservation;
 import view.form.Form_MyPage;
 import view.form.Form_ViewMyReserv;
-import view.form.Form_GetReservationInfo;
 
 public class MemberMain extends javax.swing.JFrame {
 
