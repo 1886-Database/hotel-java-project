@@ -34,25 +34,14 @@ public class Form_MemberMsg extends javax.swing.JPanel {
 	private Message[] mess;
 	private MessageManager mM;
    
-	/**
-     * Creates new form Form_1
-     */
     public Form_MemberMsg(String loginID) {
     	mM = new MessageManager();
-    	
-    all();
-    
+  
         initComponents();
-        
+        all();
     
     }
-        
-
-        
-        
-    
-    
-
+  
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

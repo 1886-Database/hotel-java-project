@@ -37,8 +37,7 @@ public class EmployeeMain extends javax.swing.JFrame {
     private Form_AdMember form4;
     private Form_AdSales form5;
     private Form_AdMyPage form6;
-
-    private Form_AdMsg form7;
+    private Form_EmployeeMsg form7;
     static String loginID = "wcampbell";   //테스트를 위한 값 초기화... 마지막에 삭제해야함
 
 
