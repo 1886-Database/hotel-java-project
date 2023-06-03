@@ -3,6 +3,7 @@ package modelManager;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 
 import model.Employee;
@@ -38,7 +39,7 @@ public class EmployeeManager {
 		    	return 1; //로그인 성공
 		    }
 		    return 0; //로그인 실패 (잘못된 id/pw)
-		}catch(Exception e){
+		}catch(SQLException e){
 		    e.printStackTrace();
 		}finally {
 			System.out.println("자원 반납");
@@ -60,7 +61,7 @@ public class EmployeeManager {
 		    	return 0; //중복 ID 존재
 		    }
 		    return 1; //중복 ID 존재하지 않음
-		}catch(Exception e){
+		}catch(SQLException e){
 		    e.printStackTrace();
 		}finally {
 			myConnection.close(rs,null,ps,con);
@@ -77,7 +78,7 @@ public class EmployeeManager {
 				ps.setString(1, password);
 				ps.setString(2, loginID);
 				ps.executeUpdate();
-			}catch(Exception e) {
+			}catch(SQLException e) {
 				e.printStackTrace();
 			}finally {
 				myConnection.close(null, null, ps, con);
@@ -94,10 +95,10 @@ public class EmployeeManager {
 				ps.setString(1, loginID);
 				rs = ps.executeQuery();
 				while(rs.next()) {
-					Employee employee = new Employee(loginID,rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6),rs.getString(7));
+					Employee employee = new Employee(rs.getInt(1),loginID,rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6),rs.getString(7));
 					return employee;
 				}
-			}catch(Exception e) {
+			}catch(SQLException e) {
 				e.printStackTrace();
 			}finally {
 				myConnection.close(rs, null, ps, con);
@@ -106,7 +107,7 @@ public class EmployeeManager {
 			return employee;
 		}
 		
-		//직원관리 화면 : employee 테이블 모든 레코드를 각각 Employee 객체에 저장한 후 객체 배열 반환
+	//직원관리 화면 : employee 테이블의 모든 레코드를 각각 Employee 객체에 저장한 후 객체 배열 반환
 		public Employee[] getAllEmployee() {
 			Employee[] e_array;
 			int rowCnt=0;
@@ -144,7 +145,7 @@ public class EmployeeManager {
 			
 				return e_array;
 				
-			}catch(Exception e) {
+			}catch(SQLException e) {
 				e.printStackTrace();
 			}finally {
 				myConnection.close(rs, stmt, null, con);
@@ -153,4 +154,73 @@ public class EmployeeManager {
 			e_array=new Employee[rowCnt];
 			return e_array;
 		}
+		
+	//직원관리 화면 : 직원 삭제
+		public int delete(int id) {
+			String SQL = "DELETE FROM DB2023_employee WHERE employeeID=?";
+			try {
+				con=myConnection.getConnection();
+				ps=con.prepareStatement(SQL);
+				ps.setInt(1, id);
+				ps.executeUpdate();
+				return 1;
+			}catch(SQLException e) {
+				e.printStackTrace();
+			}finally {
+				myConnection.close(null, stmt, null, con);
+			}
+			return -1;
+		}
+		
+	//직원관리 화면 : 직원 추가
+		public int add(String loginID,String name,String phone,String birthDate,String dept) {
+			String SQL = "INSERT INTO DB2023_employee VALUES(?,?,?,?,?,?,?)";
+			try {
+				con=myConnection.getConnection();
+				ps=con.prepareStatement(SQL);
+				stmt=con.createStatement();
+				rs=stmt.executeQuery("select max(employeeID) from DB2023_employee");
+				while(rs.next()) {
+					int employeeID = rs.getInt(1)+1;
+					ps.setInt(1, employeeID);
+					ps.setString(2, loginID);
+					ps.setString(3, name);
+					ps.setString(4, "1234");
+					ps.setString(5, phone);
+					ps.setString(6, birthDate);
+					ps.setString(7, dept);
+					ps.executeUpdate();
+					return 1;   //성공
+				}
+			}catch(SQLException e) {
+				e.printStackTrace();
+			}finally {
+				myConnection.close(rs,stmt,ps,con);
+			}
+			return -1; //데이터베이스 오류
+		}
+		
+	//직원관리 화면 : 직원 수정 
+		
+		public int edit(int id,String loginID,String name,String phone,String birthDate,String dept) {
+			String SQL = "UPDATE DB2023_employee SET loginID=?, name=?, phone=?, birthDate=?, department=? WHERE employeeID=?";
+			try {
+				con=myConnection.getConnection();
+				ps=con.prepareStatement(SQL);
+				ps.setString(1, loginID);
+				ps.setString(2,name);
+				ps.setString(3,phone);
+				ps.setString(4, birthDate);
+				ps.setString(5, dept);
+				ps.setInt(6, id);
+				ps.executeUpdate();
+				return 1;
+			}catch(SQLException e) {
+				e.printStackTrace();
+			}finally {
+				myConnection.close(null, stmt, null, con);
+			}
+			return -1;
+		}
+		
 }

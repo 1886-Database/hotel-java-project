@@ -33,28 +33,21 @@ import java.awt.event.ActionEvent;
 public class Login {
 
 	private JFrame frame;
+	private int role;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Login window = new Login();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
-	/**
-	 * Create the application.
-	 */
-	public Login() {
+	public Login(int num) {
+		role=num;
 		initialize();
+		
+		java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                frame.setVisible(true);
+            }
+        });
+		
+		if(role==1)
+			button_signUp.setVisible(false);
 	}
 
 	/**
@@ -69,7 +62,6 @@ public class Login {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setShape(new RoundRectangle2D.Double(0, 0, 1195, 670, 20, 20)); //frame 코너 둥글게
 		frame.getContentPane().setLayout(null);
-		frame.setVisible(true);
 	    
 		backgroundPanel = new LoginBackground(Color.decode("#283c86"), Color.decode("#45a247"), 3);
 		backgroundPanel.setBounds(0, 0, 1194, 670);
@@ -78,7 +70,7 @@ public class Login {
 	    backgroundPanel.setLayout(null);
 	    
 	    //호텔 이름 라벨
-	    JLabel hotelName = new JLabel("EWHA HOTEL");
+	    hotelName = new JLabel("EWHA HOTEL");
 	    hotelName.setFont(new Font("이화체", Font.BOLD, 46));
 	    hotelName.setForeground(new Color(255, 255, 255));
 	    hotelName.setBounds(494, 122, 332, 139);
@@ -132,7 +124,7 @@ public class Login {
 	    button_login.addMouseListener(new MouseAdapter() {
 	    	@Override
 	    	public void mouseClicked(MouseEvent e) {
-	    		String loginID = input_loginID.getText(); //유저가 입력한 id를 username 변수에 저장
+	    		String loginID = input_loginID.getText(); //유저가 입력한 id를 loginID 변수에 저장
 	            String password = String.valueOf(input_password.getPassword()); //유저가 입력한 패스워드를 password 변수에 저장
 	            if(loginID.trim().equals("")){ //유저가 아이디 창을 입력하지 않았다면
 	                JOptionPane.showMessageDialog(backgroundPanel,"ID를 입력해주세요.", "Empty ID",2);
@@ -141,26 +133,10 @@ public class Login {
 	                JOptionPane.showMessageDialog(backgroundPanel,"패스워드를 입력해주세요.", "Empty Password",2);
 	            }
 	            else{ //유저가 아이디와 패스워드를 모두 입력한 경우
-	            	MemberManager memberManager = new MemberManager();
-	            	EmployeeManager employeeManager = new EmployeeManager();
-	            	try {
-	            		if(memberManager.login(loginID,password)==1) {
-	            			MemberMain memberMain = new MemberMain(loginID);
-	            			memberMain.main(null);
-	            			frame.dispose();
-	            		}
-	            		else if(employeeManager.login(loginID,password)==1) {
-	            			EmployeeMain employeeMain = new EmployeeMain(loginID);
-	            			employeeMain.main(null);
-	            			frame.dispose();
-	            		}
-	            		else {
-	            			JOptionPane.showMessageDialog(backgroundPanel,"ID나 패스워드가 잘못되었습니다.", "Login Error",2);
-	            		}
-	            	}
-	            	catch(Exception ex){
-	            		JOptionPane.showMessageDialog(backgroundPanel,"error", "Login Error",2);
-	            	}
+	            	if(role==0) 
+	            		memLogin(loginID,password);
+	            	if(role==1)
+	            		empLogin(loginID,password);
 	            }
 	    	}
 	    });
@@ -202,7 +178,7 @@ public class Login {
 	    backgroundPanel.add(button_signUp);
 	    
 	    //구분선
-	    Label line1 = new Label("");
+	    line1 = new Label("");
 	    line1.setBackground(new Color(255, 255, 255));
 	    line1.setBounds(380, 350, 450, 1);
 	    backgroundPanel.add(line1);
@@ -213,12 +189,12 @@ public class Login {
 	    backgroundPanel.add(line2);
 	    
 	    //종료 버튼
-	    JLabel button_exit = new JLabel("");
+	    button_exit = new JLabel("");
 	    button_exit.setHorizontalAlignment(SwingConstants.CENTER);
 	    button_exit.addMouseListener(new MouseAdapter() {
 	    	@Override
 	    	public void mouseClicked(MouseEvent e) {
-	    		frame.dispose();
+	    		System.exit(0);
 	    	}
 	    });
 	    button_exit.setToolTipText("종료");
@@ -226,15 +202,66 @@ public class Login {
 	    button_exit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icon/exit.png")));
 	    backgroundPanel.add(button_exit);
 	    
+	    //뒤로가기 버튼
+	    button_back = new JLabel("");
+	    button_back.setHorizontalAlignment(SwingConstants.CENTER);
+	    button_back.addMouseListener(new MouseAdapter() {
+	    	@Override
+	    	public void mouseClicked(MouseEvent e) {
+	    		new Init();
+	    		frame.dispose();
+	    	}
+	    });
+	    button_back.setBounds(24, 24, 62, 60);
+	    button_back.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icon/back.png")));
+	    backgroundPanel.add(button_back);
 	    
 	}
+	
+	//회원 로그인
+	private void memLogin(String id, String pw) {
+		MemberManager memberManager = new MemberManager();
+		try {
+			if(memberManager.login(id,pw)==1) {
+				MemberMain memberMain = new MemberMain(id);
+				memberMain.main(null);
+				frame.dispose();
+			}else
+				JOptionPane.showMessageDialog(backgroundPanel,"ID나 패스워드가 잘못되었습니다.", "Login Error",2);
+				
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
+	//직원 로그인
+	private void empLogin(String id, String pw) {
+		EmployeeManager employeeManager = new EmployeeManager();
+		try {
+			if(employeeManager.login(id,pw)==1) {
+    			EmployeeMain employeeMain = new EmployeeMain(id);
+    			employeeMain.main(null);
+    			frame.dispose();
+			}else
+				JOptionPane.showMessageDialog(backgroundPanel,"ID나 패스워드가 잘못되었습니다.", "Login Error",2);
+				
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
 	private view.component.LoginBackground backgroundPanel;
 	private view.swing.RoundedButton button_login;
+	private JLabel hotelName;
 	private JLabel hotelIcon;
 	private JLabel label_ID;
 	private JLabel label_password;
 	private JTextField input_loginID;
 	private JPasswordField input_password;
 	private JLabel button_signUp;
+	private JLabel button_exit;
+	private JLabel button_back;
+	private Label line1;
 	private Label line2;
 }

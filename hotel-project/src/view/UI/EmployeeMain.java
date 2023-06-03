@@ -37,8 +37,10 @@ public class EmployeeMain extends javax.swing.JFrame {
     private Form_AdMember form4;
     private Form_AdSales form5;
     private Form_AdMyPage form6;
-    private Form_EmployeeMsg form7;
-    static String loginID = "perryf";   //테스트를 위한 값 초기화... 마지막에 삭제해야함
+
+    private Form_AdMsg form7;
+    static String loginID = "wcampbell";   //테스트를 위한 값 초기화... 마지막에 삭제해야함
+
 
     public EmployeeMain(String id) {
         initComponents();
@@ -47,7 +49,7 @@ public class EmployeeMain extends javax.swing.JFrame {
         home = new Form_Home();
         form1 = new Form_AdRoom();
         form2 = new Form_AdReserv();
-        form3 = new Form_AdEmployee();
+        form3 = new Form_AdEmployee(loginID);
         form4 = new Form_AdMember();
         form5 = new Form_AdSales();
         form6 = new Form_AdMyPage(loginID);
@@ -73,7 +75,7 @@ public class EmployeeMain extends javax.swing.JFrame {
                 }else if (index ==11) {
                     setForm(form7);
                 }else if (index ==13) {
-                    dispose();
+                    System.exit(0);
                 }
             }
         });

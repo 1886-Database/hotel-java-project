@@ -55,10 +55,11 @@ public class MemberMain extends javax.swing.JFrame {
                 	setForm(form4);
                 } else if (index==8) { //예약조회
                 	setForm(form5);
-                }
-                else if (index==9) { //메시지
+                } else if (index==9) { //메시지
                 	setForm(form6);
-                }
+                } else if (index==11) 
+                	System.exit(0);
+       
                 
             }
         });

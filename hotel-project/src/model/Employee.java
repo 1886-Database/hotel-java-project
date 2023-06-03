@@ -13,9 +13,9 @@ public class Employee {
 	//기본 생성자
 	public Employee() {}
 	
-	//employeeID 를 제외한 매개변수를 받는 생성자
-	public Employee(String loginID,String name,String password,String phone,String birthDate,String department) {
+	public Employee(int employeeID,String loginID,String name,String password,String phone,String birthDate,String department) {
 		super();
+		this.setEmployeeID(employeeID);
 		this.setLoginID(loginID);
 		this.setName(name);
 		this.setPassword(password);
