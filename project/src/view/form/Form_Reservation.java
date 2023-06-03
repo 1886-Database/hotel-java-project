@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package view.form;
+
 import java.awt.*;
 import java.awt.Color;
 import javax.swing.JComponent;
@@ -20,8 +21,10 @@ import model.Room;
 import modelManager.RoomManager;
 import modelManager.MemberManager;
 import modelManager.ReservationManager;
+import view.UI.MemberMain;
 import view.UI.SignUp;
 import view.form.Form_RoomReservation;
+import view.form.Form_GetReservationInfo;
 
 import view.model.R_StatusType;
 import view.model.StatusType;
@@ -36,6 +39,7 @@ import java.awt.event.ActionEvent;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -47,24 +51,18 @@ import javax.swing.table.DefaultTableModel;
  */
 public class Form_Reservation extends javax.swing.JPanel {
 
-	private Form_RoomReservation rr ;
     private Room[] room;
     private RoomManager rM;
     private ReservationManager rsM;
+    private JButton button1 = new JButton("Button");
     
     public Form_Reservation() {
-        initComponents();
-        
+       initComponents();
         rM = new RoomManager();
-        rr = new Form_RoomReservation();
+        add(button1);
         all();
     }
-    private void setForm(JComponent com) {
-    	panelBorder1.removeAll();
-    	panelBorder1.add(com);
-    	panelBorder1.revalidate();
-    	panelBorder1.repaint();
-    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -72,9 +70,9 @@ public class Form_Reservation extends javax.swing.JPanel {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    public void initComponents() {
 
-    	panel = new javax.swing.JLayeredPane();
+        panel = new javax.swing.JLayeredPane();
         panelBorder1 = new view.swing.PanelBorder();
         Title = new javax.swing.JLabel();
         spTable = new javax.swing.JScrollPane();
@@ -105,44 +103,49 @@ public class Form_Reservation extends javax.swing.JPanel {
         
         JButton btnNewButton = new JButton("적용");
         btnNewButton.addMouseListener(new MouseAdapter(){
-        	public void mouseClicked(MouseEvent e) {
-        		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        		String checkin = simpleDateFormat.format(dateChooser.getDate());
-        		String checkout = simpleDateFormat.format(dateChooser_1.getDate());
-        		
-        		
-        		int result = dateChooser.getDate().compareTo(dateChooser_1.getDate());
-        		if(result>0) {
-        			JOptionPane.showMessageDialog(panelBorder1,"체크아웃 날짜가 잘못되었습니다", "CheckOut Error",2);
-        		}else if(checkin.equals(checkout)) {
-        			JOptionPane.showMessageDialog(panelBorder1,"동일한 날짜로 예약이 불가합니다", "Date Error",2);
-        		}else {
-        			RoomManager roomManager = new RoomManager();
-        			System.out.println("검색 성공");
-        			refreshroom(checkin,checkout);
-        		}
-        	}
+           public void mouseClicked(MouseEvent e) {
+              SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+              String checkin = simpleDateFormat.format(dateChooser.getDate());
+              String checkout = simpleDateFormat.format(dateChooser_1.getDate());
+              
+              
+              int result = dateChooser.getDate().compareTo(dateChooser_1.getDate());
+              if(result>0) {
+                 JOptionPane.showMessageDialog(panelBorder1,"체크아웃 날짜가 잘못되었습니다", "CheckOut Error",2);
+              }else if(checkin.equals(checkout)) {
+                 JOptionPane.showMessageDialog(panelBorder1,"동일한 날짜로 예약이 불가합니다", "Date Error",2);
+              }else {
+                 RoomManager roomManager = new RoomManager();
+                 System.out.println("검색 성공");
+                 refreshroom(checkin,checkout);
+                 System.out.println("예약할 체크인 날짜: "+checkin+"예약할 체크아웃 날짜: "+checkout);
+              }
+           }
         });
        
-      //테이블 행을 클릭하면 해당 행의 정보가 옆의 박스에 자동 입력되도록 하는 이벤트 리스너
+      //테이블 행 클릭 시 이벤트
         table.addMouseListener(new MouseAdapter() {
-        	@Override
-        	public void mouseClicked(MouseEvent e) {
-        		
-        		setForm(rr);
+           @Override
+           public void mouseClicked(MouseEvent e) {
+              
+              button1.doClick();
 
-            	
-            	int row = table.getSelectedRow();
-        		String roomno = String.valueOf(table.getModel().getValueAt(row, 0 ));
-        		String roomname = (String) table.getModel().getValueAt(row, 1 );
-        		String roomtype = (String) table.getModel().getValueAt(row, 2 );
-        		String bedtype = String.valueOf(table.getModel().getValueAt(row, 3 ));
-        		String price = String.valueOf(table.getModel().getValueAt(row, 4 ));
-        		System.out.println(roomno+roomname+roomtype+bedtype+price);
-        	}
+               
+              int row = table.getSelectedRow();
+              String roomno = String.valueOf(table.getModel().getValueAt(row, 0 ));
+              String roomname = (String) table.getModel().getValueAt(row, 1 );
+              String roomtype = (String) table.getModel().getValueAt(row, 2 );
+              String bedtype = String.valueOf(table.getModel().getValueAt(row, 3 ));
+              String price = String.valueOf(table.getModel().getValueAt(row, 4 ));
+              
+              System.out.println("예약할 객실 번호: "+roomno);
+              
+           }
 
-			
+         
         });
+        
+        
         table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
         spTable.setVerticalScrollBar(new ScrollBar());
@@ -159,7 +162,7 @@ public class Form_Reservation extends javax.swing.JPanel {
 
             },
             new String [] {
-            		"ROOM NO", "ROOM NAME", "ROOM TYPE", "BED TYPE", "PRICE"
+                  "ROOM NO", "ROOM NAME", "ROOM TYPE", "BED TYPE", "PRICE"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -178,45 +181,45 @@ public class Form_Reservation extends javax.swing.JPanel {
 
         javax.swing.GroupLayout panelBorder1Layout = new javax.swing.GroupLayout(panelBorder1);
         panelBorder1Layout.setHorizontalGroup(
-        	panelBorder1Layout.createParallelGroup(Alignment.LEADING)
-        		.addGroup(panelBorder1Layout.createSequentialGroup()
-        			.addGroup(panelBorder1Layout.createParallelGroup(Alignment.LEADING)
-        				.addGroup(panelBorder1Layout.createSequentialGroup()
-        					.addGap(20)
-        					.addGroup(panelBorder1Layout.createParallelGroup(Alignment.LEADING, false)
-        						.addComponent(Title)
-        						.addGroup(panelBorder1Layout.createSequentialGroup()
-        							.addGap(11)
-        							.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 118, GroupLayout.PREFERRED_SIZE)
-        							.addPreferredGap(ComponentPlacement.RELATED)
-        							.addComponent(dateChooser, GroupLayout.PREFERRED_SIZE, 150, GroupLayout.PREFERRED_SIZE)
-        							.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        							.addComponent(lblNewLabel_1, GroupLayout.PREFERRED_SIZE, 109, GroupLayout.PREFERRED_SIZE)
-        							.addGap(37)
-        							.addComponent(dateChooser_1, GroupLayout.PREFERRED_SIZE, 141, GroupLayout.PREFERRED_SIZE)
-        							.addGap(118)
-        							.addComponent(btnNewButton))))
-        				.addGroup(Alignment.TRAILING, panelBorder1Layout.createSequentialGroup()
-        					.addGap(30)
-        					.addComponent(spTable)))
-        			.addContainerGap())
+           panelBorder1Layout.createParallelGroup(Alignment.LEADING)
+              .addGroup(panelBorder1Layout.createSequentialGroup()
+                 .addGroup(panelBorder1Layout.createParallelGroup(Alignment.LEADING)
+                    .addGroup(panelBorder1Layout.createSequentialGroup()
+                       .addGap(20)
+                       .addGroup(panelBorder1Layout.createParallelGroup(Alignment.LEADING, false)
+                          .addComponent(Title)
+                          .addGroup(panelBorder1Layout.createSequentialGroup()
+                             .addGap(11)
+                             .addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 118, GroupLayout.PREFERRED_SIZE)
+                             .addPreferredGap(ComponentPlacement.RELATED)
+                             .addComponent(dateChooser, GroupLayout.PREFERRED_SIZE, 150, GroupLayout.PREFERRED_SIZE)
+                             .addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                             .addComponent(lblNewLabel_1, GroupLayout.PREFERRED_SIZE, 109, GroupLayout.PREFERRED_SIZE)
+                             .addGap(37)
+                             .addComponent(dateChooser_1, GroupLayout.PREFERRED_SIZE, 141, GroupLayout.PREFERRED_SIZE)
+                             .addGap(118)
+                             .addComponent(btnNewButton))))
+                    .addGroup(Alignment.TRAILING, panelBorder1Layout.createSequentialGroup()
+                       .addGap(30)
+                       .addComponent(spTable)))
+                 .addContainerGap())
         );
         panelBorder1Layout.setVerticalGroup(
-        	panelBorder1Layout.createParallelGroup(Alignment.LEADING)
-        		.addGroup(panelBorder1Layout.createSequentialGroup()
-        			.addGap(20)
-        			.addComponent(Title)
-        			.addGap(26)
-        			.addGroup(panelBorder1Layout.createParallelGroup(Alignment.LEADING)
-        				.addComponent(lblNewLabel, GroupLayout.DEFAULT_SIZE, 23, Short.MAX_VALUE)
-        				.addGroup(panelBorder1Layout.createParallelGroup(Alignment.LEADING, false)
-        					.addComponent(btnNewButton, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        					.addComponent(dateChooser, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        				.addComponent(dateChooser_1, GroupLayout.DEFAULT_SIZE, 23, Short.MAX_VALUE)
-        				.addComponent(lblNewLabel_1, GroupLayout.DEFAULT_SIZE, 23, Short.MAX_VALUE))
-        			.addPreferredGap(ComponentPlacement.RELATED)
-        			.addComponent(spTable, GroupLayout.DEFAULT_SIZE, 534, Short.MAX_VALUE)
-        			.addContainerGap())
+           panelBorder1Layout.createParallelGroup(Alignment.LEADING)
+              .addGroup(panelBorder1Layout.createSequentialGroup()
+                 .addGap(20)
+                 .addComponent(Title)
+                 .addGap(26)
+                 .addGroup(panelBorder1Layout.createParallelGroup(Alignment.LEADING)
+                    .addComponent(lblNewLabel, GroupLayout.DEFAULT_SIZE, 23, Short.MAX_VALUE)
+                    .addGroup(panelBorder1Layout.createParallelGroup(Alignment.LEADING, false)
+                       .addComponent(btnNewButton, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                       .addComponent(dateChooser, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(dateChooser_1, GroupLayout.DEFAULT_SIZE, 23, Short.MAX_VALUE)
+                    .addComponent(lblNewLabel_1, GroupLayout.DEFAULT_SIZE, 23, Short.MAX_VALUE))
+                 .addPreferredGap(ComponentPlacement.RELATED)
+                 .addComponent(spTable, GroupLayout.DEFAULT_SIZE, 534, Short.MAX_VALUE)
+                 .addContainerGap())
         );
         panelBorder1.setLayout(panelBorder1Layout);
 
@@ -244,21 +247,27 @@ public class Form_Reservation extends javax.swing.JPanel {
         
     }// </editor-fold>//GEN-END:initComponents
     
+    //필터링한 룸리스트 재정렬
     private void refreshroom(String checkin, String checkout) {
-    	DefaultTableModel model = (DefaultTableModel)table.getModel();
-    	model.setNumRows(0);
-    	room= rM.getRefreshRoom(checkin,checkout);
-    	for (int i = 0; i < room.length; ++i) {
-			table.addRow(new Object[] {room[i].getRoomNo(),room[i].getRoomName(),room[i].getRoomType(),room[i].getBedType(),room[i].getPrice()});
-		}
+       DefaultTableModel model = (DefaultTableModel)table.getModel();
+       model.setNumRows(0);
+       room= rM.getRefreshRoom(checkin,checkout);
+       for (int i = 0; i < room.length; ++i) {
+         table.addRow(new Object[] {room[i].getRoomNo(),room[i].getRoomName(),room[i].getRoomType(),room[i].getBedType(),room[i].getPrice()});
+      }
     }
-    
+    //전체 룸리스트
     private void all() {
-    	room= rM.getAllRoom();
-    	for (int i = 0; i < room.length; ++i) {
-			table.addRow(new Object[] {room[i].getRoomNo(),room[i].getRoomName(),room[i].getRoomType(),room[i].getBedType(),room[i].getPrice()});
-		}
+       room= rM.getAllRoom();
+       for (int i = 0; i < room.length; ++i) {
+         table.addRow(new Object[] {room[i].getRoomNo(),room[i].getRoomName(),room[i].getRoomType(),room[i].getBedType(),room[i].getPrice()});
+      }
+       
+        
     }
+    public void addButton1ActionListener(ActionListener listener) {
+        button1.addActionListener(listener);
+     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Title;

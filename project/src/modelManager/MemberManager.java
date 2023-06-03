@@ -219,4 +219,3 @@ public class MemberManager {
 		return -1;
 	}
 }
-

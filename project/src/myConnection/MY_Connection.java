@@ -8,36 +8,33 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class MY_Connection {
+
 	//DB 연결을 위한 connection 객체를 반환하는 메소드
-		public static Connection getConnection() {
-			try {
-				Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/DB2023188606","DB2023188606","DB2023188606");
-				System.out.println("데이터베이스 연결 성공");
-				return con;
-			}
-			catch(SQLException e){
-				System.out.println("데이터베이스 연결 실패");
-			}
-			return null;	
+	public static Connection getConnection() {
+		try {
+			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/DB2023188606","DB2023188606","DB2023188606");
+			System.out.println("데이터베이스 연결 성공");
+			return con;
 		}
-		//자원 반납을 위한 메소드
-		public static void close(ResultSet rs, Statement st, PreparedStatement ps, Connection con) {
-			try {
-				if(rs!=null)
-					rs.close();
-				if(st!=null)
-					st.close();
-				if(ps!=null)
-					ps.close();
-				if(con!=null)
-					con.close();
-			}
-			catch(SQLException e){
-				System.out.println(e.getMessage());
-			}
+		catch(SQLException e){
+			System.out.println("데이터베이스 연결 실패");
 		}
-		public static void main(String[] args) {
-			getConnection();
+		return null;	
+	}
+	//자원 반납을 위한 메소드
+	public static void close(ResultSet rs, Statement st, PreparedStatement ps, Connection con) {
+		try {
+			if(rs!=null)
+				rs.close();
+			if(st!=null)
+				st.close();
+			if(ps!=null)
+				ps.close();
+			if(con!=null)
+				con.close();
 		}
-	
+		catch(SQLException e){
+			System.out.println(e.getMessage());
+		}
+	}
 }

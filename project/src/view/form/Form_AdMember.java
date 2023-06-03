@@ -177,14 +177,6 @@ public class Form_AdMember extends JPanel {
         input_birthDate = new JDateChooser();
         input_birthDate.setBounds(122, 456, 195, 26);
         
-        //추가 버튼
-        btn_add = new JButton("Add");
-        btn_add.setBounds(428, 492, 53, 23);
-        
-        //수정 버튼
-        btn_edit = new JButton("Edit");
-        btn_edit.setBounds(537, 492, 51, 23);
-        
         //삭제 버튼
         btn_del = new JButton("Delete");
         btn_del.addActionListener(new ActionListener() {
@@ -205,7 +197,7 @@ public class Form_AdMember extends JPanel {
         		}
         	}
         });
-        btn_del.setBounds(638, 492, 65, 23);
+        btn_del.setBounds(425, 492, 131, 23);
         
         //새로고침 버튼
         btn_refresh = new JButton("Refresh");
@@ -214,7 +206,7 @@ public class Form_AdMember extends JPanel {
         		refresh();
         	}
         });
-        btn_refresh.setBounds(742, 492, 73, 23);
+        btn_refresh.setBounds(709, 492, 131, 23);
         
         
         add(panelBorder1);
@@ -231,12 +223,15 @@ public class Form_AdMember extends JPanel {
         panelBorder1.add(input_phoneNum);
         panelBorder1.add(input_birthDate);
         panelBorder1.add(spTable);
-        panelBorder1.add(btn_add);
-        panelBorder1.add(btn_edit);
         panelBorder1.add(btn_del);
         panelBorder1.add(btn_refresh);
         
         JButton btn_clear = new JButton("Clear");
+        btn_clear.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		clear();
+        	}
+        });
         btn_clear.setBounds(12, 115, 65, 23);
         panelBorder1.add(btn_clear);
         add(panel);
@@ -299,8 +294,6 @@ public class Form_AdMember extends JPanel {
     private JLabel label_loginID;
     private JComboBox input_grade;
     private JDateChooser input_birthDate;
-    private JButton btn_add;
-    private JButton btn_edit;
     private JButton btn_del;
     private JButton btn_refresh;
 }

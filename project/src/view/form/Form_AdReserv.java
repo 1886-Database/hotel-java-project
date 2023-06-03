@@ -37,7 +37,7 @@ public class Form_AdReserv extends javax.swing.JPanel {
         JPanel p = new JPanel();
         p.setBackground(Color.WHITE);
         spTable.setCorner(JScrollPane.UPPER_RIGHT_CORNER, p);
-        table.addRow(new Object[]{"23031900001", "Ivan", "Single", "2023-03-19~2023-03-20", StatusType.APPROVED});
+        table.addRow(new Object[]{"23031900001", "Ivan", "Single", "2023-03-19~2023-03-20", StatusType.PENDING});
         table.addRow(new Object[]{"23040100002", "Conan", "2023-04-01 13:20", "83821", StatusType.APPROVED});
         
     

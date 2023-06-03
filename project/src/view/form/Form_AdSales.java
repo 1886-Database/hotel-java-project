@@ -54,7 +54,7 @@ public class Form_AdSales extends javax.swing.JPanel {
         textField.setColumns(10);
         textField.setBounds(80, 330, 164, 26);
         panelBorder1.add(textField);
-        table.addRow(new Object[]{"23031900001", "Ivan", "Single", "2023-03-19~2023-03-20", StatusType.APPROVED});
+        table.addRow(new Object[]{"23031900001", "Ivan", "Single", "2023-03-19~2023-03-20", StatusType.PENDING});
         table.addRow(new Object[]{"23040100002", "Conan", "2023-04-01 13:20", "83821", StatusType.APPROVED});
         
     
