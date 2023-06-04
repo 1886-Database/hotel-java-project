@@ -13,6 +13,9 @@ import javax.swing.JPanel;
 import javax.swing.ListCellRenderer;
 import javax.swing.SwingUtilities;
 
+import model.Reservation;
+import modelManager.ReservationManager;
+
 import javax.swing.JScrollPane;
 import view.model.StatusType;
 import view.swing.ScrollBar;
@@ -33,32 +36,16 @@ import javax.swing.SwingConstants;
 
 public class Form_ViewMyReserv extends JPanel {
 
-    /**
-     * Creates new form Form_1
-     */
-    public Form_ViewMyReserv() {
+    private String loginID;
+    private Reservation[] reserv;
+    private ReservationManager rM;
+    
+    public Form_ViewMyReserv(String id) {
+    	loginID = id;
         initComponents();
-    //  add row table
-        spTable.setVerticalScrollBar(new ScrollBar());
-        spTable.getVerticalScrollBar().setBackground(Color.WHITE);
-        spTable.getViewport().setBackground(Color.WHITE);
-        JPanel p = new JPanel();
-        p.setBackground(Color.WHITE);
-        spTable.setCorner(JScrollPane.UPPER_RIGHT_CORNER, p);
+        
         table.addRow(new Object[]{"23031900001", "Ivan", "Single", "2023-03-19~2023-03-20", StatusType.PENDING});
-        table.addRow(new Object[]{"23040100002", "Conan", "2023-04-01 13:20", "83821", StatusType.APPROVED});
-        table.addRow(new Object[]{"Ross Kopelman", "rosskopelman@gmail.com", "Subscriber", "25 Apr,2018", StatusType.APPROVED});
-        table.addRow(new Object[]{"Mike Hussy", "mikehussy@gmail.com", "Admin", "25 Apr,2018", StatusType.REJECT});
-        table.addRow(new Object[]{"Kevin Pietersen", "kevinpietersen@gmail.com", "Admin", "25 Apr,2018", StatusType.PENDING});
-        table.addRow(new Object[]{"Andrew Strauss", "andrewstrauss@gmail.com", "Editor", "25 Apr,2018", StatusType.APPROVED});
-        table.addRow(new Object[]{"Ross Kopelman", "rosskopelman@gmail.com", "Subscriber", "25 Apr,2018", StatusType.APPROVED});
-        table.addRow(new Object[]{"Mike Hussy", "mikehussy@gmail.com", "Admin", "25 Apr,2018", StatusType.REJECT});
-        table.addRow(new Object[]{"Kevin Pietersen", "kevinpietersen@gmail.com", "Admin", "25 Apr,2018", StatusType.PENDING});
-        table.addRow(new Object[]{"Kevin Pietersen", "kevinpietersen@gmail.com", "Admin", "25 Apr,2018", StatusType.PENDING});
-        table.addRow(new Object[]{"Andrew Strauss", "andrewstrauss@gmail.com", "Editor", "25 Apr,2018", StatusType.APPROVED});
-        table.addRow(new Object[]{"Ross Kopelman", "rosskopelman@gmail.com", "Subscriber", "25 Apr,2018", StatusType.APPROVED});
-        table.addRow(new Object[]{"Mike Hussy", "mikehussy@gmail.com", "Admin", "25 Apr,2018", StatusType.REJECT});
-        table.addRow(new Object[]{"Kevin Pietersen", "kevinpietersen@gmail.com", "Admin", "25 Apr,2018", StatusType.PENDING});
+
     
     }
 
@@ -89,13 +76,19 @@ public class Form_ViewMyReserv extends JPanel {
         jLabel1.setText("Reservation History");
 
         spTable.setBorder(null);
+        spTable.setVerticalScrollBar(new ScrollBar());
+        spTable.getVerticalScrollBar().setBackground(Color.WHITE);
+        spTable.getViewport().setBackground(Color.WHITE);
+        JPanel p = new JPanel();
+        p.setBackground(Color.WHITE);
+        spTable.setCorner(JScrollPane.UPPER_RIGHT_CORNER, p);
 
         table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "예약번호", "예약자", "객실", "예약 날짜", "체크인 날짜", "체크아웃 날짜", "처리현황"
+                "예약번호", "예약 객실", "예약 날짜", "체크인 날짜", "체크아웃 날짜", "처리현황"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -173,7 +166,14 @@ public class Form_ViewMyReserv extends JPanel {
         );
         this.setLayout(layout);
     }// </editor-fold>//GEN-END:initComponents
-
+    
+    //사용자의 예약내역 불러오기
+    private void getMyReserv() {
+    	reserv = rM.getMyReserv();
+    	for (int i = 0; i < reserv.length; ++i) {
+			table.addRow(new Object[] {reserv[i].getMemberID(),mem[i].getGrade(),mem[i].getName(),mem[i].getLoginID(),mem[i].getPhone(),mem[i].getBirthDate()});
+		}
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;

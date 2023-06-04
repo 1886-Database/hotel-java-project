@@ -37,7 +37,7 @@ public class MemberMain extends javax.swing.JFrame {
         form2 = new Form_2();
         form3 = new Form_3();
         form4 = new Form_MyPage(loginID);
-        form5 = new Form_ViewMyReserv();
+        form5 = new Form_ViewMyReserv(loginID);
         form6 = new Form_Msg();
         menu.initMoving(MemberMain.this);
         menu.addEventMenuSelected(new EventMenuSelected() {
