@@ -143,9 +143,7 @@ public class Form_Reservation extends javax.swing.JPanel {
         table.addMouseListener(new MouseAdapter() {
            @Override
            public void mouseClicked(MouseEvent e) {
-        	   if (checkin.equals("")||checkout.equals("")) {
-      				JOptionPane.showMessageDialog(panelBorder1,"날짜 정보를 모두 입력해주세요.", "Empty slot Exists",2);
-      			}else {
+        	   
       				button1.doClick();
                
       				int row = table.getSelectedRow();
@@ -158,7 +156,7 @@ public class Form_Reservation extends javax.swing.JPanel {
       				System.out.println("예약할 객실 번호: "+roomno);
               
       			}
-           }
+           
          
         });
         
