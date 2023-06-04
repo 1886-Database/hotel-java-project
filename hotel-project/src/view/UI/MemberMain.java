@@ -79,9 +79,12 @@ public class MemberMain extends javax.swing.JFrame {
         setForm(new Form_Home());
         
         form3.addButton1ActionListener(new ActionListener() {
-
             @Override
             public void actionPerformed(ActionEvent e) {
+               String[] s = form3.dataArr();
+               s[0] = String.valueOf(MemberID);
+               for(int i=1; i<s.length; ++i)
+                  System.out.println(s[i]);
                setForm(form1);
             }
          });
