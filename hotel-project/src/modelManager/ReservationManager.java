@@ -27,24 +27,25 @@ public class ReservationManager {
 		catch(Exception e) {
 			e.printStackTrace();
 		}
-		form3 = new Form_Reservation();
-		rr = new Form_RoomReservation();
+		
 	}
 	//입력받은 정보를 reservation 테이블에 insert
 		public int reservation(){
-			String SQL = "INSERT INTO DB2023_member VALUES(?,?,?,?,?,?,?,?,?,?)";
+			String SQL = "INSERT INTO DB2023_reservation VALUES(?,?,?,?,?,?,?,?,?,?)";
 			try {
 				con=myConnection.getConnection();
 				ps=con.prepareStatement(SQL);
 				stmt=con.createStatement();
-				rs=stmt.executeQuery("select max(reservedNo) from DB2023_room");
+				rs=stmt.executeQuery("select max(reservedNo) from DB2023_reservation");
 				while(rs.next()) {
-					String[] s = form3.dataArr();
-					String MEMBERID = s[0];
-		            String ROOMNO = s[1];
-		            String CHECKIN = s[2];
-		            String CHECKOUT = s[3];
+					form3 = new Form_Reservation();
+					String[] s1 = form3.dataArr();
+		            String ROOMNO = s1[0];
+		            String CHECKIN = s1[1];
+		            String CHECKOUT = s1[2];
+		            String MEMBERID = "00001";
 		            
+		            rr = new Form_RoomReservation();
 		            String[] s2 = rr.dataArr2();
 		            String RESERVEDDATE = s2[0];
 		            String REQUIREMENT = s2[1];
