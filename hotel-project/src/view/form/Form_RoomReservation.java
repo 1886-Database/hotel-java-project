@@ -116,7 +116,8 @@ public class Form_RoomReservation extends javax.swing.JPanel {
         	public void mouseClicked(MouseEvent e) {
         		int ans = JOptionPane.showConfirmDialog(null, "입력한 정보대로 객실을 예약하시겠습니까?","Reserve Room",JOptionPane.YES_NO_OPTION);
     			if(ans==JOptionPane.YES_OPTION) {
-    				//add
+    				rM.reservation();
+    				
     			}
         		Date date_now = new Date(System.currentTimeMillis()); // 현재시간을 가져와 Date형으로 저장한다
         		SimpleDateFormat fourteen_format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); 
