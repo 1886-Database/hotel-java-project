@@ -7,9 +7,9 @@ package view.form;
 
 import java.awt.*;
 import java.awt.Color;
-import javax.swing.JComponent;
+
 import javax.swing.GroupLayout.Alignment;
-import javax.swing.GroupLayout;
+
 import java.awt.Color;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -48,12 +48,28 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author RAVEN
  */
+
 public class Form_Reservation extends javax.swing.JPanel {
+
 
     private Room[] room;
     private RoomManager rM;
     private ReservationManager rsM;
     private JButton button1 = new JButton("Button");
+    private String checkin = null;
+    private String checkout = null;
+    
+	public String[] dataArr() {
+        int row = table.getSelectedRow();
+        String roomno = String.valueOf(table.getModel().getValueAt(row, 0 ));
+        String checkIn = checkin;
+        String checkOut = checkout;
+        String[] arr = {roomno,checkIn,checkOut};
+       
+        return arr;
+    }
+	
+    
     
     public Form_Reservation() {
        initComponents();
@@ -103,44 +119,46 @@ public class Form_Reservation extends javax.swing.JPanel {
         JButton btnNewButton = new JButton("적용");
         btnNewButton.addMouseListener(new MouseAdapter(){
            public void mouseClicked(MouseEvent e) {
-              SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-              String checkin = simpleDateFormat.format(dateChooser.getDate());
-              String checkout = simpleDateFormat.format(dateChooser_1.getDate());
-              
-              
-              int result = dateChooser.getDate().compareTo(dateChooser_1.getDate());
-              if(result>0) {
-                 JOptionPane.showMessageDialog(panelBorder1,"체크아웃 날짜가 잘못되었습니다", "CheckOut Error",2);
-              }else if(checkin.equals(checkout)) {
-                 JOptionPane.showMessageDialog(panelBorder1,"동일한 날짜로 예약이 불가합니다", "Date Error",2);
-              }else {
-                 RoomManager roomManager = new RoomManager();
-                 System.out.println("검색 성공");
-                 refreshroom(checkin,checkout);
-                 System.out.println("예약할 체크인 날짜: "+checkin+"예약할 체크아웃 날짜: "+checkout);
-              }
+        	   
+      				SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+      				checkin = simpleDateFormat.format(dateChooser.getDate());
+      				checkout = simpleDateFormat.format(dateChooser_1.getDate());
+               
+      				int result = dateChooser.getDate().compareTo(dateChooser_1.getDate());
+      				if(result>0) {
+      					JOptionPane.showMessageDialog(panelBorder1,"체크아웃 날짜가 잘못되었습니다", "CheckOut Error",2);
+      				}else if(checkin.equals(checkout)) {
+      					JOptionPane.showMessageDialog(panelBorder1,"동일한 날짜로 예약이 불가합니다", "Date Error",2);
+      				}else {
+      					RoomManager roomManager = new RoomManager();
+      					System.out.println("검색 성공");
+      					refreshroom(checkin,checkout);
+      					System.out.println("예약할 체크인 날짜: "+checkin+"예약할 체크아웃 날짜: "+checkout);
+      				}
+      			
            }
         });
-       
+			
       //테이블 행 클릭 시 이벤트
         table.addMouseListener(new MouseAdapter() {
            @Override
            public void mouseClicked(MouseEvent e) {
-              
-              button1.doClick();
-
+        	   if (checkin.equals("")||checkout.equals("")) {
+      				JOptionPane.showMessageDialog(panelBorder1,"날짜 정보를 모두 입력해주세요.", "Empty slot Exists",2);
+      			}else {
+      				button1.doClick();
                
-              int row = table.getSelectedRow();
-              String roomno = String.valueOf(table.getModel().getValueAt(row, 0 ));
-              String roomname = (String) table.getModel().getValueAt(row, 1 );
-              String roomtype = (String) table.getModel().getValueAt(row, 2 );
-              String bedtype = String.valueOf(table.getModel().getValueAt(row, 3 ));
-              String price = String.valueOf(table.getModel().getValueAt(row, 4 ));
+      				int row = table.getSelectedRow();
+      				String roomno = String.valueOf(table.getModel().getValueAt(row, 0 ));
+      				String roomname = (String) table.getModel().getValueAt(row, 1 );
+      				String roomtype = (String) table.getModel().getValueAt(row, 2 );
+      				String bedtype = String.valueOf(table.getModel().getValueAt(row, 3 ));
+      				String price = String.valueOf(table.getModel().getValueAt(row, 4 ));
               
-              System.out.println("예약할 객실 번호: "+roomno);
+      				System.out.println("예약할 객실 번호: "+roomno);
               
+      			}
            }
-
          
         });
         
