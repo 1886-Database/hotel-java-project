@@ -9,6 +9,7 @@ import java.awt.event.MouseMotionAdapter;
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.ListCellRenderer;
 import javax.swing.SwingUtilities;
@@ -26,6 +27,9 @@ import view.swing.MenuItem;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.GroupLayout;
 import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.DefaultTableCellRenderer;
+
 import view.swing.RoundedButton;
 import java.awt.Font;
 import javax.swing.JButton;
@@ -39,13 +43,16 @@ public class Form_ViewMyReserv extends JPanel {
     private String loginID;
     private Reservation[] reserv;
     private ReservationManager rM;
+    private JButton button1 = new JButton("Button");
     
     public Form_ViewMyReserv(String id) {
+    	
     	loginID = id;
+    	
+    	rM = new ReservationManager();
         initComponents();
         
-        table.addRow(new Object[]{"23031900001", "Ivan", "Single", "2023-03-19~2023-03-20", StatusType.PENDING});
-
+        getMyReserv();
     
     }
 
@@ -67,8 +74,6 @@ public class Form_ViewMyReserv extends JPanel {
         setBackground(new java.awt.Color(242, 242, 242));
 
         panel.setLayout(new java.awt.GridLayout(1, 0, 10, 0));
-
-
         panelBorder1.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel1.setFont(new java.awt.Font("sansserif", 1, 18)); // NOI18N
@@ -88,68 +93,104 @@ public class Form_ViewMyReserv extends JPanel {
 
             },
             new String [] {
-                "예약번호", "예약 객실", "예약 날짜", "체크인 날짜", "체크아웃 날짜", "처리현황"
+                "예약번호", "예약 객실 번호", "예약 날짜", "체크인 날짜", "체크아웃 날짜", "처리현황"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false, false,false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
+        
         spTable.setViewportView(table);
+        
+      //테이블 행을 클릭하면 해당 행의 정보가 옆의 박스에 자동 입력되도록 하는 이벤트 리스너
+        table.addMouseListener(new MouseAdapter() {
+        	@Override
+        	public void mouseClicked(MouseEvent e) {
+        		if(e.getClickCount()==2) {
+        			JOptionPane.showMessageDialog(null,"test.", "Select your reservation",2);
+        			button1.doClick();
+        		}
+        	}
+        });
+        
+        
+        
+        JLabel lblNewLabel_1 = new JLabel("* 예약 내역을 더블 클릭하면 예약에 대한 상세정보를 보실 수 있습니다.");
+        lblNewLabel_1.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
 
         javax.swing.GroupLayout panelBorder1Layout = new javax.swing.GroupLayout(panelBorder1);
-        panelBorder1.setLayout(panelBorder1Layout);
         panelBorder1Layout.setHorizontalGroup(
-            panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelBorder1Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addGroup(panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelBorder1Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(spTable))
-                .addContainerGap())
+        	panelBorder1Layout.createParallelGroup(Alignment.LEADING)
+        		.addGroup(panelBorder1Layout.createSequentialGroup()
+        			.addGap(20)
+        			.addGroup(panelBorder1Layout.createParallelGroup(Alignment.LEADING)
+        				.addGroup(panelBorder1Layout.createSequentialGroup()
+        					.addComponent(jLabel1)
+        					.addGap(45)
+        					.addComponent(lblNewLabel_1, GroupLayout.PREFERRED_SIZE, 527, GroupLayout.PREFERRED_SIZE))
+        				.addComponent(spTable))
+        			.addGap(24))
         );
         panelBorder1Layout.setVerticalGroup(
-            panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelBorder1Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(spTable, javax.swing.GroupLayout.DEFAULT_SIZE, 279, Short.MAX_VALUE)
-                .addGap(20, 20, 20))
+        	panelBorder1Layout.createParallelGroup(Alignment.LEADING)
+        		.addGroup(panelBorder1Layout.createSequentialGroup()
+        			.addGap(20)
+        			.addGroup(panelBorder1Layout.createParallelGroup(Alignment.LEADING)
+        				.addComponent(jLabel1)
+        				.addComponent(lblNewLabel_1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        			.addPreferredGap(ComponentPlacement.RELATED)
+        			.addComponent(spTable, GroupLayout.DEFAULT_SIZE, 450, Short.MAX_VALUE)
+        			.addGap(20))
         );
+        panelBorder1.setLayout(panelBorder1Layout);
         
-        btnNewButton = new JButton("예약 취소");
-        btnNewButton.addActionListener(new ActionListener() {
+        button_cancel = new JButton("예약 취소");
+        button_cancel.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
+        		int row = table.getSelectedRow();
+    			if(row==-1)
+    				JOptionPane.showMessageDialog(null,"취소할 예약내역을 먼저 선택해주세요.", "Select your reservation",2);
+    			else {
+    				
+    			}
         	}
         });
         
         JLabel lblNewLabel = new JLabel("* 체크인 날짜로부터 3일 이전에만 예약 취소가 가능합니다.");
+        lblNewLabel.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
         lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        
+        button_refresh = new JButton("새로고침");
+        button_refresh.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		refresh();
+        	}
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         layout.setHorizontalGroup(
-        	layout.createParallelGroup(Alignment.LEADING)
+        	layout.createParallelGroup(Alignment.TRAILING)
         		.addGroup(layout.createSequentialGroup()
         			.addGap(20)
         			.addGroup(layout.createParallelGroup(Alignment.TRAILING)
-        				.addComponent(panelBorder1, GroupLayout.DEFAULT_SIZE, 410, Short.MAX_VALUE)
-        				.addComponent(panel, GroupLayout.DEFAULT_SIZE, 410, Short.MAX_VALUE))
+        				.addComponent(panelBorder1, GroupLayout.DEFAULT_SIZE, 907, Short.MAX_VALUE)
+        				.addComponent(panel, GroupLayout.DEFAULT_SIZE, 907, Short.MAX_VALUE))
         			.addGap(20))
-        		.addGroup(Alignment.TRAILING, layout.createSequentialGroup()
-        			.addGap(145)
-        			.addComponent(btnNewButton, GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE)
-        			.addGap(131))
         		.addGroup(layout.createSequentialGroup()
         			.addGap(59)
-        			.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 306, Short.MAX_VALUE)
+        			.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 830, Short.MAX_VALUE)
         			.addGap(58))
+        		.addGroup(Alignment.LEADING, layout.createSequentialGroup()
+        			.addGap(150)
+        			.addComponent(button_cancel, GroupLayout.PREFERRED_SIZE, 302, GroupLayout.PREFERRED_SIZE)
+        			.addGap(43)
+        			.addComponent(button_refresh, GroupLayout.PREFERRED_SIZE, 302, GroupLayout.PREFERRED_SIZE)
+        			.addContainerGap(150, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
         	layout.createParallelGroup(Alignment.LEADING)
@@ -157,9 +198,11 @@ public class Form_ViewMyReserv extends JPanel {
         			.addGap(20)
         			.addComponent(panel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
         			.addGap(15)
-        			.addComponent(panelBorder1, GroupLayout.DEFAULT_SIZE, 153, Short.MAX_VALUE)
+        			.addComponent(panelBorder1, GroupLayout.DEFAULT_SIZE, 520, Short.MAX_VALUE)
         			.addGap(18)
-        			.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
+        			.addGroup(layout.createParallelGroup(Alignment.LEADING)
+        				.addComponent(button_cancel, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
+        				.addComponent(button_refresh, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE))
         			.addGap(18)
         			.addComponent(lblNewLabel)
         			.addGap(16))
@@ -169,10 +212,25 @@ public class Form_ViewMyReserv extends JPanel {
     
     //사용자의 예약내역 불러오기
     private void getMyReserv() {
-    	reserv = rM.getMyReserv();
+    	reserv = rM.getMyReserv(loginID);
     	for (int i = 0; i < reserv.length; ++i) {
-			table.addRow(new Object[] {reserv[i].getMemberID(),mem[i].getGrade(),mem[i].getName(),mem[i].getLoginID(),mem[i].getPhone(),mem[i].getBirthDate()});
+			table.addRow(new Object[] {reserv[i].getReservedNo(),reserv[i].getRoomNo(),reserv[i].getReservedDate(),reserv[i].getCheckIn(),reserv[i].getCheckOut(),reserv[i].getReservedStatus()});
 		}
+    }
+    
+    private void refresh() {
+    	DefaultTableModel model = (DefaultTableModel)table.getModel();
+    	model.setRowCount(0);
+    	getMyReserv();
+    }
+    
+    public void addButton1ActionListener(ActionListener listener) {
+        button1.addActionListener(listener);
+     }
+    public String getReservedNo() {
+    	int row = table.getSelectedRow();
+    	String reservedNo = (String) table.getModel().getValueAt(row, 0 );
+    	return reservedNo;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -181,5 +239,6 @@ public class Form_ViewMyReserv extends JPanel {
     private view.swing.PanelBorder panelBorder1;
     private javax.swing.JScrollPane spTable;
     private view.swing.Table table;
-    private JButton btnNewButton;
+    private JButton button_cancel;
+    private JButton button_refresh;
 }

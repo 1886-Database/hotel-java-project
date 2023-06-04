@@ -1,18 +1,30 @@
 package view.UI;
 
+import javax.swing.*; 
+import java.awt.*;
 import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+
 import javax.swing.JComponent;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.GroupLayout;
+
 
 import view.event.EventMenuSelected;
 import view.form.Form_1;
 import view.form.Form_2;
 import view.form.Form_3;
 import view.form.Form_Home;
-import view.form.Form_Msg;
+import view.form.Form_EwhaHotel;
+import view.form.Form_MemberMsg;
+import view.form.Form_RoomReservation;
+import view.form.Form_Reservation;
 import view.form.Form_MyPage;
 import view.form.Form_ViewMyReserv;
+import view.form.Form_ViewMyReservDetails;
 
 public class MemberMain extends javax.swing.JFrame {
 
@@ -20,25 +32,28 @@ public class MemberMain extends javax.swing.JFrame {
      * Creates new form Main
      */
     private Form_Home home;
-    private Form_1 form1;
-    private Form_2 form2;
-    private Form_3 form3;
+    private Form_RoomReservation form1;
+    private Form_EwhaHotel form2;
+    private Form_Reservation form3;
     private Form_MyPage form4;
     private Form_ViewMyReserv form5;
-    private Form_Msg form6;
-    static String loginID="leda7";   //테스트를 위한 값 초기화... 마지막에 삭제해야함
+    private Form_ViewMyReservDetails form5_details;
+    private Form_MemberMsg form6;
+    static String loginID="leda7"; 
+    static int MemberID = 00001;//테스트를 위한 값 초기화... 마지막에 삭제해야함
 
     public MemberMain(String id) {
         initComponents();
         loginID = id;
         setBackground(new Color(0, 0, 0, 0));
         home = new Form_Home();
-        form1 = new Form_1();
-        form2 = new Form_2();
-        form3 = new Form_3();
+        form1 = new Form_RoomReservation();
+        form2 = new Form_EwhaHotel();
+        form3 = new Form_Reservation();
         form4 = new Form_MyPage(loginID);
         form5 = new Form_ViewMyReserv(loginID);
-        form6 = new Form_Msg();
+        form6 = new Form_MemberMsg(MemberID);
+
         menu.initMoving(MemberMain.this);
         menu.addEventMenuSelected(new EventMenuSelected() {
             @Override
@@ -66,6 +81,23 @@ public class MemberMain extends javax.swing.JFrame {
         //  set when system open start with home form
         setForm(new Form_Home());
         
+        form3.addButton1ActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+               setForm(form1);
+            }
+         });
+        
+        form5.addButton1ActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            	String reservedNo = form5.getReservedNo();
+            	form5_details = new Form_ViewMyReservDetails(reservedNo);
+            	setForm(form5_details);
+            }
+         });
         
     }
 
@@ -178,4 +210,3 @@ public class MemberMain extends javax.swing.JFrame {
     private view.swing.PanelBorder panelBorder1;
     // End of variables declaration//GEN-END:variables
 }
-
