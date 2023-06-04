@@ -41,12 +41,14 @@ public class Form_EmployeeMsg extends javax.swing.JPanel {
 
 	private Message[] mess;
 	private MessageManager mM;
+	private MemberManager member;
 	private int employeeID;
    
 	
     public Form_EmployeeMsg(int EmployeeID) {
     	this.employeeID=EmployeeID;
     	mM = new MessageManager();
+    	member = new MemberManager();
     	   initComponents();
     
     sent();
@@ -237,7 +239,7 @@ public class Form_EmployeeMsg extends javax.swing.JPanel {
     private void sent() {
     	mess = mM.getEmployeeSendMessage();
     	for (int i = 0; i < mess.length; ++i) {
-        	table.addRow(new Object[] {mess[i].getSendtime(),mess[i].getMemberID(),mess[i].getContent()});
+        	table.addRow(new Object[] {mess[i].getSendtime(),member.getLoginIDbyMemberID(mess[i].getMemberID()),mess[i].getContent()});
     	}
     }
        
@@ -245,7 +247,7 @@ public class Form_EmployeeMsg extends javax.swing.JPanel {
     private void recieved() {
     	mess = mM.getEmployeeRecieveMessage();
     	for (int i = 0; i < mess.length; ++i) {
-        	table_1.addRow(new Object[] {mess[i].getMemberID(),mess[i].getSendtime(),mess[i].getContent()});
+        	table_1.addRow(new Object[] {member.getLoginIDbyMemberID(mess[i].getMemberID()),mess[i].getSendtime(),mess[i].getContent()});
         }
     }
     	
