@@ -1,21 +1,21 @@
 package model;
 
 public class Reservation {
-	private int ReservedNo;
+	private String ReservedNo;
 	private int RoomNo;
 	private String CheckIn;
 	private String CheckOut;
 	private String ReservedDate;
 	private int MemberID;
 	private String Requirement;
-	private boolean Breakfast;
+	private String Breakfast;
 	private String ReservedStatus;
 	private int GusetNo;
 	
 	//기본 생성자
 		public Reservation() {}
 		
-		public Reservation(int ReservedNo,int RoomNo,String CheckIn, String CheckOut, String ReservedDate, int MemberID, String Requirement, Boolean Breakfast, String ReservedStatus, int GuestNo) {
+		public Reservation(String ReservedNo,int RoomNo,String CheckIn, String CheckOut, String ReservedDate, int MemberID, String Requirement, String Breakfast, String ReservedStatus, int GuestNo) {
 			super();
 			this.setReservedNo(ReservedNo);
 			this.setRoomNo(RoomNo);
@@ -29,11 +29,11 @@ public class Reservation {
 			this.setGusetNo(GusetNo);
 		}
 
-		public int getReservedNo() {
+		public String getReservedNo() {
 			return ReservedNo;
 		}
 
-		public void setReservedNo(int ReservedNo) {
+		public void setReservedNo(String ReservedNo) {
 			this.ReservedNo = ReservedNo;
 		}
 
@@ -84,11 +84,11 @@ public class Reservation {
 		public void setRequirement(String Requirement) {
 			this.Requirement = Requirement;
 		}
-		public Boolean getBreakfast() {
+		public String getBreakfast() {
 			return Breakfast;
 		}
 
-		public void setBreakfast(Boolean Breakfast) {
+		public void setBreakfast(String Breakfast) {
 			this.Breakfast = Breakfast;
 		}
 		public String getReservedStatus() {
