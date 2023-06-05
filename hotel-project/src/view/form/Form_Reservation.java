@@ -55,17 +55,18 @@ public class Form_Reservation extends javax.swing.JPanel {
     private Room[] room;
     private RoomManager rM;
     private ReservationManager rsM;
+    private Form_RoomReservation rr;
     private JButton button1 = new JButton("Button");
     private String checkin = null;
     private String checkout = null;
     
-	public String[] dataArr() {
+    public String[] dataArr() {
         int row = table.getSelectedRow();
-        String roomno = String.valueOf(table.getModel().getValueAt(row, 0 ));
-        String checkIn = checkin;
-        String checkOut = checkout;
-        String[] arr = {roomno,checkIn,checkOut};
-       
+        String roomnO = String.valueOf(table.getModel().getValueAt(row, 0 ));
+        String roomno = roomnO;
+        String[] arr = {roomno,checkin,checkout};
+        for(int i=0; i<arr.length; ++i)
+            System.out.println("dataArr: "+arr[i]);
         return arr;
     }
 	
@@ -133,6 +134,7 @@ public class Form_Reservation extends javax.swing.JPanel {
       					RoomManager roomManager = new RoomManager();
       					System.out.println("검색 성공");
       					refreshroom(checkin,checkout);
+      					//rsM.reservation();
       					System.out.println("예약할 체크인 날짜: "+checkin+"예약할 체크아웃 날짜: "+checkout);
       				}
       			
