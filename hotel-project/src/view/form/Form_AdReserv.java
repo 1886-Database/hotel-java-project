@@ -19,29 +19,39 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import com.toedter.calendar.JDateChooser;
+
+import model.Reservation;
+import modelManager.ReservationManager;
+
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.Date;
+import java.awt.event.ActionEvent;
 
 
 public class Form_AdReserv extends javax.swing.JPanel {
 
-
+	private Reservation[] resList;
+	private ReservationManager rM;
+	private Reservation res;
     /**
      * Creates new form Form_1
      */
     public Form_AdReserv() {
-        initComponents();
+    	
+    	rM = new ReservationManager();
+    	initComponents();
+    	all();
+    }
+    	
+    	
+    	
+       
     //  add row table
-        spTable.setVerticalScrollBar(new ScrollBar());
-        spTable.getVerticalScrollBar().setBackground(Color.WHITE);
-        spTable.getViewport().setBackground(Color.WHITE);
-        JPanel p = new JPanel();
-        p.setBackground(Color.WHITE);
-        spTable.setCorner(JScrollPane.UPPER_RIGHT_CORNER, p);
-        table.addRow(new Object[]{"23031900001", "Ivan", "Single", "2023-03-19~2023-03-20", StatusType.PENDING});
-        table.addRow(new Object[]{"23040100002", "Conan", "2023-04-01 13:20", "83821", StatusType.APPROVED});
         
     
-    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -55,8 +65,23 @@ public class Form_AdReserv extends javax.swing.JPanel {
         panel = new javax.swing.JLayeredPane();
         panelBorder1 = new view.swing.PanelBorder();
         jLabel1 = new javax.swing.JLabel();
+        jLabel1.setBounds(20, 20, 110, 22);
         spTable = new javax.swing.JScrollPane();
+        spTable.setBounds(65, 69, 750, 420);
         table = new view.swing.Table();
+        table.addMouseListener(new MouseAdapter() {
+        	@Override
+        	public void mouseClicked(MouseEvent e) {
+        		int row = table.getSelectedRow();
+        		
+        		
+        		
+        		String dept = (String) table.getModel().getValueAt(row, 1 );
+        		
+        		
+        		
+        	}
+        });
 
         setBackground(new java.awt.Color(242, 242, 242));
 
@@ -76,7 +101,7 @@ public class Form_AdReserv extends javax.swing.JPanel {
 
             },
             new String [] {
-                "예약번호", "예약자", "방 번호", "예약날짜", "처리현황"
+                "예약번호", "예약자", "방 번호", "체크인 날짜", "체크아웃 날짜","처리현황"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -89,115 +114,25 @@ public class Form_AdReserv extends javax.swing.JPanel {
         });
         spTable.setViewportView(table);
         
-        JLabel lblNewLabel = new JLabel("예약번호");
-        
-        JLabel lblNewLabel_1 = new JLabel("예약자");
-        
-        JLabel lblNewLabel_1_1 = new JLabel("방 번호");
-        
-        JLabel lblNewLabel_1_1_1 = new JLabel("예약 날짜");
-        
-        JLabel lblNewLabel_1_1_1_1 = new JLabel("처리현황");
-        
-        textField = new JTextField();
-        textField.setColumns(10);
+        lblNewLabel_1_1_1 = new JLabel("처리현황");
+        lblNewLabel_1_1_1.setBounds(75, 523, 44, 16);
         
         textField_1 = new JTextField();
+        textField_1.setBounds(821, 226, 130, 26);
         textField_1.setColumns(10);
         
-        JComboBox comboBox = new JComboBox();
+        JComboBox ReserveState = new JComboBox();
+        ReserveState.setBounds(131, 519, 130, 27);
         
-        JDateChooser dateChooser = new JDateChooser();
+        btnEdit = new JButton("Edit");
+        btnEdit.setBounds(301, 518, 75, 29);
         
-        JComboBox comboBox_1 = new JComboBox();
-        
-        JButton btnNewButton = new JButton("Add");
-        
-        JButton btnEdit = new JButton("Edit");
-        
-        JButton btnNewButton_1_1 = new JButton("Delete");
-        
-        JButton btnNewButton_1_1_1 = new JButton("Clear");
-
-        javax.swing.GroupLayout panelBorder1Layout = new javax.swing.GroupLayout(panelBorder1);
-        panelBorder1Layout.setHorizontalGroup(
-        	panelBorder1Layout.createParallelGroup(Alignment.LEADING)
-        		.addGroup(panelBorder1Layout.createSequentialGroup()
-        			.addGap(20)
-        			.addGroup(panelBorder1Layout.createParallelGroup(Alignment.LEADING)
-        				.addGroup(panelBorder1Layout.createSequentialGroup()
-        					.addComponent(jLabel1)
-        					.addContainerGap(665, Short.MAX_VALUE))
-        				.addGroup(Alignment.TRAILING, panelBorder1Layout.createSequentialGroup()
-        					.addGroup(panelBorder1Layout.createParallelGroup(Alignment.LEADING)
-        						.addComponent(lblNewLabel)
-        						.addComponent(lblNewLabel_1)
-        						.addComponent(lblNewLabel_1_1)
-        						.addComponent(lblNewLabel_1_1_1)
-        						.addComponent(lblNewLabel_1_1_1_1))
-        					.addGap(18)
-        					.addGroup(panelBorder1Layout.createParallelGroup(Alignment.LEADING)
-        						.addGroup(panelBorder1Layout.createParallelGroup(Alignment.LEADING, false)
-        							.addComponent(dateChooser, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        							.addComponent(textField)
-        							.addComponent(textField_1)
-        							.addComponent(comboBox, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        						.addComponent(comboBox_1, GroupLayout.PREFERRED_SIZE, 130, GroupLayout.PREFERRED_SIZE))
-        					.addPreferredGap(ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
-        					.addGroup(panelBorder1Layout.createParallelGroup(Alignment.LEADING, false)
-        						.addGroup(Alignment.TRAILING, panelBorder1Layout.createSequentialGroup()
-        							.addComponent(spTable, GroupLayout.PREFERRED_SIZE, 512, GroupLayout.PREFERRED_SIZE)
-        							.addGap(29))
-        						.addGroup(panelBorder1Layout.createSequentialGroup()
-        							.addComponent(btnNewButton)
-        							.addGap(64)
-        							.addComponent(btnEdit)
-        							.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        							.addComponent(btnNewButton_1_1)
-        							.addGap(71)
-        							.addComponent(btnNewButton_1_1_1)
-        							.addGap(38))))))
-        );
-        panelBorder1Layout.setVerticalGroup(
-        	panelBorder1Layout.createParallelGroup(Alignment.LEADING)
-        		.addGroup(panelBorder1Layout.createSequentialGroup()
-        			.addGroup(panelBorder1Layout.createParallelGroup(Alignment.LEADING)
-        				.addGroup(panelBorder1Layout.createSequentialGroup()
-        					.addGap(20)
-        					.addComponent(jLabel1)
-        					.addGap(135)
-        					.addGroup(panelBorder1Layout.createParallelGroup(Alignment.BASELINE)
-        						.addComponent(lblNewLabel)
-        						.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-        					.addGap(33)
-        					.addGroup(panelBorder1Layout.createParallelGroup(Alignment.BASELINE)
-        						.addComponent(lblNewLabel_1)
-        						.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-        					.addGap(40)
-        					.addGroup(panelBorder1Layout.createParallelGroup(Alignment.BASELINE)
-        						.addComponent(lblNewLabel_1_1)
-        						.addComponent(comboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-        					.addGap(41)
-        					.addGroup(panelBorder1Layout.createParallelGroup(Alignment.LEADING)
-        						.addGroup(panelBorder1Layout.createSequentialGroup()
-        							.addComponent(lblNewLabel_1_1_1)
-        							.addGap(44)
-        							.addGroup(panelBorder1Layout.createParallelGroup(Alignment.BASELINE)
-        								.addComponent(lblNewLabel_1_1_1_1)
-        								.addComponent(comboBox_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
-        						.addComponent(dateChooser, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
-        				.addGroup(panelBorder1Layout.createSequentialGroup()
-        					.addGap(54)
-        					.addComponent(spTable, GroupLayout.PREFERRED_SIZE, 420, GroupLayout.PREFERRED_SIZE)))
-        			.addGap(44)
-        			.addGroup(panelBorder1Layout.createParallelGroup(Alignment.BASELINE)
-        				.addComponent(btnNewButton)
-        				.addComponent(btnEdit)
-        				.addComponent(btnNewButton_1_1)
-        				.addComponent(btnNewButton_1_1_1))
-        			.addContainerGap(63, Short.MAX_VALUE))
-        );
-        panelBorder1.setLayout(panelBorder1Layout);
+        btnRefresh = new JButton("Refresh");
+        btnRefresh.setBounds(707, 523, 76, 29);
+        btnRefresh.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        	}
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -219,15 +154,52 @@ public class Form_AdReserv extends javax.swing.JPanel {
                 .addComponent(panelBorder1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(20, 20, 20))
         );
+        
+        spTable.setVerticalScrollBar(new ScrollBar());
+        spTable.getVerticalScrollBar().setBackground(Color.WHITE);
+        spTable.getViewport().setBackground(Color.WHITE);
+        JPanel p = new JPanel();
+        p.setBackground(Color.WHITE);
+        spTable.setCorner(JScrollPane.UPPER_RIGHT_CORNER, p);
+        panelBorder1.setLayout(null);
+        panelBorder1.add(jLabel1);
+        panelBorder1.add(lblNewLabel_1_1_1);
+        panelBorder1.add(textField_1);
+        panelBorder1.add(ReserveState);
+        panelBorder1.add(spTable);
+        panelBorder1.add(btnEdit);
+        panelBorder1.add(btnRefresh);
+       
+    
     }// </editor-fold>//GEN-END:initComponents
-
-
+    
+    private void all() {
+    	resList = rM.getAllReservation();
+    	for (int i = 0; i < resList.length; ++i) {
+        	table.addRow(new Object[] {resList[i].getReservedNo(),resList[i].getMemberID(),resList[i].getRoomNo(),resList[i].getCheckIn(),resList[i].getCheckOut(),resList[i].getReservedStatus()});
+        }
+    }
+    private void set (String name,String loginID, String dept, String phone, Date date) {
+    	int i=-1;
+    	if(dept.equals("front office"))
+    		i=0;
+    	else if(dept.equals("housekeeping"))
+    		i=1;
+    	else if(dept.equals("security"))
+    		i=2;
+    	else if(dept.equals("hr"))
+    		i=3;
+    	
+    	
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLayeredPane panel;
     private view.swing.PanelBorder panelBorder1;
     private javax.swing.JScrollPane spTable;
     private view.swing.Table table;
-    private JTextField textField;
     private JTextField textField_1;
+    private JLabel lblNewLabel_1_1_1;
+    private JButton btnEdit;
+    private JButton btnRefresh;
 }

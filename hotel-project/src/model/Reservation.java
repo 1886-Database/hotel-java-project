@@ -1,7 +1,7 @@
 package model;
 
 public class Reservation {
-	private String ReservedNo;
+	private int ReservedNo;
 	private int RoomNo;
 	private String CheckIn;
 	private String CheckOut;
@@ -15,7 +15,7 @@ public class Reservation {
 	//기본 생성자
 		public Reservation() {}
 		
-		public Reservation(String ReservedNo,int RoomNo,String CheckIn, String CheckOut, String ReservedDate, int MemberID, String Requirement, Boolean Breakfast, String ReservedStatus, int GuestNo) {
+		public Reservation(int ReservedNo,int RoomNo,String CheckIn, String CheckOut, String ReservedDate, int MemberID, String Requirement, Boolean Breakfast, String ReservedStatus, int GuestNo) {
 			super();
 			this.setReservedNo(ReservedNo);
 			this.setRoomNo(RoomNo);
@@ -29,11 +29,11 @@ public class Reservation {
 			this.setGusetNo(GusetNo);
 		}
 
-		public String getReservedNo() {
+		public int getReservedNo() {
 			return ReservedNo;
 		}
 
-		public void setReservedNo(String ReservedNo) {
+		public void setReservedNo(int ReservedNo) {
 			this.ReservedNo = ReservedNo;
 		}
 
