@@ -159,6 +159,25 @@ public class MemberManager {
 	    return loginID;
 	}
 
+	public int getMemberIDbyLoginID(String LoginID) {
+	    String SQL = "SELECT memberID FROM DB2023_member WHERE loginID=?";
+	    int memberID = 0;
+	    try {
+	        con = myConnection.getConnection();
+	        ps = con.prepareStatement(SQL);
+	        ps.setString(1, LoginID);
+	        rs = ps.executeQuery();
+	        
+	        if (rs.next()) {  // 결과 집합에 데이터가 있는지 확인
+	            memberID = rs.getInt(1);
+	        }
+	    } catch (SQLException se) {
+	        se.printStackTrace();
+	    } finally {
+	        myConnection.close(rs, null, ps, con);
+	    }
+	    return memberID;
+	}
 	
 	//회원관리 화면 : member 테이블의 모든 레코드를 각각 Member 객체에 저장한 후 객체 배열 반환
 	public Member[] getAllMember() {

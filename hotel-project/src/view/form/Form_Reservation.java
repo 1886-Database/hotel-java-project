@@ -25,7 +25,7 @@ import view.UI.MemberMain;
 import view.UI.SignUp;
 import view.form.Form_RoomReservation;
 
-import view.model.R_StatusType;
+
 import view.model.StatusType;
 import view.swing.ScrollBar;
 import javax.swing.GroupLayout.Alignment;

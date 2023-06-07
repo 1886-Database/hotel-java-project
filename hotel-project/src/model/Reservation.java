@@ -11,12 +11,17 @@ public class Reservation {
 	private String Breakfast;
 	private String ReservedStatus;
 	private int GusetNo;
-	
+	private String MemberName;
+	private String MemberPhone;
 	//기본 생성자
 		public Reservation() {}
 		
-		public Reservation(String ReservedNo,int RoomNo,String CheckIn, String CheckOut, String ReservedDate, int MemberID, String Requirement, String Breakfast, String ReservedStatus, int GuestNo) {
+
+		public Reservation(String MemberName,String MemberPhone,int ReservedNo,int RoomNo,String CheckIn, String CheckOut, String ReservedDate, int MemberID, String Requirement, String Breakfast, String ReservedStatus, int GuestNo) {
+
 			super();
+			this.setMemberName(MemberName);
+			this.setMemberPhone(MemberPhone);
 			this.setReservedNo(ReservedNo);
 			this.setRoomNo(RoomNo);
 			this.setCheckIn(CheckIn);
@@ -28,8 +33,27 @@ public class Reservation {
 			this.setReservedStatus(ReservedStatus);
 			this.setGusetNo(GusetNo);
 		}
+		
+		public String getMemberName() {
+			return MemberName;
+		}
 
-		public String getReservedNo() {
+
+		public void setMemberName(String MemberName) {
+			this.MemberName = MemberName;
+		}
+		
+		public String getMemberPhone() {
+			return MemberPhone;
+		}
+
+
+		public void setMemberPhone(String MemberPhone) {
+			this.MemberPhone = MemberPhone;
+		}
+		
+
+		public int getReservedNo() {
 			return ReservedNo;
 		}
 

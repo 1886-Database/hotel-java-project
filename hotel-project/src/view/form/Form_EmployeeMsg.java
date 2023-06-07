@@ -102,7 +102,7 @@ public class Form_EmployeeMsg extends javax.swing.JPanel {
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -150,7 +150,8 @@ public class Form_EmployeeMsg extends javax.swing.JPanel {
         	@Override
         	public void mouseClicked(MouseEvent e) {
         	    String message = messagetxt.getText();
-        	    int memberID = Integer.parseInt(recieverIDtxt.getText());
+        	    String loginID = recieverIDtxt.getText();
+        	    int memberID = member.getMemberIDbyLoginID(loginID);
         	    
         	    String timestamp = String.valueOf(System.currentTimeMillis()); // Current timestamp as a string
         	    if (message.trim().equals("")) {
@@ -163,6 +164,8 @@ public class Form_EmployeeMsg extends javax.swing.JPanel {
         	            if (result == 1) {
         	                JOptionPane.showMessageDialog(panel, "메시지를 보냈습니다.", "done", 2);
         	                DefaultTableModel model = (DefaultTableModel)table.getModel();
+        	                DefaultTableModel model_1 = (DefaultTableModel)table_1.getModel();
+        	                model_1.setRowCount(0);
         	            	model.setRowCount(0);
         	            	sent();
         	            	recieved();
