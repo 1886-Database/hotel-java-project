@@ -1,7 +1,7 @@
 package model;
 
 public class Reservation {
-	private String ReservedNo;
+	private int ReservedNo;
 	private int RoomNo;
 	private String CheckIn;
 	private String CheckOut;
@@ -57,7 +57,7 @@ public class Reservation {
 			return ReservedNo;
 		}
 
-		public void setReservedNo(String ReservedNo) {
+		public void setReservedNo(int ReservedNo) {
 			this.ReservedNo = ReservedNo;
 		}
 
