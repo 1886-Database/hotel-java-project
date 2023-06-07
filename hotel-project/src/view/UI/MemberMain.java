@@ -45,7 +45,7 @@ public class MemberMain extends javax.swing.JFrame {
         loginID = id;
         setBackground(new Color(0, 0, 0, 0));
         home = new Form_Home();
-        form1 = new Form_RoomReservation();
+        
         form2 = new Form_EwhaHotel();
         form3 = new Form_Reservation();
         form4 = new Form_MyPage(loginID);
@@ -79,9 +79,13 @@ public class MemberMain extends javax.swing.JFrame {
         setForm(new Form_Home());
         
         form3.addButton1ActionListener(new ActionListener() {
-
             @Override
             public void actionPerformed(ActionEvent e) {
+               String[] s = form3.dataArr();
+               
+               for(int i=0; i<s.length; ++i)
+                   System.out.println(s[i]);
+               form1 = new Form_RoomReservation(s);
                setForm(form1);
             }
          });

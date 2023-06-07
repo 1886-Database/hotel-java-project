@@ -82,13 +82,29 @@ public class RoomManager {
 			Room[] r_array;
 			int rowCnt=11;
 			int index=0;
-			String room = "(SELECT db2023_room.RoomNo,BedType,Capacity,Price,RoomType,RoomSize,RoomName,NonSmoking,Parking FROM db2023_room LEFT OUTER JOIN db2023_reservation ON db2023_room.roomNo=db2023_reservation.roomNo WHERE db2023_reservation.checkIn!=? AND db2023_reservation.checkOut!=?) UNION ALL (SELECT db2023_room.RoomNo,BedType,Capacity,Price,RoomType,RoomSize,RoomName,NonSmoking,Parking FROM db2023_room LEFT OUTER JOIN db2023_reservation ON db2023_room.roomNo=db2023_reservation.roomNo WHERE db2023_reservation.roomNo IS NULL)";
+			String room = "SELECT db2023_room.roomNo,bedType,capacity,price,roomType,roomSize,roomName,nonSmoking,parking \r\n"
+					+ "FROM db2023_room JOIN db2023_reservation ON db2023_room.roomNo=db2023_reservation.roomNo\r\n"
+					+ "WHERE db2023_room.roomNo !=\r\n"
+					+ "ALL (SELECT db2023_room.roomNo\r\n"
+					+ "FROM db2023_room JOIN db2023_reservation ON db2023_room.roomNo=db2023_reservation.roomNo\r\n"
+					+ "WHERE ((? between checkIn AND checkOut and ? > checkOut)\r\n"
+					+ "OR (? < checkIn and ? between checkIn and checkOut)\r\n"
+					+ "OR (? between checkIn and checkOut and ? between checkIn and checkOut)\r\n"
+					+ "OR (? < checkIn and ? > checkOut)))\r\n"
+					+ "UNION ALL \r\n"
+					+ "(SELECT db2023_room.roomNo,bedType,capacity,price,roomType,roomSize,roomName,nonSmoking,parking FROM db2023_room LEFT OUTER JOIN db2023_reservation ON db2023_room.roomNo=db2023_reservation.roomNo WHERE db2023_reservation.roomNo IS NULL)";
 			
 			try {
 				con=myConnection.getConnection();
 				ps = con.prepareStatement(room);
 			    ps.setString(1, checkin);
 			    ps.setString(2,checkout);
+			    ps.setString(3, checkin);
+			    ps.setString(4,checkout);
+			    ps.setString(5, checkin);
+			    ps.setString(6,checkout);
+			    ps.setString(7, checkin);
+			    ps.setString(8,checkout);
 			    rs = ps.executeQuery();
 				
 				
@@ -124,8 +140,8 @@ public class RoomManager {
 		}
 		//삭제 메소드 
 		public int delete(int roomNo) {
-			String query1 = "UPDATE DB2023_room SET RoomNo=null WHERE RoomNo=?";
-			String query2 = "DELETE FROM DB2023_room WHERE RoomNo=?";
+			String query1 = "UPDATE DB2023_room SET roomNo=null WHERE roomNo=?";
+			String query2 = "DELETE FROM DB2023_room WHERE roomNo=?";
 			try {
 				con=myConnection.getConnection();
 				con.setAutoCommit(false);  /**트랜잭션 시작**/
@@ -180,7 +196,7 @@ public class RoomManager {
 		}
 		
 		public int edit(String roomno,String bedtype, String capacity, String price, String roomtype,String roomsize,String roomname) {
-			String SQL = "UPDATE DB2023_room SET RoomNo=?, BedType=?, Capacity=?, Price=?, RoomType=?, RoomSize=?, RoomName=?, NonSmoking=1, Parking=1 WHERE RoomNo=?";
+			String SQL = "UPDATE DB2023_room SET roomNo=?, bedType=?, capacity=?, price=?, roomType=?, roomSize=?, roomName=?, nonSmoking=1, parking=1 WHERE roomNo=?";
 			try {
 				con=myConnection.getConnection();
 				ps=con.prepareStatement(SQL);

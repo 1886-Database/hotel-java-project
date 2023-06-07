@@ -28,16 +28,37 @@ import modelManager.RoomManager;
 
 public class Form_RoomReservation extends javax.swing.JPanel {
 	
-	public Form_RoomReservation() {
-        initComponents();
-        
-        
+	private ReservationManager rsM;
+	private Form_Reservation r;
+	private String reserveddate = null;
+	private String requirement = null;
+	private String Breakfast = null;
+	private String reservedstatus = null;
+	private String guestno = null;
+	private String roomno;
+	private String checkin;
+	private String checkout;
+	
+	public String[] dataArr2() {
+        String RESERVEDDATE = reserveddate;
+        String REQUIREMENT = requirement;
+        String BREAKFAST_ = Breakfast;
+        String RESERVEDSTATUS = reservedstatus;
+        String GUESTNO = guestno;
+        String[] arr2 = {RESERVEDDATE,REQUIREMENT,BREAKFAST_,RESERVEDSTATUS,GUESTNO};
+       
+        return arr2;
     }
 	
+	public Form_RoomReservation(String[] s) {
+        initComponents();
+        rsM = new ReservationManager();
+        r = new Form_Reservation();
+        roomno = s[0];
+        checkin = s[1];
+        checkout = s[2];
+    }
 	
-	
-	
-	Form_Reservation r = new Form_Reservation();
 	
 	
 
@@ -98,26 +119,25 @@ public class Form_RoomReservation extends javax.swing.JPanel {
         JButton RButton = new JButton("예약하기");
         RButton.addMouseListener(new MouseAdapter(){
         	public void mouseClicked(MouseEvent e) {
-        		int ans = JOptionPane.showConfirmDialog(null, "입력한 정보대로 객실을 예약하시겠습니까?","Reserve Room",JOptionPane.YES_NO_OPTION);
-    			if(ans==JOptionPane.YES_OPTION) {
-    				//add
-    			}
         		Date date_now = new Date(System.currentTimeMillis()); // 현재시간을 가져와 Date형으로 저장한다
         		SimpleDateFormat fourteen_format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); 
-        		String reserveddate = fourteen_format.format(date_now);
+        		reserveddate = fourteen_format.format(date_now);
         		System.out.println(reserveddate);
-        		String requirement = textField.getText();
+        		requirement = textField.getText();
         		System.out.println(requirement);
-        		String guestno = PSELECT.getSelectedItem().toString();
-        		String Breakfast = BSELECT.getSelectedItem().toString();
-        		if(Breakfast=="조식신청 안함") {
-        			int breakfast = 0;
-        		}else {
-        			int breakfast = 1;
-        		}
-        		String reservedstatus="대기";
-        		System.out.println("인원: "+guestno+"조식여부: "+Breakfast+"요구사항: "+requirement);
-        		//d
+        		guestno = PSELECT.getSelectedItem().toString();
+        		Breakfast = BSELECT.getSelectedItem().toString();
+        		reservedstatus="대기";
+        		
+        		int ans = JOptionPane.showConfirmDialog(null, "입력한 정보대로 객실을 예약하시겠습니까?","Reserve Room",JOptionPane.YES_NO_OPTION);
+        		
+    			if(ans==JOptionPane.YES_OPTION) {
+    				rsM.reservation(roomno,checkin,checkout,reserveddate,requirement,Breakfast,reservedstatus,guestno);
+    				
+    			}
+        		
+        		
+        		
         	}
         });
         
