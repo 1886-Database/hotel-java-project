@@ -49,7 +49,7 @@ public class MemberMain extends javax.swing.JFrame {
         form2 = new Form_EwhaHotel();
         form3 = new Form_Reservation();
         form4 = new Form_MyPage(loginID);
-        form5 = new Form_ViewMyReserv();
+        form5 = new Form_ViewMyReserv(loginID);
         form6 = new Form_MemberMsg(MemberID);
         menu.initMoving(MemberMain.this);
         menu.addEventMenuSelected(new EventMenuSelected() {
