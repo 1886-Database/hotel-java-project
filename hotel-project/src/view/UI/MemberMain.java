@@ -85,7 +85,7 @@ public class MemberMain extends javax.swing.JFrame {
                
                for(int i=0; i<s.length; ++i)
                    System.out.println(s[i]);
-               form1 = new Form_RoomReservation(s);
+               form1 = new Form_RoomReservation(loginID,s);
                setForm(form1);
             }
          });

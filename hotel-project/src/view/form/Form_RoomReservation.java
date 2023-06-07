@@ -22,14 +22,20 @@ import javax.swing.JButton;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
+import model.Member;
 import view.form.Form_Reservation;
+import modelManager.MemberManager;
 import modelManager.ReservationManager;
 import modelManager.RoomManager;
 
 public class Form_RoomReservation extends javax.swing.JPanel {
 	
+	private Member mem;
+	private MemberManager mM;
 	private ReservationManager rsM;
 	private Form_Reservation r;
+	
+	private int memberID;
 	private String reserveddate = null;
 	private String requirement = null;
 	private String Breakfast = null;
@@ -46,11 +52,12 @@ public class Form_RoomReservation extends javax.swing.JPanel {
         String RESERVEDSTATUS = reservedstatus;
         String GUESTNO = guestno;
         String[] arr2 = {RESERVEDDATE,REQUIREMENT,BREAKFAST_,RESERVEDSTATUS,GUESTNO};
-       
+        
         return arr2;
     }
 	
-	public Form_RoomReservation(String[] s) {
+	public Form_RoomReservation(String loginID,String[] s) {
+		memberID = mM.getByLoginID(loginID).getMemberID();
         initComponents();
         rsM = new ReservationManager();
         r = new Form_Reservation();
