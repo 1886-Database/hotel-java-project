@@ -10,12 +10,19 @@ import java.util.ArrayList;
 import model.Message;
 import myConnection.MY_Connection;
 
+import modelManager.MemberManager;
+import model.Member;
+
+
 public class MessageManager {
 	private MY_Connection myConnection;
 	private Connection con;
 	private Statement stmt;
 	private PreparedStatement ps;
 	private ResultSet rs;
+	private MemberManager member;
+	
+	
 
 	public MessageManager() {
 		try {
@@ -54,7 +61,9 @@ public class MessageManager {
 	}
 	public int EmsendMessage(int memberID, String messagestatus, String content, String sendtime) {
 	    String SQL = "INSERT INTO DB2023_message VALUES(?,?,?,?,?)";
+	   
 	    try {
+	    	
 	        con = myConnection.getConnection();
 	        ps = con.prepareStatement(SQL);
 	        stmt = con.createStatement();

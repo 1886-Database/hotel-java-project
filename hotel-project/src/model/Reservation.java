@@ -11,12 +11,19 @@ public class Reservation {
 	private boolean Breakfast;
 	private String ReservedStatus;
 	private int GusetNo;
-	
+	private String MemberName;
+	private String MemberPhone;
 	//기본 생성자
 		public Reservation() {}
 		
+<<<<<<< Updated upstream
 		public Reservation(int ReservedNo,int RoomNo,String CheckIn, String CheckOut, String ReservedDate, int MemberID, String Requirement, Boolean Breakfast, String ReservedStatus, int GuestNo) {
+=======
+		public Reservation(String MemberName,String MemberPhone,int ReservedNo,int RoomNo,String CheckIn, String CheckOut, String ReservedDate, int MemberID, String Requirement, String Breakfast, String ReservedStatus, int GuestNo) {
+>>>>>>> Stashed changes
 			super();
+			this.setMemberName(MemberName);
+			this.setMemberPhone(MemberPhone);
 			this.setReservedNo(ReservedNo);
 			this.setRoomNo(RoomNo);
 			this.setCheckIn(CheckIn);
@@ -28,7 +35,26 @@ public class Reservation {
 			this.setReservedStatus(ReservedStatus);
 			this.setGusetNo(GusetNo);
 		}
+		
+		public String getMemberName() {
+			return MemberName;
+		}
 
+<<<<<<< Updated upstream
+=======
+		public void setMemberName(String MemberName) {
+			this.MemberName = MemberName;
+		}
+		
+		public String getMemberPhone() {
+			return MemberPhone;
+		}
+
+		public void setMemberPhone(String MemberPhone) {
+			this.MemberPhone = MemberPhone;
+		}
+		
+>>>>>>> Stashed changes
 		public int getReservedNo() {
 			return ReservedNo;
 		}
