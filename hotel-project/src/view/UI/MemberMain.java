@@ -71,6 +71,7 @@ public class MemberMain extends javax.swing.JFrame {
                 	form5.refresh();
                 } else if (index==9) { //메시지
                 	setForm(form6);
+                	form6.refresh();
                 } else if (index==11) 
                 	System.exit(0);
        
