@@ -13,120 +13,124 @@ public class Reservation {
 	private int GusetNo;
 	private String MemberName;
 	private String MemberPhone;
-	//기본 생성자
-		public Reservation() {}
-		
 
-		public Reservation(String MemberName,String MemberPhone,int ReservedNo,int RoomNo,String CheckIn, String CheckOut, String ReservedDate, int MemberID, String Requirement, String Breakfast, String ReservedStatus, int GuestNo) {
+	// 기본 생성자
+	public Reservation() {
+	}
 
-			super();
-			this.setMemberName(MemberName);
-			this.setMemberPhone(MemberPhone);
-			this.setReservedNo(ReservedNo);
-			this.setRoomNo(RoomNo);
-			this.setCheckIn(CheckIn);
-			this.setCheckOut(CheckOut);
-			this.setReservedDate(ReservedDate);
-			this.setMemberID(MemberID);
-			this.setRequirement(Requirement);
-			this.setBreakfast(Breakfast);
-			this.setReservedStatus(ReservedStatus);
-			this.setGusetNo(GusetNo);
-		}
-		
-		public String getMemberName() {
-			return MemberName;
-		}
+	// view 생성자
+	public Reservation(String MemberName, String MemberPhone, int ReservedNo, int RoomNo, String CheckIn,
+			String CheckOut, String ReservedDate, int MemberID, String Requirement, String Breakfast,
+			String ReservedStatus, int GuestNo) {
 
+		super();
+		this.setMemberName(MemberName);
+		this.setMemberPhone(MemberPhone);
+		this.setReservedNo(ReservedNo);
+		this.setRoomNo(RoomNo);
+		this.setCheckIn(CheckIn);
+		this.setCheckOut(CheckOut);
+		this.setReservedDate(ReservedDate);
+		this.setMemberID(MemberID);
+		this.setRequirement(Requirement);
+		this.setBreakfast(Breakfast);
+		this.setReservedStatus(ReservedStatus);
+		this.setGusetNo(GusetNo);
+	}
 
-		public void setMemberName(String MemberName) {
-			this.MemberName = MemberName;
-		}
-		
-		public String getMemberPhone() {
-			return MemberPhone;
-		}
+	public String getMemberName() {
+		return MemberName;
+	}
 
+	public void setMemberName(String MemberName) {
+		this.MemberName = MemberName;
+	}
 
-		public void setMemberPhone(String MemberPhone) {
-			this.MemberPhone = MemberPhone;
-		}
-		
+	public String getMemberPhone() {
+		return MemberPhone;
+	}
 
-		public int getReservedNo() {
-			return ReservedNo;
-		}
+	public void setMemberPhone(String MemberPhone) {
+		this.MemberPhone = MemberPhone;
+	}
 
-		public void setReservedNo(int ReservedNo) {
-			this.ReservedNo = ReservedNo;
-		}
+	public int getReservedNo() {
+		return ReservedNo;
+	}
 
-		public int getRoomNo() {
-			return RoomNo;
-		}
+	public void setReservedNo(int ReservedNo) {
+		this.ReservedNo = ReservedNo;
+	}
 
-		public void setRoomNo(int RoomNo) {
-			this.RoomNo = RoomNo;
-		}
+	public int getRoomNo() {
+		return RoomNo;
+	}
 
-		public String getCheckIn() {
-			return CheckIn;
-		}
+	public void setRoomNo(int RoomNo) {
+		this.RoomNo = RoomNo;
+	}
 
-		public void setCheckIn(String CheckIn) {
-			this.CheckIn = CheckIn;
-		}
+	public String getCheckIn() {
+		return CheckIn;
+	}
 
-		public String getCheckOut() {
-			return CheckOut;
-		}
+	public void setCheckIn(String CheckIn) {
+		this.CheckIn = CheckIn;
+	}
 
-		public void setCheckOut(String CheckOut) {
-			this.CheckOut = CheckOut;
-		}
+	public String getCheckOut() {
+		return CheckOut;
+	}
 
-		public String getReservedDate() {
-			return ReservedDate;
-		}
+	public void setCheckOut(String CheckOut) {
+		this.CheckOut = CheckOut;
+	}
 
-		public void setReservedDate(String ReservedDate) {
-			this.ReservedDate = ReservedDate;
-		}
+	public String getReservedDate() {
+		return ReservedDate;
+	}
 
-		public int getMemberID() {
-			return MemberID;
-		}
+	public void setReservedDate(String ReservedDate) {
+		this.ReservedDate = ReservedDate;
+	}
 
-		public void setMemberID(int MemberID) {
-			this.MemberID = MemberID;
-		}
+	public int getMemberID() {
+		return MemberID;
+	}
 
-		public String getRequirement() {
-			return Requirement;
-		}
+	public void setMemberID(int MemberID) {
+		this.MemberID = MemberID;
+	}
 
-		public void setRequirement(String Requirement) {
-			this.Requirement = Requirement;
-		}
-		public String getBreakfast() {
-			return Breakfast;
-		}
+	public String getRequirement() {
+		return Requirement;
+	}
 
-		public void setBreakfast(String Breakfast) {
-			this.Breakfast = Breakfast;
-		}
-		public String getReservedStatus() {
-			return ReservedStatus;
-		}
+	public void setRequirement(String Requirement) {
+		this.Requirement = Requirement;
+	}
 
-		public void setReservedStatus(String ReservedStatus) {
-			this.ReservedStatus = ReservedStatus;
-		}
-		public int getGusetNo() {
-			return GusetNo;
-		}
+	public String getBreakfast() {
+		return Breakfast;
+	}
 
-		public void setGusetNo(int GusetNo) {
-			this.GusetNo = GusetNo;
-		}
+	public void setBreakfast(String Breakfast) {
+		this.Breakfast = Breakfast;
+	}
+
+	public String getReservedStatus() {
+		return ReservedStatus;
+	}
+
+	public void setReservedStatus(String ReservedStatus) {
+		this.ReservedStatus = ReservedStatus;
+	}
+
+	public int getGusetNo() {
+		return GusetNo;
+	}
+
+	public void setGusetNo(int GusetNo) {
+		this.GusetNo = GusetNo;
+	}
 }

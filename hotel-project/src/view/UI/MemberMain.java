@@ -24,6 +24,7 @@ import view.form.Form_RoomReservation;
 import view.form.Form_Reservation;
 import view.form.Form_MyPage;
 import view.form.Form_ViewMyReserv;
+import view.form.Form_ViewMyReservDetails;
 
 public class MemberMain extends javax.swing.JFrame {
 
@@ -67,6 +68,7 @@ public class MemberMain extends javax.swing.JFrame {
                 	setForm(form4);
                 } else if (index==8) { //예약조회
                 	setForm(form5);
+                	form5.refresh();
                 } else if (index==9) { //메시지
                 	setForm(form6);
                 } else if (index==11) 
@@ -89,6 +91,7 @@ public class MemberMain extends javax.swing.JFrame {
                setForm(form1);
             }
          });
+        
         
     }
 

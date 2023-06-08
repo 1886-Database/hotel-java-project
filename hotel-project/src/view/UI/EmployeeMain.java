@@ -21,7 +21,6 @@ import view.form.Form_EmployeeMsg;
 import view.form.Form_AdMyPage;
 import view.form.Form_AdReserv;
 import view.form.Form_AdRoom;
-import view.form.Form_AdSales;
 import view.form.Form_Home;
 
 public class EmployeeMain extends javax.swing.JFrame {
@@ -35,10 +34,8 @@ public class EmployeeMain extends javax.swing.JFrame {
     private Form_AdReserv form2;
     private Form_AdEmployee form3;
     private Form_AdMember form4;
-    private Form_AdSales form5;
-    private Form_AdMyPage form6;
-
-    private Form_EmployeeMsg form7;
+    private Form_AdMyPage form5;
+    private Form_EmployeeMsg form6;
     static String loginID = "wcampbell"; 
     static int EmployeeID = 2; //테스트를 위한 값 초기화... 마지막에 삭제해야함
 
@@ -53,9 +50,8 @@ public class EmployeeMain extends javax.swing.JFrame {
         form2 = new Form_AdReserv();
         form3 = new Form_AdEmployee(loginID);
         form4 = new Form_AdMember();
-        form5 = new Form_AdSales();
-        form6 = new Form_AdMyPage(loginID);
-        form7 = new Form_EmployeeMsg(EmployeeID);
+        form5 = new Form_AdMyPage(loginID);
+        form6 = new Form_EmployeeMsg(EmployeeID);
         menu.initMoving(EmployeeMain.this);
         menu.addEventMenuSelected(new EventMenuSelected() {
             @Override
@@ -70,12 +66,10 @@ public class EmployeeMain extends javax.swing.JFrame {
                     setForm(form3);
                 } else if (index == 5) {
                     setForm(form4);
-                } else if (index == 6) {
+                } else if (index == 10) {
                     setForm(form5);
-                }else if (index == 10) {
-                    setForm(form6);
                 }else if (index ==11) {
-                    setForm(form7);
+                    setForm(form6);
                 }else if (index ==13) {
                     System.exit(0);
                 }

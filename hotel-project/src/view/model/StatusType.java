@@ -1,5 +1,5 @@
 package view.model;
 
 public enum StatusType {
-    PENDING, APPROVED, REJECT
+    승인, 대기, 거절, 취소
 }

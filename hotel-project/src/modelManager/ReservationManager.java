@@ -210,6 +210,23 @@ public class ReservationManager {
 		r_array = new Reservation[rowCnt];
 		return r_array;
 	}
+	
+	//예약조회 : 예약 상태를 '취소'로 변경
+	public int cancel(int reservedNo) {
+		String SQL = "UPDATE DB2023_reservation SET reservedStatus = '취소' WHERE reservedNo=?";
+		try {
+			con = myConnection.getConnection();
+			ps = con.prepareStatement(SQL);
+			ps.setInt(1, reservedNo);
+			ps.executeUpdate();
+			return 1; //예약 취소 완료
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			myConnection.close(null, null, ps, con);
+		}
+		return -1; //데이터베이스 오류
+	}
 
 	public int edit(int reservedNo, String reservedStatus) {
 		String SQL = "UPDATE DB2023_reservation SET reservedStatus=? WHERE reservedNo=?";
@@ -223,7 +240,7 @@ public class ReservationManager {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			myConnection.close(null, stmt, null, con);
+			myConnection.close(null, null, ps, con);
 		}
 		return -1;
 

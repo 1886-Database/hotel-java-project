@@ -57,13 +57,18 @@ public class Form_RoomReservation extends javax.swing.JPanel {
     }
 	
 	public Form_RoomReservation(String loginID,String[] s) {
-		memberID = mM.getByLoginID(loginID).getMemberID();
-        initComponents();
+		
+		mM = new MemberManager();
         rsM = new ReservationManager();
         r = new Form_Reservation();
+        
         roomno = s[0];
         checkin = s[1];
         checkout = s[2];
+        memberID = mM.getByLoginID(loginID).getMemberID();
+        
+        
+        initComponents();
     }
 	
 	
