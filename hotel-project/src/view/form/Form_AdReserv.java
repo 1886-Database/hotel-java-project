@@ -91,7 +91,7 @@ public class Form_AdReserv extends javax.swing.JPanel {
 
         jLabel1.setFont(new java.awt.Font("맑은 고딕", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(127, 127, 127));
-        jLabel1.setText("Reservation");
+        jLabel1.setText("Reservation Management");
 
         spTable.setBorder(null);
 
@@ -210,7 +210,7 @@ public class Form_AdReserv extends javax.swing.JPanel {
     	ReserveState.setSelectedIndex(i);
     	
     }
-    private void refresh() {
+    public void refresh() {
     	DefaultTableModel model = (DefaultTableModel)table.getModel();
     	model.setRowCount(0);
     	all();

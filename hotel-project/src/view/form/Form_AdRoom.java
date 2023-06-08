@@ -109,7 +109,7 @@ public class Form_AdRoom extends javax.swing.JPanel {
         
         jLabel1.setFont(new java.awt.Font("sansserif", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(127, 127, 127));
-        jLabel1.setText("Room");
+        jLabel1.setText("Room Management");
 
         spTable.setBorder(null);
 
