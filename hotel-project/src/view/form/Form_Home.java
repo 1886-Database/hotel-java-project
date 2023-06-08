@@ -59,6 +59,7 @@ public class Form_Home extends javax.swing.JPanel {
         INFOIMG.setLayout(null);
         INFOIMG.setVisible(true);
         InfoLabel = new JLabel("<html><body><center>국내 최고의 럭셔리 비즈니스 호텔인 이화호텔 서울은 <br> 최고급 서비스를 제공하며 서울 아현동에 자리잡고 있습니다. <br> 1886년도에 설립된 전통있는 호텔로, 이화의 정신이 담겨있습니다.</center></body></html>");
+        InfoLabel.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
         InfoLabel.setHorizontalAlignment(SwingConstants.CENTER);
         
         //ROOMS&SUITE 부분
@@ -76,6 +77,7 @@ public class Form_Home extends javax.swing.JPanel {
         RSLabel.setForeground(new Color(127, 127, 127));
         RSLabel.setFont(new Font("SansSerif", Font.BOLD, 18));
         RSLabel_1 = new JLabel("고객님의 여유로운 호텔스테이를 위해 조식서비스를 제공해드립니다");
+        RSLabel_1.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
         RSLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
         
         
