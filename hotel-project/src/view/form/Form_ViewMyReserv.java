@@ -114,7 +114,7 @@ public class Form_ViewMyReserv extends JPanel {
 					JPanel dPanel = new Form_ViewMyReservDetails(reservedNo);
 					popup.getContentPane().add(dPanel);
 					popup.setVisible(true);
-					popup.setSize(840, 500);					
+					popup.setSize(840, 550);					
 					popup.setLocationRelativeTo(panelBorder1);  
 					popup.setResizable(false);  				
 				}
