@@ -62,6 +62,7 @@ public class EmployeeMain extends javax.swing.JFrame {
                     setForm(form1);
                 } else if (index == 3) {
                     setForm(form2);
+                    form2.refresh();
                 } else if (index == 4) {
                     setForm(form3);
                 } else if (index == 5) {
@@ -70,6 +71,7 @@ public class EmployeeMain extends javax.swing.JFrame {
                     setForm(form5);
                 }else if (index ==10) {
                     setForm(form6);
+                    form6.refresh();
                 }else if (index ==12) {
                     System.exit(0);
                 }
