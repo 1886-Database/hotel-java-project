@@ -63,7 +63,7 @@ public class Form_AdReserv extends javax.swing.JPanel {
         panel = new javax.swing.JLayeredPane();
         panelBorder1 = new view.swing.PanelBorder();
         jLabel1 = new javax.swing.JLabel();
-        jLabel1.setBounds(20, 20, 110, 22);
+        jLabel1.setBounds(20, 20, 259, 22);
         spTable = new javax.swing.JScrollPane();
         spTable.setBounds(65, 69, 750, 420);
         table = new view.swing.Table();
