@@ -107,14 +107,16 @@ public class Form_Reservation extends javax.swing.JPanel {
         //필터기능
         JLabel lblNewLabel = new JLabel("체크인 날짜");
         lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+       
         
         JDateChooser dateChooser = new JDateChooser();
+        dateChooser.setMinSelectableDate(new Date(System.currentTimeMillis())); //오늘 날짜 이후로만 선택이 가능
         
         lblNewLabel_1 = new JLabel("체크아웃 날짜");
         lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
         
         JDateChooser dateChooser_1 = new JDateChooser();
-        
+        dateChooser_1.setMinSelectableDate(new Date(System.currentTimeMillis())); //오늘 날짜 이후로만 선택이 가능
         
         
         JButton btnNewButton = new JButton("적용");
@@ -145,17 +147,20 @@ public class Form_Reservation extends javax.swing.JPanel {
         table.addMouseListener(new MouseAdapter() {
            @Override
            public void mouseClicked(MouseEvent e) {
-        	   
+        	   if(checkin==null||checkout==null)
+        		   JOptionPane.showMessageDialog(panelBorder1,"체크인 날짜와 체크아웃 날짜를 먼저 선택해주세요.", "Date Not Selected",2);
+        	   else
       				button1.doClick();
-               
-      				int row = table.getSelectedRow();
-      				String roomno = String.valueOf(table.getModel().getValueAt(row, 0 ));
-      				String roomname = (String) table.getModel().getValueAt(row, 1 );
-      				String roomtype = (String) table.getModel().getValueAt(row, 2 );
-      				String bedtype = String.valueOf(table.getModel().getValueAt(row, 3 ));
-      				String price = String.valueOf(table.getModel().getValueAt(row, 4 ));
+      				
+      				//아래 코드들 필요 없어보여서 일단 주석 쳐놨는데, 사용 안 하는 코드면 삭제해주세요!
+      				//int row = table.getSelectedRow();
+      				//String roomno = String.valueOf(table.getModel().getValueAt(row, 0 ));
+      				//String roomname = (String) table.getModel().getValueAt(row, 1 );
+      				//String roomtype = (String) table.getModel().getValueAt(row, 2 );
+      				//String bedtype = String.valueOf(table.getModel().getValueAt(row, 3 ));
+      				//String price = String.valueOf(table.getModel().getValueAt(row, 4 ));
               
-      				System.out.println("예약할 객실 번호: "+roomno);
+      				//System.out.println("예약할 객실 번호: "+roomno);
               
       			}
            
