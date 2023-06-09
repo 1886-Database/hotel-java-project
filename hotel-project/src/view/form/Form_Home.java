@@ -1,4 +1,4 @@
-package view.form;
+package view.form; 
 
 import javax.swing.ImageIcon;
 import java.awt.image.*;
