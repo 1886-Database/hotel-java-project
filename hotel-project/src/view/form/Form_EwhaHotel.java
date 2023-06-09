@@ -27,10 +27,10 @@ import javax.swing.JButton;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JTextField;
 
-public class Form_EwhaHotel extends javax.swing.JPanel {
+public class Form_Home extends javax.swing.JPanel {
 	
 	
-    public Form_EwhaHotel() {
+    public Form_Home() {
         initComponents();
         JPanel p = new JPanel();
         p.setBackground(Color.WHITE);   
