@@ -17,7 +17,7 @@ import view.event.EventMenuSelected;
 import view.form.Form_1;
 import view.form.Form_2;
 import view.form.Form_3;
-import view.form.Form_EwhaHotel;
+import view.form.Form_Home;
 import view.form.Form_MemberMsg;
 import view.form.Form_RoomReservation;
 import view.form.Form_Reservation;
@@ -32,7 +32,7 @@ public class MemberMain extends javax.swing.JFrame {
      * Creates new form Main
      */
     private Form_RoomReservation form1;
-    private Form_EwhaHotel form2;
+    private Form_Home form2;
     private Form_Reservation form3;
     private Form_MyPage form4;
     private Form_ViewMyReserv form5;
@@ -44,7 +44,7 @@ public class MemberMain extends javax.swing.JFrame {
         initComponents();
         loginID = id;
         setBackground(new Color(0, 0, 0, 0));
-        form2 = new Form_EwhaHotel();
+        form2 = new Form_Home();
         form3 = new Form_Reservation();
         form4 = new Form_MyPage(loginID);
         form5 = new Form_ViewMyReserv(loginID);
@@ -77,7 +77,7 @@ public class MemberMain extends javax.swing.JFrame {
             }
         });
         //set when system open start
-        setForm(new Form_EwhaHotel());
+        setForm(new Form_Home());
         
         //객실 예약 페이지에서 객실 상세 예약 페이지로 이동
         form3.addButton1ActionListener(new ActionListener() {
