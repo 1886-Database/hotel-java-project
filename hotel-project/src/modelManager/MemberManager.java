@@ -17,72 +17,74 @@ public class MemberManager {
 	private PreparedStatement ps;
 	private ResultSet rs;
 
-	//기본 생성자 : 커넥션 객체 생성
+	// 기본 생성자 : 커넥션 객체 생성
 	public MemberManager() {
 		try {
 			myConnection = new MY_Connection();
-		} 
-		catch(Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	
-	//로그인 화면 : 입력받은 id와 pw 와 일치하는 정보가 member 테이블에 존재하는지 확인
+
+	// 로그인 화면 : 입력받은 loginID와 pw 와 일치하는 정보가 member 테이블에 존재하는지 확인 후 존재하면 return 1
 	public int login(String id, String pw) {
 		String SQL = "SELECT * FROM DB2023_member WHERE loginID=? and password=?";
 		try {
-			con=myConnection.getConnection();
-		    ps = con.prepareStatement(SQL);
-		    ps.setString(1, id);
-		    ps.setString(2,pw);
-		    rs = ps.executeQuery();
-		    
-		    if (rs.next()) { 
-		    	System.out.println("멤버 로그인 성공");
-		    	return 1; //로그인 성공
-		    }
-		    return 0; //로그인 실패 (잘못된 id/pw)
-		}catch(SQLException se){
-		    se.printStackTrace();
-		}finally {
-			myConnection.close(rs,null,ps,con);
+			con = myConnection.getConnection();
+			ps = con.prepareStatement(SQL);
+			ps.setString(1, id);
+			ps.setString(2, pw);
+			rs = ps.executeQuery();
+
+			if (rs.next()) {
+				System.out.println("멤버 로그인 성공");
+				return 1; // 로그인 성공
+			}
+			return 0; // 로그인 실패 (잘못된 id/pw)
+		} catch (SQLException se) {
+			se.printStackTrace();
+		} finally {
+			myConnection.close(rs, null, ps, con);
 		}
-		return -1; //데이터베이스 오류 
-	 }
-	
-	//회원가입 화면 : ID 중복 검사
+		return -1; // 데이터베이스 오류
+	}
+
+	// 회원가입 화면 ID 중복 검사 기능 : 인자로 받은 loginID 값이 member 테이블 loginID 필드에 이미 존재하는 속성 값인지
+	// 확인 후 존재하면 return 0.
+	// 존재하지 않으면 return 1
 	public int checkID(String id) {
 		String SQL = "SELECT * FROM DB2023_member WHERE loginID=?";
 		System.out.println("checkID");
 		try {
-			con=myConnection.getConnection();
-		    ps = con.prepareStatement(SQL);
-		    ps.setString(1, id);
-		    rs = ps.executeQuery();
-		    
-		    if (rs.next()) { 
-		    	System.out.println("중복 ID 존재");
-		    	return 0; //중복 ID 존재
-		    }
-		    return 1; //중복 ID 존재하지 않음
-		}catch(SQLException se){
-		    se.printStackTrace();
-		}finally {
-			myConnection.close(rs,null,ps,con);
+			con = myConnection.getConnection();
+			ps = con.prepareStatement(SQL);
+			ps.setString(1, id);
+			rs = ps.executeQuery();
+
+			if (rs.next()) {
+				System.out.println("중복 ID 존재");
+				return 0; // 중복 ID 존재
+			}
+			return 1; // 중복 ID 존재하지 않음
+		} catch (SQLException se) {
+			se.printStackTrace();
+		} finally {
+			myConnection.close(rs, null, ps, con);
 		}
-		return -1; //데이터베이스 오류 
+		return -1; // 데이터베이스 오류
 	}
-	
-	//회원가입 화면 : 입력받은 정보를 member 테이블에 insert
-	public int signUp(String name,String loginID,String password,String phoneNum,String birthDate){
+
+	// 회원가입 화면 : 회원가입 화면에서 입력받은 정보를 인자로 받아서 member 테이블에 insert.
+	// 이때, memberID 와 grade 는 사용자에게서 입력받지 않고 프로그램에서 계산한 값(혹은 default 값)으로 처리
+	public int signUp(String name, String loginID, String password, String phoneNum, String birthDate) {
 		String SQL = "INSERT INTO DB2023_member VALUES(?,?,?,?,?,?,?)";
 		try {
-			con=myConnection.getConnection();
-			ps=con.prepareStatement(SQL);
-			stmt=con.createStatement();
-			rs=stmt.executeQuery("select max(memberID) from DB2023_member");
-			while(rs.next()) {
-				int memberID = rs.getInt(1)+1;
+			con = myConnection.getConnection();
+			ps = con.prepareStatement(SQL);
+			stmt = con.createStatement();
+			rs = stmt.executeQuery("select max(memberID) from DB2023_member");
+			while (rs.next()) {
+				int memberID = rs.getInt(1) + 1;
 				ps.setInt(1, memberID);
 				ps.setString(2, loginID);
 				ps.setString(3, name);
@@ -93,118 +95,122 @@ public class MemberManager {
 				ps.executeUpdate();
 				return 1;
 			}
-		}catch(SQLException se) {
+		} catch (SQLException se) {
 			se.printStackTrace();
-		}finally {
-			myConnection.close(rs,stmt,ps,con);
+		} finally {
+			myConnection.close(rs, stmt, ps, con);
 		}
-		return -1; //데이터베이스 오류
+		return -1; // 데이터베이스 오류
 	}
-	
-	//마이페이지 화면 : 인자로 받은 id 에 해당하는 레코드의 비밀번호를 인자로 받은 pw 값으로 변경
-	public int passwordChange(String loginID,String password) {
-		String SQL="UPDATE DB2023_member SET password=? WHERE loginID=?";
+
+	// 마이페이지 화면 패스워드 변경 기능 : 인자로 받은 loginID 와 일치하는 레코드의 password 속성 값을 인자로 받은 pw 값으로
+	// 변경
+	public int passwordChange(String loginID, String password) {
+		String SQL = "UPDATE DB2023_member SET password=? WHERE loginID=?";
 		try {
-			con=myConnection.getConnection();
-			ps=con.prepareStatement(SQL);
+			con = myConnection.getConnection();
+			ps = con.prepareStatement(SQL);
 			ps.setString(1, password);
 			ps.setString(2, loginID);
 			ps.executeUpdate();
-		}catch(SQLException se) {
+		} catch (SQLException se) {
 			se.printStackTrace();
-		}finally {
+		} finally {
 			myConnection.close(null, null, ps, con);
 		}
 		return -1;
 	}
-	
-	//마이페이지 화면 : 인자로 받은 id 에 해당하는 레코드를 Member 객체에 저장한 후 Member 객체 반환
+
+	// 마이페이지 화면 : 인자로 받은 loginID 와 일치하는 레코드를 select 한 후 해당 레코드의 정보를 모두 Member 객체에 저장
+	// -> Member 객체 return
 	public Member getByLoginID(String loginID) {
 		String SQL = "SELECT * FROM DB2023_member WHERE loginID=?";
 		try {
-			con=myConnection.getConnection();
-			ps=con.prepareStatement(SQL);
+			con = myConnection.getConnection();
+			ps = con.prepareStatement(SQL);
 			ps.setString(1, loginID);
 			rs = ps.executeQuery();
-			while(rs.next()) {
-				Member member = new Member(rs.getInt(1),loginID,rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6),rs.getString(7));
+			while (rs.next()) {
+				Member member = new Member(rs.getInt(1), loginID, rs.getString(3), rs.getString(4), rs.getString(5),
+						rs.getString(6), rs.getString(7));
 				return member;
 			}
-		}catch(SQLException se) {
+		} catch (SQLException se) {
 			se.printStackTrace();
-		}finally {
+		} finally {
 			myConnection.close(rs, null, ps, con);
 		}
 		Member member = new Member();
 		return member;
 	}
-	
+
 	public String getLoginIDbyMemberID(int memberID) {
-	    String SQL = "SELECT loginID FROM DB2023_member WHERE memberID=?";
-	    String loginID = "";
-	    try {
-	        con = myConnection.getConnection();
-	        ps = con.prepareStatement(SQL);
-	        ps.setInt(1, memberID);
-	        rs = ps.executeQuery();
-	        
-	        if (rs.next()) {  // 결과 집합에 데이터가 있는지 확인
-	            loginID = rs.getString(1);
-	        }
-	    } catch (SQLException se) {
-	        se.printStackTrace();
-	    } finally {
-	        myConnection.close(rs, null, ps, con);
-	    }
-	    return loginID;
+		String SQL = "SELECT loginID FROM DB2023_member WHERE memberID=?";
+		String loginID = "";
+		try {
+			con = myConnection.getConnection();
+			ps = con.prepareStatement(SQL);
+			ps.setInt(1, memberID);
+			rs = ps.executeQuery();
+
+			if (rs.next()) { // 결과 집합에 데이터가 있는지 확인
+				loginID = rs.getString(1);
+			}
+		} catch (SQLException se) {
+			se.printStackTrace();
+		} finally {
+			myConnection.close(rs, null, ps, con);
+		}
+		return loginID;
 	}
 
 	public int getMemberIDbyLoginID(String LoginID) {
-	    String SQL = "SELECT memberID FROM DB2023_member WHERE loginID=?";
-	    int memberID = 0;
-	    try {
-	        con = myConnection.getConnection();
-	        ps = con.prepareStatement(SQL);
-	        ps.setString(1, LoginID);
-	        rs = ps.executeQuery();
-	        
-	        if (rs.next()) {  // 결과 집합에 데이터가 있는지 확인
-	            memberID = rs.getInt(1);
-	        }
-	    } catch (SQLException se) {
-	        se.printStackTrace();
-	    } finally {
-	        myConnection.close(rs, null, ps, con);
-	    }
-	    return memberID;
+		String SQL = "SELECT memberID FROM DB2023_member WHERE loginID=?";
+		int memberID = 0;
+		try {
+			con = myConnection.getConnection();
+			ps = con.prepareStatement(SQL);
+			ps.setString(1, LoginID);
+			rs = ps.executeQuery();
+
+			if (rs.next()) { // 결과 집합에 데이터가 있는지 확인
+				memberID = rs.getInt(1);
+			}
+		} catch (SQLException se) {
+			se.printStackTrace();
+		} finally {
+			myConnection.close(rs, null, ps, con);
+		}
+		return memberID;
 	}
-	
-	//회원관리 화면 : member 테이블의 모든 레코드를 각각 Member 객체에 저장한 후 객체 배열 반환
+
+	// 회원 관리 화면 : member 테이블의 모든 레코드를 각각 Member 객체에 저장한 후 Member 객체들이 담긴 객체 배열
+	// return
 	public Member[] getAllMember() {
 		Member[] m_array;
-		int rowCnt=0;
-		int index=0;
+		int rowCnt = 0;
+		int index = 0;
 		String mem = "SELECT * FROM DB2023_member";
 		String memCnt = "SELECT COUNT(*) FROM DB2023_member";
 		try {
-			con=myConnection.getConnection();
-			stmt=con.createStatement();
-			
-			//member 테이블의 레코드 개수 크기 만큼의 객체배열 생성
-			ResultSet rsCnt=stmt.executeQuery(memCnt);
-			
-			if(rsCnt.next()) {
-				rowCnt =rsCnt.getInt(1);
+			con = myConnection.getConnection();
+			stmt = con.createStatement();
+
+			// member 테이블의 레코드 개수 크기 만큼의 객체배열 생성
+			ResultSet rsCnt = stmt.executeQuery(memCnt);
+
+			if (rsCnt.next()) {
+				rowCnt = rsCnt.getInt(1);
 			}
-			m_array=new Member[rowCnt];
+			m_array = new Member[rowCnt];
 			for (int i = 0; i < m_array.length; ++i)
 				m_array[i] = new Member();
-			
-			rsCnt.close();     //자원반납
-			
-			//각 객체에 값 저장
-			rs=stmt.executeQuery(mem);
-			while(rs.next()) {
+
+			rsCnt.close(); // 자원반납
+
+			// 각 객체에 값 저장
+			rs = stmt.executeQuery(mem);
+			while (rs.next()) {
 				m_array[index].setMemberID(rs.getInt(1));
 				m_array[index].setLoginID(rs.getString(2));
 				m_array[index].setName(rs.getString(3));
@@ -214,49 +220,55 @@ public class MemberManager {
 				m_array[index].setGrade(rs.getString(7));
 				index++;
 			}
-		
+
 			return m_array;
-			
-		}catch(SQLException se) {
+
+		} catch (SQLException se) {
 			se.printStackTrace();
-		}finally {
+		} finally {
 			myConnection.close(rs, stmt, null, con);
 		}
-		
-		m_array=new Member[rowCnt];
+
+		m_array = new Member[rowCnt];
 		return m_array;
 	}
-	
-	//삭제 메소드 
+
+	// 마이페이지 화면 회원 탈퇴 기능 + 회원관리 화면 삭제 기능 : 인자로 받은 memberID 와 일치하는 레코드를 member 테이블에서
+	// 삭제.
+	// 이때, memberID를 참조하는 reservation 테이블과 message 테이블의 memberID 속성 값을 각각 null 로
+	// 변경해준다.
 	public int delete(int memberID) {
-		String query1 = "UPDATE DB2023_reservation SET memberID=null,reservedStatus='거절' WHERE memberID=?";
+		String query0 = "UPDATE DB2023_message SET memberID = null WHERE memberID=?";
+		String query1 = "UPDATE DB2023_reservation SET memberID=null,reservedStatus='취소' WHERE memberID=?";
 		String query2 = "DELETE FROM DB2023_member WHERE memberID=?";
 		try {
-			con=myConnection.getConnection();
-			con.setAutoCommit(false);  /**트랜잭션 시작**/
-			ps=con.prepareStatement(query1);
+			con = myConnection.getConnection();
+			con.setAutoCommit(false); /************************* 트랜잭션 시작 ***********************/
+			ps = con.prepareStatement(query0);
 			ps.setInt(1, memberID);
-			ps.executeUpdate(); //삭제하려는 회원의 예약신청 정보 수정 (예약한 회원의 id 는 null, 예약 상태는 '거절'이 되도록)
-			ps=con.prepareStatement(query2);
+			ps.executeUpdate(); // 삭제하려는 회원이 과거 보냈던 메시지 데이터의 memberID 값을 null 로 변경
+			ps = con.prepareStatement(query1);
 			ps.setInt(1, memberID);
-			ps.executeUpdate(); //회원 정보 삭제
-			con.commit();             
-			con.setAutoCommit(true);  /**트랜잭션 종료**/
+			ps.executeUpdate(); // 삭제하려는 회원의 과거 예약신청 데이터 정보를 수정 (memberID=null , reservedStatus ='취소')
+			ps = con.prepareStatement(query2);
+			ps.setInt(1, memberID);
+			ps.executeUpdate(); // 회원 데이터를 member 테이블에서 삭제
+			con.commit(); /****** 커밋 ******/
+			con.setAutoCommit(true); /************************* 트랜잭션 종료 **************************/
 			return 1;
-		}catch(SQLException se) {
+		} catch (SQLException se) {
 			System.out.println("Roll back data...");
 			se.printStackTrace();
 			try {
-				if(con!=null)
-					con.rollback();
-			}catch(SQLException se2) {
+				if (con != null)
+					con.rollback(); /****** 롤백 ******/
+			} catch (SQLException se2) {
 				se2.printStackTrace();
 			}
-		}finally {
+		} finally {
 			myConnection.close(null, null, ps, con);
 		}
-		
+
 		return -1;
 	}
 }
-
