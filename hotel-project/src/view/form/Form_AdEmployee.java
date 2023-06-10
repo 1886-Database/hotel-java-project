@@ -50,8 +50,6 @@ public class Form_AdEmployee extends javax.swing.JPanel {
         emp = eM.getByLoginID(loginID);
         initComponents(emp);
         
-        //  add row table
-        
         all();
     
     }

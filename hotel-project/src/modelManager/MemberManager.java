@@ -27,6 +27,11 @@ public class MemberManager {
 	}
 
 	// 로그인 화면 : 입력받은 loginID와 pw 와 일치하는 정보가 member 테이블에 존재하는지 확인 후 존재하면 return 1
+	/**
+	 *  입력받은 loginID와 pw 와 일치하는 정보가 member 테이블에 존재하는지 확인하는 메소드
+	 * 
+	 * @return member 로그인 정보 존재여부
+	 */
 	public int login(String id, String pw) {
 		String SQL = "SELECT * FROM DB2023_member WHERE loginID=? and password=?";
 		try {
@@ -51,6 +56,10 @@ public class MemberManager {
 	// 회원가입 화면 ID 중복 검사 기능 : 인자로 받은 loginID 값이 member 테이블 loginID 필드에 이미 존재하는 속성 값인지
 	// 확인 후 존재하면 return 0.
 	// 존재하지 않으면 return 1
+	/**
+	 * 인자로 받은 loginID 값이 member 테이블 loginID 필드에 이미 존재하는 속성 값인지 확인하는 메소드
+	 * @return member login id 중복 여부
+	 */
 	public int checkID(String id) {
 		String SQL = "SELECT * FROM DB2023_member WHERE loginID=?";
 		try {
@@ -73,6 +82,9 @@ public class MemberManager {
 
 	// 회원가입 화면 : 회원가입 화면에서 입력받은 정보를 인자로 받아서 member 테이블에 insert.
 	// 이때, memberID 와 grade 는 사용자에게서 입력받지 않고 프로그램에서 계산한 값(혹은 default 값)으로 처리
+	/**
+	 * 회원가입 화면에서 입력받은 정보를 인자로 받아서 member 테이블에 insert하는 메소드
+	 */
 	public int signUp(String name, String loginID, String password, String phoneNum, String birthDate) {
 		String SQL = "INSERT INTO DB2023_member VALUES(?,?,?,?,?,?,?)";
 		try {
@@ -102,6 +114,9 @@ public class MemberManager {
 
 	// 마이페이지 화면 패스워드 변경 기능 : 인자로 받은 loginID 와 일치하는 레코드의 password 속성 값을 인자로 받은 pw 값으로
 	// 변경
+	/**
+	 *  인자로 받은 loginID 와 일치하는 레코드의 password 속성 값을 인자로 받은 pw 값으로 변경하는 메소드
+	 */
 	public int passwordChange(String loginID, String password) {
 		String SQL = "UPDATE DB2023_member SET password=? WHERE loginID=?";
 		try {
@@ -120,6 +135,10 @@ public class MemberManager {
 
 	// 마이페이지 화면 : 인자로 받은 loginID 와 일치하는 레코드를 select 한 후 해당 레코드의 정보를 모두 Member 객체에 저장
 	// -> Member 객체 return
+	/**
+	 *인자로 받은 loginID 와 일치하는 레코드를 select 한 후 해당 레코드의 정보를 모두 Member 객체에 저장하는 메소드
+	 *@return member 객체
+	 */
 	public Member getByLoginID(String loginID) {
 		String SQL = "SELECT * FROM DB2023_member WHERE loginID=?";
 		try {
@@ -140,7 +159,12 @@ public class MemberManager {
 		Member member = new Member();
 		return member;
 	}
-
+	
+	//Member Message 화면 : 인자로 받은 member ID와 일치하는 레코드에서 LoginID를 찾아 반환.
+	/**
+	 *인자로 받은 member ID와 일치하는 레코드에서 LoginID를 찾아 반환하는 메소드입니다.
+	 *@return login ID
+	 */
 	public String getLoginIDbyMemberID(int memberID) {
 		String SQL = "SELECT loginID FROM DB2023_member WHERE memberID=?";
 		String loginID = "";
@@ -160,7 +184,11 @@ public class MemberManager {
 		}
 		return loginID;
 	}
-
+	//Member Message 화면 : 인자로 받은 login ID와 일치하는 레코드에서 member ID를 찾아 반환.
+		/**
+		 *인자로 받은 loginID 와 일치하는 레코드를 select 한 후 해당 레코드의 정보를 모두 Member 객체에 저장하는 메소드입니다.
+		 *@return membe 객체
+		 */
 	public int getMemberIDbyLoginID(String LoginID) {
 		String SQL = "SELECT memberID FROM DB2023_member WHERE loginID=?";
 		int memberID = 0;
@@ -182,7 +210,11 @@ public class MemberManager {
 	}
 
 	// 회원 관리 화면 : member 테이블의 모든 레코드를 각각 Member 객체에 저장한 후 Member 객체들이 담긴 객체 배열
-	// return
+	// return member 객체배열
+	/**
+	 *member 테이블의 모든 레코드를 각각 Member 객체에 저장한 후 Member 객체들이 담긴 객체 배열을 반환하는 메소드입니다.
+	 *@return member 객체
+	 */
 	public Member[] getAllMember() {
 		Member[] m_array;
 		int rowCnt = 0;
@@ -234,6 +266,9 @@ public class MemberManager {
 	// 삭제.
 	// 이때, memberID를 참조하는 reservation 테이블과 message 테이블의 memberID 속성 값을 각각 null 로
 	// 변경해준다.
+	/**
+	 *인자로 받은 memberID 와 일치하는 레코드를 member 테이블에서 삭제하는 메소드입니다.
+	 */
 	public int delete(int memberID) {
 		String query0 = "UPDATE DB2023_message SET memberID = null WHERE memberID=?";
 		String query1 = "DELETE FROM DB2023_reservation WHERE memberID=?";

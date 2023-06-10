@@ -1,3 +1,6 @@
+/**
+ *employee 객체를 사용하는 Method를 관리하는 class입니다.
+ */
 package modelManager;
 
 import java.sql.Connection;
@@ -27,6 +30,10 @@ public class EmployeeManager {
 	}
 
 	// 로그인 화면 : 입력받은 loginID와 pw 와 일치하는 정보가 employee 테이블에 존재하는지 확인 후 존재하면 return 1
+	/**
+	 *입력받은 loginID와 pw 와 일치하는 정보가 employee 테이블에 존재하는지 확인 후 존재하는 지 확인하는 메소드입니다.
+	 *@return 로그인 정보 존재 여부(1,0,-1)
+	 */
 	public int login(String id, String pw) {
 		String SQL = "SELECT * FROM DB2023_employee WHERE loginID=? and password=?";
 		try {
@@ -52,6 +59,11 @@ public class EmployeeManager {
 	// 존재하는 속성 값인지
 	// 확인 후 존재하면 return 0.
 	// 존재하지 않으면 return 1
+	
+	/**
+	 * 인자로 받은 loginID 값이 member 테이블 loginID 필드에 이미 존재하는 속성 값인지 확인하는 메소드입니다.
+	 *@return 로그인 정보 존재 여부(0,1)
+	 */
 	public int checkID(String id) {
 		String SQL = "SELECT * FROM DB2023_employee WHERE loginID=?";
 		try {
@@ -74,6 +86,10 @@ public class EmployeeManager {
 
 	// 마이페이지 화면 패스워드 변경 기능 : 인자로 받은 loginID 와 일치하는 레코드의 password 속성 값을 인자로 받은 pw 값으로
 	// 변경
+	
+	/**
+	 * 인자로 받은 loginID 와 일치하는 레코드의 password 속성 값을 인자로 받은 pw 값으로 변경하는 메소드입니다.
+	 */
 	public int passwordChange(String loginID, String password) {
 		String SQL = "UPDATE DB2023_employee SET password=? WHERE loginID=?";
 		try {
@@ -93,6 +109,11 @@ public class EmployeeManager {
 	// 마이페이지 화면 : 인자로 받은 loginID 와 일치하는 레코드를 select 한 후 해당 레코드의 정보를 모두 Employee 객체에
 	// 저장
 	// -> Employee 객체 return
+	
+	/**
+	 * 인자로 받은 loginID 와 일치하는 레코드를 select 한 후 해당 레코드의 정보를 모두 Employee 객체에 저장하는 메소드입니다.
+	 * @return employee 객체
+	 */
 	public Employee getByLoginID(String loginID) {
 		String SQL = "SELECT * FROM DB2023_employee WHERE loginID=?";
 		try {
@@ -115,7 +136,11 @@ public class EmployeeManager {
 	}
 
 	// 직원 관리 화면 : Employee 테이블의 모든 레코드를 각각 Employee 객체에 저장한 후 Employee 객체들이 담긴 객체 배열
-	// return
+	// return 
+	/**
+	 * Employee 테이블의 모든 레코드를 각각 Employee 객체에 저장한 후 Employee 객체들이 담긴 객체 배열을 반환하는 메소드입니다.
+	 * @return employee 객체배열
+	 */
 	public Employee[] getAllEmployee() {
 		Employee[] e_array;
 		int rowCnt = 0;
@@ -164,6 +189,9 @@ public class EmployeeManager {
 	}
 
 	// 직원관리 화면 : 인자로 받은 employeeID 와 일치하는 레코드를 employee 테이블에서 삭제
+	/**
+	 *  인자로 받은 employeeID 와 일치하는 레코드를 employee 테이블에서 삭제하는 메소드입니다.
+	 */
 	public int delete(int id) {
 		String SQL = "DELETE FROM DB2023_employee WHERE employeeID=?";
 		try {
@@ -182,6 +210,9 @@ public class EmployeeManager {
 
 	// 직원관리 화면 : 직원 관리 화면에서 입력받은 정보를 인자로 받아서 employee 테이블에 insert
 	// 이때, employeeID 는 사용자에게서 입력받지 않고 프로그램이 계산한 값으로 처리하고, password 는 1234 로 초기화해준다.
+	/**
+	 *   직원 관리 화면에서 입력받은 정보를 인자로 받아서 employee 테이블에 insert하는 메소드입니다.
+	 */
 	public int add(String loginID, String name, String phone, String birthDate, String dept) {
 		String SQL = "INSERT INTO DB2023_employee VALUES(?,?,?,?,?,?,?)";
 		try {
@@ -211,6 +242,9 @@ public class EmployeeManager {
 
 	// 직원관리 화면 : 직원관리 화면에서 사용자에게서 입력받은 정보들과 특정 직원의 employeeID를 인자로 받은 후, 해당
 	// employeeID 를 가진 레코드의 다른 속성 값들을 변경
+	/**
+	 * 직원관리 화면에서 사용자에게서 입력받은 정보들과 특정 직원의 employeeID를 인자로 받은 후, 해당 employeeID 를 가진 레코드의 다른 속성 값들을 변경하는 메소드입니다.
+	 */
 	public int edit(int id, String loginID, String name, String phone, String birthDate, String dept) {
 		String SQL = "UPDATE DB2023_employee SET loginID=?, name=?, phone=?, birthDate=?, department=? WHERE employeeID=?";
 		try {
@@ -233,7 +267,10 @@ public class EmployeeManager {
 	}
 
 	// Employeemain 화면 : 직원 메시지화면으로 employeeid로 바꿔보낼 때
-
+	
+	/**
+	 * 직원 메시지화면으로 employeeid로 바꿔보내주는 메소드입니다.
+	 */
 	public int getEmployeeIDbyloginID(String id) {
 		String SQL = "SELECT employeeID FROM DB2023_employee WHERE loginID=?";
 		int employeeID = 0;

@@ -33,8 +33,11 @@ public class MessageManager {
 		}
 	}
 	
-	//메시지 입력받은 값 message 테이블에 insert
-	
+	//회원 메시지 화면: member 메시지 입력받은 값 message 테이블에 insert
+	/**
+	 * member 메시지 입력받은 값 message 테이블에 insert
+	 * @return insert 에러 확인용 정수
+	 */
 	public int sendMessage(int memberID, String messagestatus, String content, String sendtime) {
 	    String SQL = "INSERT INTO DB2023_message VALUES(?,?,?,?,?)";
 	    try {
@@ -59,6 +62,11 @@ public class MessageManager {
 	    }
 	    return -1; // 데이터베이스 오류
 	}
+	//직원 메시지 화면: employee 메시지 입력받은 값 message 테이블에 insert
+	/**
+	 *직원 메시지 입력받은 값 message 테이블에 insert
+	 * @return insert 에러 확인용 정수
+	 */
 	public int EmsendMessage(int memberID, String messagestatus, String content, String sendtime) {
 	    String SQL = "INSERT INTO DB2023_message VALUES(?,?,?,?,?)";
 	   
@@ -85,28 +93,12 @@ public class MessageManager {
 	    }
 	    return -1; // 데이터베이스 오류
 	}
-	
-	//메시지의 멤버ID 값으로 다른 속성 값 얻기
-		public Message getByMemberID(int memberID) {
-			String SQL = "SELECT * FROM DB2023_message WHERE memberID=?";
-			try {
-				con=myConnection.getConnection();
-				ps=con.prepareStatement(SQL);
-				ps.setInt(1, memberID);
-				rs = ps.executeQuery();
-				while(rs.next()) {
-					Message message = new Message(memberID,rs.getString(3),rs.getString(4),rs.getString(5));
-					return message;
-				}
-			}catch(Exception e) {
-				e.printStackTrace();
-			}finally {
-				myConnection.close(rs, null, ps, con);
-			}
-			Message message = new Message();
-			return message;
-		}
-		
+
+	//회원 메시지 화면: memberid를 인수로 받아 member가 보낸 메시지 가져옴
+		/**
+		 *memberid를 인수로 받아 member가 보낸 메시지 값을 객체에 저장하여 가져오는 메소드
+		 * @return member message 객체 배열
+		 */
 		public Message[] getMemberSendMessage(int memberID) {
 			String mess = "SELECT messageID, memberID, messagestatus, content, sendtime FROM DB2023_message WHERE memberID=? and messagestatus='memsend' ORDER BY sendtime ASC";
 
@@ -137,9 +129,13 @@ public class MessageManager {
 
 	        return new Message[0];
 	    }
-		// message 테이블 모든 레코드를 각각 Message 객체에 저장한 후 객체 배열 반환
+	
 		
-
+		//회원 메시지 화면: memberid를 인수로 받아 member가 받은 메시지 가져옴
+				/**
+				 *memberid를 인수로 받아 member가 받은 메시지 값을 객체에 저장하여 가져오는 메소드
+				 * @return member message 객체 배열
+				 */
 public Message[] getMemberRecieveMessage(int memberID) {
 	String mess = "SELECT messageID, memberID, messagestatus, content, sendtime FROM DB2023_message WHERE memberID=? and messagestatus='memreceive' ORDER BY sendtime ASC";
 
@@ -170,7 +166,11 @@ public Message[] getMemberRecieveMessage(int memberID) {
 
     return new Message[0];
 }
-// message 테이블 모든 레코드를 각각 Message 객체에 저장한 후 객체 배열 반환
+//직원 메시지 화면: employee가 보낸 메시지 가져옴
+		/**
+		 *employee가 보낸 메시지 값을 객체에 저장하여 가져오는 메소드
+		 * @return employee message 객체 배열
+		 */
 public Message[] getEmployeeSendMessage() {
 	Message[] m_array;
 	int rowCnt=0;
@@ -216,7 +216,11 @@ public Message[] getEmployeeSendMessage() {
 	return m_array;
 }
 
-
+//직원 메시지 화면: employee가 받은 메시지 가져옴
+		/**
+		 *employee가 받은 메시지 값을 객체에 저장하여 가져오는 메소드
+		 * @return employee message 객체 배열
+		 */
 
 public Message[] getEmployeeRecieveMessage() {
 	Message[] m_array;

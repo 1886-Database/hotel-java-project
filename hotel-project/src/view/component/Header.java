@@ -7,7 +7,7 @@ import java.awt.RenderingHints;
 import javax.swing.JPanel;
 
 public class Header extends JPanel {
-
+	//기본 생성자
 	public Header() {
         initComponents();
         setOpaque(false);
@@ -48,7 +48,10 @@ public class Header extends JPanel {
             .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 45, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
-
+    
+    /**
+  	 * 디자인용 메소드입니다.
+  	 */
     @Override
     protected void paintComponent(Graphics grphcs) {
         Graphics2D g2 = (Graphics2D) grphcs;

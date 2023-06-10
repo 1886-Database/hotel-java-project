@@ -24,13 +24,16 @@ public class Card extends javax.swing.JPanel {
         listMenu1.addEventMenuSelected(event);
     }
 
+  
     public Card() {
         initComponents();
         setOpaque(false);
         listMenu1.setOpaque(false);
         init();
     }
-
+    /**
+  	 * 메뉴 판넬 초기 설정 메소드입니다.
+  	 */
     private void init() {
         listMenu1.addItem(new Model_Menu("1", "이화호텔", Model_Menu.MenuType.MENU));
         listMenu1.addItem(new Model_Menu("2", "객실예약", Model_Menu.MenuType.MENU));
@@ -94,6 +97,9 @@ public class Card extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+  	 * 디자인용 메소드입니다.
+  	 */
     @Override
     protected void paintChildren(Graphics grphcs) {
         Graphics2D g2 = (Graphics2D) grphcs;
@@ -108,6 +114,9 @@ public class Card extends javax.swing.JPanel {
     private int x;
     private int y;
 
+    /**
+  	 * 마우스 액션 메소드입니다.
+  	 */
     public void initMoving(JFrame fram) {
         panelMoving.addMouseListener(new MouseAdapter() {
             @Override

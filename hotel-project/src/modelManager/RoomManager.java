@@ -28,6 +28,10 @@ public class RoomManager {
 	}
 	
 	//룸리스트 화면 : room 테이블의 모든 레코드를 각각 room 객체에 저장한 후 객체 배열 반환
+	/**
+	 * room 테이블의 모든 레코드를 각각 room 객체에 저장한 후 객체 배열 반환하는 메소드입니다.
+	 * @return room 객체 배열 반환
+	 */
 	public Room[] getAllRoom() {
 		Room[] r_array;
 		int rowCnt=0;
@@ -78,6 +82,10 @@ public class RoomManager {
 	}
 	
 	//룸리스트 재정렬 화면 : 필터링된 room 테이블의 레코드 반환
+	/**
+	 * checkin, checkout 날짜 인수를 받아 필터링된 room 테이블의 레코드를 반환하는 메소드입니다.
+	 * @return room 객체 배열 반환
+	 */
 		public Room[] getRefreshRoom(String checkin, String checkout) {
 			Room[] r_array;
 			int rowCnt=0;
@@ -132,6 +140,7 @@ public class RoomManager {
 			r_array=new Room[rowCnt];
 			return r_array;
 		}
+		
 		//삭제 메소드 
 		public int delete(int roomNo) {
 			String query1 = "UPDATE DB2023_room SET roomNo=null WHERE roomNo=?";

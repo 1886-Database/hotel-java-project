@@ -20,26 +20,34 @@ public class LoginBackground extends JPanel{
     private int direction;
     
     
-    
+    /**
+  	 * 로그인 화면 배경 색을 채워주는 메소드입니다.
+  	 */
     public LoginBackground() {
     	super();
         color1 = Color.black;
         color2 = Color.white;
     }
-    
+    /**
+  	 * 로그인 화면 배경 색을 채워주는 메소드입니다.
+  	 */
     public LoginBackground(Color color1, Color color2) {
     	super();
         this.color1 = color1;
         this.color2 = color2;
     }
-    
+    /**
+  	 * 로그인 화면 배경 색을 채워주는 메소드입니다.
+  	 */
     public LoginBackground(Color color1, Color color2, int direction) {
     	super();
         this.color1 = color1;
         this.color2 = color2;
         this.direction = direction;
     }
-    
+    /**
+  	 * 디자인용 메소드입니다.
+  	 */
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -65,22 +73,39 @@ public class LoginBackground extends JPanel{
         graphics2d.fillRect(0, 0, getWidth(), getHeight());
     }
     
-    
+    /**
+  	 * color 1을 반환하는 메소드입니다
+  	 */
     public Color getColor1() {
         return color1;
     }
+    /**
+  	 * color 1을 가져오는 메소드입니다.
+  	 */
     public void setColor1(Color color1) {
         this.color1 = color1;
     }
+    /**
+  	 * color 2을 반환하는 메소드입니다
+  	 */
     public Color getColor2() {
         return color2;
     }
+    /**
+  	 * color 2을 가져오는 메소드입니다.
+  	 */
     public void setColor2(Color color2) {
         this.color2 = color2;
-    }
+    } 
+    /**
+  	 * direction을 반환하는 메소드입니다
+  	 */
     public int getDirection() {
         return direction;
     }
+    /**
+  	 * direction을 가져오는 메소드입니다.
+  	 */
     public void setDirection(int direction) {
         this.direction = direction;
     }

@@ -34,6 +34,10 @@ public class ReservationManager {
 	}
 
 	// 입력받은 정보를 reservation 테이블에 insert
+	/**
+	 * reservation 입력받은 값 reservation 테이블에 insert하는 메소드입니다.
+	 * @return insert 에러 확인용 정수 
+	 */
 	public int reservation(String roomno, String checkin, String checkout, String reserveddate, String requirement,
 			String breakfast, String reservedstatus, String guestno) {
 		String SQL = "INSERT INTO DB2023_reservation VALUES(?,?,?,?,?,?,?,?,?,?)";
@@ -76,7 +80,11 @@ public class ReservationManager {
 		}
 		return -1; // 데이터베이스 오류
 	}
-
+	//Member-Reservation View 가져와서 객체배열에 저장 후 반환
+		/**
+		 * MemberReservation View 가져와서 객체배열에 저장 후 반환하는 메소드입니다.
+		 * @return reservation 객체배열 반환
+		 */
 	public Reservation[] getReservationView() {
 		Reservation[] r_array;
 		int rowCnt = 0;
@@ -131,6 +139,10 @@ public class ReservationManager {
 	}
 
 	// 예약 조회 화면 : 멤버의 로그인 ID 를 받은 후 해당 멤버의 예약내역 리스트를 return
+	/**
+	 *login ID를 인수로 받아 member의 로그인 ID 를 받은 후 해당 멤버의 예약내역 리스트를 반환하는 메소드입니다.
+	 * @return reservation 객체배열 반환
+	 */
 	public Reservation[] getMyReserv(String loginID) {
 		Reservation[] r_array;
 		int rowCnt = 0;
@@ -187,6 +199,12 @@ public class ReservationManager {
 	}
 
 	//예약조회 : 예약 상태를 '취소'로 변경
+
+	/**
+	 *reservedNo를 인수로 받아 해당 예약번호의 예약테이블을 찾아 예약상태를 취소로 바꾸는 메소드입니다.
+	 * @return 데이터베이스 오류 확인용 정수 
+	 */
+	
 	public int cancel(int reservedNo) {
 		String SQL = "UPDATE DB2023_reservation SET reservedStatus = '취소' WHERE reservedNo=?";
 		try {
@@ -202,7 +220,11 @@ public class ReservationManager {
 		}
 		return -1; //데이터베이스 오류
 	}
-
+	//예약신청관리 페이지 : 예약신청상태를 변경
+	/**
+	 *reservedNo와 reserved status 인수로 받아 해당 예약번호의 예약테이블의 예약신청상태를 변경하는 메소드입니다.
+	 * @return 데이터베이스 오류 확인용 정수
+	 */
 	public int edit(int reservedNo, String reservedStatus) {
 		String SQL = "UPDATE DB2023_reservation SET reservedStatus=? WHERE reservedNo=?";
 		try {

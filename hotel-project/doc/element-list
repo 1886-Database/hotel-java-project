@@ -1,0 +1,10 @@
+main
+model
+modelManager
+myConnection
+view.component
+view.event
+view.form
+view.model
+view.swing
+view.UI

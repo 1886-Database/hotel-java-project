@@ -1,7 +1,11 @@
+/**
+ * 관리자 로그인 했을 때 관리자에게 보여지는 화면입니다.
+ */
+
 package view.UI;
 
 import java.awt.Color;
-import java.awt.geom.RoundRectangle2D;
+
 
 import javax.swing.JComponent;
 import javax.swing.JFrame;
@@ -24,7 +28,6 @@ import view.form.Form_AdRoom;
 import view.form.Form_Home;
 
 import modelManager.EmployeeManager;
-import model.Employee;
 
 public class EmployeeMain extends javax.swing.JFrame {
 

@@ -25,7 +25,11 @@ public class ReservedRoomManager {
 			e.printStackTrace();
 		}
 	}
-	
+	// 예약 상세내역 페이지 : reservedNo를 인수로 받아와 reservedRoom 테이블 객체 반환
+		/**
+		 * reservedNo를 인수로 받아와 reservedRoom 테이블 객체 반환하는 메소드입니다.
+		 * @return reservedRoom 객체 반환
+		 */
 	public ReservedRoom getByReservedNo(int reservedNo) {
 		String SQL = "SELECT * FROM DB2023_reservedRoom WHERE reservedNo=?";
 		try {

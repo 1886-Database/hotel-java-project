@@ -20,7 +20,8 @@ public class MemberMenu extends javax.swing.JPanel {
         this.event = event;
         listMenu1.addEventMenuSelected(event);
     }
-
+    
+ // 기본 생성자 
     public MemberMenu() {
         initComponents();
         setOpaque(false);
@@ -28,6 +29,10 @@ public class MemberMenu extends javax.swing.JPanel {
         init();
     }
 
+    // member menu 초기 생성 메소드.
+ 	/**
+ 	 * member menu 초기 생성 메소드입니다.
+ 	 */
     private void init() {
     	listMenu1.addItem(new Model_Menu("", "About hotel", Model_Menu.MenuType.TITLE)); //index=0
         listMenu1.addItem(new Model_Menu("", " ", Model_Menu.MenuType.EMPTY));
@@ -92,6 +97,9 @@ public class MemberMenu extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+ 	 * 디자인용 메소드입니다.	 
+ 	 */
     @Override
     protected void paintChildren(Graphics grphcs) {
         Graphics2D g2 = (Graphics2D) grphcs;
@@ -106,6 +114,9 @@ public class MemberMenu extends javax.swing.JPanel {
     private int x;
     private int y;
 
+    /**
+ 	 * 마우스 액션 메소드입니다.
+ 	 */
     public void initMoving(JFrame fram) {
         panelMoving.addMouseListener(new MouseAdapter() {
             @Override
