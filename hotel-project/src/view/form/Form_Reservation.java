@@ -44,11 +44,6 @@ import java.util.Date;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
-/**
- *
- * @author RAVEN
- */
-
 public class Form_Reservation extends javax.swing.JPanel {
 
 	private Room[] room;
@@ -116,22 +111,25 @@ public class Form_Reservation extends javax.swing.JPanel {
 		JButton btnNewButton = new JButton("적용");
 		btnNewButton.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
+				if (dateChooser.getDate()==null || dateChooser_1.getDate()==null)
+					JOptionPane.showMessageDialog(panelBorder1, "날짜를 먼저 선택해주세요.", "Error", 2);
+				else {
+					SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
-				SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-				checkin = simpleDateFormat.format(dateChooser.getDate());
-				checkout = simpleDateFormat.format(dateChooser_1.getDate());
+					checkin = simpleDateFormat.format(dateChooser.getDate());
+					checkout = simpleDateFormat.format(dateChooser_1.getDate());
 
-				int result = dateChooser.getDate().compareTo(dateChooser_1.getDate());
-				if (result > 0) {
-					JOptionPane.showMessageDialog(panelBorder1, "체크아웃 날짜가 잘못되었습니다", "CheckOut Error", 2);
-				} else if (checkin.equals(checkout)) {
-					JOptionPane.showMessageDialog(panelBorder1, "동일한 날짜로 예약이 불가합니다", "Date Error", 2);
-				} else {
-					RoomManager roomManager = new RoomManager();
-					refreshroom(checkin, checkout);
-					// rsM.reservation();
+					int result = dateChooser.getDate().compareTo(dateChooser_1.getDate());
+					if (result > 0) {
+						JOptionPane.showMessageDialog(panelBorder1, "체크아웃 날짜가 잘못되었습니다", "CheckOut Error", 2);
+					} else if (checkin.equals(checkout)) {
+						JOptionPane.showMessageDialog(panelBorder1, "동일한 날짜로 예약이 불가합니다", "Date Error", 2);
+					} else {
+						RoomManager roomManager = new RoomManager();
+						refreshroom(checkin, checkout);
+						// rsM.reservation();
+					}
 				}
-
 			}
 		});
 
@@ -171,7 +169,7 @@ public class Form_Reservation extends javax.swing.JPanel {
 
 		lblNewLabel_2 = new JLabel("* 체크인 날짜와 체크아웃 날짜를 먼저 선택 후 예약할 방을 선택해주세요.");
 		lblNewLabel_2.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
-		
+
 		btnNewButton_1 = new JButton("초기화");
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -182,54 +180,49 @@ public class Form_Reservation extends javax.swing.JPanel {
 		});
 
 		javax.swing.GroupLayout panelBorder1Layout = new javax.swing.GroupLayout(panelBorder1);
-		panelBorder1Layout.setHorizontalGroup(
-			panelBorder1Layout.createParallelGroup(Alignment.LEADING)
-				.addGroup(panelBorder1Layout.createSequentialGroup()
-					.addGap(20)
-					.addGroup(panelBorder1Layout.createParallelGroup(Alignment.LEADING)
-						.addGroup(panelBorder1Layout.createSequentialGroup()
-							.addGroup(panelBorder1Layout.createParallelGroup(Alignment.LEADING)
-								.addGroup(panelBorder1Layout.createSequentialGroup()
-									.addGap(11)
-									.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 118, GroupLayout.PREFERRED_SIZE))
-								.addComponent(Title))
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addGroup(panelBorder1Layout.createParallelGroup(Alignment.LEADING)
-								.addComponent(lblNewLabel_2, GroupLayout.PREFERRED_SIZE, 439, GroupLayout.PREFERRED_SIZE)
-								.addGroup(panelBorder1Layout.createSequentialGroup()
-									.addComponent(dateChooser, GroupLayout.PREFERRED_SIZE, 150, GroupLayout.PREFERRED_SIZE)
-									.addGap(27)
-									.addComponent(lblNewLabel_1, GroupLayout.PREFERRED_SIZE, 109, GroupLayout.PREFERRED_SIZE)
-									.addGap(26)
-									.addComponent(dateChooser_1, GroupLayout.PREFERRED_SIZE, 141, GroupLayout.PREFERRED_SIZE)
-									.addGap(35)
-									.addComponent(btnNewButton)
-									.addPreferredGap(ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
-									.addComponent(btnNewButton_1, GroupLayout.PREFERRED_SIZE, 66, GroupLayout.PREFERRED_SIZE)
-									.addGap(15))))
-						.addComponent(spTable, GroupLayout.DEFAULT_SIZE, 787, Short.MAX_VALUE))
-					.addGap(20))
-		);
-		panelBorder1Layout.setVerticalGroup(
-			panelBorder1Layout.createParallelGroup(Alignment.LEADING)
-				.addGroup(panelBorder1Layout.createSequentialGroup()
-					.addGap(20)
-					.addGroup(panelBorder1Layout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(Title)
-						.addComponent(lblNewLabel_2))
-					.addGap(26)
-					.addGroup(panelBorder1Layout.createParallelGroup(Alignment.LEADING)
-						.addComponent(lblNewLabel, GroupLayout.DEFAULT_SIZE, 23, Short.MAX_VALUE)
-						.addComponent(dateChooser, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addGroup(panelBorder1Layout.createParallelGroup(Alignment.BASELINE)
-							.addComponent(btnNewButton, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-							.addComponent(btnNewButton_1))
-						.addComponent(dateChooser_1, GroupLayout.DEFAULT_SIZE, 23, Short.MAX_VALUE)
-						.addComponent(lblNewLabel_1, GroupLayout.DEFAULT_SIZE, 23, Short.MAX_VALUE))
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(spTable, GroupLayout.DEFAULT_SIZE, 436, Short.MAX_VALUE)
-					.addContainerGap())
-		);
+		panelBorder1Layout.setHorizontalGroup(panelBorder1Layout.createParallelGroup(Alignment.LEADING)
+				.addGroup(panelBorder1Layout.createSequentialGroup().addGap(20).addGroup(panelBorder1Layout
+						.createParallelGroup(Alignment.LEADING)
+						.addGroup(panelBorder1Layout.createSequentialGroup().addGroup(panelBorder1Layout
+								.createParallelGroup(Alignment.LEADING)
+								.addGroup(panelBorder1Layout.createSequentialGroup().addGap(11).addComponent(
+										lblNewLabel, GroupLayout.PREFERRED_SIZE, 118, GroupLayout.PREFERRED_SIZE))
+								.addComponent(Title)).addPreferredGap(ComponentPlacement.RELATED)
+								.addGroup(panelBorder1Layout.createParallelGroup(Alignment.LEADING)
+										.addComponent(lblNewLabel_2, GroupLayout.PREFERRED_SIZE, 439,
+												GroupLayout.PREFERRED_SIZE)
+										.addGroup(panelBorder1Layout.createSequentialGroup()
+												.addComponent(dateChooser, GroupLayout.PREFERRED_SIZE, 150,
+														GroupLayout.PREFERRED_SIZE)
+												.addGap(27)
+												.addComponent(lblNewLabel_1, GroupLayout.PREFERRED_SIZE, 109,
+														GroupLayout.PREFERRED_SIZE)
+												.addGap(26)
+												.addComponent(dateChooser_1, GroupLayout.PREFERRED_SIZE, 141,
+														GroupLayout.PREFERRED_SIZE)
+												.addGap(35).addComponent(btnNewButton)
+												.addPreferredGap(ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+												.addComponent(btnNewButton_1, GroupLayout.PREFERRED_SIZE, 66,
+														GroupLayout.PREFERRED_SIZE)
+												.addGap(15))))
+						.addComponent(spTable, GroupLayout.DEFAULT_SIZE, 787, Short.MAX_VALUE)).addGap(20)));
+		panelBorder1Layout.setVerticalGroup(panelBorder1Layout.createParallelGroup(Alignment.LEADING)
+				.addGroup(panelBorder1Layout.createSequentialGroup().addGap(20)
+						.addGroup(panelBorder1Layout.createParallelGroup(Alignment.BASELINE).addComponent(Title)
+								.addComponent(lblNewLabel_2))
+						.addGap(26)
+						.addGroup(panelBorder1Layout.createParallelGroup(Alignment.LEADING)
+								.addComponent(lblNewLabel, GroupLayout.DEFAULT_SIZE, 23, Short.MAX_VALUE)
+								.addComponent(dateChooser, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+										GroupLayout.PREFERRED_SIZE)
+								.addGroup(panelBorder1Layout.createParallelGroup(Alignment.BASELINE)
+										.addComponent(btnNewButton, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE,
+												Short.MAX_VALUE)
+										.addComponent(btnNewButton_1))
+								.addComponent(dateChooser_1, GroupLayout.DEFAULT_SIZE, 23, Short.MAX_VALUE)
+								.addComponent(lblNewLabel_1, GroupLayout.DEFAULT_SIZE, 23, Short.MAX_VALUE))
+						.addPreferredGap(ComponentPlacement.RELATED)
+						.addComponent(spTable, GroupLayout.DEFAULT_SIZE, 436, Short.MAX_VALUE).addContainerGap()));
 		panelBorder1.setLayout(panelBorder1Layout);
 
 		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
