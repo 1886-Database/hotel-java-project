@@ -29,6 +29,8 @@ import java.awt.event.MouseEvent;
 import javax.swing.JFormattedTextField;
 import javax.swing.JFormattedTextField.AbstractFormatter;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class SignUp {
 
@@ -287,6 +289,11 @@ public class SignUp {
 	    button_signUp.setBackground(new Color(40, 60, 134));
 	    button_signUp.setBounds(950, 390, 208, 52);
 	    panel.add(button_signUp);
+	    
+	    JLabel lblNewLabel = new JLabel("* 패스워드를 제외한 나머지 정보는 한번 가입한 후로는 수정이 불가하니 신중히 작성해주시길 바랍니다.");
+	    lblNewLabel.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
+	    lblNewLabel.setBounds(122, 465, 604, 15);
+	    panel.add(lblNewLabel);
 	    
 
 	   
