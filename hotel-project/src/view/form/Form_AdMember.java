@@ -234,6 +234,11 @@ public class Form_AdMember extends JPanel {
         });
         btn_clear.setBounds(12, 115, 65, 23);
         panelBorder1.add(btn_clear);
+        
+        lblNewLabel = new JLabel("* 이화호텔에 가입한 회원들의 목록을 확인가능하며, 특정 회원을 강제로 탈퇴시키는 것이 가능합니다.");
+        lblNewLabel.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
+        lblNewLabel.setBounds(260, 28, 555, 15);
+        panelBorder1.add(lblNewLabel);
         add(panel);
     }// </editor-fold>//GEN-END:initComponents
     
@@ -296,4 +301,5 @@ public class Form_AdMember extends JPanel {
     private JDateChooser input_birthDate;
     private JButton btn_del;
     private JButton btn_refresh;
+    private JLabel lblNewLabel;
 }

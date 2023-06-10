@@ -32,6 +32,7 @@ import java.awt.event.MouseEvent;
 import java.util.Date;
 import java.awt.event.ActionEvent;
 import javax.swing.DefaultComboBoxModel;
+import java.awt.Font;
 
 
 public class Form_AdReserv extends javax.swing.JPanel {
@@ -110,12 +111,12 @@ public class Form_AdReserv extends javax.swing.JPanel {
         
         
         lblNewLabel_1_1_1 = new JLabel("처리현황");
-        lblNewLabel_1_1_1.setBounds(75, 523, 75, 16);
+        lblNewLabel_1_1_1.setBounds(65, 517, 75, 16);
         
         //reservedstatus combobox 설정
         ReserveState = new JComboBox();
         ReserveState.setModel(new DefaultComboBoxModel(new String[] {"승인", "대기", "거절"}));
-        ReserveState.setBounds(131, 519, 130, 27);
+        ReserveState.setBounds(131, 512, 130, 27);
         ReserveState.setSelectedIndex(-1);
         
         //edit button
@@ -138,7 +139,7 @@ public class Form_AdReserv extends javax.swing.JPanel {
         				}
         			}}});	
         
-        btnEdit.setBounds(301, 518, 75, 29);
+        btnEdit.setBounds(301, 511, 75, 29);
         
         
         //refresh button
@@ -185,6 +186,11 @@ public class Form_AdReserv extends javax.swing.JPanel {
         panelBorder1.add(spTable);
         panelBorder1.add(btnEdit);
         panelBorder1.add(btnRefresh);
+        
+        JLabel lblNewLabel = new JLabel("* 고객의 예약 신청 내역을 확인하고, 특정 예약 신청에 대한 처리현황을 변경할 수 있습니다.");
+        lblNewLabel.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
+        lblNewLabel.setBounds(277, 28, 548, 15);
+        panelBorder1.add(lblNewLabel);
        
     
     }
