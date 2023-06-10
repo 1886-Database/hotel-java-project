@@ -80,6 +80,8 @@ public class ReservationManager {
 		return -1; // 데이터베이스 오류
 	}
 
+	
+	//Form_AdReserve : 생성된 view replace 및 select후 객체로 반환
 	public Reservation[] getReservationView() {
 		Reservation[] r_array;
 		int rowCnt = 0;
@@ -98,7 +100,7 @@ public class ReservationManager {
 			String dropView = "DROP VIEW IF EXISTS DB2023_MemberReservationView";
 			stmt.executeUpdate(dropView);
 
-			// MemberReservationView 뷰 생성
+			// MemberReservaionView 뷰 생성
 			stmt.executeUpdate(res);
 
 			// reservation 테이블의 레코드 개수 확인

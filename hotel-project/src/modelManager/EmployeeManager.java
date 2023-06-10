@@ -224,7 +224,7 @@ public class EmployeeManager {
 		}
 		
 		
-		//Employeemain 화면 : 직원 메시지화면으로 employeeid로 바꿔보낼 때
+		//Employeemain 화면 : 직원 메시지화면으로 employeeid로 변환 후 반환
 		
 		public int getEmployeeIDbyloginID(String id) {
 		    String SQL = "SELECT employeeID FROM DB2023_employee WHERE loginID=?";

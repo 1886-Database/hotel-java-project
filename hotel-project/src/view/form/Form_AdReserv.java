@@ -40,6 +40,8 @@ public class Form_AdReserv extends javax.swing.JPanel {
 	private ReservationManager rM;
 	private Reservation res;
   
+	
+	//기본 생성자
     public Form_AdReserv() {
     	
     	rM = new ReservationManager();
@@ -54,6 +56,7 @@ public class Form_AdReserv extends javax.swing.JPanel {
      
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    
     private void initComponents() {
 
         panel = new javax.swing.JLayeredPane();
@@ -64,6 +67,7 @@ public class Form_AdReserv extends javax.swing.JPanel {
         spTable.setBounds(65, 69, 750, 420);
         table = new view.swing.Table();
         
+        //table row 클릭 시 reservedstatus combobox에 선택된 status 반영
         table.addMouseListener(new MouseAdapter() {
         	@Override
         	public void mouseClicked(MouseEvent e) {
@@ -71,26 +75,21 @@ public class Form_AdReserv extends javax.swing.JPanel {
         		
         		String reservedStatus = (String)table.getModel().getValueAt(row, 7);
         		
-        		setReservedStatus(reservedStatus);
-        		
-        		
+        		setReservedStatus(reservedStatus);    		
         	}
         });
         	
 
         setBackground(new java.awt.Color(242, 242, 242));
-
         panel.setLayout(new java.awt.GridLayout(1, 0, 10, 0));
-
-
         panelBorder1.setBackground(new java.awt.Color(255, 255, 255));
-
         jLabel1.setFont(new java.awt.Font("맑은 고딕", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(127, 127, 127));
         jLabel1.setText("Reservation Management");
-
         spTable.setBorder(null);
-
+        
+        
+        //table model setting
         table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -109,38 +108,39 @@ public class Form_AdReserv extends javax.swing.JPanel {
         });
         spTable.setViewportView(table);
         
+        
         lblNewLabel_1_1_1 = new JLabel("처리현황");
         lblNewLabel_1_1_1.setBounds(75, 523, 44, 16);
         
+        //reservedstatus combobox 설정
         ReserveState = new JComboBox();
         ReserveState.setModel(new DefaultComboBoxModel(new String[] {"승인", "대기", "거절"}));
         ReserveState.setBounds(131, 519, 130, 27);
         ReserveState.setSelectedIndex(-1);
         
+        //edit button
         btnEdit = new JButton("Edit");
         btnEdit.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
         		int row = table.getSelectedRow();
         		String reservedStatus = (String)ReserveState.getSelectedItem();
         		
-        		
-        		
-        		
-        		if(row==-1)
+        		if(row==-1)//row 선택 안했을 때
         			JOptionPane.showMessageDialog(null,"수정할 예약현황을 먼저 선택해주세요.", "Reservation is Not Selected",2);
+        		
         		else {
         			int reservedNo =  (int)table.getModel().getValueAt(row,0);
         			int result = rM.edit(reservedNo, reservedStatus);
         			if(result==1) {
     					JOptionPane.showMessageDialog(null,"정상적으로 수정되었습니다.", "Edited",2);
-        				refresh();}
-        			
-    	
-        	
+        				refresh();
+        				}
+        			}}});	
         
-        }}});
         btnEdit.setBounds(301, 518, 75, 29);
         
+        
+        //refresh button
         btnRefresh = new JButton("Refresh");
         btnRefresh.setBounds(707, 518, 76, 29);
         btnRefresh.addActionListener(new ActionListener() {
@@ -149,6 +149,7 @@ public class Form_AdReserv extends javax.swing.JPanel {
         	}
         });
 
+        
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -185,8 +186,9 @@ public class Form_AdReserv extends javax.swing.JPanel {
         panelBorder1.add(btnRefresh);
        
     
-    }// </editor-fold>//GEN-END:initComponents
+    }
     
+    //reservationview table에 가져와서 보여줌
     private void all() {
     	resList = rM.getReservationView();
     	for (int i = 0; i < resList.length; ++i) {
@@ -194,6 +196,7 @@ public class Form_AdReserv extends javax.swing.JPanel {
         }
     }
     
+    //selected table row에서 reservedstatus 가져와서 combobox에 표시
     public void setReservedStatus(String reservedStatus) {
     	int i = -1;
     	if(reservedStatus.equals("승인"))
@@ -206,13 +209,15 @@ public class Form_AdReserv extends javax.swing.JPanel {
     	ReserveState.setSelectedIndex(i);
     	
     }
+    
+    //refresh
     public void refresh() {
     	DefaultTableModel model = (DefaultTableModel)table.getModel();
     	model.setRowCount(0);
     	all();
     }
     
-    // Variables declaration - do not modify//GEN-BEGIN:variables
+    // Variables declaration 
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLayeredPane panel;
     private view.swing.PanelBorder panelBorder1;

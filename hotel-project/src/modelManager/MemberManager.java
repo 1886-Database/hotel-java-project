@@ -139,6 +139,7 @@ public class MemberManager {
 		return member;
 	}
 	
+	//Form_MemberMsg : memberID를 받아 loginID로 변환 후 반환.
 	public String getLoginIDbyMemberID(int memberID) {
 	    String SQL = "SELECT loginID FROM DB2023_member WHERE memberID=?";
 	    String loginID = "";
@@ -158,7 +159,8 @@ public class MemberManager {
 	    }
 	    return loginID;
 	}
-
+	
+	//Form_MemberMsg : loginID를 받아 memberID로 변환 후 반환.
 	public int getMemberIDbyLoginID(String LoginID) {
 	    String SQL = "SELECT memberID FROM DB2023_member WHERE loginID=?";
 	    int memberID = 0;
