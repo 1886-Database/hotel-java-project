@@ -1,4 +1,4 @@
-package view.form;
+package view.form; 
 
 import javax.swing.ImageIcon;
 import java.awt.image.*;
@@ -27,8 +27,8 @@ import javax.swing.JButton;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JTextField;
 
+//이화 호텔 페이지(메인 페이지)
 public class Form_Home extends javax.swing.JPanel {
-	
 	
     public Form_Home() {
         initComponents();
@@ -38,13 +38,11 @@ public class Form_Home extends javax.swing.JPanel {
         }
 
     @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
     	panel = new javax.swing.JLayeredPane();
     	setBackground(new java.awt.Color(242, 242, 242));
         panel.setLayout(new java.awt.GridLayout(1, 0, 10, 0));
-        
         panelBorder1 = new view.swing.PanelBorder();
         panelBorder1.setBackground(new java.awt.Color(255, 255, 255));
         JScrollPane scroll = new JScrollPane(panelBorder1);
@@ -81,8 +79,7 @@ public class Form_Home extends javax.swing.JPanel {
         RSLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
         
         
-        
-        
+        //레이아웃 설정
         javax.swing.GroupLayout panelBorder1Layout = new javax.swing.GroupLayout(panelBorder1);
         panelBorder1Layout.setHorizontalGroup(
         	panelBorder1Layout.createParallelGroup(Alignment.LEADING)
@@ -138,7 +135,9 @@ public class Form_Home extends javax.swing.JPanel {
         			.addContainerGap()
         			.addComponent(panelBorder1, GroupLayout.DEFAULT_SIZE, 500, Short.MAX_VALUE))
         );
-    }// </editor-fold>//GEN-END:initComponents
+    }
+    
+ // Variables declaration
     private javax.swing.JLayeredPane panel;
     private view.swing.PanelBorder panelBorder1;
     private JLabel InfoLabel;
