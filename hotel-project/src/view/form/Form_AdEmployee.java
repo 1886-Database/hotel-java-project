@@ -206,14 +206,16 @@ public class Form_AdEmployee extends javax.swing.JPanel {
         			}else {
         				int ans = JOptionPane.showConfirmDialog(null, "입력한 정보대로 직원을 추가하시겠습니까?","Add Employee",JOptionPane.YES_NO_OPTION);
             			if(ans==JOptionPane.YES_OPTION) {
-            				int result = eM.add(loginID, name, phone, birthDate, dept);
-            				if(result==1) {
-            					JOptionPane.showMessageDialog(null,"정상적으로 추가되었습니다.", "Added",2);
-                				refresh();
-                				clear();
-                			}else if(result==-1) {
-                				JOptionPane.showMessageDialog(null,"로그인 ID가 중복되는지 확인해주세요.", "Error",2);
-                			}
+            				if(eM.checkID(loginID)==1) {
+	            				int result = eM.add(loginID, name, phone, birthDate, dept);
+	            				if(result==1) {
+	            					JOptionPane.showMessageDialog(null,"정상적으로 추가되었습니다.", "Added",2);
+	                				refresh();
+	                				clear();
+	                			}else if(result==-1) {
+	                				JOptionPane.showMessageDialog(null,"sql 에러.", "Error",2);
+	                			}
+            				}else JOptionPane.showMessageDialog(null,"로그인 ID가 중복되는지 확인해주세요.", "Error",2);
             			}
         			}
         		}else { //로그인한 직원의 부서가 hr 이 아니라면 경고 메시지 출력
