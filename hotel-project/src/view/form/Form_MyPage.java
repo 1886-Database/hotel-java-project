@@ -433,16 +433,16 @@ public class Form_MyPage extends JPanel {
     			String pw=String.valueOf(rightPanel3_input1.getPassword());
     			String pwCheck=String.valueOf(rightPanel3_input2.getPassword());
     			if(pw.equals(""))
-    				JOptionPane.showMessageDialog(rightPanel2,"비밀번호를 입력해주세요.", "Empty password",2);
+    				JOptionPane.showMessageDialog(rightPanel3,"비밀번호를 입력해주세요.", "Empty password",2);
     			else if(pwCheck.equals(""))
-    				JOptionPane.showMessageDialog(rightPanel2,"비밀번호를 한번 더 입력해주세요.", "Empty password check",2);
+    				JOptionPane.showMessageDialog(rightPanel3,"비밀번호를 한번 더 입력해주세요.", "Empty password check",2);
     			else {
     				if(pw.equals(pwCheck)) {
     					memberManager.delete(mem.getMemberID());
-    					JOptionPane.showMessageDialog(rightPanel2,"회원탈퇴되었습니다. 프로그램이 종료됩니다.", "Deleted",2);
+    					JOptionPane.showMessageDialog(rightPanel3,"회원탈퇴되었습니다. 프로그램이 종료됩니다.", "Deleted",2);
     					System.exit(0);  //프로그램 강제종료
     				}else 
-    					JOptionPane.showMessageDialog(rightPanel2,"비밀번호가 서로 일치하지 않습니다.", "Password Not Matching",2);
+    					JOptionPane.showMessageDialog(rightPanel3,"비밀번호가 서로 일치하지 않습니다.", "Password Not Matching",2);
     			}
     		}
     	});

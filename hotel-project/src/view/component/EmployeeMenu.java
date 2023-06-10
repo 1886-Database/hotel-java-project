@@ -35,11 +35,10 @@ public class EmployeeMenu extends javax.swing.JPanel {
         listMenu1.addItem(new Model_Menu("22", "예약 관리 ", Model_Menu.MenuType.MENU));
         listMenu1.addItem(new Model_Menu("20", "직원 관리 ", Model_Menu.MenuType.MENU));
         listMenu1.addItem(new Model_Menu("21", "회원 관리 ", Model_Menu.MenuType.MENU));
-        listMenu1.addItem(new Model_Menu("23", "매출 관리 ", Model_Menu.MenuType.MENU));
         listMenu1.addItem(new Model_Menu("", " ", Model_Menu.MenuType.EMPTY));
         listMenu1.addItem(new Model_Menu("", "My page", Model_Menu.MenuType.TITLE));
     	listMenu1.addItem(new Model_Menu("", " ", Model_Menu.MenuType.EMPTY));
-        listMenu1.addItem(new Model_Menu("8", "마이페이지 ", Model_Menu.MenuType.MENU));
+        listMenu1.addItem(new Model_Menu("8", "개인정보 ", Model_Menu.MenuType.MENU));
         listMenu1.addItem(new Model_Menu("7", "메세지 ", Model_Menu.MenuType.MENU));
         listMenu1.addItem(new Model_Menu("", " ", Model_Menu.MenuType.EMPTY));
         listMenu1.addItem(new Model_Menu("10", "종료 ", Model_Menu.MenuType.MENU));

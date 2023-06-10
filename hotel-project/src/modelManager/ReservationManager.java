@@ -14,6 +14,7 @@ import model.Employee;
 import model.Reservation;
 import myConnection.MY_Connection;
 
+//예약 관리
 public class ReservationManager {
 	private MY_Connection myConnection;
 	private Connection con;
@@ -43,19 +44,6 @@ public class ReservationManager {
 			stmt = con.createStatement();
 			rs = stmt.executeQuery("select max(reservedNo) from DB2023_reservation");
 			while (rs.next()) {
-				// form3 = new Form_Reservation();
-				// String[] s1 = form3.dataArr();
-				// String ROOMNO = s1[0];
-				// String CHECKIN = s1[1];
-				// String CHECKOUT = s1[2];
-				// String MEMBERID = "1";
-				// rr = new Form_RoomReservation();
-				// String[] s2 = rr.dataArr2();
-				// String RESERVEDDATE = s2[0];
-				// String REQUIREMENT = s2[1];
-				// String BREAKFAST_ = s2[2];
-				// String RESERVEDSTATUS = s2[3];
-				// String GUESTNO = s2[4];
 
 				String ROOMNO = roomno;
 				String CHECKIN = checkin;

@@ -35,6 +35,8 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 
 public class Form_MemberMsg extends javax.swing.JPanel {
@@ -146,14 +148,14 @@ public class Form_MemberMsg extends javax.swing.JPanel {
         	    int clickedMemberID = memberID;
         	    String timestamp = String.valueOf(System.currentTimeMillis()); // Current timestamp as a string
         	    if (message.trim().equals("")) {
-        	        JOptionPane.showMessageDialog(panel, "메시지를 입력해주세요.", "Empty message", 2);
+        	        JOptionPane.showMessageDialog(null, "메시지를 입력해주세요.", "Empty message", 2);
         	    } else {
         	        try {
         	            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         	            String formattedTimestamp = sdf.format(new Date(Long.parseLong(timestamp))); // Format the timestamp
         	            int result = mM.sendMessage(clickedMemberID, "memsend", message, formattedTimestamp);
         	            if (result == 1) {
-        	                JOptionPane.showMessageDialog(panel, "메시지를 보냈습니다.", "done", 2);
+        	                JOptionPane.showMessageDialog(null, "메시지를 보냈습니다.", "done", 2);
         	                DefaultTableModel model = (DefaultTableModel)table.getModel();
         	            	model.setRowCount(0);
         	            	sent(memberID);
@@ -218,6 +220,15 @@ public class Form_MemberMsg extends javax.swing.JPanel {
                 .addComponent(panelBorder1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(20, 20, 20))
         );
+        
+        JButton btnNewButton_1 = new JButton("새로고침");
+        btnNewButton_1.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		refresh();
+        	}
+        });
+        btnNewButton_1.setBounds(539, 484, 117, 29);
+        panelBorder1.add(btnNewButton_1);
     }// </editor-fold>//GEN-END:initComponents
     
     private void sent(int memberID) {
@@ -232,8 +243,15 @@ public class Form_MemberMsg extends javax.swing.JPanel {
         	table_1.addRow(new Object[] {"호텔",mess[i].getSendtime(),mess[i].getContent()});
         }
     }
-    	
     
+    public void refresh() {
+    	DefaultTableModel model1 = (DefaultTableModel)table.getModel();
+    	model1.setRowCount(0);
+    	DefaultTableModel model2 = (DefaultTableModel)table_1.getModel();
+    	model2.setRowCount(0);
+    	sent(memberID);
+    	recieved(memberID);
+    }
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
