@@ -68,6 +68,7 @@ public class MemberMain extends javax.swing.JFrame {
                     setForm(form2);
                 } else if (index == 3) { //객실 예약 페이지
                     setForm(form3);
+                    form3.all();
                 } else if (index==7) { //개인정보 페이지
                 	setForm(form4);
                 } else if (index==8) { //예약조회 페이지

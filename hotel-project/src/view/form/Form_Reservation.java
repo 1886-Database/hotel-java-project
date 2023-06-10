@@ -256,7 +256,7 @@ public class Form_Reservation extends javax.swing.JPanel {
 	}
 
 	// 전체 룸리스트
-	private void all() {
+	public void all() {
 		DefaultTableModel model = (DefaultTableModel) table.getModel();
 		model.setNumRows(0);
 		room = rM.getAllRoom();
