@@ -110,7 +110,7 @@ public class Form_AdReserv extends javax.swing.JPanel {
         
         
         lblNewLabel_1_1_1 = new JLabel("처리현황");
-        lblNewLabel_1_1_1.setBounds(75, 523, 44, 16);
+        lblNewLabel_1_1_1.setBounds(75, 523, 75, 16);
         
         //reservedstatus combobox 설정
         ReserveState = new JComboBox();
@@ -127,7 +127,8 @@ public class Form_AdReserv extends javax.swing.JPanel {
         		
         		if(row==-1)//row 선택 안했을 때
         			JOptionPane.showMessageDialog(null,"수정할 예약현황을 먼저 선택해주세요.", "Reservation is Not Selected",2);
-        		
+        		else if(table.getModel().getValueAt(row, 7).equals("취소"))
+        			JOptionPane.showMessageDialog(null,"고객이 취소한 예약에 대해서는 예약 상태 변경이 불가능합니다.", "Not Allowed",2);
         		else {
         			int reservedNo =  (int)table.getModel().getValueAt(row,0);
         			int result = rM.edit(reservedNo, reservedStatus);
