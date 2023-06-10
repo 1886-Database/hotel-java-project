@@ -89,9 +89,6 @@ public class MemberMain extends javax.swing.JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                String[] s = form3.dataArr();
-               
-               for(int i=0; i<s.length; ++i)
-                   System.out.println(s[i]);
                form1 = new Form_RoomReservation(loginID,s);
                setForm(form1);
             }
@@ -156,8 +153,6 @@ public class MemberMain extends javax.swing.JFrame {
 
     
     public static void main(String args[]) {
-    	
-    	System.out.println(loginID+" 회원으로 로그인하였습니다.");
     	
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
