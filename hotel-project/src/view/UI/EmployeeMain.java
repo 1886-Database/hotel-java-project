@@ -28,7 +28,9 @@ import model.Employee;
 
 public class EmployeeMain extends javax.swing.JFrame {
 
-
+	/**
+     * Creates new form Main
+     */
 	private JFrame frame;
     private Form_Home home;
     private Form_AdRoom form1;
@@ -41,13 +43,12 @@ public class EmployeeMain extends javax.swing.JFrame {
     static String loginID = "wcampbell"; 
     static int EmployeeID = 2; //값 초기화
     
-    
+
     public EmployeeMain(String id) {
     	eM = new EmployeeManager();
         initComponents();
         loginID = id;
-        EmployeeID = eM.getEmployeeIDbyloginID(id);//messageform으로 employeeID 보내기 위해 변환
-        
+        EmployeeID = eM.getEmployeeIDbyloginID(id);
         setBackground(new Color(0, 0, 0, 0));
         home = new Form_Home();
         form1 = new Form_AdRoom();
@@ -59,7 +60,6 @@ public class EmployeeMain extends javax.swing.JFrame {
         menu.initMoving(EmployeeMain.this);
         menu.addEventMenuSelected(new EventMenuSelected() {
             @Override
-            //각 메뉴 눌렀을 때 form 변환
             public void selected(int index) {
                 if (index == 0) {
                     setForm(home);
@@ -145,14 +145,12 @@ public class EmployeeMain extends javax.swing.JFrame {
 
         pack();
         setLocationRelativeTo(null);
-    }
+    }// </editor-fold>//GEN-END:initComponents
+
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-       
-    	//로그인 시 관리자 loginID와 함께 로그인 메시지 console에 print
-    	System.out.println(loginID+" 관리자로 로그인하였습니다.");
     	
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -184,6 +182,6 @@ public class EmployeeMain extends javax.swing.JFrame {
     private javax.swing.JPanel mainPanel;
     private view.component.EmployeeMenu menu;
     private view.swing.PanelBorder panelBorder1;
-   
+    // End of variables declaration//GEN-END:variables
 }
 

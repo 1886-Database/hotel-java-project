@@ -182,8 +182,8 @@ public class Form_ViewMyReservDetails extends JPanel {
         						.addComponent(label_reservGuestValue, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE)
         						.addComponent(label_reservDateValue, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE)
         						.addComponent(label_reservNoValue, GroupLayout.PREFERRED_SIZE, 75, GroupLayout.PREFERRED_SIZE)
-        						.addComponent(label_checkDateValue, GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)))
-        				.addComponent(textArea, GroupLayout.PREFERRED_SIZE, 364, GroupLayout.PREFERRED_SIZE)
+        						.addComponent(label_checkDateValue, GroupLayout.PREFERRED_SIZE, 151, GroupLayout.PREFERRED_SIZE)))
+        				.addComponent(textArea, GroupLayout.DEFAULT_SIZE, 364, Short.MAX_VALUE)
         				.addComponent(label_message))
         			.addGap(25))
         );
@@ -214,7 +214,7 @@ public class Form_ViewMyReservDetails extends JPanel {
         					.addGroup(panelBorder1Layout.createParallelGroup(Alignment.BASELINE)
         						.addComponent(label_reservBreakfast)
         						.addComponent(label_reservBreakfastValue, GroupLayout.PREFERRED_SIZE, 17, GroupLayout.PREFERRED_SIZE))
-        					.addPreferredGap(ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+        					.addPreferredGap(ComponentPlacement.RELATED, 83, Short.MAX_VALUE)
         					.addComponent(label_message)
         					.addPreferredGap(ComponentPlacement.RELATED)
         					.addComponent(textArea, GroupLayout.PREFERRED_SIZE, 76, GroupLayout.PREFERRED_SIZE))
@@ -245,11 +245,11 @@ public class Form_ViewMyReservDetails extends JPanel {
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         layout.setHorizontalGroup(
         	layout.createParallelGroup(Alignment.LEADING)
-        		.addGroup(layout.createSequentialGroup()
+        		.addGroup(Alignment.TRAILING, layout.createSequentialGroup()
         			.addGap(20)
-        			.addGroup(layout.createParallelGroup(Alignment.LEADING)
-        				.addComponent(panelBorder1, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        				.addComponent(panel, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 906, Short.MAX_VALUE))
+        			.addGroup(layout.createParallelGroup(Alignment.TRAILING)
+        				.addComponent(panelBorder1, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 806, Short.MAX_VALUE)
+        				.addComponent(panel, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 809, Short.MAX_VALUE))
         			.addGap(20))
         );
         layout.setVerticalGroup(
@@ -258,7 +258,7 @@ public class Form_ViewMyReservDetails extends JPanel {
         			.addGap(20)
         			.addComponent(panel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
         			.addGap(15)
-        			.addComponent(panelBorder1, GroupLayout.DEFAULT_SIZE, 328, Short.MAX_VALUE)
+        			.addComponent(panelBorder1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         			.addGap(35))
         );
         this.setLayout(layout);

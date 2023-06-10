@@ -35,6 +35,7 @@ import modelManager.MemberManager;
 import modelManager.RoomManager;
 
 import javax.swing.JButton;
+import java.awt.Font;
 
 //객실 관리 페이지
 public class Form_AdRoom extends javax.swing.JPanel {
@@ -148,6 +149,9 @@ public class Form_AdRoom extends javax.swing.JPanel {
         input_roomsize.setColumns(10);
         input_roomname = new JTextField();
         input_roomname.setColumns(10);
+        
+        lblNewLabel = new JLabel("* 이화호텔에 존재하는 모든 객실 정보를 확인 가능합니다.");
+        lblNewLabel.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
 
         //레이아웃 설정
         javax.swing.GroupLayout panelBorder1Layout = new javax.swing.GroupLayout(panelBorder1);
@@ -158,47 +162,44 @@ public class Form_AdRoom extends javax.swing.JPanel {
         				.addGroup(panelBorder1Layout.createSequentialGroup()
         					.addGap(36)
         					.addGroup(panelBorder1Layout.createParallelGroup(Alignment.LEADING)
-        						.addGroup(panelBorder1Layout.createSequentialGroup()
-        							.addComponent(Label_roomtype)
-        							.addPreferredGap(ComponentPlacement.RELATED))
-        						.addGroup(panelBorder1Layout.createParallelGroup(Alignment.LEADING)
+        						.addComponent(Label_roomtype)
+        						.addGroup(panelBorder1Layout.createParallelGroup(Alignment.LEADING, false)
         							.addGroup(panelBorder1Layout.createSequentialGroup()
-        								.addGroup(panelBorder1Layout.createParallelGroup(Alignment.LEADING, false)
-        									.addGroup(panelBorder1Layout.createSequentialGroup()
-        										.addComponent(Label_roomname)
-        										.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        										.addComponent(input_roomname, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-        									.addGroup(panelBorder1Layout.createSequentialGroup()
-        										.addGroup(panelBorder1Layout.createParallelGroup(Alignment.LEADING)
-        											.addComponent(Label_roomno)
-        											.addComponent(Label_bedtype)
-        											.addComponent(Label_capacity)
-        											.addComponent(Label_roomsize))
-        										.addGap(51)
-        										.addGroup(panelBorder1Layout.createParallelGroup(Alignment.LEADING)
-        											.addComponent(input_roomsize, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-        											.addComponent(input_capacity, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-        											.addComponent(input_bedtype, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-        											.addComponent(input_roomno, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-        											.addComponent(input_price, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-        											.addComponent(input_roomtype, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))))
-        								.addGap(18))
+        								.addComponent(Label_roomname)
+        								.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        								.addComponent(input_roomname, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
         							.addGroup(panelBorder1Layout.createSequentialGroup()
-        								.addComponent(Label_price)
-        								.addPreferredGap(ComponentPlacement.RELATED))))
-        					.addGap(27)
-        					.addComponent(spTable, GroupLayout.DEFAULT_SIZE, 318, Short.MAX_VALUE))
+        								.addGroup(panelBorder1Layout.createParallelGroup(Alignment.LEADING)
+        									.addComponent(Label_roomno)
+        									.addComponent(Label_bedtype)
+        									.addComponent(Label_capacity)
+        									.addComponent(Label_roomsize))
+        								.addGap(51)
+        								.addGroup(panelBorder1Layout.createParallelGroup(Alignment.LEADING)
+        									.addComponent(input_roomsize, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        									.addComponent(input_capacity, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        									.addComponent(input_bedtype, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        									.addComponent(input_roomno, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        									.addComponent(input_price, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        									.addComponent(input_roomtype, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))))
+        						.addComponent(Label_price))
+        					.addGap(45)
+        					.addComponent(spTable, GroupLayout.DEFAULT_SIZE, 694, Short.MAX_VALUE))
         				.addGroup(panelBorder1Layout.createSequentialGroup()
         					.addGap(20)
-        					.addComponent(jLabel1, GroupLayout.PREFERRED_SIZE, 238, GroupLayout.PREFERRED_SIZE)))
+        					.addComponent(jLabel1, GroupLayout.PREFERRED_SIZE, 238, GroupLayout.PREFERRED_SIZE)
+        					.addPreferredGap(ComponentPlacement.RELATED)
+        					.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 602, GroupLayout.PREFERRED_SIZE)))
         			.addContainerGap())
         );
         panelBorder1Layout.setVerticalGroup(
         	panelBorder1Layout.createParallelGroup(Alignment.LEADING)
         		.addGroup(panelBorder1Layout.createSequentialGroup()
-        			.addContainerGap()
-        			.addComponent(jLabel1)
-        			.addGap(36)
+        			.addGap(19)
+        			.addGroup(panelBorder1Layout.createParallelGroup(Alignment.BASELINE)
+        				.addComponent(jLabel1)
+        				.addComponent(lblNewLabel))
+        			.addGap(27)
         			.addGroup(panelBorder1Layout.createParallelGroup(Alignment.LEADING)
         				.addGroup(panelBorder1Layout.createSequentialGroup()
         					.addComponent(spTable, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
@@ -207,7 +208,7 @@ public class Form_AdRoom extends javax.swing.JPanel {
         					.addGroup(panelBorder1Layout.createParallelGroup(Alignment.BASELINE)
         						.addComponent(Label_roomno)
         						.addComponent(input_roomno, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-        					.addPreferredGap(ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
+        					.addPreferredGap(ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
         					.addGroup(panelBorder1Layout.createParallelGroup(Alignment.BASELINE)
         						.addComponent(Label_bedtype)
         						.addComponent(input_bedtype, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
@@ -294,4 +295,5 @@ public class Form_AdRoom extends javax.swing.JPanel {
     private JTextField input_roomtype;
     private JTextField input_roomsize;
     private JTextField input_roomname;
+    private JLabel lblNewLabel;
 }

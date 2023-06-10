@@ -14,7 +14,6 @@ import model.Employee;
 import model.Reservation;
 import myConnection.MY_Connection;
 
-//예약 관리
 public class ReservationManager {
 	private MY_Connection myConnection;
 	private Connection con;
@@ -67,9 +66,7 @@ public class ReservationManager {
 				ps.setString(9, RESERVEDSTATUS);
 				ps.setString(10, GUESTNO);
 				ps.executeUpdate();
-				System.out.println("예약 완료" + " 예약 번호: " + reservedNo + " 예약 객실: " + ROOMNO + " 체크인: " + CHECKIN
-						+ " 체크아웃: " + CHECKOUT + " 예약 날짜: " + RESERVEDDATE + " 멤버아이디: " + MEMBERID + " 요구사항: "
-						+ REQUIREMENT + " 조식여부: " + BREAKFAST_ + " 상테 :" + RESERVEDSTATUS + " 인원: " + GUESTNO);
+
 				return 1;
 			}
 		} catch (SQLException se) {
@@ -80,8 +77,6 @@ public class ReservationManager {
 		return -1; // 데이터베이스 오류
 	}
 
-	
-	//Form_AdReserve : 생성된 view replace 및 select후 객체로 반환
 	public Reservation[] getReservationView() {
 		Reservation[] r_array;
 		int rowCnt = 0;
@@ -93,7 +88,7 @@ public class ReservationManager {
 			con = myConnection.getConnection();
 			stmt = con.createStatement();
 
-	
+
 			// reservation 의 레코드 개수 확인
 			ResultSet rsCnt = stmt.executeQuery(resCnt);
 
@@ -107,7 +102,7 @@ public class ReservationManager {
 			rsCnt.close(); // 자원 반환
 
 			// MemberReservationView 뷰에서 데이터 조회
-	
+
 			rs = stmt.executeQuery(query);
 			while (rs.next()) {
 				r_array[index].setMemberName(rs.getString(1));
@@ -190,7 +185,7 @@ public class ReservationManager {
 		r_array = new Reservation[rowCnt];
 		return r_array;
 	}
-	
+
 	//예약조회 : 예약 상태를 '취소'로 변경
 	public int cancel(int reservedNo) {
 		String SQL = "UPDATE DB2023_reservation SET reservedStatus = '취소' WHERE reservedNo=?";

@@ -114,9 +114,7 @@ public class Form_RoomReservation extends javax.swing.JPanel {
         		Date date_now = new Date(System.currentTimeMillis()); // 현재시간을 가져와 Date형으로 저장한다
         		SimpleDateFormat fourteen_format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); 
         		reserveddate = fourteen_format.format(date_now);
-        		System.out.println(reserveddate);
         		requirement = textField.getText();
-        		System.out.println(requirement);
         		guestno = PSELECT.getSelectedItem().toString();
         		Breakfast = BSELECT.getSelectedItem().toString();
         		reservedstatus="대기";
@@ -124,7 +122,7 @@ public class Form_RoomReservation extends javax.swing.JPanel {
         		int ans = JOptionPane.showConfirmDialog(null, "입력한 정보대로 객실을 예약하시겠습니까?","Reserve Room",JOptionPane.YES_NO_OPTION);
     			if(ans==JOptionPane.YES_OPTION) {
     				rsM.reservation(roomno,checkin,checkout,reserveddate,requirement,Breakfast,reservedstatus,guestno);
-    				
+    				JOptionPane.showMessageDialog(panelBorder1, "예약 신청이 완료되었습니다.", "done", 2);
     			}
         	
         	}

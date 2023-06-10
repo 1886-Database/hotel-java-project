@@ -206,14 +206,16 @@ public class Form_AdEmployee extends javax.swing.JPanel {
         			}else {
         				int ans = JOptionPane.showConfirmDialog(null, "입력한 정보대로 직원을 추가하시겠습니까?","Add Employee",JOptionPane.YES_NO_OPTION);
             			if(ans==JOptionPane.YES_OPTION) {
-            				int result = eM.add(loginID, name, phone, birthDate, dept);
-            				if(result==1) {
-            					JOptionPane.showMessageDialog(null,"정상적으로 추가되었습니다.", "Added",2);
-                				refresh();
-                				clear();
-                			}else if(result==-1) {
-                				JOptionPane.showMessageDialog(null,"로그인 ID가 중복되는지 확인해주세요.", "Error",2);
-                			}
+            				if(eM.checkID(loginID)==1) {
+	            				int result = eM.add(loginID, name, phone, birthDate, dept);
+	            				if(result==1) {
+	            					JOptionPane.showMessageDialog(null,"정상적으로 추가되었습니다.", "Added",2);
+	                				refresh();
+	                				clear();
+	                			}else if(result==-1) {
+	                				JOptionPane.showMessageDialog(null,"sql 에러.", "Error",2);
+	                			}
+            				}else JOptionPane.showMessageDialog(null,"로그인 ID가 중복되는지 확인해주세요.", "Error",2);
             			}
         			}
         		}else { //로그인한 직원의 부서가 hr 이 아니라면 경고 메시지 출력
@@ -334,6 +336,16 @@ public class Form_AdEmployee extends javax.swing.JPanel {
         panelBorder1.add(btn_del);
         panelBorder1.add(btn_refresh);
         panelBorder1.add(btn_clear);
+        
+        lblNewLabel = new JLabel("* 이화호텔에 근무하는 직원들의 목록을 확인 가능합니다.");
+        lblNewLabel.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
+        lblNewLabel.setBounds(257, 28, 484, 15);
+        panelBorder1.add(lblNewLabel);
+        
+        lblNewLabel_1 = new JLabel("* 직원 정보 추가(add) 및 수정(edit), 삭제(delete)에 대한 권한은 hr 부서 직원에게만 존재합니다.");
+        lblNewLabel_1.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
+        lblNewLabel_1.setBounds(257, 48, 545, 15);
+        panelBorder1.add(lblNewLabel_1);
         add(panel);
         
     }// </editor-fold>//GEN-END:initComponents
@@ -400,4 +412,6 @@ public class Form_AdEmployee extends javax.swing.JPanel {
     private JButton btn_del;
     private JButton btn_refresh;
     private JButton btn_clear;
+    private JLabel lblNewLabel;
+    private JLabel lblNewLabel_1;
 }

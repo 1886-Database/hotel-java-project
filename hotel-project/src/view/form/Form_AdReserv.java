@@ -32,6 +32,7 @@ import java.awt.event.MouseEvent;
 import java.util.Date;
 import java.awt.event.ActionEvent;
 import javax.swing.DefaultComboBoxModel;
+import java.awt.Font;
 
 
 public class Form_AdReserv extends javax.swing.JPanel {
@@ -110,12 +111,12 @@ public class Form_AdReserv extends javax.swing.JPanel {
         
         
         lblNewLabel_1_1_1 = new JLabel("처리현황");
-        lblNewLabel_1_1_1.setBounds(75, 523, 44, 16);
+        lblNewLabel_1_1_1.setBounds(65, 517, 75, 16);
         
         //reservedstatus combobox 설정
         ReserveState = new JComboBox();
         ReserveState.setModel(new DefaultComboBoxModel(new String[] {"승인", "대기", "거절"}));
-        ReserveState.setBounds(131, 519, 130, 27);
+        ReserveState.setBounds(131, 512, 130, 27);
         ReserveState.setSelectedIndex(-1);
         
         //edit button
@@ -127,7 +128,8 @@ public class Form_AdReserv extends javax.swing.JPanel {
         		
         		if(row==-1)//row 선택 안했을 때
         			JOptionPane.showMessageDialog(null,"수정할 예약현황을 먼저 선택해주세요.", "Reservation is Not Selected",2);
-        		
+        		else if(table.getModel().getValueAt(row, 7).equals("취소"))
+        			JOptionPane.showMessageDialog(null,"고객이 취소한 예약에 대해서는 예약 상태 변경이 불가능합니다.", "Not Allowed",2);
         		else {
         			int reservedNo =  (int)table.getModel().getValueAt(row,0);
         			int result = rM.edit(reservedNo, reservedStatus);
@@ -137,7 +139,7 @@ public class Form_AdReserv extends javax.swing.JPanel {
         				}
         			}}});	
         
-        btnEdit.setBounds(301, 518, 75, 29);
+        btnEdit.setBounds(301, 511, 75, 29);
         
         
         //refresh button
@@ -184,6 +186,11 @@ public class Form_AdReserv extends javax.swing.JPanel {
         panelBorder1.add(spTable);
         panelBorder1.add(btnEdit);
         panelBorder1.add(btnRefresh);
+        
+        JLabel lblNewLabel = new JLabel("* 고객의 예약 신청 내역을 확인하고, 특정 예약 신청에 대한 처리현황을 변경할 수 있습니다.");
+        lblNewLabel.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
+        lblNewLabel.setBounds(277, 28, 548, 15);
+        panelBorder1.add(lblNewLabel);
        
     
     }
