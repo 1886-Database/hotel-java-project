@@ -201,7 +201,6 @@ public class Form_EmployeeMsg extends javax.swing.JPanel {
 				recieverIDtxt.setText((String) table_1.getModel().getValueAt(row, 0));
 			}
 		});
-		
 		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
 		this.setLayout(layout);
 		layout.setHorizontalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -256,6 +255,12 @@ public class Form_EmployeeMsg extends javax.swing.JPanel {
 		model.setRowCount(0);
 		sent();
 		recieved();
+		for(int i=0; i<table.getRowCount(); ++i)
+			if(table.getModel().getValueAt(i, 1).equals(""))
+				table.getModel().setValueAt("(알 수 없음)", i, 1);
+		for(int i=0; i<table_1.getRowCount(); ++i)
+			if(table_1.getModel().getValueAt(i, 0).equals(""))
+				table_1.getModel().setValueAt("(알 수 없음)", i, 0);
 	}
 
 	// Variables declaration - do not modify//GEN-BEGIN:variables
