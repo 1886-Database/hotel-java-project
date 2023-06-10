@@ -76,41 +76,38 @@ public class RoomManager {
 		r_array=new Room[rowCnt];
 		return r_array;
 	}
+	
 	//룸리스트 재정렬 화면 : 필터링된 room 테이블의 레코드 반환
 		public Room[] getRefreshRoom(String checkin, String checkout) {
 			Room[] r_array;
-			int rowCnt=11;
+			int rowCnt=0;
 			int index=0;
-			String room = "SELECT db2023_room.roomNo,bedType,capacity,price,roomType,roomSize,roomName,nonSmoking,parking \r\n"
-					+ "FROM db2023_room JOIN db2023_reservation ON db2023_room.roomNo=db2023_reservation.roomNo\r\n"
-					+ "WHERE db2023_room.roomNo !=\r\n"
-					+ "ALL (SELECT db2023_room.roomNo\r\n"
-					+ "FROM db2023_room JOIN db2023_reservation ON db2023_room.roomNo=db2023_reservation.roomNo\r\n"
-					+ "WHERE ((? between checkIn AND checkOut and ? > checkOut)\r\n"
-					+ "OR (? < checkIn and ? between checkIn and checkOut)\r\n"
-					+ "OR (? between checkIn and checkOut and ? between checkIn and checkOut)\r\n"
-					+ "OR (? < checkIn and ? > checkOut)))\r\n"
-					+ "UNION ALL \r\n"
-					+ "(SELECT db2023_room.roomNo,bedType,capacity,price,roomType,roomSize,roomName,nonSmoking,parking FROM db2023_room LEFT OUTER JOIN db2023_reservation ON db2023_room.roomNo=db2023_reservation.roomNo WHERE db2023_reservation.roomNo IS NULL)";
+			String room = "select roomNo,bedType,capacity,price,roomType,roomSize,roomName,nonSmoking,parking "
+					+ "from DB2023_room where roomNo not in "
+					+ "(select roomNo from DB2023_reservedRoom where ? between checkIn and checkOut or ? between checkIn and checkOut)";
 			
 			try {
 				con=myConnection.getConnection();
-				ps = con.prepareStatement(room);
+				ps = con.prepareStatement(room, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
 			    ps.setString(1, checkin);
-			    ps.setString(2,checkout);
-			    ps.setString(3, checkin);
-			    ps.setString(4,checkout);
-			    ps.setString(5, checkin);
-			    ps.setString(6,checkout);
-			    ps.setString(7, checkin);
-			    ps.setString(8,checkout);
+			    ps.setString(2, checkout);
+			    
 			    rs = ps.executeQuery();
 				
+			    //rs의 레코드 개수 크기 만큼의 객체 배열 생성
+			    
+			    while (rs.next()) {
+					rowCnt++;
+				}
 				
 				r_array=new Room[rowCnt];
+				
 				for (int i = 0; i < r_array.length; ++i)
 					r_array[i] = new Room();
 				
+				rs.beforeFirst();
+				
+				//각 객체에 값 저장
 				
 				while(rs.next()) {
 					r_array[index].setRoomNo(rs.getInt(1));
