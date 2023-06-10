@@ -181,10 +181,16 @@ public class SignUp {
 	    
 	    MaskFormatter formatter=null;
 	    try {
-	    	formatter = new MaskFormatter("###-####-####");
+	    	formatter = new MaskFormatter("###########"); //전화번호 입력형식 제한
 	    }catch(ParseException ex) {
 	    }
 	    input_phone = new JFormattedTextField(formatter);
+	    input_phone.addMouseListener(new MouseAdapter() {
+	    	@Override
+	    	public void mouseClicked(MouseEvent e) { //창 클릭시 입력값 초기화
+	    		input_phone.setText("");
+	    	}
+	    });
 	    input_phone.setBounds(272, 293, 370, 38);
 	    panel.add(input_phone);
 	    
@@ -256,14 +262,14 @@ public class SignUp {
 	    			JOptionPane.showMessageDialog(frame,"비밀번호를 입력해주세요.", "Empty password",2);
 	    		}
 	    		else if(phone.trim().equals("")) {
-	    			JOptionPane.showMessageDialog(frame,"전화번호를 입력해주세요.", "Empty phoneNum",2);
+	    			JOptionPane.showMessageDialog(frame,"전화번호 11자리를 입력해주세요.", "Empty phoneNum",2);
 	    		}
 	    		else if(birthYear.trim().equals("")||birthMonth.trim().equals("")||birthDay.trim().equals("")) {
 	    			JOptionPane.showMessageDialog(frame,"생일을 입력해주세요.", "Empty birthday",2);
 	    		}else if(!(loginID.equals(checkedID))) {
 	    			JOptionPane.showMessageDialog(frame,"ID 중복 확인을 해주세요.", "you should check your ID",2);
 	    		}else {
-	    			String phoneNum = phone;
+	    			String phoneNum = phone.substring(0, 3)+"-"+phone.substring(3, 7)+"-"+phone.substring(7, 11);
 	    			String birthDate = birthYear+"-"+birthMonth+"-"+birthDay;
 	    			try {
 	    				int result = memberManager.signUp(name,loginID,password,phoneNum,birthDate);
@@ -292,6 +298,11 @@ public class SignUp {
 	    lblNewLabel.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
 	    lblNewLabel.setBounds(122, 465, 604, 15);
 	    panel.add(lblNewLabel);
+	    
+	    JLabel lblEx = new JLabel("입력예시) 01012345678");
+	    lblEx.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
+	    lblEx.setBounds(654, 312, 141, 15);
+	    panel.add(lblEx);
 	    
 
 	   
