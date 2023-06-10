@@ -23,6 +23,9 @@ import view.form.Form_AdReserv;
 import view.form.Form_AdRoom;
 import view.form.Form_Home;
 
+import modelManager.EmployeeManager;
+import model.Employee;
+
 public class EmployeeMain extends javax.swing.JFrame {
 
 	/**
@@ -36,14 +39,16 @@ public class EmployeeMain extends javax.swing.JFrame {
     private Form_AdMember form4;
     private Form_AdMyPage form5;
     private Form_EmployeeMsg form6;
+    private EmployeeManager eM;
     static String loginID = "wcampbell"; 
-    static int EmployeeID = 2; //테스트를 위한 값 초기화... 마지막에 삭제해야함
-
+    static int EmployeeID = 2; //값 초기화
+    
 
     public EmployeeMain(String id) {
+    	eM = new EmployeeManager();
         initComponents();
         loginID = id;
-       
+        EmployeeID = eM.getEmployeeIDbyloginID(id);
         setBackground(new Color(0, 0, 0, 0));
         home = new Form_Home();
         form1 = new Form_AdRoom();

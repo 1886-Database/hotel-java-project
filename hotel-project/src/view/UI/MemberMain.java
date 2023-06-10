@@ -25,6 +25,8 @@ import view.form.Form_MyPage;
 import view.form.Form_ViewMyReserv;
 import view.form.Form_ViewMyReservDetails;
 
+import modelManager.MemberManager;
+import model.Member;
 //멤버화면 메인페이지
 public class MemberMain extends javax.swing.JFrame {
 
@@ -37,12 +39,15 @@ public class MemberMain extends javax.swing.JFrame {
     private Form_MyPage form4;
     private Form_ViewMyReserv form5;
     private Form_MemberMsg form6;
+    private MemberManager mM;
     static String loginID="leda7"; 
     static int MemberID = 00001;//테스트를 위한 값 초기화... 마지막에 삭제해야함
 
     public MemberMain(String id) {
+    	mM = new MemberManager();
         initComponents();
         loginID = id;
+        MemberID = mM.getMemberIDbyLoginID(loginID);
         setBackground(new Color(0, 0, 0, 0));
         form2 = new Form_Home();
         form3 = new Form_Reservation();

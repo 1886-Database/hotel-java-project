@@ -223,4 +223,29 @@ public class EmployeeManager {
 			return -1;
 		}
 		
+		
+		//Employeemain 화면 : 직원 메시지화면으로 employeeid로 바꿔보낼 때
+		
+		public int getEmployeeIDbyloginID(String id) {
+		    String SQL = "SELECT employeeID FROM DB2023_employee WHERE loginID=?";
+		    int employeeID = 0;
+		    try {
+		        con = myConnection.getConnection();
+		        ps = con.prepareStatement(SQL);
+		        ps.setString(1, id);
+		        rs = ps.executeQuery();
+		        
+		        if (rs.next()) {  // 결과 집합에 데이터가 있는지 확인
+		            employeeID = rs.getInt(1);
+		        }
+		    } catch (SQLException se) {
+		        se.printStackTrace();
+		    } finally {
+		        myConnection.close(rs, null, ps, con);
+		    }
+		    return employeeID;
+		}
+		
 }
+
+
