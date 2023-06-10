@@ -22,7 +22,7 @@ public class MemberManager {
 		try {
 			myConnection = new MY_Connection();
 		} catch (Exception e) {
-			e.printStackTrace();
+			
 		}
 	}
 
@@ -46,7 +46,7 @@ public class MemberManager {
 			}
 			return 0; // 로그인 실패 (잘못된 id/pw)
 		} catch (SQLException se) {
-			se.printStackTrace();
+			
 		} finally {
 			myConnection.close(rs, null, ps, con);
 		}
@@ -73,7 +73,7 @@ public class MemberManager {
 			}
 			return 1; // 중복 ID 존재하지 않음
 		} catch (SQLException se) {
-			se.printStackTrace();
+			
 		} finally {
 			myConnection.close(rs, null, ps, con);
 		}
@@ -105,7 +105,7 @@ public class MemberManager {
 				return 1;
 			}
 		} catch (SQLException se) {
-			se.printStackTrace();
+			
 		} finally {
 			myConnection.close(rs, stmt, ps, con);
 		}
@@ -126,7 +126,7 @@ public class MemberManager {
 			ps.setString(2, loginID);
 			ps.executeUpdate();
 		} catch (SQLException se) {
-			se.printStackTrace();
+			
 		} finally {
 			myConnection.close(null, null, ps, con);
 		}
@@ -152,7 +152,7 @@ public class MemberManager {
 				return member;
 			}
 		} catch (SQLException se) {
-			se.printStackTrace();
+			
 		} finally {
 			myConnection.close(rs, null, ps, con);
 		}
@@ -178,7 +178,7 @@ public class MemberManager {
 				loginID = rs.getString(1);
 			}
 		} catch (SQLException se) {
-			se.printStackTrace();
+			
 		} finally {
 			myConnection.close(rs, null, ps, con);
 		}
@@ -202,7 +202,7 @@ public class MemberManager {
 				memberID = rs.getInt(1);
 			}
 		} catch (SQLException se) {
-			se.printStackTrace();
+			
 		} finally {
 			myConnection.close(rs, null, ps, con);
 		}
@@ -253,7 +253,7 @@ public class MemberManager {
 			return m_array;
 
 		} catch (SQLException se) {
-			se.printStackTrace();
+			
 		} finally {
 			myConnection.close(rs, stmt, null, con);
 		}
@@ -289,12 +289,12 @@ public class MemberManager {
 			con.setAutoCommit(true); /************************* 트랜잭션 종료 **************************/
 			return 1;
 		} catch (SQLException se) {
-			se.printStackTrace();
+			
 			try {
 				if (con != null)
 					con.rollback(); /****** 롤백 ******/
 			} catch (SQLException se2) {
-				se2.printStackTrace();
+				
 			}
 		} finally {
 			myConnection.close(null, null, ps, con);

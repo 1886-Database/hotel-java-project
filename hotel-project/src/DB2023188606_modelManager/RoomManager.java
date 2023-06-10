@@ -23,7 +23,7 @@ public class RoomManager {
 			myConnection = new MY_Connection();
 		} 
 		catch(Exception e) {
-			e.printStackTrace();
+			
 		}
 	}
 	
@@ -72,7 +72,7 @@ public class RoomManager {
 			return r_array;
 			
 		}catch(SQLException se) {
-			se.printStackTrace();
+			
 		}finally {
 			myConnection.close(rs, stmt, null, con);
 		}
@@ -132,7 +132,7 @@ public class RoomManager {
 				return r_array;
 				
 			}catch(SQLException se) {
-				se.printStackTrace();
+				
 			}finally {
 				myConnection.close(rs, null, ps, con);
 			}
@@ -158,7 +158,7 @@ public class RoomManager {
 				con.setAutoCommit(true);  /**트랜잭션 종료**/
 				return 1;
 			}catch(SQLException se) {
-				se.printStackTrace();
+				
 				try {
 					if(con!=null)
 						con.rollback();
@@ -190,7 +190,7 @@ public class RoomManager {
 					return 1;   //성공
 				}
 			}catch(SQLException e) {
-				e.printStackTrace();
+				
 			}finally {
 				myConnection.close(null,stmt,ps,con);
 			}
@@ -212,7 +212,7 @@ public class RoomManager {
 				ps.executeUpdate();
 				return 1;
 			}catch(SQLException e) {
-				e.printStackTrace();
+				
 			}finally {
 				myConnection.close(null, stmt, null, con);
 			}

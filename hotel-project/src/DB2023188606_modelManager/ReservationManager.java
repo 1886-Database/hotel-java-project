@@ -26,7 +26,7 @@ public class ReservationManager {
 		try {
 			myConnection = new MY_Connection();
 		} catch (Exception e) {
-			e.printStackTrace();
+			
 		}
 
 	}
@@ -72,7 +72,7 @@ public class ReservationManager {
 				return 1;
 			}
 		} catch (SQLException se) {
-			se.printStackTrace();
+			
 		} finally {
 			myConnection.close(rs, stmt, ps, con);
 		}
@@ -127,7 +127,7 @@ public class ReservationManager {
 			return r_array;
 
 		} catch (SQLException e) {
-			e.printStackTrace();
+			
 		} finally {
 			myConnection.close(rs, stmt, null, con);
 		}
@@ -187,7 +187,7 @@ public class ReservationManager {
 			return r_array;
 
 		} catch (SQLException se) {
-			se.printStackTrace();
+			
 		} finally {
 			myConnection.close(rs, null, ps, con);
 		}
@@ -212,7 +212,7 @@ public class ReservationManager {
 			ps.executeUpdate();
 			return 1; //예약 취소 완료
 		}catch(SQLException e) {
-			e.printStackTrace();
+			
 		}finally {
 			myConnection.close(null, null, ps, con);
 		}
@@ -233,7 +233,7 @@ public class ReservationManager {
 			ps.executeUpdate();
 			return 1;
 		} catch (SQLException e) {
-			e.printStackTrace();
+			
 		} finally {
 			myConnection.close(null, null, ps, con);
 		}

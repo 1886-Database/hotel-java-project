@@ -25,7 +25,7 @@ public class EmployeeManager {
 		try {
 			myConnection = new MY_Connection();
 		} catch (Exception e) {
-			e.printStackTrace();
+			
 		}
 	}
 
@@ -48,7 +48,7 @@ public class EmployeeManager {
 			}
 			return 0; // 로그인 실패 (잘못된 id/pw)
 		} catch (SQLException e) {
-			e.printStackTrace();
+			
 		} finally {
 			myConnection.close(rs, null, ps, con);
 		}
@@ -77,7 +77,7 @@ public class EmployeeManager {
 			}
 			return 1; // 중복 ID 존재하지 않음
 		} catch (SQLException e) {
-			e.printStackTrace();
+			
 		} finally {
 			myConnection.close(rs, null, ps, con);
 		}
@@ -99,7 +99,7 @@ public class EmployeeManager {
 			ps.setString(2, loginID);
 			ps.executeUpdate();
 		} catch (SQLException e) {
-			e.printStackTrace();
+			
 		} finally {
 			myConnection.close(null, null, ps, con);
 		}
@@ -127,7 +127,7 @@ public class EmployeeManager {
 				return employee;
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			
 		} finally {
 			myConnection.close(rs, null, ps, con);
 		}
@@ -179,7 +179,7 @@ public class EmployeeManager {
 			return e_array;
 
 		} catch (SQLException e) {
-			e.printStackTrace();
+			
 		} finally {
 			myConnection.close(rs, stmt, null, con);
 		}
@@ -201,7 +201,7 @@ public class EmployeeManager {
 			ps.executeUpdate();
 			return 1;
 		} catch (SQLException e) {
-			e.printStackTrace();
+			
 		} finally {
 			myConnection.close(null, stmt, null, con);
 		}
@@ -233,7 +233,7 @@ public class EmployeeManager {
 				return 1; // 성공
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			
 		} finally {
 			myConnection.close(rs, stmt, ps, con);
 		}
@@ -259,7 +259,7 @@ public class EmployeeManager {
 			ps.executeUpdate();
 			return 1;
 		} catch (SQLException e) {
-			e.printStackTrace();
+			
 		} finally {
 			myConnection.close(null, stmt, null, con);
 		}
@@ -284,7 +284,7 @@ public class EmployeeManager {
 				employeeID = rs.getInt(1);
 			}
 		} catch (SQLException se) {
-			se.printStackTrace();
+			
 		} finally {
 			myConnection.close(rs, null, ps, con);
 		}

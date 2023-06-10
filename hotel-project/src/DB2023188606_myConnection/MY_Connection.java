@@ -20,7 +20,7 @@ public class MY_Connection {
 					"DB2023188606");
 			return con;
 		} catch (SQLException e) {
-			e.printStackTrace();
+			
 		}
 		return null;
 	}
@@ -40,7 +40,7 @@ public class MY_Connection {
 			if (con != null)
 				con.close();
 		} catch (SQLException e) {
-			e.printStackTrace();
+			
 		}
 	}
 }

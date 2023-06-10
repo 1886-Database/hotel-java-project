@@ -28,7 +28,7 @@ public class MessageManager {
 			myConnection = new MY_Connection();
 		} 
 		catch(Exception e) {
-			e.printStackTrace();
+			
 		}
 	}
 	
@@ -55,7 +55,7 @@ public class MessageManager {
 	            return 1;
 	        }
 	    } catch (Exception e) {
-	        e.printStackTrace();
+	        
 	    } finally {
 	        myConnection.close(rs, stmt, ps, con);
 	    }
@@ -86,7 +86,7 @@ public class MessageManager {
 	            return 1;
 	        }
 	    } catch (Exception e) {
-	        e.printStackTrace();
+	        
 	    } finally {
 	        myConnection.close(rs, stmt, ps, con);
 	    }
@@ -121,7 +121,7 @@ public class MessageManager {
 
 				return messageList.toArray(new Message[0]);
 			} catch (Exception e) {
-				e.printStackTrace();
+				
 			} finally {
 				myConnection.close(rs, stmt, null, con);
 			}
@@ -158,7 +158,7 @@ public Message[] getMemberRecieveMessage(int memberID) {
 
 		return messageList.toArray(new Message[0]);
 	} catch (Exception e) {
-		e.printStackTrace();
+		
 	} finally {
 		myConnection.close(rs, stmt, null, con);
 	}
@@ -206,7 +206,7 @@ public Message[] getEmployeeSendMessage() {
 		return m_array;
 		
 	}catch(Exception e) {
-		e.printStackTrace();
+		
 	}finally {
 		myConnection.close(rs, stmt, null, con);
 	}
@@ -257,7 +257,7 @@ public Message[] getEmployeeRecieveMessage() {
 		return m_array;
 		
 	}catch(Exception e) {
-		e.printStackTrace();
+		
 	}finally {
 		myConnection.close(rs, stmt, null, con);
 	}

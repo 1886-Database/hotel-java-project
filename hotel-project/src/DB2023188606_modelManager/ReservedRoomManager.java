@@ -22,7 +22,7 @@ public class ReservedRoomManager {
 			myConnection = new MY_Connection();
 		} 
 		catch(Exception e) {
-			e.printStackTrace();
+			
 		}
 	}
 	// 예약 상세내역 페이지 : reservedNo를 인수로 받아와 reservedRoom 테이블 객체 반환
@@ -45,7 +45,7 @@ public class ReservedRoomManager {
 			}
 			
 		}catch(SQLException e) {
-			e.printStackTrace();
+			
 		}finally {
 			myConnection.close(rs, null, ps, con);
 		}

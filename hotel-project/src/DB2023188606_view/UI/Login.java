@@ -231,7 +231,7 @@ public class Login {
 				JOptionPane.showMessageDialog(backgroundPanel,"ID나 패스워드가 잘못되었습니다.", "Login Error",2);
 				
 		}catch(Exception e) {
-			e.printStackTrace();
+			
 		}
 		
 	}
@@ -248,7 +248,7 @@ public class Login {
 				JOptionPane.showMessageDialog(backgroundPanel,"ID나 패스워드가 잘못되었습니다.", "Login Error",2);
 				
 		}catch(Exception e) {
-			e.printStackTrace();
+			
 		}
 	}
 	
