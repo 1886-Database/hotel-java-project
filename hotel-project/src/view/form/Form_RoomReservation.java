@@ -45,6 +45,7 @@ public class Form_RoomReservation extends javax.swing.JPanel {
 	private String roomno;
 	private String checkin;
 	private String checkout;
+	private int num = 0;
 	
 	
 	//객실 예약 Form_Reservation 페이지에서 객실 번호, 체크인 날짜, 체크아웃 날짜, 멤버아이디 값을 가져옴.
@@ -121,8 +122,12 @@ public class Form_RoomReservation extends javax.swing.JPanel {
         		
         		int ans = JOptionPane.showConfirmDialog(null, "입력한 정보대로 객실을 예약하시겠습니까?","Reserve Room",JOptionPane.YES_NO_OPTION);
     			if(ans==JOptionPane.YES_OPTION) {
-    				rsM.reservation(roomno,checkin,checkout,reserveddate,requirement,Breakfast,reservedstatus,guestno);
-    				JOptionPane.showMessageDialog(panelBorder1, "예약 신청이 완료되었습니다.", "done", 2);
+    				if(num==0) {
+	    				rsM.reservation(roomno,checkin,checkout,reserveddate,requirement,Breakfast,reservedstatus,guestno);
+	    				JOptionPane.showMessageDialog(panelBorder1, "예약 신청이 완료되었습니다.", "done", 2);
+	    				num++;
+    				}else
+    					JOptionPane.showMessageDialog(panelBorder1, "이미 완료된 신청입니다.", "Already done", 2);
     			}
         	
         	}
