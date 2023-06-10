@@ -43,19 +43,6 @@ public class ReservationManager {
 			stmt = con.createStatement();
 			rs = stmt.executeQuery("select max(reservedNo) from DB2023_reservation");
 			while (rs.next()) {
-				// form3 = new Form_Reservation();
-				// String[] s1 = form3.dataArr();
-				// String ROOMNO = s1[0];
-				// String CHECKIN = s1[1];
-				// String CHECKOUT = s1[2];
-				// String MEMBERID = "1";
-				// rr = new Form_RoomReservation();
-				// String[] s2 = rr.dataArr2();
-				// String RESERVEDDATE = s2[0];
-				// String REQUIREMENT = s2[1];
-				// String BREAKFAST_ = s2[2];
-				// String RESERVEDSTATUS = s2[3];
-				// String GUESTNO = s2[4];
 
 				String ROOMNO = roomno;
 				String CHECKIN = checkin;
@@ -79,9 +66,7 @@ public class ReservationManager {
 				ps.setString(9, RESERVEDSTATUS);
 				ps.setString(10, GUESTNO);
 				ps.executeUpdate();
-				System.out.println("예약 완료" + " 예약 번호: " + reservedNo + " 예약 객실: " + ROOMNO + " 체크인: " + CHECKIN
-						+ " 체크아웃: " + CHECKOUT + " 예약 날짜: " + RESERVEDDATE + " 멤버아이디: " + MEMBERID + " 요구사항: "
-						+ REQUIREMENT + " 조식여부: " + BREAKFAST_ + " 상테 :" + RESERVEDSTATUS + " 인원: " + GUESTNO);
+
 				return 1;
 			}
 		} catch (SQLException se) {

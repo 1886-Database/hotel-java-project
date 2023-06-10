@@ -147,7 +147,6 @@ public class EmployeeMain extends javax.swing.JFrame {
      */
     public static void main(String args[]) {
        
-    	System.out.println(loginID+" 관리자로 로그인하였습니다.");
     	
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {

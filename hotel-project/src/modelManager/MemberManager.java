@@ -37,7 +37,6 @@ public class MemberManager {
 			rs = ps.executeQuery();
 
 			if (rs.next()) {
-				System.out.println("멤버 로그인 성공");
 				return 1; // 로그인 성공
 			}
 			return 0; // 로그인 실패 (잘못된 id/pw)
@@ -54,7 +53,6 @@ public class MemberManager {
 	// 존재하지 않으면 return 1
 	public int checkID(String id) {
 		String SQL = "SELECT * FROM DB2023_member WHERE loginID=?";
-		System.out.println("checkID");
 		try {
 			con = myConnection.getConnection();
 			ps = con.prepareStatement(SQL);
@@ -62,7 +60,6 @@ public class MemberManager {
 			rs = ps.executeQuery();
 
 			if (rs.next()) {
-				System.out.println("중복 ID 존재");
 				return 0; // 중복 ID 존재
 			}
 			return 1; // 중복 ID 존재하지 않음
@@ -257,7 +254,6 @@ public class MemberManager {
 			con.setAutoCommit(true); /************************* 트랜잭션 종료 **************************/
 			return 1;
 		} catch (SQLException se) {
-			System.out.println("Roll back data...");
 			se.printStackTrace();
 			try {
 				if (con != null)

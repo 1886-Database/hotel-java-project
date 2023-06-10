@@ -86,8 +86,6 @@ public class MemberMain extends javax.swing.JFrame {
             public void actionPerformed(ActionEvent e) {
                String[] s = form3.dataArr();
                
-               for(int i=0; i<s.length; ++i)
-                   System.out.println(s[i]);
                form1 = new Form_RoomReservation(loginID,s);
                setForm(form1);
             }
@@ -170,9 +168,7 @@ public class MemberMain extends javax.swing.JFrame {
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
-    	
-    	System.out.println(loginID+" 회원으로 로그인하였습니다.");
-    	
+    	    	
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {

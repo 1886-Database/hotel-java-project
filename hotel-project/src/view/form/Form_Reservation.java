@@ -64,8 +64,6 @@ public class Form_Reservation extends javax.swing.JPanel {
 		String roomnO = String.valueOf(table.getModel().getValueAt(row, 0));
 		String roomno = roomnO;
 		String[] arr = { roomno, checkin, checkout };
-		for (int i = 0; i < arr.length; ++i)
-			System.out.println("dataArr: " + arr[i]);
 		return arr;
 	}
 
@@ -130,10 +128,8 @@ public class Form_Reservation extends javax.swing.JPanel {
 					JOptionPane.showMessageDialog(panelBorder1, "동일한 날짜로 예약이 불가합니다", "Date Error", 2);
 				} else {
 					RoomManager roomManager = new RoomManager();
-					System.out.println("검색 성공");
 					refreshroom(checkin, checkout);
 					// rsM.reservation();
-					System.out.println("예약할 체크인 날짜: " + checkin + "예약할 체크아웃 날짜: " + checkout);
 				}
 
 			}
@@ -147,17 +143,6 @@ public class Form_Reservation extends javax.swing.JPanel {
 					JOptionPane.showMessageDialog(panelBorder1, "체크인 날짜와 체크아웃 날짜를 먼저 선택해주세요.", "Date Not Selected", 2);
 				else
 					button1.doClick();
-
-				// 아래 코드들 필요 없어보여서 일단 주석 쳐놨는데, 사용 안 하는 코드면 삭제해주세요!
-				// int row = table.getSelectedRow();
-				// String roomno = String.valueOf(table.getModel().getValueAt(row, 0 ));
-				// String roomname = (String) table.getModel().getValueAt(row, 1 );
-				// String roomtype = (String) table.getModel().getValueAt(row, 2 );
-				// String bedtype = String.valueOf(table.getModel().getValueAt(row, 3 ));
-				// String price = String.valueOf(table.getModel().getValueAt(row, 4 ));
-
-				// System.out.println("예약할 객실 번호: "+roomno);
-
 			}
 
 		});

@@ -134,9 +134,7 @@ public class Form_RoomReservation extends javax.swing.JPanel {
         		Date date_now = new Date(System.currentTimeMillis()); // 현재시간을 가져와 Date형으로 저장한다
         		SimpleDateFormat fourteen_format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); 
         		reserveddate = fourteen_format.format(date_now);
-        		System.out.println(reserveddate);
         		requirement = textField.getText();
-        		System.out.println(requirement);
         		guestno = PSELECT.getSelectedItem().toString();
         		Breakfast = BSELECT.getSelectedItem().toString();
         		reservedstatus="대기";

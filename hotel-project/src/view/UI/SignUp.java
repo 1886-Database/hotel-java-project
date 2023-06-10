@@ -215,12 +215,10 @@ public class SignUp {
 	    			JOptionPane.showMessageDialog(frame,"ID를 입력해주세요.", "Empty id",2);
 	    		}else {
 	    			try { 
-	    				System.out.println("1");
 			    		if(memberManager.checkID(loginID)==0) {
 			    			JOptionPane.showMessageDialog(frame,"이미 존재하는 ID입니다.", "ID duplicate",2);
 			    		}else {
 			    			checkedID=loginID;
-			    			System.out.println("checkedID : "+checkedID);
 			    			JOptionPane.showMessageDialog(frame,"사용할 수 있는 ID입니다", "possible ID",2);
 			    		}
 	    			}catch(Exception ex) {

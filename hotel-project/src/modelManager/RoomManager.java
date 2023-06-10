@@ -78,7 +78,6 @@ public class RoomManager {
 	}
 	//룸리스트 재정렬 화면 : 필터링된 room 테이블의 레코드 반환
 		public Room[] getRefreshRoom(String checkin, String checkout) {
-			System.out.println(checkin+checkout);
 			Room[] r_array;
 			int rowCnt=11;
 			int index=0;
@@ -125,8 +124,6 @@ public class RoomManager {
 					r_array[index].setParking(rs.getBoolean(9));
 					index++;
 				}
-				System.out.println("재정렬 성공");
-			
 				return r_array;
 				
 			}catch(SQLException se) {
@@ -155,7 +152,6 @@ public class RoomManager {
 				con.setAutoCommit(true);  /**트랜잭션 종료**/
 				return 1;
 			}catch(SQLException se) {
-				System.out.println("Roll back data...");
 				se.printStackTrace();
 				try {
 					if(con!=null)
