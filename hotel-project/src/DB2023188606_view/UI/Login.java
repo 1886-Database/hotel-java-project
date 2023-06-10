@@ -38,7 +38,7 @@ public class Login {
 
 
 	public Login(int num) {
-		role=num;
+		role=num;  //로그인할 사용자가 member인지 employee인지 구별하기 위한 필드 (0이면 member, 1이면 employee)
 		initialize();
 		
 		java.awt.EventQueue.invokeLater(new Runnable() {
@@ -47,13 +47,11 @@ public class Login {
             }
         });
 		
-		if(role==1)
+		if(role==1)  //만약 로그인할 사용자가 employee 라면 회원가입 frame 으로 통하는 버튼은 화면에 표시하지 않는다.
 			button_signUp.setVisible(false);
 	}
 
-	/**
-	 * Initialize the contents of the frame.
-	 */
+	//frame 초기화를 위한 메소드
 	private void initialize() {
 		frame = new JFrame();
 		frame.getContentPane().setEnabled(false);
@@ -120,31 +118,28 @@ public class Login {
 	    backgroundPanel.add(input_password);
 	    input_password.setOpaque(false);
 	    
-	    //로그인 버튼
+	    /****************로그인 버튼*******************/
 	    button_login = new RoundedButton("login");
-	    button_login.addMouseListener(new MouseAdapter() {
+	    button_login.addMouseListener(new MouseAdapter() { //버튼 클릭 이벤트
 	    	@Override
 	    	public void mouseClicked(MouseEvent e) {
-	    		String loginID = input_loginID.getText(); //유저가 입력한 id를 loginID 변수에 저장
-	            String password = String.valueOf(input_password.getPassword()); //유저가 입력한 패스워드를 password 변수에 저장
-	            if(loginID.trim().equals("")){ //유저가 아이디 창을 입력하지 않았다면
+	    		String loginID = input_loginID.getText(); //사용자가 입력한 id를 loginID 변수에 저장
+	            String password = String.valueOf(input_password.getPassword()); //사용자가 입력한 패스워드를 password 변수에 저장
+	            if(loginID.trim().equals("")){ //사용자가 아이디를 입력하지 않고서 버튼을 눌렀다면 경고창 띄우기
 	                JOptionPane.showMessageDialog(backgroundPanel,"ID를 입력해주세요.", "Empty ID",2);
 	            }
-	            else if(password.trim().equals("")){ //유저가 패스워드 창을 입력하지 않았다면
+	            else if(password.trim().equals("")){ //사용자가 pw를 입력하지 않고서 버튼을 눌렀다면 경고창 띄우기
 	                JOptionPane.showMessageDialog(backgroundPanel,"패스워드를 입력해주세요.", "Empty Password",2);
 	            }
-	            else{ //유저가 아이디와 패스워드를 모두 입력한 경우
-	            	if(role==0) 
+	            else{ //사용자가 아이디와 패스워드를 모두 입력한 경우
+	            	if(role==0) //member가 로그인한 거라면 memLogin 메소드 호출
 	            		memLogin(loginID,password);
-	            	if(role==1)
+	            	if(role==1) //employee가 로그인한 거라면 empLogin 메소드 호출
 	            		empLogin(loginID,password);
 	            }
 	    	}
 	    });
-	    button_login.addActionListener(new ActionListener() {
-	    	public void actionPerformed(ActionEvent e) {
-	    	}
-	    });
+
 	    button_login.setForeground(new Color(255, 255, 255));
 	    button_login.setText("LOGIN");
 	    button_login.setFont(new Font("맑은 고딕", Font.BOLD, 25));
@@ -153,20 +148,20 @@ public class Login {
 	    button_login.setSize(435,61);
 	    backgroundPanel.add(button_login);
 	    
-	    //회원가입 하러 가기 버튼
+	    /*******************회원가입 하러 가기 버튼**********************/
 	    button_signUp = new JLabel("아직 회원이 아니신가요?");
 	    button_signUp.addMouseListener(new MouseAdapter() {
 	    	@Override
-	    	public void mouseEntered(MouseEvent e) {
+	    	public void mouseEntered(MouseEvent e) {  //마우스 커서를 올렸을 시 문구 변경
 	    		button_signUp.setText("회원가입 하러가기");
 	    	}
 	    	@Override
-	    	public void mouseExited(MouseEvent e) {
+	    	public void mouseExited(MouseEvent e) {   //마우스 커서가 밖으로 벗어났을 시 문구 변경
 	    		button_signUp.setText("아직 회원이 아니신가요?");
 	    	}
 	    	@Override
-	    	public void mouseClicked(MouseEvent e) {
-	    		SignUp signUp = new SignUp();
+	    	public void mouseClicked(MouseEvent e) {  //버튼 클릭 이벤트
+	    		SignUp signUp = new SignUp();	//회원가입 창으로 연결
 	    		frame.dispose();
 	    		
 	    	}
@@ -219,7 +214,7 @@ public class Login {
 	    
 	}
 	
-	//회원 로그인
+	//회원 로그인 : MemberManager 객체 생성 후 login 메소드 호출. return 값이 1 (로그인 성공을 의미) 이라면 MemberMain frame으로 연결
 	private void memLogin(String id, String pw) {
 		MemberManager memberManager = new MemberManager();
 		try {
@@ -227,7 +222,7 @@ public class Login {
 				MemberMain memberMain = new MemberMain(id);
 				memberMain.main(null);
 				frame.dispose();
-			}else
+			}else //return 값이 1이 아니라면 (=로그인 실패) 경고창 띄우기
 				JOptionPane.showMessageDialog(backgroundPanel,"ID나 패스워드가 잘못되었습니다.", "Login Error",2);
 				
 		}catch(Exception e) {
@@ -236,7 +231,7 @@ public class Login {
 		
 	}
 	
-	//직원 로그인
+	//직원 로그인 : EmployeeManager 객체 생성 후 login 메소드 호출. return 값이 1 (로그인 성공을 의미) 이라면 EmployeeMain frame으로 연결
 	private void empLogin(String id, String pw) {
 		EmployeeManager employeeManager = new EmployeeManager();
 		try {
@@ -244,7 +239,7 @@ public class Login {
     			EmployeeMain employeeMain = new EmployeeMain(id);
     			employeeMain.main(null);
     			frame.dispose();
-			}else
+			}else //return 값이 1이 아니라면 (=로그인 실패) 경고창 띄우기
 				JOptionPane.showMessageDialog(backgroundPanel,"ID나 패스워드가 잘못되었습니다.", "Login Error",2);
 				
 		}catch(Exception e) {

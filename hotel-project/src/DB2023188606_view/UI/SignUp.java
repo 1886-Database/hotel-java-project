@@ -41,7 +41,7 @@ public class SignUp {
 		initialize();
 	}
 
-
+	//frame 초기화를 위한 메소드
 	private void initialize() {
 		frame = new JFrame();
 		frame.getContentPane().setEnabled(false);

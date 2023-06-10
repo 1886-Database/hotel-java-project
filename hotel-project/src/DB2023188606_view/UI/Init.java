@@ -36,7 +36,7 @@ public class Init {
         });
 	}
 
-	
+	//frame 초기화를 위한 메소드
 	private void initialize() {
 		frame = new JFrame();
 		frame.getContentPane().setEnabled(false);
@@ -80,11 +80,11 @@ public class Init {
 	    button_exit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/DB2023188606_view/icon/exit.png")));
 	    backgroundPanel.add(button_exit);
 	    
-	    //로그인 버튼
+	    /**************************member 로그인 버튼************************/
 	    button_memLogin = new RoundedButton("login");
-	    button_memLogin.addActionListener(new ActionListener() {
+	    button_memLogin.addActionListener(new ActionListener() { //버튼 클릭 이벤트
 	    	public void actionPerformed(ActionEvent e) {
-	    		new Login(0);
+	    		new Login(0); //로그인 frame에 인자 0을 넘겨주며 호출 
 	    		frame.dispose();
 	    	}
 	    });
@@ -96,10 +96,11 @@ public class Init {
 	    button_memLogin.setSize(435,61);
 	    backgroundPanel.add(button_memLogin);
 	    
+	    /**************************employee 로그인 버튼************************/
 	    button_empLogin = new RoundedButton("login");
 	    button_empLogin.addActionListener(new ActionListener() {
 	    	public void actionPerformed(ActionEvent e) {
-	    		new Login(1);
+	    		new Login(1); //로그인 frame에 인자 1을 넘겨주며 호출
 	    		frame.dispose();
 	    	}
 	    });
