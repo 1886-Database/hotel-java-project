@@ -1,12 +1,9 @@
 package view.UI;
 
-import javax.swing.*; 
-import java.awt.*;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+
 
 import javax.swing.JComponent;
 import javax.swing.GroupLayout.Alignment;
@@ -14,19 +11,17 @@ import javax.swing.GroupLayout;
 
 
 import view.event.EventMenuSelected;
-import view.form.Form_1;
-import view.form.Form_2;
-import view.form.Form_3;
+
 import view.form.Form_Home;
 import view.form.Form_MemberMsg;
 import view.form.Form_RoomReservation;
 import view.form.Form_Reservation;
 import view.form.Form_MyPage;
 import view.form.Form_ViewMyReserv;
-import view.form.Form_ViewMyReservDetails;
+
 
 import modelManager.MemberManager;
-import model.Member;
+
 //멤버화면 메인페이지
 public class MemberMain extends javax.swing.JFrame {
 

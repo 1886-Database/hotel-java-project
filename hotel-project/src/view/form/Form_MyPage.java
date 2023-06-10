@@ -5,7 +5,6 @@ import java.awt.Color;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
-import view.model.StatusType;
 import view.swing.ScrollBar;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.GroupLayout;

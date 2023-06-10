@@ -9,13 +9,13 @@ import java.util.Date;
 
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import view.model.StatusType;
+
 import view.swing.ScrollBar;
 import java.awt.Color;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import view.model.StatusType;
+
 import view.swing.ScrollBar;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.GroupLayout;
@@ -262,6 +262,9 @@ public class Form_AdRoom extends javax.swing.JPanel {
     }
     
     //왼쪽 박스에 표시될 객실정보
+    /**
+  	 *input 텍스트박스에 입력된 값을 세팅하는 메소드입니다.
+  	 */
     private void setInputText(String roomno,String bedtype, String capacity, String price, String roomtype, String roomsize,String roomname) {
     	
 
@@ -275,6 +278,9 @@ public class Form_AdRoom extends javax.swing.JPanel {
     }
 
     //객실 테이블에 객실정보 가져와 행 추가
+	/**
+  	 * room의 모든 객체 가져와 테이블에 삽입하는 메소드입니다.
+  	 */
     private void all() {
         room= rM.getAllRoom();
         for (int i = 0; i < room.length; ++i) {

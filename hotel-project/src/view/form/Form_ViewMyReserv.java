@@ -22,7 +22,7 @@ import view.swing.ScrollBar;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.DefaultTableCellRenderer;
 
-import view.model.StatusType;
+
 import model.Reservation;
 import modelManager.ReservationManager;
 
@@ -242,6 +242,9 @@ public class Form_ViewMyReserv extends JPanel {
 	}// </editor-fold>//GEN-END:initComponents
 
 	// 사용자의 예약내역 불러오기
+	/**
+  	 * 사용자의 예약내역을 불러와 테이블에 삽입하는 메소드입니다.
+  	 */
 	private void getMyReserv() {
 		reserv = rM.getMyReserv(loginID);
 		for (int i = 0; i < reserv.length; ++i) {
@@ -250,13 +253,22 @@ public class Form_ViewMyReserv extends JPanel {
 		}
 	}
 
+	 //table refresh
+		/**
+	  	 * 테이블을 새로고침하여 가져오는 메소드입니다.
+	  	 */
 	public void refresh() {
 		DefaultTableModel model = (DefaultTableModel) table.getModel();
 		model.setRowCount(0);
 		getMyReserv();
 	}
 
-
+	//선택된 테이블의 row에서 reservedNo를 가져오기
+	/**
+  	 * 선택된 테이블의 row에서 reservedNo를 가져오는 메소드입니다.
+  	 * @return reservedNo
+  	 */
+	
 	public int getReservedNo() {
 		int row = table.getSelectedRow();
 		int reservedNo = (int) table.getModel().getValueAt(row, 0);

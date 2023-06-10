@@ -16,9 +16,7 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.GroupLayout;
 
 import view.event.EventMenuSelected;
-import view.form.Form_1;
-import view.form.Form_2;
-import view.form.Form_3;
+
 import view.form.Form_AdEmployee;
 import view.form.Form_AdMember;
 import view.form.Form_EmployeeMsg;

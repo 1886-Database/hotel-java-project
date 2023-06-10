@@ -8,8 +8,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
-import view.model.StatusType;
-import view.swing.CellStatus;
+
 import view.swing.TableHeader;
 
 public class Table extends JTable {

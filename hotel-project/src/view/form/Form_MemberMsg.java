@@ -6,13 +6,13 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
 import view.UI.Login;
-import view.model.StatusType;
+
 import view.swing.ScrollBar;
 import java.awt.Color;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import view.model.StatusType;
+
 import view.swing.ScrollBar;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.GroupLayout;
@@ -55,8 +55,7 @@ public class Form_MemberMsg extends javax.swing.JPanel {
     recieved(memberID);
     
     }
-         
-      
+        
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents(){
@@ -86,7 +85,7 @@ public class Form_MemberMsg extends javax.swing.JPanel {
         sentmessage.setBorder(null);
         
         
-        //보낸 메시지 table setmodel 
+        //보낸 메시지 table model set 
         table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -227,7 +226,10 @@ public class Form_MemberMsg extends javax.swing.JPanel {
         panelBorder1.add(btnNewButton_1);
     }
     
-   //보낸 메시지 table에 받아와서 추가
+   //보낸 메시지 table에 받아와서 추가 
+  	/**
+  	 * member ID를 인수로 받아와 member가 보낸 메시지를 레코드에서 가져와 테이블에 입력하는 메소드입니다.
+  	 */
     private void sent(int memberID) {
     	mess = mM.getMemberSendMessage(memberID);
     	for (int i = 0; i < mess.length; ++i) {
@@ -235,6 +237,9 @@ public class Form_MemberMsg extends javax.swing.JPanel {
         }}
    
     //보낸 메시지 table에 받아와서 추가
+	/**
+  	 * member ID를 인수로 받아와 member가 받은 메시지를 레코드에서 가져와 테이블에 입력하는 메소드입니다.
+  	 */
     private void recieved(int memberID) {
     	mess = mM.getMemberRecieveMessage(memberID);
     	for (int i = 0; i < mess.length; ++i) {
@@ -243,6 +248,9 @@ public class Form_MemberMsg extends javax.swing.JPanel {
     }
     
     //table refresh
+	/**
+  	 * 두 테이블을 새로고침하여 가져오는 메소드입니다.
+  	 */
     public void refresh() {
     	DefaultTableModel model1 = (DefaultTableModel)table.getModel();
     	model1.setRowCount(0);

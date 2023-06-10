@@ -44,6 +44,7 @@ public class Form_AdEmployee extends javax.swing.JPanel {
 	private EmployeeManager eM;
 	private Employee emp;
 	
+	//loginID를 인수로 받아오는 생성자
     public Form_AdEmployee(String loginID) {
     	
         eM = new EmployeeManager();
@@ -348,6 +349,11 @@ public class Form_AdEmployee extends javax.swing.JPanel {
         
     }// </editor-fold>//GEN-END:initComponents
    
+    
+    // employee의 모든 객체 가져와 테이블에 삽입하는 메소드
+  	/**
+  	 * employee의 모든 객체 가져와 테이블에 삽입하는 메소드입니다.
+  	 */
     private void all() {
     	empList = eM.getAllEmployee();
     	for (int i = 0; i < empList.length; ++i) {
@@ -355,12 +361,21 @@ public class Form_AdEmployee extends javax.swing.JPanel {
         }
     }
     
+    //employee 테이블 새로고침 하는 메소드
+  	/**
+  	 * employee 테이블을 새로고침하여 가져오는 메소드입니다.
+  	 */
     private void refresh() {
     	DefaultTableModel model = (DefaultTableModel)table.getModel();
     	model.setRowCount(0);
     	all();
     }
    
+    
+    //텍스트 박스를 비우는 메소드입니다.
+  	/**
+  	 *텍스트 박스를 비우는 메소드입니다.
+  	 */
     private void clear() {
     	input_name.setText("");
     	input_loginID.setText("");
@@ -370,6 +385,10 @@ public class Form_AdEmployee extends javax.swing.JPanel {
     	table.clearSelection();
     }
     
+    //input 텍스트박스에 입력된 값을 세팅하는 메소드.
+  	/**
+  	 *input 텍스트박스에 입력된 값을 세팅하는 메소드입니다.
+  	 */
     private void setInputText(String name,String loginID, String dept, String phone, Date date) {
     	int i=-1;
     	if(dept.equals("front office"))

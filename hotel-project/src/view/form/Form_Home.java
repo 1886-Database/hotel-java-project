@@ -4,13 +4,13 @@ import javax.swing.ImageIcon;
 import java.awt.image.*;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import view.model.StatusType;
+
 import view.swing.ScrollBar;
 import java.awt.Color;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import view.model.StatusType;
+
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.GroupLayout;
 import java.awt.GridLayout;
@@ -34,7 +34,6 @@ public class Form_Home extends javax.swing.JPanel {
         initComponents();
         JPanel p = new JPanel();
         p.setBackground(Color.WHITE);   
-        
         }
 
     @SuppressWarnings("unchecked")

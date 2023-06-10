@@ -194,8 +194,10 @@ public class Form_AdReserv extends javax.swing.JPanel {
        
     
     }
-    
-    //reservationview table에 가져와서 보여줌
+    // reservation의 모든 객체 가져와 테이블에 삽입하는 메소드
+  	/**
+  	 * reservation의 모든 객체 가져와 테이블에 삽입하는 메소드입니다.
+  	 */
     private void all() {
     	resList = rM.getReservationView();
     	for (int i = 0; i < resList.length; ++i) {
@@ -203,7 +205,10 @@ public class Form_AdReserv extends javax.swing.JPanel {
         }
     }
     
-    //selected table row에서 reservedstatus 가져와서 combobox에 표시
+    //reservedStatus를 string으로 받아와 combobox의 index로 바꿔 reserved status를 바꿔주는 메소드
+	/**
+  	reservedStatus를 string으로 받아와 combobox의 index로 바꿔 reserved status를 바꿔주는 메소드
+  	 */
     public void setReservedStatus(String reservedStatus) {
     	int i = -1;
     	if(reservedStatus.equals("승인"))
@@ -217,7 +222,10 @@ public class Form_AdReserv extends javax.swing.JPanel {
     	
     }
     
-    //refresh
+    //reservation 테이블 새로고침 하는 메소드
+  	/**
+  	 * reservation 테이블을 새로고침하여 가져오는 메소드입니다.
+  	 */
     public void refresh() {
     	DefaultTableModel model = (DefaultTableModel)table.getModel();
     	model.setRowCount(0);
