@@ -236,7 +236,7 @@ public class MemberManager {
 	// 변경해준다.
 	public int delete(int memberID) {
 		String query0 = "UPDATE DB2023_message SET memberID = null WHERE memberID=?";
-		String query1 = "UPDATE DB2023_reservation SET memberID=null,reservedStatus='취소' WHERE memberID=?";
+		String query1 = "DELETE FROM DB2023_reservation WHERE memberID=?";
 		String query2 = "DELETE FROM DB2023_member WHERE memberID=?";
 		try {
 			con = myConnection.getConnection();
@@ -246,7 +246,7 @@ public class MemberManager {
 			ps.executeUpdate(); // 삭제하려는 회원이 과거 보냈던 메시지 데이터의 memberID 값을 null 로 변경
 			ps = con.prepareStatement(query1);
 			ps.setInt(1, memberID);
-			ps.executeUpdate(); // 삭제하려는 회원의 과거 예약신청 데이터 정보를 수정 (memberID=null , reservedStatus ='취소')
+			ps.executeUpdate(); // 삭제하려는 회원의 과거 신청했던 예약데이터도 삭제 
 			ps = con.prepareStatement(query2);
 			ps.setInt(1, memberID);
 			ps.executeUpdate(); // 회원 데이터를 member 테이블에서 삭제
