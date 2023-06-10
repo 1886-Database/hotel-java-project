@@ -50,7 +50,8 @@ public class EmployeeManager {
 		return -1; // 데이터베이스 오류
 	}
 
-	// 직원 관리 화면 (직원을 추가할 때 id 중복검사) : 인자로 받은 loginID 값이 member 테이블 loginID 필드에 이미 존재하는 속성 값인지
+	// 직원 관리 화면 (직원을 추가할 때 id 중복검사) : 인자로 받은 loginID 값이 member 테이블 loginID 필드에 이미
+	// 존재하는 속성 값인지
 	// 확인 후 존재하면 return 0.
 	// 존재하지 않으면 return 1
 	public int checkID(String id) {
@@ -75,7 +76,7 @@ public class EmployeeManager {
 	}
 
 	// 마이페이지 화면 패스워드 변경 기능 : 인자로 받은 loginID 와 일치하는 레코드의 password 속성 값을 인자로 받은 pw 값으로
-		// 변경
+	// 변경
 	public int passwordChange(String loginID, String password) {
 		String SQL = "UPDATE DB2023_employee SET password=? WHERE loginID=?";
 		try {
@@ -92,7 +93,8 @@ public class EmployeeManager {
 		return -1;
 	}
 
-	// 마이페이지 화면 : 인자로 받은 loginID 와 일치하는 레코드를 select 한 후 해당 레코드의 정보를 모두 Employee 객체에 저장
+	// 마이페이지 화면 : 인자로 받은 loginID 와 일치하는 레코드를 select 한 후 해당 레코드의 정보를 모두 Employee 객체에
+	// 저장
 	// -> Employee 객체 return
 	public Employee getByLoginID(String loginID) {
 		String SQL = "SELECT * FROM DB2023_employee WHERE loginID=?";
@@ -115,7 +117,8 @@ public class EmployeeManager {
 		return employee;
 	}
 
-	// 직원 관리 화면 : Employee 테이블의 모든 레코드를 각각 Employee 객체에 저장한 후 Employee 객체들이 담긴 객체 배열 return
+	// 직원 관리 화면 : Employee 테이블의 모든 레코드를 각각 Employee 객체에 저장한 후 Employee 객체들이 담긴 객체 배열
+	// return
 	public Employee[] getAllEmployee() {
 		Employee[] e_array;
 		int rowCnt = 0;
@@ -209,7 +212,8 @@ public class EmployeeManager {
 		return -1; // 데이터베이스 오류
 	}
 
-	// 직원관리 화면 : 직원관리 화면에서 사용자에게서 입력받은 정보들과 특정 직원의 employeeID를 인자로 받은 후, 해당 employeeID 를 가진 레코드의 다른 속성 값들을 변경
+	// 직원관리 화면 : 직원관리 화면에서 사용자에게서 입력받은 정보들과 특정 직원의 employeeID를 인자로 받은 후, 해당
+	// employeeID 를 가진 레코드의 다른 속성 값들을 변경
 	public int edit(int id, String loginID, String name, String phone, String birthDate, String dept) {
 		String SQL = "UPDATE DB2023_employee SET loginID=?, name=?, phone=?, birthDate=?, department=? WHERE employeeID=?";
 		try {
@@ -229,6 +233,28 @@ public class EmployeeManager {
 			myConnection.close(null, stmt, null, con);
 		}
 		return -1;
+	}
+
+	// Employeemain 화면 : 직원 메시지화면으로 employeeid로 바꿔보낼 때
+
+	public int getEmployeeIDbyloginID(String id) {
+		String SQL = "SELECT employeeID FROM DB2023_employee WHERE loginID=?";
+		int employeeID = 0;
+		try {
+			con = myConnection.getConnection();
+			ps = con.prepareStatement(SQL);
+			ps.setString(1, id);
+			rs = ps.executeQuery();
+
+			if (rs.next()) { // 결과 집합에 데이터가 있는지 확인
+				employeeID = rs.getInt(1);
+			}
+		} catch (SQLException se) {
+			se.printStackTrace();
+		} finally {
+			myConnection.close(rs, null, ps, con);
+		}
+		return employeeID;
 	}
 
 }

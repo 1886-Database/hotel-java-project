@@ -130,7 +130,7 @@ public class Form_MemberMsg extends javax.swing.JPanel {
         JLabel jLabel1_1 = new JLabel();
         jLabel1_1.setText("보낸 메시지");
         jLabel1_1.setForeground(new Color(127, 127, 127));
-        jLabel1_1.setFont(new Font("맑은 고", Font.BOLD, 18));
+        jLabel1_1.setFont(new Font("맑은 고딕", Font.BOLD, 18));
         jLabel1_1.setBounds(428, 44, 121, 22);
         panelBorder1.add(jLabel1_1);
         
