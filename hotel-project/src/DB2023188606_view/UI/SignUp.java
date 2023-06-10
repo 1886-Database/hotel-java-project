@@ -183,7 +183,6 @@ public class SignUp {
 	    try {
 	    	formatter = new MaskFormatter("###-####-####");
 	    }catch(ParseException ex) {
-	    	ex.printStackTrace();
 	    }
 	    input_phone = new JFormattedTextField(formatter);
 	    input_phone.setBounds(272, 293, 370, 38);
@@ -224,7 +223,6 @@ public class SignUp {
 			    			JOptionPane.showMessageDialog(frame,"사용할 수 있는 ID입니다", "possible ID",2);
 			    		}
 	    			}catch(Exception ex) {
-	    				ex.printStackTrace();
 	    				JOptionPane.showMessageDialog(frame,"error", "Error",2);
 	    			}
 	    		}

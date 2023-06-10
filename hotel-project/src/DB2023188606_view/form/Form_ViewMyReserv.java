@@ -182,7 +182,6 @@ public class Form_ViewMyReserv extends JPanel {
 							dateCheck=0;
 					} catch (ParseException e1) {
 						// TODO Auto-generated catch block
-						e1.printStackTrace();
 					} 
 					
 					if(dateCheck==1) {

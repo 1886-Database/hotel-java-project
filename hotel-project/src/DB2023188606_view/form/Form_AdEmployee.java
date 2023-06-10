@@ -164,7 +164,6 @@ public class Form_AdEmployee extends javax.swing.JPanel {
 	    try {
 	    	formatter = new MaskFormatter("###-####-####");
 	    }catch(ParseException ex) {
-	    	ex.printStackTrace();
 	    }
 	    input_phoneNum = new JFormattedTextField(formatter);
 	    input_phoneNum.setBounds(122, 381, 195, 26);

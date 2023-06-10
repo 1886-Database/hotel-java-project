@@ -163,7 +163,6 @@ public class RoomManager {
 					if(con!=null)
 						con.rollback();
 				}catch(SQLException se2) {
-					se2.printStackTrace();
 				}
 			}finally {
 				myConnection.close(null, null, ps, con);
