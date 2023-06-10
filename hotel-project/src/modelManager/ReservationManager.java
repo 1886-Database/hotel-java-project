@@ -96,7 +96,7 @@ public class ReservationManager {
 		Reservation[] r_array;
 		int rowCnt = 0;
 		int index = 0;
-		String res = "CREATE OR REPLACE VIEW MemberReservationView AS "
+		String res = "CREATE OR REPLACE VIEW DB2023_MemberReservationView AS "
 				+ "SELECT member.name, member.phone, reservation.reservedNo, reservation.roomNo, reservation.checkIn, reservation.checkOut, "
 				+ "reservation.reservedDate, reservation.memberID, reservation.reservedStatus, reservation.requirement "
 				+ "FROM DB2023_member AS member "
@@ -107,7 +107,7 @@ public class ReservationManager {
 			stmt = con.createStatement();
 
 			// 뷰가 이미 존재하는지 확인
-			String dropView = "DROP VIEW IF EXISTS MemberReservationView";
+			String dropView = "DROP VIEW IF EXISTS DB2023_MemberReservationView";
 			stmt.executeUpdate(dropView);
 
 			// MemberReservationView 뷰 생성
@@ -127,7 +127,7 @@ public class ReservationManager {
 
 			// MemberReservationView 뷰에서 데이터 조회
 			String query = "SELECT name, phone, reservedNo, roomNo, checkIn, checkOut, reservedDate, memberID, reservedStatus, requirement "
-					+ "FROM MemberReservationView";
+					+ "FROM DB2023_MemberReservationView";
 			rs = stmt.executeQuery(query);
 			while (rs.next()) {
 				r_array[index].setMemberName(rs.getString(1));
