@@ -162,7 +162,7 @@ public class Form_EmployeeMsg extends javax.swing.JPanel {
 							refresh();
 
 						} else {
-							JOptionPane.showMessageDialog(panelBorder1, "error.", "send error", 2);
+							JOptionPane.showMessageDialog(panelBorder1, "존재하는 수신자 ID인지 확인해주세요.", "send error", 2);
 						}
 					} catch (Exception ex) {
 						JOptionPane.showMessageDialog(panelBorder1, "error", "Error", 2);
