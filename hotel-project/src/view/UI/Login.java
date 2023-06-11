@@ -219,6 +219,9 @@ public class Login {
 	}
 	
 	//회원 로그인
+	/**
+  	 * id와 pw를 인수로 받아 member테이블에서 일치하는 데이터가 있는지 확인하는 메소드입니다.
+  	 */
 	private void memLogin(String id, String pw) {
 		MemberManager memberManager = new MemberManager();
 		try {
@@ -236,6 +239,9 @@ public class Login {
 	}
 	
 	//직원 로그인
+	/**
+  	 * id와 pw를 인수로 받아 employee 테이블에서 일치하는 데이터가 있는지 확인하는 메소드입니다.
+  	 */
 	private void empLogin(String id, String pw) {
 		EmployeeManager employeeManager = new EmployeeManager();
 		try {

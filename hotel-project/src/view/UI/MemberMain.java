@@ -26,7 +26,7 @@ import modelManager.MemberManager;
 public class MemberMain extends javax.swing.JFrame {
 
 	/**
-     * Creates new form Main
+     * Creates new form MemberMain form
      */
     private Form_RoomReservation form1;
     private Form_Home form2;
@@ -92,6 +92,9 @@ public class MemberMain extends javax.swing.JFrame {
     }
 
     //메뉴 선택시 화면 전환
+    /**
+  	 * 메뉴 선택시 화면 전환하는 메소드입니다.
+  	 */
     private void setForm(JComponent com) {
         mainPanel.removeAll();
         mainPanel.add(com);

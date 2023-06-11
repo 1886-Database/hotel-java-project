@@ -36,7 +36,10 @@ public class Init {
         });
 	}
 
-	
+
+	/**
+  	 * 초기화면 생성자
+  	 */
 	private void initialize() {
 		frame = new JFrame();
 		frame.getContentPane().setEnabled(false);
