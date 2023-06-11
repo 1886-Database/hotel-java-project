@@ -27,7 +27,7 @@ import javax.swing.GroupLayout;
 public class EmployeeMain extends javax.swing.JFrame {
 
 	/**
-     * Creates new form Main
+     * Creates new form EmployeeMain
      */
 	private JFrame frame;
     private Form_Home home;
@@ -41,7 +41,9 @@ public class EmployeeMain extends javax.swing.JFrame {
     static String loginID = "wcampbell"; 
     static int EmployeeID = 2; //값 초기화
     
-
+    /**
+     * Creates new form EmployeeMain
+     */
     public EmployeeMain(String id) {
     	eM = new EmployeeManager();
         initComponents();
@@ -84,6 +86,10 @@ public class EmployeeMain extends javax.swing.JFrame {
         setForm(new Form_Home());
     }
 
+    //메뉴 선택시 화면 전환
+    /**
+  	 * 메뉴 선택시 화면 전환하는 메소드입니다.
+  	 */
     private void setForm(JComponent com) {
         mainPanel.removeAll();
         mainPanel.add(com);
@@ -93,7 +99,9 @@ public class EmployeeMain extends javax.swing.JFrame {
 
    
     @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    /**
+  	 * form을 초기 세팅하는 메소드입니다.
+  	 */
     private void initComponents() {
 
         panelBorder1 = new DB2023188606_view.swing.PanelBorder();
@@ -145,9 +153,7 @@ public class EmployeeMain extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * @param args the command line arguments
-     */
+   
     public static void main(String args[]) {
     	
         try {
