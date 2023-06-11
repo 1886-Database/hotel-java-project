@@ -92,13 +92,18 @@ public class RoomManager {
 			int index=0;
 			String room = "select roomNo,bedType,capacity,price,roomType,roomSize,roomName,nonSmoking,parking "
 					+ "from DB2023_room where roomNo not in "
-					+ "(select roomNo from DB2023_reservedRoom where ? between checkIn and checkOut or ? between checkIn and checkOut)";
+					+ "(select roomNo from DB2023_reservedRoom where ? between checkIn and checkOut or ? between checkIn and checkOut "
+					+ "or checkIn between ? and ? or checkOut between ? and ?)";
 			
 			try {
 				con=myConnection.getConnection();
 				ps = con.prepareStatement(room, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
 			    ps.setString(1, checkin);
 			    ps.setString(2, checkout);
+			    ps.setString(3, checkin);
+			    ps.setString(4, checkout);
+			    ps.setString(5, checkin);
+			    ps.setString(6, checkout);
 			    
 			    rs = ps.executeQuery();
 				
