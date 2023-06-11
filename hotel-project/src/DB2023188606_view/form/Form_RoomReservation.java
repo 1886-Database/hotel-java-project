@@ -124,7 +124,7 @@ public class Form_RoomReservation extends javax.swing.JPanel {
         		int ans = JOptionPane.showConfirmDialog(null, "입력한 정보대로 객실을 예약하시겠습니까?","Reserve Room",JOptionPane.YES_NO_OPTION);
     			if(ans==JOptionPane.YES_OPTION) {
     				if(num==0) {
-	    				rsM.reservation(roomno,checkin,checkout,reserveddate,requirement,Breakfast,reservedstatus,guestno);
+	    				rsM.reservation(memberID,roomno,checkin,checkout,reserveddate,requirement,Breakfast,reservedstatus,guestno);
 	    				JOptionPane.showMessageDialog(panelBorder1, "예약 신청이 완료되었습니다.", "done", 2);
 	    				num++;
     				}else
