@@ -92,13 +92,13 @@ public class Form_Reservation extends javax.swing.JPanel {
 		JLabel lblNewLabel = new JLabel("체크인 날짜");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 
-		JDateChooser dateChooser = new JDateChooser();
+		dateChooser = new JDateChooser();
 		dateChooser.setMinSelectableDate(new Date(System.currentTimeMillis())); // 오늘 날짜 이후로만 선택이 가능
 
 		lblNewLabel_1 = new JLabel("체크아웃 날짜");
 		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
 
-		JDateChooser dateChooser_1 = new JDateChooser();
+		dateChooser_1 = new JDateChooser();
 		dateChooser_1.setMinSelectableDate(new Date(System.currentTimeMillis())); // 오늘 날짜 이후로만 선택이 가능
 
 		JButton btnNewButton = new JButton("적용");
@@ -166,8 +166,6 @@ public class Form_Reservation extends javax.swing.JPanel {
 		btnNewButton_1 = new JButton("초기화");
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				dateChooser.setDate(null);
-				dateChooser_1.setDate(null);
 				all();
 			}
 		});
@@ -256,6 +254,8 @@ public class Form_Reservation extends javax.swing.JPanel {
   	 * 모든 room 리스트를 객체 배열로 가지고 와 테이블에 삽입하는 메소드입니다.
   	 */
 	public void all() {
+		dateChooser.setDate(null);
+		dateChooser_1.setDate(null);
 		DefaultTableModel model = (DefaultTableModel) table.getModel();
 		model.setNumRows(0);
 		room = rM.getAllRoom();
@@ -265,6 +265,7 @@ public class Form_Reservation extends javax.swing.JPanel {
 		}
 
 	}
+	
 	
 	/**
   	 * button1 에 listener를 인수로 가지고와 actionlistener를 추가하는 메소드입니다.
@@ -282,4 +283,6 @@ public class Form_Reservation extends javax.swing.JPanel {
 	private JLabel lblNewLabel_1;
 	private JLabel lblNewLabel_2;
 	private JButton btnNewButton_1;
+	private JDateChooser dateChooser;
+	private JDateChooser dateChooser_1;
 }
