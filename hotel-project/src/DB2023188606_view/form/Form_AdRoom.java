@@ -156,8 +156,6 @@ public class Form_AdRoom extends javax.swing.JPanel {
                 .addGap(20, 20, 20))
         );
     }
-    
-
     //객실 테이블에 객실정보 가져와 행 추가
 	/**
   	 * room의 모든 객체 가져와 테이블에 삽입하는 메소드입니다.
@@ -168,6 +166,16 @@ public class Form_AdRoom extends javax.swing.JPanel {
         	
           table.addRow(new Object[] {room[i].getRoomNo(),room[i].getBedType(),room[i].getCapacity(),room[i].getPrice(),room[i].getRoomType(),room[i].getRoomSize(),room[i].getRoomName(),room[i].getNonSmoking(),room[i].getParking()});
        }
+        for (int i = 0; i < table.getRowCount(); ++i) {
+            if (table.getModel().getValueAt(i, 7).equals(true))
+               table.getModel().setValueAt("금연", i, 7);
+            else
+               table.getModel().setValueAt("흡연 가능", i, 7);
+            if (table.getModel().getValueAt(i, 7).equals(true))
+               table.getModel().setValueAt("가능", i, 8);
+            else
+               table.getModel().setValueAt("불가능", i, 8);
+         }
      }
     
     // Variables declaration
