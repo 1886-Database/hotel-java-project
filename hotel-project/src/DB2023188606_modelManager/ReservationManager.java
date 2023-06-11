@@ -36,7 +36,7 @@ public class ReservationManager {
 	 * reservation 입력받은 값 reservation 테이블에 insert하는 메소드입니다.
 	 * @return insert 에러 확인용 정수 
 	 */
-	public int reservation(String roomno, String checkin, String checkout, String reserveddate, String requirement,
+	public int reservation(int memberID, String roomno, String checkin, String checkout, String reserveddate, String requirement,
 			String breakfast, String reservedstatus, String guestno) {
 		String SQL = "INSERT INTO DB2023_reservation VALUES(?,?,?,?,?,?,?,?,?,?)";
 		try {
@@ -50,7 +50,7 @@ public class ReservationManager {
 				String CHECKIN = checkin;
 				String CHECKOUT = checkout;
 				String RESERVEDDATE = reserveddate;
-				String MEMBERID = "1";
+				String MEMBERID = String.valueOf(memberID);
 				String REQUIREMENT = requirement;
 				String BREAKFAST_ = breakfast;
 				String RESERVEDSTATUS = reservedstatus;
