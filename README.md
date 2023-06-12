@@ -1,9 +1,10 @@
 # hotel-java-project
 
-## 어플리케이션 실행 방법
+### 어플리케이션 실행 방법
 
 **1. create.sql 파일을 이용하여 데이터베이스 생성**
 
+**2. 이후로는 아래 사진을 참고하여 프로젝트 생성 및 어플리케이션 실행 과정을 진행하면 된다.**
 
 ![그림1](https://github.com/1886-Database/hotel-java-project/assets/87927105/5f4c52ab-eb93-4e2d-824b-f692bd569b2b)
 ![그림2](https://github.com/1886-Database/hotel-java-project/assets/87927105/5ef6ea50-066b-4a00-a4a5-dd43648aa7e7)
