@@ -21,3 +21,5 @@
 ![13](https://github.com/1886-Database/hotel-java-project/assets/87927105/ac228470-a036-4b2e-a318-4794ed9a3ec3)
 ![14](https://github.com/1886-Database/hotel-java-project/assets/87927105/6f5d9a0a-915c-4d9a-b376-0d162cc9c745)
 
+![encoding1](https://github.com/1886-Database/hotel-java-project/assets/87927105/78476202-ab6c-497d-9df5-0883e0075f6b)
+![encoding2](https://github.com/1886-Database/hotel-java-project/assets/87927105/6662ff23-6ccb-4589-bad8-735a26557860)
