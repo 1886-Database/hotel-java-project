@@ -291,8 +291,10 @@ public class MemberManager {
 		} catch (SQLException se) {
 			
 			try {
-				if (con != null)
+				if (con != null) {
 					con.rollback(); /****** 롤백 ******/
+					con.setAutoCommit(true);
+				}
 			} catch (SQLException se2) {
 				
 			}
